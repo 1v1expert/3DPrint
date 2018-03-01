@@ -1,0 +1,33 @@
+<form class="form-horizontal" onsubmit="return false;">
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" id="settings-apiEnabled" data-bind="checked: api_enabled"> {{ _('Enable') }}
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox">
+                <input type="checkbox" id="settings-apiCors" data-bind="checked: api_allowCrossOrigin"> {{ _('Allow <a href="%(url)s">Cross Origin Resource Sharing (CORS)</a>', url = "https://en.wikipedia.org/wiki/Cross-origin_resource_sharing") }}
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="settings-apiKey">{{ _('API Key') }}</label>
+        <div class="controls">
+            <div class="input-append input-block-level">
+                <input type="text" readonly="readonly" id="settings-apikey" data-bind="value: api_key, attr: {placeholder: '{{ _('N/A') }}'}">
+                <a class="btn add-on" title="Copy API Key to clipboard" data-bind="click: copyApiKey, enable: api_key"><i class="fa fa-copy"></i></a>
+                <a class="btn add-on" title="Generate new API Key" data-bind="click: generateApiKey, enable: api_key"><i class="fa fa-refresh"></i></a>
+            </div>
+            <span class="help-block">{{ _('Please note that changes to the API key are applied immediately, without having to "Save" first.') }}</span>
+        </div>
+    </div>
+    <div class="control-group" data-bind="visible: api_key">
+        <label class="control-label">{{ _('QR Code') }}</label>
+        <div class="controls">
+            <div data-bind="qrcode: {text: api_key, size: 180}"></div>
+        </div>
+    </div>
+</form>

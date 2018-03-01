@@ -1,0 +1,19 @@
+<div id="reloadui_overlay" xmlns="http://www.w3.org/1999/html">
+    <div id="reloadui_overlay_background"></div>
+    <div id="reloadui_overlay_wrapper">
+        <div class="container">
+            <div class="hero-unit">
+                <h1>{{ _('Please reload') }}</h1>
+                <p>{% trans %}
+                    There is a new version of the server active now, a reload
+                    of the user interface is needed. This will not interrupt
+                    any print jobs you might have ongoing. Please reload the
+                    web interface now by clicking the button below.
+                {% endtrans %}</p>
+                <p>
+                    <button class="btn btn-primary btn-large" title="{{ _('Reload now') }}" onclick="var event = arguments[0] || window.event; var source = event.target || event.srcElement; if (source.disabled) return; source.disabled = true; source.className += ' disabled'; source.firstChild.style.display = ''; location.reload(true); return false;"><i class="fa fa-spinner fa-spin" style="display: none"></i> {{ _('Reload now') }}</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
