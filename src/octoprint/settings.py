@@ -347,7 +347,7 @@ default_settings = {
 	"devel": {
 		"stylesheet": "css",
 		"cache": {
-			"enabled": True,
+			"enabled": False,
 			"preemptive": True
 		},
 		"webassets": {
