@@ -1,4 +1,4 @@
-#The snappy web interface for your 3D printer
+# The snappy web interface for your 3D printer
 ````
 Dependencies:
  - Ngrok (https://ngrok.com/) - remote access
