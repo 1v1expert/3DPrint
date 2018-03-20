@@ -1,4 +1,4 @@
-The snappy web interface for your 3D printer
+#The snappy web interface for your 3D printer
 ````
 Dependencies:
  - Ngrok (https://ngrok.com/) - remote access
@@ -8,10 +8,12 @@ Dependencies:
  - zsh
  - Octoprint - main project
  - Touchui - plugin
- - 
+ - themeplate jetson
 
 ````
-# Installation [Ngrok](https://github.com/foosel/OctoPrint/wiki/OctoPrint-and-Ngrok)
+### Theme [Jetson](https://cloud.mail.ru/public/2gbz/UHGrjgGnH)
+
+### Installation [Ngrok](https://github.com/foosel/OctoPrint/wiki/OctoPrint-and-Ngrok)
 1. Go to [https://ngrok.com/](https://ngrok.com/) and sign up.  You will end up at the get started page.  Keep this open we need this later.  Open the link to download ngrok in a new page.  Find the Linux ARM download link and copy this link location to clipboard.
 2. Type sudo wget [download link], at the time of writing:
 
