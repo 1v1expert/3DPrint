@@ -1,4 +1,5 @@
 # The snappy web interface for your 3D printer
+### 3DPrint porject [![GitHub release](https://img.shields.io/badge/release-v0.1.1-blue.svg)](https://github.com/1v1expert/3DPrint/releases) [![GitHub license](https://img.shields.io/github/license/1v1expert/3DPrint.svg?style=plastic)](https://github.com/1v1expert/3DPrint/blob/master/LICENSE)
 ````
 Dependencies:
  - Ngrok (https://ngrok.com/) - remote access
@@ -9,7 +10,7 @@ Dependencies:
  - Octoprint - main project
  - Touchui - plugin
  - themeplate jetson
-
+ - OctoPrint-TFT
 ````
 ### Theme [Jetson](https://cloud.mail.ru/public/2gbz/UHGrjgGnH)
 
@@ -47,3 +48,14 @@ It will then unzip.
 - ctrl-u view source
 
 
+### [OctoPrint-TFT](https://github.com/mcuadros/OctoPrint-TFT)
+
+_OctoPrint-TFT_, a touch interface for TFT touch modules based on GTK+3.
+
+Is a _X application_ to be executed directly in the X Server without any windows
+manager, as _frontend of a [OctoPrint](http://octoprint.org) server_ in a Raspberry Pi
+equipped with any [TFT Touch module](https://www.waveshare.com/wiki/3.5inch_RPi_LCD_(A)).
+
+Allows you to control your 3D Printer, like you can do with any [TFT/LCD panel](http://reprap.org/wiki/RepRapTouch), but using _OctoPrint_ and a Raspberry Pi.
+
+<img width="480" src="https://user-images.githubusercontent.com/1573114/33559609-a73a969e-d90d-11e7-9cf2-cf212412aaa5.png" />
