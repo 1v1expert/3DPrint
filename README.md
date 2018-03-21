@@ -40,7 +40,7 @@ It will then unzip.
 
 `./ngrok http 80`
 
-### Index.html(chromium)
+### Index.html [hot-keys chromium](https://os-chrome.ru/chrome-os/hotkeys/)
 - ctrl-o open new file browser
 - ctrl-r reload
 - ctrl-t new tab 
