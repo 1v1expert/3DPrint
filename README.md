@@ -40,3 +40,10 @@ It will then unzip.
 
 `./ngrok http 80`
 
+### Index.html(chromium)
+- ctrl-o open new file browser
+- ctrl-r reload
+- ctrl-t new tab 
+- ctrl-u view source
+
+
