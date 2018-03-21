@@ -54,11 +54,6 @@ It will then unzip.
 
 _OctoPrint-TFT_, a touch interface for TFT touch modules based on GTK+3.
 
-Is a _X application_ to be executed directly in the X Server without any windows
-manager, as _frontend of a [OctoPrint](http://octoprint.org) server_ in a Raspberry Pi
-equipped with any [TFT Touch module](https://www.waveshare.com/wiki/3.5inch_RPi_LCD_(A)).
-
-Allows you to control your 3D Printer, like you can do with any [TFT/LCD panel](http://reprap.org/wiki/RepRapTouch), but using _OctoPrint_ and a Raspberry Pi.
 
 <img width="480" src="https://user-images.githubusercontent.com/1573114/33559609-a73a969e-d90d-11e7-9cf2-cf212412aaa5.png" />
 
