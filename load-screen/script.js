@@ -5,7 +5,8 @@
 	var progress = document.getElementById("progress");
 	var error = document.getElementById("error");
 	var port = ((window.navigator.userAgent.match(/P:([0-9]+)/g) || [""])[0].replace("P:", "")) || 5000;
-	var prefix = "http://localhost:"+port;
+	var prefix = "http://localhost:"+port+"/";
+	var url = prefix + "plugin/touchui/ping";
 	var pass = 0;
 	var retry = 0;
 	var checkTimeout;
@@ -16,6 +17,7 @@
 		progress.innerHTML = title;
 		error.innerHTML = subtitle;
 		document.body.className = className;
+		alert(url);
 	}
 
 	if (localStorage["mainColor"] && localStorage["bgColor"]) {
@@ -38,6 +40,7 @@
 	document.addEventListener("click", function() {
 		if (document.body.className.indexOf("error") !== -1) {
 			setMsg("Connecting to TouchUI", "", "");
+			alert(url);
 
 			pass = 0;
 			++retry;
@@ -110,6 +113,7 @@
 
 		if(pass >= 30) {
 			setMsg("Connecting to TouchUI failed..", "", "error");
+			alert(url);
 			return;
 		}
 
@@ -117,7 +121,8 @@
 		oReq.addEventListener('load', reqListener);
 		oReq.addEventListener('error', doRequest);
 		oReq.addEventListener('abort', doRequest);
-		oReq.open("get", prefix, true);
+		oReq.open("get", url, true);
+		alert(url);
 		oReq.send();
 	}
 
