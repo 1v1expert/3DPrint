@@ -15,7 +15,7 @@
 	<div class="preloader-it">
 		<div class="la-anim-1"></div>
 	</div>
-    
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
 
@@ -46,12 +46,27 @@
 				<div class="row">
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
-							<div class="well well-lg card-view">
-								<h6 class="mb-15">Принтер ждёт команды</h6>
-								<p></p>
-							</div>
+						<div class="well well-lg card-view">
+							<h6 class="mb-15" id="status">Принтер ждёт команды</h6>
+							<p></p>
+							<div class="form-wrap">
+								<div class="form-group">
+									<label class="control-label mb-10" for="baudrates">Baudrates:</label>
+									<select id="baudrates" class="form-control required" name="country">
+										<!--<option value="1">India</option>
+										<option value="2">Australia</option>
+										<option value="3">USA</option>
+										<option value="4">Japan</option>-->
+									</select>
+								</div>
+						<!--	<div class="form-group">
+								<label class="control-label mb-5" for="baudrates">Baudrates:</label>
+								<label id="baudrates"  type="text" name="address" class="form-control required" value=""></label>
+							</div>-->
+						</div>
+						</div>
                     </div>
-
+<!--
 					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-3">
 						<div class="panel panel-default card-view">
 							<div class="panel-wrapper collapse in">
@@ -64,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-
+-->
                     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
                         <div class="panel panel-default card-view">
 							<div class="panel-heading">
@@ -100,6 +115,15 @@
 						</div>
 					</div>
                 </div>
+
+				<!-- footer -->
+				<footer class="footer container-fluid pl-30 pr-30">
+					<div class="row">
+						<div class="col-sm-12">
+							<p>2018 &copy; 3DQality. Pampered by VLADDOS</p>
+						</div>
+					</div>
+				</footer>
 
     <!-- jQuery -->
     <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>

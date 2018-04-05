@@ -23,7 +23,7 @@ Printrun
 Cura/current_profile.ini
 Cura/preferences.ini
 build
-dist
+software/dist
 pypy
 OctoPrint.egg-info
 *.orig
