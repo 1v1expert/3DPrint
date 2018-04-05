@@ -11,7 +11,27 @@
  ** ***************************************/
 
  "use strict";
-/*****Ready function start*****/
+
+/***** Connected *****/
+var Connected = function () {
+	var connect = document.getElementById("connect");
+  	connect.classList.add('disabled');
+  	var disconnect = document.getElementById("disconnect");
+  	disconnect.classList.remove('disabled');
+  	var status = document.getElementById("status");
+  	status.innerText = "Принтер подключен";
+};
+/***** End Connected *****/
+/***** Disconnected *****/
+var Disconnected = function () {
+	var connect = document.getElementById("connect");
+  	connect.classList.remove('disabled');
+  	var disconnect = document.getElementById("disconnect");
+  	disconnect.classList.add('disabled');
+  	var status = document.getElementById("status");
+  	status.innerText = "Принтер отключен";
+};
+/***** End Disconnected *****/
 
 /*****Connect Octoprint Serve ******/
 var ConnectServ = function () {
@@ -21,8 +41,8 @@ var settings = {
   "url": "http://127.0.0.1:5000/api/connection",
   "method": "POST",
   "headers": {
-    "x-api-key": "E39CDD5E459A4493A6AC51204115204D",
-    "content-type": "application/json",
+  	"x-api-key": "E39CDD5E459A4493A6AC51204115204D",
+	  "content-type": "application/json",
 	  "cache-control": "no-cache",
     "postman-token": "13968f54-1b34-ae87-2761-1fe1477a334b"
   },
@@ -30,17 +50,12 @@ var settings = {
   "data": '{"command": "connect"}',
   "success": function() {
   	//alert("Success");
-  	var connect = document.getElementById("connect");
-  	connect.classList.add('disabled');
-  	var disconnect = document.getElementById("disconnect");
-  	disconnect.classList.remove('disabled');
-  	var status = document.getElementById("status");
-  	status.innerText = "Принтер подключен";
-                },
+	  Connected();
+	  },
   "error": function() {
   	//alert("Error");
   	var status = document.getElementById("status");
-  	status.innerText = "Принтер отключен";
+  	status.innerText = "Не удалось подключиться";
                 }
 };
 $.ajax(settings).done(function (response) {
@@ -64,17 +79,12 @@ var settings = {
   "data": '{"command": "disconnect"}',
   "success": function() {
   	//alert("Success");
-  	var connect = document.getElementById("connect");
-  	connect.classList.remove('disabled');
-  	var disconnect = document.getElementById("disconnect");
-  	disconnect.classList.add('disabled');
-  	var status = document.getElementById("status");
-  	status.innerText = "Принтер отключен";
-                },
+	  Disconnected();
+	  },
   "error": function() {
   	//alert("Error");
   	var status = document.getElementById("status");
-  	status.innerText = "Принтер отключен";
+  	status.innerText = "Нет соединения";
                 }
 };
 $.ajax(settings).done(function (response) {
@@ -115,9 +125,10 @@ $.ajax(settings).done(function (response) {
 });
 };
 /********END FUNC ******/
+/*****Ready function start*****/
 $(document).ready(function(){
 	jetson();
-	ConnectServ();
+	//ConnectServ();
 	//$('#disconnect').onClick(DisconnectServ());
 	//StartOcto();
 	$('.preloader-it > .la-anim-1').addClass('la-animate');
