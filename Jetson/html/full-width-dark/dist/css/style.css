@@ -219,7 +219,7 @@ h5 {
 h6, .panel-title {
   font-size: 16px;
   line-height: 24px;
-  text-transform: capitalize; }
+  /*text-transform: capitalize;*/ }
 
 p {
   font-size: 14px;
