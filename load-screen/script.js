@@ -1,24 +1,25 @@
 !function() {
-	
+
 	var hasPostMessage = false;
 	var content = document.getElementById("content");
 	var progress = document.getElementById("progress");
 	var error = document.getElementById("error");
 	var port = ((window.navigator.userAgent.match(/P:([0-9]+)/g) || [""])[0].replace("P:", "")) || 5000;
 	var prefix = "http://localhost:"+port+"/";
-	var url = prefix + "plugin/touchui/ping";
+	//var url = prefix + "plugin/touchui/ping";
+	var url = prefix;
 	var pass = 0;
 	var retry = 0;
 	var checkTimeout;
-	
+
 	var version = 2;
-	
+
 	var setMsg = function(title, subtitle, className) {
 		progress.innerHTML = title;
 		error.innerHTML = subtitle;
 		document.body.className = className;
 	}
-	
+
 	if (localStorage["mainColor"] && localStorage["bgColor"]) {
 		document.getElementById("styling").innerHTML = "" +
 			"svg { fill: " + localStorage["mainColor"] + "; }" +
@@ -39,7 +40,7 @@
 	document.addEventListener("click", function() {
 		if (document.body.className.indexOf("error") !== -1) {
 			setMsg("Connecting to TouchUI", "", "");
-			
+
 			pass = 0;
 			++retry;
 			doRequest();
@@ -59,14 +60,14 @@
 
 			case 'loading':
 				setMsg("Loading TouchUI", "", "");
-				
+
 				if (!checkTimeout) {
 					checkTimeout = setTimeout(function() {
 						setMsg("Startup failed..", "Tap to retry", "error");
 					}, 60000); // Wait 1 minutes, if failed give error
 				}
 				break;
-				
+
 			default:
 				clearTimeout(checkTimeout);
 				checkTimeout = false;
@@ -76,18 +77,18 @@
 					if (parseFloat(event.data) > version) {
 						setMsg("Update your bootloader!", "Read the wiki how, tap to proceed", "info");
 						return;
-						
+
 					//TouchUI is ready and has same version
-					} else { 
+					} else {
 						setMsg("", "", "hide");
 						return;
 					}
 				}
-				
+
 				if (typeof event.data === "object") {
 					var msg = event.data[0];
 					var file = event.data[1];
-					
+
 					if(msg !== true) { // if true this is not an error
 						setMsg("Startup failed, tap to retry", ((retry > 0) ? msg : ""), "error");
 					} else { // if true this is a customization
@@ -124,7 +125,7 @@
 
 	function doRequest() {
 		setTimeout(processRequest, 3000);
-		
+
 		if(pass > 0) {
 			progress.innerHTML = "<span id=\"badge\">" + pass + "</span> Connecting to TouchUI";
 		}
