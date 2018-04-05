@@ -5,9 +5,7 @@
 	var progress = document.getElementById("progress");
 	var error = document.getElementById("error");
 	var port = ((window.navigator.userAgent.match(/P:([0-9]+)/g) || [""])[0].replace("P:", "")) || 5000;
-	var prefix = "http://localhost:"+port+"/";
-	//var url = prefix + "plugin/touchui/ping";
-	var url = prefix;
+	var prefix = "http://localhost:"+port;
 	var pass = 0;
 	var retry = 0;
 	var checkTimeout;
@@ -119,7 +117,7 @@
 		oReq.addEventListener('load', reqListener);
 		oReq.addEventListener('error', doRequest);
 		oReq.addEventListener('abort', doRequest);
-		oReq.open("get", url, true);
+		oReq.open("get", prefix, true);
 		oReq.send();
 	}
 
