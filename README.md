@@ -12,6 +12,18 @@ Dependencies:
  - themeplate jetson
  - OctoPrint-TFT
 ````
+
+## Install 3DPrint
+````
+1. git clone https://github.com/1v1expert/3DPrint.git .3DPrint
+2. cd .3DPrint/
+3. python --version
+>> python2.7
+4. mkvirtualenv -p /usr/bin/python venv
+5. cd software
+6. pip install .
+````
+
 ### 1. Theme [Jetson](https://cloud.mail.ru/public/2gbz/UHGrjgGnH)
 
 ### 2. Installation [Ngrok](https://github.com/foosel/OctoPrint/wiki/OctoPrint-and-Ngrok)
@@ -40,6 +52,7 @@ It will then unzip.
 7. To start ngrok, type:
 
 `./ngrok http 80`
+
 -------
 #### 3.Index.html [hot-keys chromium](https://os-chrome.ru/chrome-os/hotkeys/)
 - ctrl-o open new file browser
