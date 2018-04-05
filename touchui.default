@@ -1,10 +1,10 @@
 # Configuration for /etc/init.d/touchui
 
 # The init.d script will only run if this variable non-empty.
-TOUCHUI_USER=pi
+TOUCHUI_USER=vladdos
 
 # Where is the xinit file locatated
-TOUCHUI_DIR="TouchUI-autostart"
+TOUCHUI_DIR=".3DPrint"
 
 # And what xinit file are we looking for
 TOUCHUI_FILE="chromium.xinit"
@@ -14,6 +14,7 @@ TOUCHUI_FILE="chromium.xinit"
 
 # What arguments to pass to xinit, usually no need to touch this
 DAEMON_ARGS=/home/vladdos/.3DPrint/$TOUCHUI_FILE
+
 # DAEMON_ARGS=/home/$TOUCHUI_USER/$TOUCHUI_DIR/$TOUCHUI_FILE
 
 # Umask of files touchui generates, Change this to 000 if running touchui as its own, separate user
