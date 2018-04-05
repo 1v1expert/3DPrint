@@ -22,6 +22,25 @@ Dependencies:
 4. mkvirtualenv -p /usr/bin/python venv
 5. cd software
 6. pip install .
+7. Run "octoprint serve"
+8. sudo apt-get update
+9. sudo apt-get install --no-install-recommends xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils matchbox unclutter chromium-browser
+10. ls /dev | grep fb
+11. sudo nano /usr/share/X11/xorg.conf.d/99-fbdev.conf
+12. #touch (ls /dev | grep fb) >> 99-fbdev.conf
+13. 
+>> Section "Device"
+>>  Identifier "touchscreen"
+>>  Driver "fbdev"
+>>  Option "fbdev" "/dev/fb1"
+>> EndSection
+14. sudo sed -i 's/allowed_users=console/allowed_users=anybody/' /etc/X11/Xwrapper.config
+15. cd ..
+16. sudo cp touchui.init /etc/init.d/touchui
+17. sudo chmod +x /etc/init.d/touchui
+18. sudo cp touchui.default /etc/default/touchui
+19. sudo update-rc.d touchui defaults
+
 ````
 
 ### 1. Theme [Jetson](https://cloud.mail.ru/public/2gbz/UHGrjgGnH)
