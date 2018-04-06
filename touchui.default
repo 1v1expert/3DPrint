@@ -13,7 +13,7 @@ TOUCHUI_FILE="chromium.xinit"
 #DAEMON=/path/to/xinit/executable
 
 # What arguments to pass to xinit, usually no need to touch this
-DAEMON_ARGS=/home/vladdos/project/.3DPrint/$TOUCHUI_FILE
+DAEMON_ARGS=/home/vladdos/project/.3dprint/$TOUCHUI_FILE
 
 # DAEMON_ARGS=/home/$TOUCHUI_USER/$TOUCHUI_DIR/$TOUCHUI_FILE
 
