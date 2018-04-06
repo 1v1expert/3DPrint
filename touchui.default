@@ -4,7 +4,7 @@
 TOUCHUI_USER=vladdos
 
 # Where is the xinit file locatated
-TOUCHUI_DIR=".3DPrint"
+TOUCHUI_DIR=".3dprint"
 
 # And what xinit file are we looking for
 TOUCHUI_FILE="chromium.xinit"
