@@ -43,8 +43,7 @@ var settings = {
   "headers": {
   	"x-api-key": "E39CDD5E459A4493A6AC51204115204D",
 	  "content-type": "application/json",
-	  "cache-control": "no-cache",
-    "postman-token": "13968f54-1b34-ae87-2761-1fe1477a334b"
+	  "cache-control": "no-cache"
   },
   "processData": false,
   "data": '{"command": "connect"}',
@@ -72,8 +71,7 @@ var settings = {
   "headers": {
     "x-api-key": "E39CDD5E459A4493A6AC51204115204D",
     "content-type": "application/json",
-	  "cache-control": "no-cache",
-    "postman-token": "13968f54-1b34-ae87-2761-1fe1477a334b"
+	  "cache-control": "no-cache"
   },
   "processData": false,
   "data": '{"command": "disconnect"}',
@@ -104,8 +102,7 @@ var settings = {
   "headers": {
     "x-api-key": "E39CDD5E459A4493A6AC51204115204D",
     "content-type": "application/json",
-    "cache-control": "no-cache",
-    "postman-token": "dd9554ae-95b3-f30c-854c-bc31afcc71a4"
+    "cache-control": "no-cache"
   },
   "processData": false,
   "data": '{"command": "connect"}'
