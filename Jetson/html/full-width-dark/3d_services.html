@@ -51,33 +51,62 @@
  <!-- Main Content -->
 		<div class="page-wrapper">
 			<div class="container-fluid pt-25">
-				<div class="datepicker col-md-6">
-				<div class="timepicker col-md-6">
-				<table class="table-condensed">
-					<tbody>
-					<tr>
-						<td><a href="#" tabindex="-1" title="Increment Hour" class="btn" data-action="incrementHours">
-							<span class="fa fa-arrow-up"></span></a>
-						</td>
-						<td class="separator"></td>
-						<td><a href="#" tabindex="-1" title="Increment Minute" class="btn" data-action="incrementMinutes"><span class="fa fa-arrow-up"></span></a></td>
-						<td class="separator"></td>
-					</tr>
-					<tr>
-						<td style="text-align: center"><a href="#" tabindex="-1" title="Дом" class="btn" data-action="decrementHours"><span class="fa fa-home"></span></a></td>
-						<td class="separator"><a href="#" tabindex="-1" title="Влево" class="btn" data-action="decrementHours"><span class="fa fa-arrow-left"></span></a></td>
-						<td style="text-align: center"><a href="#" tabindex="-1" title="Дом" class="btn" data-action="decrementHours"><span class="fa fa-home"></span></a></td>
-						<td><a href="#" tabindex="-1" title="Decrement Hour" class="btn" data-action="decrementHours"><span class="fa fa-arrow-right"></span></a></td>
-					</tr>
-					<tr>
-						<td><a href="#" tabindex="-1" title="вниз" class="btn" data-action="decrementHours"><span class="fa fa-arrow-down"></span></a></td>
-						<td class="separator"></td><td><a href="#" tabindex="-1" title="Вниз" class="btn" data-action="decrementMinutes"><span class="fa fa-arrow-down"></span></a></td>
-						<td class="separator"></td>
-					</tr></tbody></table>
-				</div>
+				<div class="col-lg-6 col-sm-12">
+					<div class="panel panel-default card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">Движение по осям</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<p class="text-muted">Defaul<code>tab-struct vertical-tab custom-tab-1</code> class.</p>
+								<div class="tab-struct vertical-tab custom-tab-1 mt-40">
+									<ul role="tablist" class="nav nav-tabs ver-nav-tab" id="myTabs_8" style="min-height: 170px;">
+										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_8" href="#home_8">0,01 мм</a></li>
+										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8" role="tab" href="#profile_8" aria-expanded="false">0.1 мм</a></li>
+										<li class="dropdown" role="presentation">
+											<a data-toggle="tab" id="profile_tab_9" role="tab" href="#profile_8" aria-expanded="false">1 мм</a></li>
+									</ul>
+									<div class="datepicker">
+										<div class="timepicker">
+											<div class="table-responsive" style="margin-left: 25%;">
+												<table class="table-condensed ">
+													<tbody>
+													<tr>
+														<td><a href="#" tabindex="-1" title="Вверх" class="btn" data-action="incrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
+														</td>
+														<td class="separator"></td>
+														<td><a href="#" tabindex="-1" title="Вверх" class="btn" data-action="incrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td>
+													</tr>
+													<tr>
+														<td style="text-align: center"><a href="#" tabindex="-1" title="Дом" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-home"style="font-size: x-large;"></span></a></td>
+														<td class="separator"><a href="#" tabindex="-1" title="Влево" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-left" style="font-size: x-large;"></span></a></td>
+														<td style="text-align: center"><a href="#" tabindex="-1" title="Дом" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-home" style="font-size: x-large;"></span></a></td>
+														<td><a href="#" tabindex="-1" title="Вправо" class="btn" data-action="decrementHours" style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-right" style="font-size: x-large;"></span></a></td>
+													</tr>
+													<tr>
+														<td><a href="#" tabindex="-1" title="вниз" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td><td><a href="#" tabindex="-1" title="Вниз" class="btn" data-action="decrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+
+
+
+
 <!-- Row -->
 
 

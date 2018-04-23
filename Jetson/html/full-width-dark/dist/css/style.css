@@ -928,7 +928,8 @@ button.fc-agendaWeek-button, .fc-prev-button, .fc-next-button, .fc-today-button 
   border: none;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease;
+}
   .btn i, .wizard > .actions .disabled a i, .wizard > .actions .disabled a:hover i, .wizard > .actions .disabled a:active i, .wizard > .actions a i, .wizard > .actions a:hover i, .wizard > .actions a:active i, .dt-buttons .dt-button i, .tablesaw-sortable th.tablesaw-sortable-head button i, .sweet-alert button i, .owl-theme .owl-nav [class*="owl-"] i, button.fc-agendaDay-button.fc-state-default.fc-corner-right i,
   button.fc-month-button.fc-state-default.fc-corner-left i,
   button.fc-agendaWeek-button i, .fc-prev-button i, .fc-next-button i, .fc-today-button i {
@@ -3929,7 +3930,7 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
       color: #878787;
       margin: 0;
       border-radius: 0;
-      text-transform: capitalize;
+      /*text-transform: capitalize;*/
       -webkit-transition: 0.2s ease;
       -moz-transition: 0.2s ease;
       transition: 0.2s ease; }
