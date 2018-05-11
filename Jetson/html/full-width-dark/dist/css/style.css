@@ -4615,6 +4615,16 @@ button.btn-small.btn-select.fc-agendaWeek-button, .btn-small.btn-select.fc-prev-
       content: "%";
       font-size: 14px;
       margin-left: 1px; }
+    .easypiechart .degrees {
+    color: #fff;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 100px;
+    z-index: 2; }
+    .easypiechart .degrees:after {
+      content: "°";
+      font-size: 14px;
+      margin-left: 1px; }
 
 .easypiechart.easypiechart-widget-pie {
   margin-bottom: 5px;

@@ -14,7 +14,7 @@
 
 /***** Connected *****/
 var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
-var ApiKeyProd ="B594C3445DE7429982783DAA69DE5AC5";
+var ApiKeyProd ="083E87CC0E9E4300AA7354F31C8FD6F8";
 var ActiveApi = ApiKeyProd;
 
 var GetState = function () {
@@ -22,23 +22,38 @@ var GetState = function () {
   "async": true,
   "crossDomain": true,
   "url": "http://127.0.0.1:5000/api/printer",
-  "method": "POST",
+  "method": "GET",
   "headers": {
   	"x-api-key": ActiveApi,
 	  "content-type": "application/json",
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "connect"}',
   "success": function(response) {
   	console.log(response);
-  	var resptxt = JSON.parse(response.responseText);
-  	if (resptxt.temperature){
-  		var temptool1 = resptxt.temperature.tool0.actual * 100 / resptxt.temperature.tool0.target;
-  		var temptool2 = resptxt.temperature.tool1.actual * 100 / resptxt.temperature.tool1.target;
-  		var tempbed = resptxt.temperature.bed.actual * 100 / resptxt.temperature.bed.target;
-  		$('#pie_chart_1').data('easyPieChart').update(temptool1);
-  		$('#pie_chart_2').data('easyPieChart').update(temptool2);
+  	//var resptxt = JSON.parse(response.responseText);
+  	if (response.temperature.tool0){
+  		if (response.temperature.tool0.target === 0){
+  			$('#pie_chart_1').data('easyPieChart').update(100);
+  			$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
+  		}
+  		else {
+  		var temptool1 = response.temperature.tool0.actual * 100 / response.temperature.tool0.target;
+  		$('#pie_chart_1').data('easyPieChart').update(temptool1);}
+
+
+	};
+  	if (response.temperature.tool1){
+  		if (response.temperature.tool1.target === 0){
+  			$('#pie_chart_2').data('easyPieChart').update(100);
+  			$('#pie_chart_2').find('.percent').text(response.temperature.tool1.actual);
+  		}
+  		else {
+  		var temptool2 = response.temperature.tool1.actual * 100 / response.temperature.tool1.target;
+  		$('#pie_chart_2').data('easyPieChart').update(temptool2);}
+	};
+  	if (response.temperature.bed){
+  		var tempbed = response.temperature.bed.actual * 100 / response.temperature.bed.target;
   		$('#pie_chart_3').data('easyPieChart').update(tempbed);
 	};
 	  },
@@ -80,7 +95,7 @@ var ConnectServ = function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:5000/api/connection",
+  "url": "http://127.0.0.1:8112/api/connection",
   "method": "POST",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -89,12 +104,13 @@ var settings = {
   },
   "processData": false,
   "data": '{"command": "connect"}',
-  "success": function() {
-  	//alert("Success");
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response);
 	  Connected();
 	  },
-  "error": function() {
-  	//alert("Error");
+  "error": function(response) {
+  	console.log(response);
   	var status = document.getElementById("status");
   	status.innerText = "Не удалось подключиться";
                 }
