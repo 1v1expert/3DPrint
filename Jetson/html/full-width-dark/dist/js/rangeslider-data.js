@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 	"use strict";
-	
+
 	$("#range_2").ionRangeSlider({
 	  type: "double",
 	  min: 1000000,
@@ -37,12 +37,12 @@ $(document).ready(function() {
 	  grid_snap: true
 	});
 	$("#range_4").ionRangeSlider({
-	  type: "double",
+	  //type: "double",
 	  min: 0,
 	  max: 100,
-	  from: 30,
-	  to: 70,
-	  from_fixed: true
+	  //from: 70,
+	  from: 70,
+	  to_fixed: true
 	});
 	$("#range_5").ionRangeSlider({
 	  type: "double",

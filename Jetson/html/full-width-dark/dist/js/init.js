@@ -13,6 +13,46 @@
  "use strict";
 
 /***** Connected *****/
+var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
+var ApiKeyProd ="B594C3445DE7429982783DAA69DE5AC5";
+var ActiveApi = ApiKeyProd;
+
+var GetState = function () {
+	var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:5000/api/printer",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "connect"}',
+  "success": function(response) {
+  	console.log(response);
+  	var resptxt = JSON.parse(response.responseText);
+  	if (resptxt.temperature){
+  		var temptool1 = resptxt.temperature.tool0.actual * 100 / resptxt.temperature.tool0.target;
+  		var temptool2 = resptxt.temperature.tool1.actual * 100 / resptxt.temperature.tool1.target;
+  		var tempbed = resptxt.temperature.bed.actual * 100 / resptxt.temperature.bed.target;
+  		$('#pie_chart_1').data('easyPieChart').update(temptool1);
+  		$('#pie_chart_2').data('easyPieChart').update(temptool2);
+  		$('#pie_chart_3').data('easyPieChart').update(tempbed);
+	};
+	  },
+  "error": function() {
+  	//alert("Error");
+  	var status = document.getElementById("status");
+  	status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
 var Connected = function () {
 	var connect = document.getElementById("connect");
   	connect.classList.add('disabled');
@@ -20,6 +60,8 @@ var Connected = function () {
   	disconnect.classList.remove('disabled');
   	var status = document.getElementById("status");
   	status.innerText = "Принтер подключен";
+  	GetState();
+  	//$('#pie_chart_2').data('easyPieChart').update(100);
 };
 /***** End Connected *****/
 /***** Disconnected *****/
@@ -41,7 +83,7 @@ var settings = {
   "url": "http://127.0.0.1:5000/api/connection",
   "method": "POST",
   "headers": {
-  	"x-api-key": "E39CDD5E459A4493A6AC51204115204D",
+  	"x-api-key": ActiveApi,
 	  "content-type": "application/json",
 	  "cache-control": "no-cache"
   },
@@ -69,7 +111,7 @@ var settings = {
   "url": "http://127.0.0.1:5000/api/connection",
   "method": "POST",
   "headers": {
-    "x-api-key": "E39CDD5E459A4493A6AC51204115204D",
+    "x-api-key": ActiveApi,
     "content-type": "application/json",
 	  "cache-control": "no-cache"
   },
@@ -100,7 +142,7 @@ var settings = {
   "url": "http://127.0.0.1:5000/api/connection",
   "method": "POST",
   "headers": {
-    "x-api-key": "E39CDD5E459A4493A6AC51204115204D",
+    "x-api-key": ActiveApi,
     "content-type": "application/json",
     "cache-control": "no-cache"
   },
@@ -129,6 +171,9 @@ $(document).ready(function(){
 	//$('#disconnect').onClick(DisconnectServ());
 	//StartOcto();
 	$('.preloader-it > .la-anim-1').addClass('la-animate');
+	$('#pie_chart_1').data('easyPieChart').update(0);
+	$('#pie_chart_2').data('easyPieChart').update(0);
+	$('#pie_chart_3').data('easyPieChart').update(0);
 });
 /*****Ready function end*****/
 
