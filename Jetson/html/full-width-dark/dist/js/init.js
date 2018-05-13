@@ -12,16 +12,22 @@
 
  "use strict";
 
+
 /***** Connected *****/
 var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
 var ApiKeyProd ="083E87CC0E9E4300AA7354F31C8FD6F8";
 var ActiveApi = ApiKeyProd;
+var PortProd = 5000;
+var PortTest = 8112;
+var ActivePort = PortTest;
 
-var GetState = function () {
-	var settings = {
+var idIntervals=0;
+var TARGET = 300;
+function timer(){
+    var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:5000/api/printer",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/printer",
   "method": "GET",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -34,27 +40,38 @@ var GetState = function () {
   	//var resptxt = JSON.parse(response.responseText);
   	if (response.temperature.tool0){
   		if (response.temperature.tool0.target === 0){
-  			$('#pie_chart_1').data('easyPieChart').update(100);
-  			$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
+  			var temptool1 = response.temperature.tool0.actual * 100 / TARGET;
+  			$('#pie_chart_1').find('.percents').text(response.temperature.tool0.actual);
+  			$('#pie_chart_1').data('easyPieChart').update(temptool1);
+  			//$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
   		}
   		else {
-  		var temptool1 = response.temperature.tool0.actual * 100 / response.temperature.tool0.target;
-  		$('#pie_chart_1').data('easyPieChart').update(temptool1);}
+  		var temptools1 = response.temperature.tool0.actual * 100 / response.temperature.tool0.target;
+  		$('#pie_chart_1').data('easyPieChart').update(temptools1);}
 
 
 	};
   	if (response.temperature.tool1){
   		if (response.temperature.tool1.target === 0){
-  			$('#pie_chart_2').data('easyPieChart').update(100);
-  			$('#pie_chart_2').find('.percent').text(response.temperature.tool1.actual);
+  			var temptool2 = response.temperature.tool1.actual * 100 / TARGET;
+  			$('#pie_chart_2').find('.percents').text(response.temperature.tool1.actual);
+  			$('#pie_chart_2').data('easyPieChart').update(temptool2);
+  			//$('#pie_chart_2').find('.percent').text(response.temperature.tool1.actual);
   		}
   		else {
-  		var temptool2 = response.temperature.tool1.actual * 100 / response.temperature.tool1.target;
-  		$('#pie_chart_2').data('easyPieChart').update(temptool2);}
+  		var temptools2 = response.temperature.tool1.actual * 100 / response.temperature.tool1.target;
+  		$('#pie_chart_2').data('easyPieChart').update(temptools2);}
 	};
   	if (response.temperature.bed){
-  		var tempbed = response.temperature.bed.actual * 100 / response.temperature.bed.target;
-  		$('#pie_chart_3').data('easyPieChart').update(tempbed);
+  		if (response.temperature.bed.target === 0){
+  			var tempbed = response.temperature.bed.actual * 100 / TARGET;
+  			$('#pie_chart_3').find('.percents').text(response.temperature.bed.actual);
+  			$('#pie_chart_3').data('easyPieChart').update(tempbed);
+  			//$('#pie_chart_3').find('.percent').text(response.temperature.bed.actual);
+  		}
+  		else {
+  		var tempbeds = response.temperature.bed.actual * 100 / response.temperature.bed.target;
+  		$('#pie_chart_3').data('easyPieChart').update(tempbeds);}
 	};
 	  },
   "error": function() {
@@ -66,7 +83,31 @@ var GetState = function () {
 $.ajax(settings).done(function (response) {
     console.log(response);
 });
+}
+var GetState = function (flag) {
+	if (flag === 'false') {
+		$('#pie_chart_1').data('easyPieChart').update(0);
+			$('#pie_chart_2').data('easyPieChart').update(0);
+				$('#pie_chart_3').data('easyPieChart').update(0);
+                clearInterval(idIntervals);
+             }
+             else {
+		idIntervals=setInterval(function(){timer();},10000);//опять запускается таймер
+	}
+  //clearInterval(idIntervals);//тут останавливаем таймер
+
 };
+
+//function timer(flag){
+//    var intervalId = setInterval (function(){...}
+//    if (flag == 'false') {
+//                clearInterval(intervalId);
+//             }
+//};
+
+//var GetState = function () {
+
+//};
 
 var Connected = function () {
 	var connect = document.getElementById("connect");
@@ -87,6 +128,7 @@ var Disconnected = function () {
   	disconnect.classList.add('disabled');
   	var status = document.getElementById("status");
   	status.innerText = "Принтер отключен";
+  	GetState('false');
 };
 /***** End Disconnected *****/
 
@@ -95,7 +137,7 @@ var ConnectServ = function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:8112/api/connection",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "POST",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -124,7 +166,7 @@ var DisconnectServ = function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:5000/api/connection",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "POST",
   "headers": {
     "x-api-key": ActiveApi,
@@ -155,7 +197,7 @@ var StartOcto = function(){
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:5000/api/connection",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "POST",
   "headers": {
     "x-api-key": ActiveApi,
@@ -188,8 +230,11 @@ $(document).ready(function(){
 	//StartOcto();
 	$('.preloader-it > .la-anim-1').addClass('la-animate');
 	$('#pie_chart_1').data('easyPieChart').update(0);
+	$('#degres_1').text('/' + TARGET + '°');
 	$('#pie_chart_2').data('easyPieChart').update(0);
+	$('#degres_2').text('/' + TARGET + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
+	$('#degres_3').text('/' + TARGET + '°');
 });
 /*****Ready function end*****/
 
@@ -212,7 +257,20 @@ $(window).on("load", function() {
 			  offset: 'bottom-in-view'
 			});
 		}
-	}
+	};
+    $('ul.menu-main').on('click', 'li:not(.active)', function() {
+		$(this)
+			.addClass('active').siblings().removeClass('active')
+			.closest('div.tabs').find('div.tabs__content').removeClass('active').eq($(this).index()).addClass('active');
+	});
+
+	var tabIndex = window.location.hash.replace('#tab','')-1;
+	if (tabIndex != -1) $('ul.menu-main li').eq(tabIndex).click();
+
+	$('a[href*=#tab]').click(function() {
+		var tabIndex = $(this).attr('href').replace(/(.*)#tab/, '')-1;
+		$('ul.menu-main li').eq(tabIndex).click();
+	});
 });
 /*****Load function* end*****/
 

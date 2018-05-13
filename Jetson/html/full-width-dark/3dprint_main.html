@@ -9,7 +9,148 @@
     <link href="vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 	<link href="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
+	<style>
+
+.menu-main {
+	padding: inherit;
+	/*display: -webkit-flex;
+	display: -ms-flexbox;*/
+	display: flex;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	list-style: none;
+	position: relative;
+	margin: -1px 0 0 -1px;
+}
+.menu-main li:last-child:after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	right: -2px;
+	z-index: -1;
+	height: 5px;
+	background: #50c4e3;
+}
+.menu-main li:not(.active):last-child:after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	right: -2px;
+	z-index: -1;
+	height: 5px;
+	background: none;
+}
+
+.menu-main:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+.menu-main li {
+	flex: 1 0 auto;
+	padding: 9px 15px;
+	margin: 1px 0 0 1px;
+	background: #50c4e3;
+	color: #FFF;
+	position: relative;
+	border: solid #50c4e3;
+	border-width: 2px 2px 0;
+	border-radius: 5px 5px 0 0;
+	text-align: center;
+}
+.menu-main li:not(.active) {
+	cursor: pointer;
+}
+.menu-main li:not(.active):hover {
+	background: #7DCA86;
+	border-color: #7DCA86;
+}
+.menu-main .active {
+	background: #030d13;
+	color: #fff;
+	border-color: #030d13;
+}
+.menu-main .active:after {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	right: 0;
+	height: 5px;
+	background: #50c4e3;
+}
+.tabs__content {
+	display: none;
+	background: #FFF;
+	border: 2px solid #50c4e3;
+	border-radius: 0 5px 5px 5px;
+	/*padding: 7px 15px;*/
+}
+.tabs__content.active {
+	display: block;
+}
+
+.vertical .menu-main {
+	float: left;
+	display: block;
+}
+.vertical .menu-main li {
+	float: none;
+	border-width: 2px 0 2px 2px;
+	border-radius: 5px 0 0 5px;
+}
+.vertical .menu-main li:last-child:before {
+	display: none;
+}
+.vertical .menu-main .active:after {
+	left: auto;
+	top: 0;
+	right: -2px;
+	bottom: 0;
+	width: 2px;
+	height: auto;
+}
+.vertical .tabs__content {
+	overflow: hidden;
+}
+
+@media screen and (max-width: 650px) {
+
+	.menu-main li {
+		-webkit-flex: 1 0 auto;
+		    -ms-flex: 1 0 auto;
+		        flex: 1 0 auto;
+	}
+	.vertical .menu-main {
+		float: none;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+	}
+	.vertical .menu-main li {
+		border-width: 2px 2px 0;
+		border-radius: 5px 5px 0 0;
+	}
+	.vertical .menu-main li:last-child:before {
+		display: block;
+	}
+	.vertical .menu-main .active:after {
+		top: auto;
+		bottom: -5px;
+		left: 0;
+		right: 0;
+		width: auto;
+		height: 5px;
+		background: #FFF;
+	}}
+
+	</style>
+
 </head>
 <body>
 	<div class="preloader-it">
@@ -17,30 +158,17 @@
 	</div>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-
-            <div class="col-lg-2">
-            <div class="nav-header pull-left">
-                <div class="logo-wrap">
-                    <a href="3dprint.html">
-                        <img class="brand-img" src="dist/img/logo.png" alt="brand"/>
-                        <span class="brand-text">3DPRINT</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    <div class="col-lg-7">
-        <ul class="menu-main">
-  <li><a href="" class="current">ДОМ</a></li>
-
- <li><a href="3d_files.html">Настройки</a></li>
-  <li><a href="3d_services.html">Обслуживание</a></li>
-            <li><a href="3d_settings.html">информация</a></li>
-</ul>
-    </div>
-</nav>
- <!-- Main Content -->
-		<div class="page-wrapper">
+	<div class="tabs">
+		<nav class="navbar navbar-inverse navbar-fixed-top" style="min-height: auto; padding: 0 0 0 0;">
+			<ul class="menu-main">
+				<li class="active">Дом</li>
+				<li>Управление</li>
+				<li>Файлы</li>
+				<li>Инструкция</li>
+			</ul>
+		</nav>
+  <div class="tabs__content  active">
+	  <div class="page-wrapper">
 			<div class="container-fluid pt-25">
 <!-- Row -->
 				<div class="row">
@@ -96,19 +224,564 @@
 										<div class="col-sm-4 mb-15">
 											<span class="skill-head mb-20">1 сопла</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="86">
-												<span class="degrees percent head-font">86</span>
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_1"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
 										<div class="col-sm-4 mb-15">
 											<span class="skill-head mb-20">2 сопла</span>
 											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="46">
-												<span class="degrees percent head-font">46</span>
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_2"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
 										<div class="col-sm-4 mb-15">
 											<span class="skill-head mb-20">стола</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="90">
-												<span class="degrees percent head-font">90</span>
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_3"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+			</div>
+	  </div>
+	  <footer class="footer container-fluid pl-30 pr-30">
+					<div class="row">
+						<div class="col-sm-12">
+							<p>2018 &copy; 3DQality. Pampered by VLADDOS</p>
+						</div>
+					</div>
+				</footer>
+  </div>
+
+  <div class="tabs__content">
+    <div class="page-wrapper">
+				<div class="container-fluid">
+
+					<!-- Title -->
+					<div class="row heading-bg">
+						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+						  <h5 class="txt-dark">Инструкция</h5>
+						</div>
+						<!-- Breadcrumb -->
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+						  <ol class="breadcrumb">
+							<li class="active"><span>faq</span></li>
+						  </ol>
+						</div>
+						<!-- /Breadcrumb -->
+					</div>
+					<!-- /Title -->
+
+					<!-- Row -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default card-view">
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body pa-15">
+										<div class="panel-group accordion-struct"  role="tablist" aria-multiselectable="true">
+											<div class="panel panel-default">
+												<div class="panel-heading activestate" role="tab" id="headingFive">
+													<a role="button" data-toggle="collapse" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive" >Руководство</a>
+												</div>
+												<div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+													<div class="panel-group accordion-struct accordion-style-1" id="accordion_2" role="tablist" aria-multiselectable="true">
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="heading_10">
+													<a role="button" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_10" aria-expanded="false" class="collapsed"><div class="icon-ac-wrap pr-20"><span class="plus-ac"><i class="ti-plus"></i></span><span class="minus-ac"><i class="ti-minus"></i></span></div>печать</a>
+												</div>
+												<div id="collapse_10" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" style="height: 0px;">
+													<div class="panel-body pa-15"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer la. </div>
+												</div>
+											</div>
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="heading_11">
+													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_11" aria-expanded="false"><div class="icon-ac-wrap pr-20"><span class="plus-ac"><i class="ti-plus"></i></span><span class="minus-ac"><i class="ti-minus"></i></span></div>обслуживание</a>
+												</div>
+												<div id="collapse_11" class="panel-collapse collapse" role="tabpanel" aria-expanded="false" style="height: 0px;">
+													<div class="panel-body pa-15"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, </div>
+												</div>
+											</div>
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="heading_12">
+													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_12" aria-expanded="false"><div class="icon-ac-wrap pr-20"><span class="plus-ac"><i class="ti-plus"></i></span><span class="minus-ac"><i class="ti-minus"></i></span></div>движение по осям</a>
+												</div>
+												<div id="collapse_12" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
+													<div class="panel-body pa-15"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, inable VHS. </div>
+												</div>
+											</div>
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="heading_13">
+													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_2" href="#collapse_13" aria-expanded="false"><div class="icon-ac-wrap pr-20"><span class="plus-ac"><i class="ti-plus"></i></span><span class="minus-ac"><i class="ti-minus"></i></span></div>обслуживание</a>
+												</div>
+												<div id="collapse_13" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
+													<div class="panel-body pa-15"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, inable VHS. </div>
+												</div>
+											</div>
+										</div>
+												</div>
+											</div>
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="headingSix">
+													<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix" >Видеоматериалы</a>
+												</div>
+												<div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+													<div class="panel-body pa-15">Видосики</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+					</div>
+				</div>
+		<footer class="footer container-fluid pl-30 pr-30">
+					<div class="row">
+						<div class="col-sm-12">
+							<p>2018 &copy; 3DQality. Pampered by VLADDOS</p>
+						</div>
+					</div>
+				</footer>
+  </div>
+
+
+</div>
+		<div class="tabs__content">
+			<!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container-fluid pt-25">
+				<div class="col-lg-6 col-sm-12">
+					<div class="panel panel-default card-view">
+						<div class="panel-heading">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">Движение по осям</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<p class="text-muted">Движение <code>осуществляйте курсорами </code></p>
+								<div class="tab-struct vertical-tab custom-tab-1 mt-40">
+									<ul role="tablist" class="nav nav-tabs ver-nav-tab" id="myTabs_8" style="min-height: 170px; width: 100px">
+										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_8" href="#home_8">0,01</a></li>
+										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8" role="tab" href="#profile_8" aria-expanded="false">0.1</a></li>
+										<li class="dropdown" role="presentation">
+											<a data-toggle="tab" id="profile_tab_9" role="tab" href="#profile_8" aria-expanded="false">1</a></li>
+									</ul>
+									<div class="datepicker">
+										<div class="timepicker">
+											<div class="table-responsive" style="margin-left: 25%;">
+												<table class="table-condensed ">
+													<tbody>
+													<tr>
+														<td><a href="#" tabindex="-1" title="Вверх" class="btn" data-action="incrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
+														</td>
+														<td class="separator"></td>
+														<td><a href="#" tabindex="-1" title="Вверх" class="btn" data-action="incrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td>
+													</tr>
+													<tr>
+														<td style="text-align: center"><a href="#" tabindex="-1" title="Дом" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-home"style="font-size: x-large;"></span></a></td>
+														<td class="separator"><a href="#" tabindex="-1" title="Влево" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-left" style="font-size: x-large;"></span></a></td>
+														<td style="text-align: center"><a href="#" tabindex="-1" title="Дом" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-home" style="font-size: x-large;"></span></a></td>
+														<td><a href="#" tabindex="-1" title="Вправо" class="btn" data-action="decrementHours" style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-right" style="font-size: x-large;"></span></a></td>
+													</tr>
+													<tr>
+														<td><a href="#" tabindex="-1" title="вниз" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td><td><a href="#" tabindex="-1" title="Вниз" class="btn" data-action="decrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+<!-- Row -->
+
+
+				<!-- footer -->
+				<footer class="footer container-fluid pl-30 pr-30">
+					<div class="row">
+						<div class="col-sm-12">
+							<p>2018 &copy; 3DQality. Pampered by VLADDOS</p>
+						</div>
+					</div>
+				</footer>
+		</div>
+		</div>
+			<div class="tabs__content">
+				<!-- Main Content -->
+			<div class="page-wrapper">
+				<div class="container-fluid">
+					<!-- Title -->
+					<div class="row heading-bg">
+						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+						  <h5 class="txt-dark">Менеджер файлов</h5>
+						</div>
+						<!-- Breadcrumb -->
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+						  <ol class="breadcrumb">
+							<li class="active"><span>file manager</span></li>
+						  </ol>
+						</div>
+						<!-- /Breadcrumb -->
+					</div>
+					<!-- /Title -->
+					<!-- Row -->
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default card-view pa-0">
+								<div class="panel-wrapper collapse in">
+									<div class="panel-body pa-0">
+										<div class="">
+											<div class="col-lg-3 col-md-4 file-directory pa-0">
+												<div class="ibox float-e-margins">
+													<div class="ibox-content">
+														<div class="file-manager">
+															<div class="mt-20 mb-20 ml-15 mr-15">
+																<div class="fileupload btn btn-success btn-anim btn-block"><i class="fa fa-upload"></i><span class="btn-text">Upload files</span>
+																	<input type="file" class="upload">
+																</div>
+															</div>
+															<div class="pl-15 mb-30">
+																<a href="#" class="file-control active">All</a>
+																<a href="#" class="file-control">Documents</a>
+																<a href="#" class="file-control">Audio</a>
+																<a href="#" class="file-control">Images</a>
+															</div>
+
+															<h6 class="mb-10 pl-15">Folders</h6>
+															<ul class="folder-list mb-30">
+																<li class="active"><a href=""><i class="zmdi zmdi-folder"></i> Files</a></li>
+																<li><a href=""><i class="zmdi zmdi-folder"></i> Pictures</a></li>
+															</ul>
+															<div class="clearfix"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="col-lg-9 col-md-8 file-sec pt-20">
+												<div class="row">
+													<div class="col-lg-12">
+														<div class="row">
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="icon">
+																			<i class="zmdi zmdi-file-text"></i>
+																		</div>
+																		<div class="file-name">
+																			Document_2016.doc
+																			<br>
+																			<span>Added: Jan 11, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="icon">
+																			<i class="zmdi zmdi-collection-music"></i>
+																		</div>
+																		<div class="file-name">
+																			Michal Jackson.mp3
+																			<br>
+																			<span>Added: Jan 22, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="image" style="background-image:url(dist/img/gallery/equal-size/mock2.jpg)">
+																		</div>
+																		<div class="file-name">
+																			Document_2016.doc
+																			<br>
+																			<span>Added: Fab 11, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="icon">
+																			<i class="img-responsive zmdi zmdi-collection-video"></i>
+																		</div>
+																		<div class="file-name">
+																			Monica's birthday.mpg4
+																			<br>
+																			<span>Added: Fab 18, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<a href="#">
+																	<div class="file">
+
+																		<div class="icon">
+																			<i class="zmdi zmdi-chart"></i>
+																		</div>
+																		<div class="file-name">
+																			Annual report 2016.xls
+																			<br>
+																			<span>Added: Fab 22, 2016</span>
+																		</div>
+																	</div>
+																</a>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="icon">
+																			<i class="zmdi zmdi-file-text"></i>
+																		</div>
+																		<div class="file-name">
+																			Document_2016.doc
+																			<br>
+																			<span>Added: Jan 11, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="image" style="background-image:url(dist/img/gallery/mock6.jpg)">
+																		</div>
+																		<div class="file-name">
+																			Italy street.jpg
+																			<br>
+																			<span>Added: Jan 6, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="image" style="background-image:url(dist/img/gallery/equal-size/mock5.jpg)">
+																		</div>
+																		<div class="file-name">
+																			My feel.png
+																			<br>
+																			<span>Added: Jan 7, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="icon">
+																			<i class="zmdi zmdi-collection-music"></i>
+																		</div>
+																		<div class="file-name">
+																			Michal Jackson.mp3
+																			<br>
+																			<span>Added: Jan 22, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="image" style="background-image:url(dist/img/gallery/equal-size/mock4.jpg)">
+																		</div>
+																		<div class="file-name">
+																			Document_2016.doc
+																			<br>
+																			<span>Added: Fab 11, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<div class="file">
+																	<a href="#">
+
+																		<div class="icon">
+																			<i class="img-responsive zmdi zmdi-collection-video"></i>
+																		</div>
+																		<div class="file-name">
+																			Monica's birthday.mpg4
+																			<br>
+																			<span>Added: Fab 18, 2016</span>
+																		</div>
+																	</a>
+																</div>
+															</div>
+															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+																<a href="#">
+																	<div class="file">
+
+																		<div class="icon">
+																			<i class="zmdi zmdi-chart"></i>
+																		</div>
+																		<div class="file-name">
+																			Annual report 2016.xls
+																			<br>
+																			<span>Added: Fab 22, 2016</span>
+																		</div>
+																	</div>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+					<!-- /Row -->
+
+
+				<!-- footer -->
+				<footer class="footer container-fluid pl-30 pr-30">
+					<div class="row">
+						<div class="col-sm-12">
+							<p>2018 &copy; 3DQality. Pampered by VLADDOS</p>
+						</div>
+					</div>
+				</footer>
+
+			</div></div>
+	<div class="tabs__content"></div>
+	</div>
+
+<!-- .tabs -->
+
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">
+
+            <div class="col-lg-2">
+            <div class="nav-header pull-left">
+                <div class="logo-wrap">
+                    <a href="3dprint.html">
+                        <img class="brand-img" src="dist/img/logo.png" alt="brand"/>
+                        <span class="brand-text">3DPRINT</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-7">
+        <ul class="menu-main">
+  <li><a href="" class="current">ДОМ</a></li>
+
+ <li><a href="3d_files.html">Настройки</a></li>
+  <li><a href="3d_services.html">Обслуживание</a></li>
+            <li><a href="3d_settings.html">информация</a></li>
+</ul>
+    </div>
+</nav>
+ <!-- Main Content
+		<div class="page-wrapper">
+			<div class="container-fluid pt-25">
+<!-- Row
+				<div class="row">
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+						<div class="well well-lg card-view">
+							<h6 class="mb-15" id="status">Принтер ожидает</h6>
+							<p></p>
+							<button class="btn btn-success btn-outline btn-rounded" onclick="ConnectServ()" id="connect">Подключиться</button>
+							<button class="btn btn-success btn-outline btn-rounded disabled" onclick="DisconnectServ()" id="disconnect">Отключиться</button>
+							<!--<div class="form-wrap">
+								<div class="form-group">
+									<label class="control-label mb-10" for="baudrates">Baudrates:</label>
+									<select id="baudrates" class="form-control required" name="country">
+										<!--<option value="1">India</option>
+										<option value="2">Australia</option>
+										<option value="3">USA</option>
+										<option value="4">Japan</option>
+									</select>
+								</div>
+							<div class="form-group">
+								<label class="control-label mb-5" for="baudrates">Baudrates:</label>
+								<label id="baudrates"  type="text" name="address" class="form-control required" value=""></label>
+							</div>
+						</div>
+						</div>
+                    </div>
+
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-3">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+                                <div class="panel-body sm-data-box-1">
+									<span class="uppercase-font weight-500 font-14 block text-center txt-dark">Состояние принтера</span>
+									<div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+										<span class="counter-anim" data>12</span>%<span></span>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
+                        <div class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">Температура</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pb-0">
+									<div class="row">
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">1 сопла</span>
+											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="86">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_1"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">2 сопла</span>
+											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="46">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_2"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">стола</span>
+											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="90">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_3"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
 									</div>
@@ -119,13 +792,7 @@
                 </div>
 
 				<!-- footer -->
-				<footer class="footer container-fluid pl-30 pr-30">
-					<div class="row">
-						<div class="col-sm-12">
-							<p>2018 &copy; 3DQality. Pampered by VLADDOS</p>
-						</div>
-					</div>
-				</footer>
+
 
     <!-- jQuery -->
     <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>

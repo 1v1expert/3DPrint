@@ -4006,7 +4006,10 @@ ul.wysihtml5-toolbar a.btn.wysihtml5-command-active, ul.wysihtml5-toolbar .wizar
   background: transparent !important; }
   .custom-tab-1.vertical-tab .ver-nav-tab > li.active > a {
     border-bottom: none;
-    border-right: 3px solid #4aa23c; }
+    border-right: 3px solid #50c4e3; }
+  .custom-tab-1.vertical-tab .ver-nav-tab > li> a:after{
+    content: " мм";
+  }
 .custom-tab-1.vertical-tab.vertical-tab-reverse > li.active > a {
   border-right: none;
   border-left: 3px solid #4aa23c; }
