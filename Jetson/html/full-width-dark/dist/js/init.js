@@ -53,7 +53,7 @@ function timer(){
     var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/printer",
+  "url": "https://127.0.0.1:" + ActivePort + "/api/printer",
   "method": "GET",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -163,7 +163,7 @@ var ConnectServ = function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
+  "url": "https://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "POST",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -192,7 +192,7 @@ var DisconnectServ = function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
+  "url": "https://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "POST",
   "headers": {
     "x-api-key": ActiveApi,
@@ -223,7 +223,7 @@ var StartOcto = function(){
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
+  "url": "https://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "POST",
   "headers": {
     "x-api-key": ActiveApi,
@@ -252,7 +252,7 @@ var GetStatePrinter = function () {
 	var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
+  "url": "https://127.0.0.1:" + ActivePort + "/api/connection",
   "method": "GET",
   "headers": {
     "x-api-key": ActiveApi,
