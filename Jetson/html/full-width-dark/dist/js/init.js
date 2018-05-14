@@ -17,7 +17,7 @@
 var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
 var ApiKeyProd ="083E87CC0E9E4300AA7354F31C8FD6F8";
 var ActiveApi = ApiKeyProd;
-var PortProd = 5005;
+var PortProd = 5000;
 var PortTest = 8112;
 var ActivePort = PortProd;
 
