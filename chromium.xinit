@@ -7,7 +7,7 @@ TOUCHUI_EXTRA='echo "TouchUI: screensaver enabled"'
 
 # Uncomment the next variable to generate a full log under ~/.config/chromium/chrome_debug.log
 # or to enable the remote deugger, forward port by haproxy or by tunnel
-#TOUCHUI_DEBUG="--remote-debugging-port=9222 --enable-logging --v=100"
+TOUCHUI_DEBUG="--remote-debugging-port=9222 --enable-logging --v=100"
 
 # Load octoprint settings for getting $PORT
 [ -r /etc/default/octoprint ] && . /etc/default/octoprint
