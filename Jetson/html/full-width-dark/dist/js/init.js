@@ -23,6 +23,32 @@ var ActivePort = PortTest;
 
 var idIntervals=0;
 var TARGET = 300;
+
+$('#UP_Z').on('click', function () {
+		alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#UP_Y').on('click', function () {
+		alert('UP Y' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#DOWN_Z').on('click', function () {
+		alert('DOWN Z' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#Down_Y').on('click', function () {
+		alert('DOWN Y' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#Home_Z').on('click', function () {
+		alert('Home Z' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#Home_XY').on('click', function () {
+		alert('Home XY' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#Left_X').on('click', function () {
+		alert('Left X' + $('#myTabs_8').find('.active').find('a').text());
+    });
+$('#Right_X').on('click', function () {
+		alert('Right X' + $('#myTabs_8').find('.active').find('a').text());
+    });
+
 function timer(){
     var settings = {
   "async": true,
@@ -114,8 +140,9 @@ var Connected = function () {
   	connect.classList.add('disabled');
   	var disconnect = document.getElementById("disconnect");
   	disconnect.classList.remove('disabled');
-  	var status = document.getElementById("status");
-  	status.innerText = "Принтер подключен";
+  	//var status = document.getElementById("status");
+  	//status.innerText = "подключено";
+  	$('.label_status').text('подключено');
   	GetState();
   	//$('#pie_chart_2').data('easyPieChart').update(100);
 };
@@ -126,8 +153,7 @@ var Disconnected = function () {
   	connect.classList.remove('disabled');
   	var disconnect = document.getElementById("disconnect");
   	disconnect.classList.add('disabled');
-  	var status = document.getElementById("status");
-  	status.innerText = "Принтер отключен";
+  	$('.label_status').text('отключено');
   	GetState('false');
 };
 /***** End Disconnected *****/
@@ -148,11 +174,11 @@ var settings = {
   "data": '{"command": "connect"}',
   "success": function(response) {
   	//alert(response);
-	  console.log(response);
+	  console.log(response + 'ConnectServ');
 	  Connected();
 	  },
   "error": function(response) {
-  	console.log(response);
+  	console.log(response + 'Error connect serv');
   	var status = document.getElementById("status");
   	status.innerText = "Не удалось подключиться";
                 }
@@ -221,6 +247,69 @@ $.ajax(settings).done(function (response) {
   //return response;
 });
 };
+
+var GetStatePrinter = function () {
+	var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
+  "method": "GET",
+  "headers": {
+    "x-api-key": ActiveApi,
+    "content-type": "application/json",
+    "cache-control": "no-cache"
+  },
+  "processData": false,
+		"success": function (msg) {
+			console.log(msg.current.state + 'MSG SUC');
+			if (msg.current.state === 'Operational'){
+				ConnectServ();
+			} else {Disconnected();}
+        },
+		"error": function (msg) {
+			console.log(msg + 'MSG ERR');
+        },
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response.current.state);
+})};
+var ShowTimer = function (iter, idIntervall) {
+$('.connection_label').text(iter);
+if (iter <0){console.log(iter, idIntervall);clearInterval(idIntervall);};
+	 	if (iter === 0){console.log(iter, idIntervall, 'sad');clearInterval(idIntervall);};
+};
+var CheckedConnect = function (error) {
+	if (error === 'false') {
+
+                clearInterval(idIntervall);
+             } else {
+	var i = 30;
+	 //while (i > 0){
+	 var idIntervall=setInterval(function(){
+	 	ShowTimer(i, idIntervall);
+	 	i--;
+
+	 },1000);
+	 //i--;
+	 console.log(i);
+	 //};
+	 //i--;
+	 //if (i < 0){clearInterval(idIntervals);InitialServe('false');};
+	 //if (i === 0){clearInterval(idIntervals);InitialServe('false');};
+		 }
+	//alert(args);
+};
+
+var InitialServe = function (error) {
+if (error === 'false') {
+
+                clearInterval(idIntervals);
+             }
+             else {
+		var idIntervals=setInterval(function(){CheckedConnect();},32000);//опять запускается таймер
+	}
+};
 /********END FUNC ******/
 /*****Ready function start*****/
 $(document).ready(function(){
@@ -235,6 +324,8 @@ $(document).ready(function(){
 	$('#degres_2').text('/' + TARGET + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + TARGET + '°');
+	InitialServe();
+	//GetStatePrinter();
 });
 /*****Ready function end*****/
 
@@ -271,6 +362,7 @@ $(window).on("load", function() {
 		var tabIndex = $(this).attr('href').replace(/(.*)#tab/, '')-1;
 		$('ul.menu-main li').eq(tabIndex).click();
 	});
+
 });
 /*****Load function* end*****/
 

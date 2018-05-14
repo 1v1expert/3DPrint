@@ -31,7 +31,7 @@ $(document).ready(function() {
 	if( $('#pie_chart_3').length > 0 ){
 		$('#pie_chart_3').easyPieChart({
 			animate: 3000,
-			barColor : '#f8b32d',
+			barColor : '#c7254e',
 			lineWidth: 4,
 			size:	100,
 			scaleColor:false,
