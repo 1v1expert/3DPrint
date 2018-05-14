@@ -19,7 +19,7 @@ var ApiKeyProd ="083E87CC0E9E4300AA7354F31C8FD6F8";
 var ActiveApi = ApiKeyProd;
 var PortProd = 5000;
 var PortTest = 8112;
-var ActivePort = PortTest;
+var ActivePort = PortProd;
 
 var idIntervals=0;
 var TARGET = 300;
@@ -324,8 +324,8 @@ $(document).ready(function(){
 	$('#degres_2').text('/' + TARGET + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + TARGET + '°');
-	InitialServe();
-	//GetStatePrinter();
+	//InitialServe();
+	GetStatePrinter();
 });
 /*****Ready function end*****/
 
