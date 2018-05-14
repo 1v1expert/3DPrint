@@ -49,7 +49,11 @@ then
 fi
 
 CHROME_VERSION=$(dpkg -s chromium-browser | grep "Version: " | sed -e 's/Version: //g')
-CHROME_ARGS="   --no-first-run
+CHROME_ARGS="   --no-first-run --kiosk $TOUCHUI_ARGS $TOUCHUI_DEBUG
+                --dns-prefetch-disable --disable-sync-preferences --disk-cache-size=1048576
+                --disable-java --disable-plugins --disable-extensions --disable-infobars
+                --user-agent='TouchUI (X11, Chrome $CHROME_VERSION) (P:$PORT)'
+                --start-maximized --window-position=0,0
                 $(dirname "$0")/Jetson/html/full-width-dark/3dprint_main.html"
 
 [ -r /home/$TOUCHUI_USER/TouchUI-autostart/calibration.sh ] && . /home/$TOUCHUI_USER/TouchUI-autostart/calibration.sh
@@ -58,4 +62,4 @@ CHROME_ARGS="   --no-first-run
 eval $TOUCHUI_EXTRA &
 matchbox-window-manager &
 unclutter -idle 0.1 &
-su $TOUCHUI_USER -c "chromium-browser $(echo $CHROME_ARGS|tr -d '\n')"
+su $TOUCHUI_USER -c "google-chrome $(echo $CHROME_ARGS|tr -d '\n')"
