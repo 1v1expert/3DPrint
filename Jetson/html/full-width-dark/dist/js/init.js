@@ -18,35 +18,85 @@ var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
 var ApiKeyProd ="23F07E17671244B68068BC4D65DCDBFE";
 var ActiveApi = "A1DF8B0B3E6743448D60194EAC0F0772";
 var PortProd = 5000;
-var PortTest = 8112;
+//var PortTest = 8112;
 var ActivePort = PortProd;
 
 var idIntervals=0;
 var TARGET = 300;
 
+/*****Connect Octoprint Serve ******/
+var PrintHead = function (command) {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/printer/printhead",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "connect"}',
+  "success": function () {
+
+  },
+  "error": function () {
+
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
 $('#UP_Z').on('click', function () {
-		alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "jog", "z": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#UP_Y').on('click', function () {
-		alert('UP Y' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('UP Y' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "jog", "y": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#DOWN_Z').on('click', function () {
-		alert('DOWN Z' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('DOWN Z' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "jog", "z": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#Down_Y').on('click', function () {
-		alert('DOWN Y' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('DOWN Y' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "jog", "y": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#Home_Z').on('click', function () {
-		alert('Home Z' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('Home Z' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "home", "axes": ["z"]}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#Home_XY').on('click', function () {
-		alert('Home XY' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('Home XY' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "home", "axes": ["x", "y"]}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#Left_X').on('click', function () {
-		alert('Left X' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('Left X' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "jog", "x": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		console.log(command);
+		PrintHead(command);
     });
 $('#Right_X').on('click', function () {
-		alert('Right X' + $('#myTabs_8').find('.active').find('a').text());
+		//alert('Right X' + $('#myTabs_8').find('.active').find('a').text());
+		var command = '{"command": "jog", "x": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		console.log(command);
+		PrintHead(command);
     });
 
 function timer(){
@@ -107,9 +157,11 @@ function timer(){
 	};
 	  },
   "error": function() {
+  	CheckedConnect(30);
+  	Disconnected();
   	//alert("Error");
-  	var status = document.getElementById("status");
-  	status.innerText = "Не удалось подключиться";
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
                 }
 };
 $.ajax(settings).done(function (response) {
@@ -149,6 +201,7 @@ var Connected = function () {
   	//var status = document.getElementById("status");
   	//status.innerText = "подключено";
   	$('.label_status').text('подключено');
+  	$('.connection_label').text('');
   	GetState();
   	//$('#pie_chart_2').data('easyPieChart').update(100);
 };
@@ -184,9 +237,11 @@ var settings = {
 	  Connected();
 	  },
   "error": function(response) {
+  	CheckedConnect(30);
   	console.log(response + 'Error connect serv');
-  	var status = document.getElementById("status");
-  	status.innerText = "Не удалось подключиться";
+  	$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
                 }
 };
 $.ajax(settings).done(function (response) {
@@ -270,27 +325,30 @@ var GetStatePrinter = function () {
 			console.log(msg.current.state + 'MSG SUC');
 			if (msg.current.state === 'Operational'){
 				ConnectServ();
+				//InitialServe('false');
 			} else {Disconnected();}
         },
 		"error": function (msg) {
 			console.log(msg + 'MSG ERR');
+			CheckedConnect(30);
+			$('.label_status').text('не удалось подключиться');
         },
 };
 
 $.ajax(settings).done(function (response) {
   console.log(response.current.state);
-})};
-var ShowTimer = function (iter, idIntervall) {
-$('.connection_label').text(iter);
-if (iter <0){console.log(iter, idIntervall);clearInterval(idIntervall);};
-	 	if (iter === 0){console.log(iter, idIntervall, 'sad');clearInterval(idIntervall);};
+});
 };
-var CheckedConnect = function (error) {
-	if (error === 'false') {
 
-                clearInterval(idIntervall);
-             } else {
-	var i = 30;
+var ShowTimer = function (iter, idIntervall) {
+$('.connection_label').text('повтор через: ' + iter + 'с');
+if (iter ===0){console.log(iter, idIntervall);GetStatePrinter();clearInterval(idIntervall);};
+	 	//if (iter === 0){console.log(iter, idIntervall, 'sad');clearInterval(idIntervall);};
+};
+var CheckedConnect = function (i) {
+console.log('GLOBAL TIMER', i);
+//GetStatePrinter();
+	//var i = 30;
 	 //while (i > 0){
 	 var idIntervall=setInterval(function(){
 	 	ShowTimer(i, idIntervall);
@@ -298,24 +356,26 @@ var CheckedConnect = function (error) {
 
 	 },1000);
 	 //i--;
-	 console.log(i);
+	 //console.log(i);
 	 //};
 	 //i--;
 	 //if (i < 0){clearInterval(idIntervals);InitialServe('false');};
 	 //if (i === 0){clearInterval(idIntervals);InitialServe('false');};
-		 }
+
 	//alert(args);
 };
 
-var InitialServe = function (error) {
-if (error === 'false') {
+//var InitialServe = function () {
+//if (error === 'false') {
+// console.log('TIMER STOP');
+ //               clearInterval(idIntervals);
 
-                clearInterval(idIntervals);
-             }
-             else {
-		var idIntervals=setInterval(function(){CheckedConnect();},32000);//опять запускается таймер
-	}
-};
+   //          }
+            // else {
+//	console.log('START MAIN TIMER');
+//	var tik = 32000;
+//	setTimeout(function(){CheckedConnect(tik/1000-2);},tik);
+//};
 /********END FUNC ******/
 /*****Ready function start*****/
 $(document).ready(function(){
