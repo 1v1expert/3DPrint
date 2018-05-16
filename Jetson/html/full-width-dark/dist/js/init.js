@@ -37,12 +37,12 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "connect"}',
+  "data": command,
   "success": function () {
-
+  	alert('Успешно');
   },
   "error": function () {
-
+  	alert('Не успешно');
   }
 };
 $.ajax(settings).done(function (response) {
