@@ -24,12 +24,44 @@ var ActivePort = PortProd;
 var idIntervals=0;
 var TARGET = 300;
 
+
+var GetJob = function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "GET",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "success": function (response) {
+  	//alert('Успешно', response);
+	  if (response.progress.completion) {
+          $('#progress').css('width', response.progress.completion + '%');
+          $('#progress').html(response.progress.completion + '%');
+          console.log(response, response.progress.completion);
+          $('#file_name').text("Файл: " + response.file.name);
+          $('#estimatedPrintTime').text("Estimat time: " + response.job.estimatedPrintTime);
+      }
+
+  },
+  "error": function (response) {
+  	//alert('Не успешно', response);
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
 /*****Connect Octoprint Serve ******/
 var PrintHead = function (command) {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/printer/printhead",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/printer/printhead",
   "method": "POST",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -37,12 +69,12 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": command,
-  "success": function () {
-  	alert('Успешно');
+  "data": String(command),
+  "success": function (response) {
+  	alert('Успешно', response);
   },
-  "error": function () {
-  	alert('Не успешно');
+  "error": function (response) {
+  	alert('Не успешно', response);
   }
 };
 $.ajax(settings).done(function (response) {

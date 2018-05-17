@@ -175,10 +175,17 @@
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
 						<div class="well well-lg card-view">
-							<!--<h6 class="mb-15" id="status">Принтер ожидает</h6>-->
-							<p></p>
-							<button class="btn btn-success btn-outline btn-rounded" onclick="ConnectServ()" id="connect">Подключиться</button>
-							<button class="btn btn-success btn-outline btn-rounded disabled" onclick="DisconnectServ()" id="disconnect">Отключиться</button>
+                            <h6 class="mb-15" id="print_status"></h6>
+                            <div class="panel-body">
+										<div class="progress progress-lg">
+											<div class="progress-bar progress-bar-inverse active progress-bar-striped" style="width: 80%;" id="progress" role="progressbar">80%</div>
+										</div><label id="file_name"></label><p></p><label id="estimatedPrintTime"></label>
+									</div>
+
+							<p></p><div class="btn-group mt-15 mr-10">
+							<button class="btn btn-success btn-outline btn-rounded btn-xs" style="font-size: 8px" onclick="ConnectServ()" id="connect">Подключиться</button>
+							<button class="btn btn-success btn-outline btn-rounded  btn-xs disabled" style="font-size: 8px" onclick="DisconnectServ()" id="disconnect">Отключиться</button>
+                            <button class="btn btn-success btn-outline btn-rounded btn-xs" style="font-size: 8px" onclick="GetJob()" id="printinfo">Пучать info</button></div>
 							<!--<div class="form-wrap">
 								<div class="form-group">
 									<label class="control-label mb-10" for="baudrates">Baudrates:</label>
@@ -284,7 +291,7 @@
 								<p class="text-muted">Движение <code>осуществляйте курсорами </code></p>
 								<div class="tab-struct vertical-tab custom-tab-1 mt-40">
 									<ul role="tablist" class="nav nav-tabs ver-nav-tab" id="myTabs_8" style="min-height: 170px; width: 100px">
-										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_8" href="#home_8">0,1</a></li>
+										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab" role="tab" id="home_tab_8" href="#home_8">0.1</a></li>
 										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8" role="tab" href="#profile_8" aria-expanded="false">1</a></li>
 										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8" role="tab" href="#profile_8" aria-expanded="false">10</a></li>
 										<li class="dropdown" role="presentation">
