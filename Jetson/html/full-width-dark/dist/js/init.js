@@ -208,7 +208,7 @@ var GetState = function (flag) {
                 clearInterval(idIntervals);
              }
              else {
-		idIntervals=setInterval(function(){timer();},10000);//опять запускается таймер
+		idIntervals=setInterval(function(){timer();GetJob();},10000);//опять запускается таймер
 	}
   //clearInterval(idIntervals);//тут останавливаем таймер
 
