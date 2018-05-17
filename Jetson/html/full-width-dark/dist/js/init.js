@@ -44,7 +44,7 @@ var settings = {
           $('#progress').html(response.progress.completion + '%');
           console.log(response, response.progress.completion);
           $('#file_name').text("Файл: " + response.file.name);
-          $('#estimatedPrintTime').text("Estimat time: " + response.job.estimatedPrintTime);
+          $('#estimatedPrintTime').text("Estimat time: " + response.job.estimatedPrintTime + "с");
       }
 
   },
