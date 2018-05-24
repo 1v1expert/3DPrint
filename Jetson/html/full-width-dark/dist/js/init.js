@@ -23,8 +23,48 @@ var ActivePort = PortProd;
 
 var idIntervals=0;
 var TARGET = 300;
+var OnPrint = function (name_file) {
+  swal({
+            title: "Вы уверены ?",
+            text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f8b32d",
+            confirmButtonText: "Да, я сделаю это",
+            cancelButtonText: "Нет, не хооочу",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm){
+            if (isConfirm) {
+                swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
+            } else {
+                swal("Отменено", "А ты послушный :)", "error");
+            }
+        });
+  var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://127.0.0.1:" + ActivePort + "/api/files/local/" + name_file,
+      "method": "POST",
+      "headers": {
+          "x-api-key": ActiveApi,
+          "content-type": "application/json",
+          "cache-control": "no-cache"
+      },
+      "data": '{"command": "select", "print": true}',
+      "processData": false,
+      "success": function(response){GetJob();console.log('SUUCCCCCEEESS'); console.log(response);},
+      "error": function(response){console.log('ERRROE'); console.log(response);swal("Ошибка", "Ошибка печати", "error");}
 
-$('#localfiles').on('click', function () {
+};
+  $.ajax(settings).done(function (response) {
+   console.log(response);
+});
+  console.log(name_file);
+};
+
+$('#localfiles').on('click', function () {GetFilesLocal();});
+var GetFilesLocal = function () {
     console.log('LOCAL');
     var settings = {
         "async": true,
@@ -42,7 +82,7 @@ $('#localfiles').on('click', function () {
             var data_html = "";
             for(var item in response.files) {
                 //alert();
-                data_html = data_html + "<div class='col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box'><div class='file'><a href=''> <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>"+ response.files[item].name +"<br> <span>Added: --------</span> </div> </a> </div> </div>";
+                data_html = data_html + "<div class='col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box'><div class='file'><a onclick=\"OnPrint(\'"+ response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>"+ response.files[item].name +"<br> <span>Added: --------</span> </div> </a> </div> </div>";
 
             };$('#rowfiles').html(data_html);
 
@@ -50,9 +90,7 @@ $('#localfiles').on('click', function () {
     };
     $.ajax(settings).done(function (response) {
     console.log(response);
-});
-
-});
+});};
 
 var GetJob = function () {
 var settings = {
@@ -72,7 +110,7 @@ var settings = {
           $('#progress').css('width', response.progress.completion + '%');
           $('#progress').html(response.progress.completion + '%');
           console.log(response, response.progress.completion);
-          $('#file_name').text("Файл: " + response.file.name);
+          $('#file_name').text("Файл: " + response.job.file.name);
           $('#estimatedPrintTime').text("Estimat time: " + response.job.estimatedPrintTime + "с");
       }
 
@@ -453,6 +491,7 @@ $(document).ready(function(){
 	$('#degres_3').text('/' + TARGET + '°');
 	//InitialServe();
 	GetStatePrinter();
+	GetFilesLocal();
 });
 /*****Ready function end*****/
 

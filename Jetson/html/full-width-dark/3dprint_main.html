@@ -8,6 +8,8 @@
 
     <link href="vendors/bower_components/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
 	<link href="vendors/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
+	<!--alerts CSS -->
+		<link href="vendors/bower_components/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
     <!-- Custom CSS -->
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
@@ -396,7 +398,7 @@
 															<h6 class="mb-10 pl-15">Folders</h6>
 															<ul class="folder-list mb-30">
 																<li class="active" id="localfiles"><a><i class="zmdi zmdi-folder"></i> Local</a></li>
-																<li><a href=""><i class="zmdi zmdi-folder"></i> USB</a></li>
+																<li><a><i class="zmdi zmdi-folder"></i> USB</a></li>
 															</ul>
 															<div class="clearfix"></div>
 														</div>
@@ -409,7 +411,7 @@
 														<div class="row" id="rowfiles">
 															<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
 																<div class="file">
-																	<a href="">
+																	<a href="" onclick="alert('AA')">
 
 																		<div class="icon">
 																			<i class="zmdi zmdi-file-text"></i>
@@ -690,6 +692,8 @@
 
 	<!-- Switchery JavaScript -->
 	<script src="vendors/bower_components/switchery/dist/switchery.min.js"></script>
+	<!-- Sweet-Alert  -->
+	<script src="vendors/bower_components/sweetalert/dist/sweetalert.min.js"></script>
 
 	<!-- EChartJS JavaScript -->
 	<script src="vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
