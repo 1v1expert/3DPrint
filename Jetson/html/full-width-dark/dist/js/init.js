@@ -24,6 +24,35 @@ var ActivePort = PortProd;
 var idIntervals=0;
 var TARGET = 300;
 
+$('#localfiles').on('click', function () {
+    console.log('LOCAL');
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/files?recursive=true",
+        "method": "GET",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "success": function (response) {
+            console.log(response);
+            var data_html = "";
+            for(var item in response.files) {
+                //alert();
+                data_html = data_html + "<div class='col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box'><div class='file'><a href=''> <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>"+ response.files[item].name +"<br> <span>Added: --------</span> </div> </a> </div> </div>";
+
+            };$('#rowfiles').html(data_html);
+
+        }
+    };
+    $.ajax(settings).done(function (response) {
+    console.log(response);
+});
+
+});
 
 var GetJob = function () {
 var settings = {
