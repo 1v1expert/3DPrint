@@ -54,7 +54,8 @@ CHROME_ARGS="   --no-first-run --kiosk $TOUCHUI_ARGS $TOUCHUI_DEBUG
                 --disable-java --disable-plugins --disable-extensions --disable-infobars
                 --user-agent='TouchUI (X11, Chrome $CHROME_VERSION) (P:$PORT)'
                 --start-maximized --window-position=0,0
-                $(dirname "$0")/Jetson/html/full-width-dark/3dprint_main.html"
+                $(dirname "$0")/load-screen/startup.html"
+#               $(dirname "$0")/Jetson/html/full-width-dark/3dprint_main.html"
 
 [ -r /home/$TOUCHUI_USER/TouchUI-autostart/calibration.sh ] && . /home/$TOUCHUI_USER/TouchUI-autostart/calibration.sh
 

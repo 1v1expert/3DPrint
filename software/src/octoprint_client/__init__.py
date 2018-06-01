@@ -80,13 +80,10 @@ class SocketClient(object):
 	def _on_callback(self, cb, *args, **kwargs):
 		"""
 		Callback for socket events.
-
 		Will call any callback method defined on ``self`` that matches ``cb``
 		prefixed with an ``_ws_``, then will call any callback method provided in
 		the socket keyword arguments (``self._ws_kwargs``) that matches ``cb``.
-
 		Calling args and kwargs will be the ones passed to ``_on_callback``.
-
 		Arguments:
 		    cb (str): the callback type
 		"""
@@ -103,7 +100,6 @@ class SocketClient(object):
 	def _ws_on_open(self, ws):
 		"""
 		Callback for socket on_open event.
-
 		Used only to track active reconnection attempts.
 		"""
 
@@ -116,7 +112,6 @@ class SocketClient(object):
 	def _ws_on_close(self, ws):
 		"""
 		Callback for socket on_close event.
-
 		Used only to track active reconnection attempts.
 		"""
 
@@ -157,21 +152,16 @@ class SocketClient(object):
 	def reconnect(self, timeout=None, disconnect=True):
 		"""
 		Tries to reconnect to the web socket.
-
 		If timeout is set will try to reconnect over the specified timeout in seconds
 		and return False if the connection could not be re-established.
-
 		If no timeout is provided, the method will block until the connection could
 		be re-established.
-
 		If disconnect is set to ``True`` will disconnect the socket explicitly
 		first if it is currently connected.
-
 		Arguments:
 		    timeout (number): timeout in seconds to wait for the reconnect to happen.
 		    disconnect (bool): Whether to disconnect explicitly from the socket if
 		       a connection is currently established (True, default) or not (False).
-
 		Returns:
 		    bool - True if the reconnect was successful, False otherwise.
 		"""

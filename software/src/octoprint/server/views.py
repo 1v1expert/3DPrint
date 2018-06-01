@@ -370,6 +370,8 @@ def index():
 		# no plugin took an interest, we'll use the default UI
 		def make_default_ui():
 			r = make_response(render_template("index.jinja2", **render_kwargs))
+			print(render_kwargs['accessControlActive'])
+			print('!!!!!!-')
 			if wizard:
 				# if we have active wizard dialogs, set non caching headers
 				r = util.flask.add_non_caching_response_headers(r)
