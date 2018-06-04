@@ -4,7 +4,7 @@ src/octoprint/templates/_data/SUPPORTERS.md
 src/octoprint/templates/_data/THIRDPARTYLICENSES.md
 
 devtools
-
+chromium.xinit
 *.tar.bz2
 *.tar.gz
 *.7z
