@@ -157,6 +157,24 @@ def in_cache():
 		_logger.debug("Path {} not yet cached (key: {}), signaling as missing".format(path, key))
 		return abort(404)
 
+#Work with usb
+def work_usb():
+	import re
+	import subprocess
+	device_re = re.compile("Bus\s+(?P<bus>\d+)\s+Device\s+(?P<device>\d+).+ID\s(?P<id>\w+:\w+)\s(?P<tag>.+)$", re.I)
+	df = subprocess.check_output("lsusb")
+	devices = []
+	for i in df.split('\n'):
+		if i:
+			info = device_re.match(i)
+			if info:
+				dinfo = info.groupdict()
+				dinfo['device'] = '/dev/bus/usb/%s/%s' % (dinfo.pop('bus'), dinfo.pop('device'))
+				devices.append(dinfo)
+	return devices
+
+#-------------
+
 @app.route("/")
 def index():
 	global _templates, _plugin_names, _plugin_vars
@@ -366,12 +384,20 @@ def index():
 			wizard=wizard,
 			now=now,
 		))
-
+		
 		# no plugin took an interest, we'll use the default UI
 		def make_default_ui():
 			r = make_response(render_template("index.jinja2", **render_kwargs))
 			print(render_kwargs['accessControlActive'])
 			print('!!!!!!-')
+			#print(render_kwargs)
+			print(render_kwargs['uiApiKey'])
+			print(render_kwargs['templates']['sidebar']['order'])
+			print(render_kwargs['templates']['sidebar']['order'][2])
+			#print(render_kwargs['templates']['sidebar']['order']['files'])
+			print(render_kwargs['templates']["sidebar"]["entries"])
+			#print(render_kwargs["overflow_visible"])
+			print(work_usb())
 			if wizard:
 				# if we have active wizard dialogs, set non caching headers
 				r = util.flask.add_non_caching_response_headers(r)
