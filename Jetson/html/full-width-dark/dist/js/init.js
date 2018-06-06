@@ -44,7 +44,7 @@ var OnPrint = function (name_file) {
   var settings = {
       "async": true,
       "crossDomain": true,
-      "url": "http://127.0.0.1:" + ActivePort + "/api/files/local/" + name_file,
+      "url": "http://127.0.0.1:" + ActivePort + "/api/files/local/" + decodeURI(name_file),
       "method": "POST",
       "headers": {
           "x-api-key": ActiveApi,
@@ -63,13 +63,14 @@ var OnPrint = function (name_file) {
   console.log(name_file);
 };
 
-$('#localfiles').on('click', function () {GetFilesLocal();});
-var GetFilesLocal = function () {
+$('#localfiles').on('click', function () {$('#rowfiles').html('');GetFilesLocal("sdcard?recursive=true");});
+$('#usbfiles').on('click', function () {$('#rowfiles').html('');GetFilesLocal("local?force=true&filter=gcode&recursive=true");});
+var GetFilesLocal = function (dd) {
     console.log('LOCAL');
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/files?recursive=true",
+        "url": "http://127.0.0.1:" + ActivePort + "/api/files/" + dd,
         "method": "GET",
         "headers": {
             "x-api-key": ActiveApi,
@@ -107,11 +108,11 @@ var settings = {
   "success": function (response) {
   	//alert('Успешно', response);
 	  if (response.progress.completion) {
-          $('#progress').css('width', response.progress.completion + '%');
-          $('#progress').html(response.progress.completion + '%');
+          $('#progress').css('width', Math.round(response.progress.completion) + '%');
+          $('#progress').html(Math.round(response.progress.completion) + '%');
           console.log(response, response.progress.completion);
           $('#file_name').text("Файл: " + response.job.file.name);
-          $('#estimatedPrintTime').text("Estimat time: " + response.job.estimatedPrintTime + "с");
+          $('#estimatedPrintTime').text("Время печати: " + response.job.estimatedPrintTime + "с");
       }
 
   },
