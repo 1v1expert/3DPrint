@@ -142,7 +142,7 @@ def _getFileDetails(origin, path, recursive=True):
 		return None
 
 
-def _getFileList(origin, path=None, filter=None, recursive=False, allow_from_cache=True):
+def _getFileList(origin, path=None, filter=None, recursive=False, allow_from_cache=False):
 	if origin == FileDestinations.SDCARD:
 		sdFileList = printer.get_sd_files()
 

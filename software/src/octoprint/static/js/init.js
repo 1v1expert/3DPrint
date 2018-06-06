@@ -63,7 +63,7 @@ var OnPrint = function (name_file) {
   console.log(name_file);
 };
 
-$('#localfiles').on('click', function () {GetFilesLocal();});
+$('#localfiles').on('click', function () {$('#rowfiles').html('');GetFilesLocal();});
 var GetFilesLocal = function () {
     console.log('LOCAL');
     var settings = {
