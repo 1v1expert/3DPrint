@@ -64,5 +64,5 @@ CHROME_ARGS="   --no-first-run --kiosk $TOUCHUI_ARGS $TOUCHUI_DEBUG
 eval $TOUCHUI_EXTRA &
 matchbox-window-manager &
 unclutter -idle 0.1 &
-su $TOUCHUI_USER -c "chromium-browser $(echo $CHROME_ARGS|tr -d '\n')"
-#su $TOUCHUI_USER -c "google-chrome-stable $(echo $CHROME_ARGS|tr -d '\n')"
+#su $TOUCHUI_USER -c "chromium-browser $(echo $CHROME_ARGS|tr -d '\n')"
+su $TOUCHUI_USER -c "google-chrome-stable $(echo $CHROME_ARGS|tr -d '\n')"
