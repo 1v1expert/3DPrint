@@ -85,6 +85,11 @@ def _create_etag(path, filter, recursive, lm=None):
 
 	return hash.hexdigest()
 
+@api.route("/usb/", methods=["GET"])
+@restricted_access
+def GetUsbFiles():
+	return jsonify("HIHI PIDOR")
+
 
 @api.route("/files", methods=["GET"])
 @with_revalidation_checking(etag_factory=lambda lm=None: _create_etag(request.path,
@@ -142,7 +147,7 @@ def _getFileDetails(origin, path, recursive=True):
 		return None
 
 
-def _getFileList(origin, path=None, filter=None, recursive=False, allow_from_cache=False):
+def _getFileList(origin, path=None, filter=None, recursive=False, allow_from_cache=True):
 	if origin == FileDestinations.SDCARD:
 		sdFileList = printer.get_sd_files()
 

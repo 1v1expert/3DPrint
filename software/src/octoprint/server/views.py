@@ -397,7 +397,7 @@ def index():
 			#print(render_kwargs['templates']['sidebar']['order']['files'])
 			print(render_kwargs['templates']["sidebar"]["entries"])
 			#print(render_kwargs["overflow_visible"])
-			print(work_usb())
+			#print(work_usb())
 			if wizard:
 				# if we have active wizard dialogs, set non caching headers
 				r = util.flask.add_non_caching_response_headers(r)
