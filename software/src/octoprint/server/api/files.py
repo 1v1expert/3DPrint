@@ -85,10 +85,9 @@ def _create_etag(path, filter, recursive, lm=None):
 
 	return hash.hexdigest()
 
-@api.route("/usb/", methods=["GET"])
-@restricted_access
-def GetUsbFiles():
-	return jsonify("HIHI PIDOR")
+#@api.route("/usb", methods=["GET"])
+#def GetUsbFiles():
+#	return jsonify({"uuid": "HI PIDOR"})
 
 
 @api.route("/files", methods=["GET"])
