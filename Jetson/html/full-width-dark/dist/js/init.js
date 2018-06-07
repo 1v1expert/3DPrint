@@ -23,6 +23,110 @@ var ActivePort = PortProd;
 
 var idIntervals=0;
 var TARGET = 300;
+
+$('#restartprint').on('click', function () {
+    RestartPrint();
+});
+$('#stopprint').on('click', function () {
+    Stopprint();
+});
+$('#pauseprint').on('click', function () {
+    TogglePrint();
+});
+
+var RestartPrint= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "restart"}',
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response + ' -- success stoping print');
+	  //Connected();
+	  },
+  "error": function(response) {
+  	//CheckedConnect(30);
+  	console.log(response + " - Error stopping print");
+  	//$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var TogglePrint= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "pause", "action": "toggle"}',
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response + ' -- success toggle print');
+	  //Connected();
+	  },
+  "error": function(response) {
+  	//CheckedConnect(30);
+  	console.log(response + " - Error toggle print");
+  	//$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var Stopprint= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "cancel"}',
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response + ' -- success stoping print');
+	  //Connected();
+	  },
+  "error": function(response) {
+  	//CheckedConnect(30);
+  	console.log(response + " - Error stopping print");
+  	//$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
 var OnPrint = function (name_file) {
   swal({
             title: "Вы уверены ?",
@@ -513,6 +617,8 @@ $(document).ready(function(){
 	$('#degres_2').text('/' + TARGET + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + TARGET + '°');
+	//$('#pie_chart_34').data('easyPieChart').update(0);
+	//$('#degres_34').text('/' + TARGET + '°');
 	//InitialServe();
 	GetStatePrinter();
 	//GetFilesLocal();

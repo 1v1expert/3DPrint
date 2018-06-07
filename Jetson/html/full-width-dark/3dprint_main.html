@@ -15,6 +15,12 @@
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	<style>
 
+.easypiechart .degreess:after {
+    content: "%";
+    font-size: 14px;
+    margin-left: 1px;
+}
+
 .menu-main {
 	padding: inherit;
 	/*display: -webkit-flex;
@@ -69,8 +75,8 @@
 	cursor: pointer;
 }
 .menu-main li:not(.active):hover {
-	background: #7DCA86;
-	border-color: #7DCA86;
+	background: #50c4e3;
+	border-color: #50c4e3;
 }
 .menu-main .active {
 	background: #030d13;
@@ -171,11 +177,11 @@
 		</nav>
   <div class="tabs__content  active">
 	  <div class="page-wrapper">
-			<div class="container-fluid pt-25">
+			<div class="container-fluid pt-25" style="padding-top: 1px !important;">
 <!-- Row -->
 				<div class="row">
 
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+                    <div class="col-lg-12 h-20">
 						<div class="well well-lg card-view">
                             <h6 class="mb-15" id="print_status"></h6>
                             <div class="panel-body">
@@ -184,11 +190,15 @@
 										</div><label id="file_name"></label><p></p><label id="estimatedPrintTime"></label>
 									</div>
 
-							<p></p><div class="btn-group mt-15 mr-10">
-							<button class="btn btn-success btn-outline btn-rounded" onclick="ConnectServ()" id="connect">Подключиться</button>
-							<button class="btn btn-success btn-outline btn-rounded disabled" onclick="DisconnectServ()" id="disconnect">Отключиться</button>
+							<p></p><div class="row" style="text-align: center">
+							<div class="btn-group mt-15 mr-10">
+							<button class="btn btn-success btn-outline btn-rounded" id="restartprint"><i style="    font-size: xx-large;" class="fa fa-play-circle-o" aria-hidden="true"> restart</i></button>
+								<button class="btn btn-success btn-outline btn-rounded" id="stopprint"><i style="    font-size: xx-large;" class="fa fa-stop" aria-hidden="true"> stop</i></button>
+							<button class="btn btn-success btn-outline btn-rounded" id="pauseprint"><i style="    font-size: xx-large;" class="fa fa-pause" id="iconpause" aria-hidden="true"> pause</i></button>
                             <!--<button class="btn btn-success btn-outline btn-rounded btn-xs" style="font-size: 8px" onclick="GetJob()" id="printinfo">Пучать info</button>-->
                             </div>
+						</div>
+
 							<!--<div class="form-wrap">
 								<div class="form-group">
 									<label class="control-label mb-10" for="baudrates">Baudrates:</label>
@@ -219,37 +229,44 @@
                             </div>
                         </div>
                     </div>
--->
-                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
+--></div><div class="row">
+                    <div class="col-lg-12 h-10">
                         <div class="panel panel-default card-view">
-							<div class="panel-heading">
+							<!--<div class="panel-heading">
 								<div class="pull-left">
 									<h6 class="panel-title txt-dark">Температура</h6>
 								</div>
 								<div class="clearfix"></div>
-							</div>
+							</div>-->
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pb-0">
 									<div class="row">
-										<div class="col-sm-4 mb-15">
+										<div class="col-sm-3 mb-15">
 											<span class="skill-head mb-20">1 сопла</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_1"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<div class="col-sm-4 mb-15">
+										<div class="col-sm-3 mb-15">
 											<span class="skill-head mb-20">2 сопла</span>
 											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_2"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<div class="col-sm-4 mb-15">
+										<div class="col-sm-3 mb-15">
 											<span class="skill-head mb-20">стола</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_3"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<div class="col-sm-3 mb-15">
+											<span class="skill-head mb-20">вентилятор</span>
+											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="20">
+												<span class="degreess  percents degrees head-font">20</span>
+												<label id="degres_34"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
 									</div>
@@ -259,18 +276,23 @@
 					</div>
                 </div>
 			</div>
-	  </div>
+  </div>
 	  <footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
-						<div class="col-sm-6">
-							<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
-						</div>
-						<div class="col-sm-6">
-							<div class="col-sm-6">
-							<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+						<div class="col-sm-9">
+							<div class="col-sm-8">
+								<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<p><label class="connection_label"></label></p>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="col-sm-6 right">
+								<p onclick="ConnectServ()" id="connect"><code>подключить</code></p>
+							</div>
+							<div class="col-sm-6 left">
+								<p onclick="DisconnectServ()" id="disconnect"><code>отключить</code></p>
 							</div>
 						</div>
 					</div>

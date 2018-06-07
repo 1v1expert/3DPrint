@@ -41,6 +41,19 @@ $(document).ready(function() {
 			}
 		});
 	}
+	if( $('#pie_chart_34').length > 0 ){
+		$('#pie_chart_34').easyPieChart({
+			animate: 3000,
+			barColor : '#0ac700',
+			lineWidth: 4,
+			size:	100,
+			scaleColor:false,
+			lineCap: 'square',
+			onStep: function(from, to, percent) {
+				$(this.el).find('.percent').text(Math.round(percent));
+			}
+		});
+	}
 	if( $('#pie_chart_4').length > 0 ){
 		$('#pie_chart_4').easyPieChart({
 			barColor : '#50c4e3',
