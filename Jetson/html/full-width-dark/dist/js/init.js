@@ -37,6 +37,7 @@ var OnPrint = function (name_file) {
         }, function(isConfirm){
             if (isConfirm) {
                 swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
+                $('#maintab').click()
             } else {
                 swal("Отменено", "А ты послушный :)", "error");
             }
@@ -63,8 +64,8 @@ var OnPrint = function (name_file) {
   console.log(name_file);
 };
 
-$('#localfiles').on('click', function () {$('#rowfiles').html('');GetFilesLocal("sdcard?recursive=true");});
-$('#usbfiles').on('click', function () {$('#rowfiles').html('');GetFilesLocal("local?force=true&filter=gcode&recursive=true");});
+$('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').addClass('active');$('#usbfiles').removeClass('active');GetFilesLocal("sdcard?recursive=true");});
+$('#usbfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').removeClass('active');$('#usbfiles').addClass('active');GetFilesLocal("local?force=true&filter=gcode&recursive=true");});
 var GetFilesLocal = function (dd) {
     console.log('LOCAL');
     var settings = {
@@ -255,6 +256,8 @@ function timer(){
   		$('#pie_chart_3').find('.percents').text(response.temperature.bed.actual);
   		$('#pie_chart_3').data('easyPieChart').update(tempbeds);}
 	};
+  	GetFilesLocal("sdcard?recursive=true");
+  	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
 	  },
   "error": function() {
   	CheckedConnect(30);
