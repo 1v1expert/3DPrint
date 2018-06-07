@@ -83,7 +83,8 @@ var GetFilesLocal = function (dd) {
             console.log(response);
             var data_html = "";
             if (response.files.length === 0){
-            	if (dd === "local?force=true&filter=gcode&recursive=true"){$('#usbfiles').css('visibility', 'hidden');};
+            	if (dd === "local?force=true&filter=gcode&recursive=true"){$('#usbfiles').css('visibility', 'hidden');
+            	$('#rowfiles').html('');};
             }
             else {
                 for (var item in response.files) {
