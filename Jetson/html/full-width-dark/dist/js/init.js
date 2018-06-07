@@ -82,11 +82,30 @@ var GetFilesLocal = function (dd) {
         "success": function (response) {
             console.log(response);
             var data_html = "";
-            for(var item in response.files) {
-                //alert();
-                data_html = data_html + "<div class='col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box'><div class='file'><a onclick=\"OnPrint(\'"+ response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>"+ response.files[item].name +"<br> <span>Added: --------</span> </div> </a> </div> </div>";
+            if (response.files.length === 0){
+            	if (dd === "local?force=true&filter=gcode&recursive=true"){$('#usbfiles').css('visibility', 'hidden');};
+            }
+            else {
+                for (var item in response.files) {
+                    //alert();
+                    data_html = data_html + "<div class='col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box'><div class='file'><a onclick=\"OnPrint(\'" + response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + response.files[item].name + "<br> <span>Added: --------</span> </div> </a> </div> </div>";
 
-            };$('#rowfiles').html(data_html);
+                }
+                if (dd === "local?force=true&filter=gcode&recursive=true") {
+                    $('#usbfiles').css('visibility', 'visible');
+                };
+                if (dd === "local?force=true&filter=gcode&recursive=true") {
+                	if ($('#usbfiles').hasClass('active')) {
+                		$('#rowfiles').html(data_html);
+					}
+                };
+                if (dd === "sdcard?recursive=true") {
+                	if ($('#localfiles').hasClass('active')) {
+                		$('#rowfiles').html(data_html);
+					}
+                };
+
+            };
 
         }
     };
@@ -256,7 +275,7 @@ function timer(){
   		$('#pie_chart_3').find('.percents').text(response.temperature.bed.actual);
   		$('#pie_chart_3').data('easyPieChart').update(tempbeds);}
 	};
-  	GetFilesLocal("sdcard?recursive=true");
+  	//GetFilesLocal("sdcard?recursive=true");
   	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
 	  },
   "error": function() {
@@ -495,7 +514,9 @@ $(document).ready(function(){
 	$('#degres_3').text('/' + TARGET + '°');
 	//InitialServe();
 	GetStatePrinter();
-	GetFilesLocal();
+	//GetFilesLocal();
+	GetFilesLocal("sdcard?recursive=true");
+  	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
 });
 /*****Ready function end*****/
 
