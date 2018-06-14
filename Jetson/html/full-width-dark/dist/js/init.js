@@ -17,7 +17,7 @@
 var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
 var ApiKeyProd ="A1DF8B0B3E6743448D60194EAC0F0772";
 var ApiRasp = "5C761F424E5E46EE934DE9F683609B66";
-var ActiveApi = ApiRasp;
+var ActiveApi = ApiKeyProd;
 var PortProd = 5000;
 //var PortTest = 8112;
 var ActivePort = PortProd;
@@ -465,6 +465,7 @@ var settings = {
 	  Connected();
 	  },
   "error": function(response) {
+      clearInterval(GLOBAL_TIMER);
   	CheckedConnect(30);
   	console.log(response + 'Error connect serv');
   	$('.label_status').text('не удалось подключиться');
@@ -571,18 +572,26 @@ $.ajax(settings).done(function (response) {
 var ShowTimer = function (iter, idIntervall) {
 $('.connection_label').text('повтор через: ' + iter + 'с');
 if (iter ===0){console.log(iter, idIntervall);GetStatePrinter();clearInterval(idIntervall);};
+//$('#connect').on('click', function () {
+//    alert('AAAA-RABOTAET');
+//});
+
 	 	//if (iter === 0){console.log(iter, idIntervall, 'sad');clearInterval(idIntervall);};
 };
+var GLOBAL_TIMER;
 var CheckedConnect = function (i) {
 console.log('GLOBAL TIMER', i);
 //GetStatePrinter();
 	//var i = 30;
 	 //while (i > 0){
+    //clearInterval(idIntervall);
 	 var idIntervall=setInterval(function(){
 	 	ShowTimer(i, idIntervall);
 	 	i--;
 
 	 },1000);
+	 GLOBAL_TIMER = idIntervall;
+	 //return idIntervall;
 	 //i--;
 	 //console.log(i);
 	 //};
