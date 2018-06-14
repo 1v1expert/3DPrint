@@ -15,8 +15,9 @@
 
 /***** Connected *****/
 var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
-var ApiKeyProd ="23F07E17671244B68068BC4D65DCDBFE";
-var ActiveApi = "A1DF8B0B3E6743448D60194EAC0F0772";
+var ApiKeyProd ="A1DF8B0B3E6743448D60194EAC0F0772";
+var ApiRasp = "5C761F424E5E46EE934DE9F683609B66";
+var ActiveApi = ApiRasp;
 var PortProd = 5000;
 //var PortTest = 8112;
 var ActivePort = PortProd;
@@ -319,7 +320,7 @@ $('#Left_X').on('click', function () {
     });
 $('#Right_X').on('click', function () {
 		//alert('Right X' + $('#myTabs_8').find('.active').find('a').text());
-		var command = '{"command": "jog", "x": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
+		var command = '{"command": "jog", "x": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
 		PrintHead(command);
     });
