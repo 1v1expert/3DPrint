@@ -536,7 +536,7 @@ var settings = {
 	  },
   "error": function(response) {
       clearInterval(GLOBAL_TIMER);
-  	CheckedConnect(30);
+  	CheckedConnect(5);
   	console.log(response + 'Error connect serv');
   	$('.label_status').text('не удалось подключиться');
   	//var status = document.getElementById("status");
@@ -622,14 +622,14 @@ var GetStatePrinter = function () {
   "processData": false,
 		"success": function (msg) {
 			console.log(msg.current.state + 'MSG SUC');
-			if (msg.current.state === 'Operational' || msg.current.state === 'Closed'){
+			if (msg.current.state === 'Operational' || msg.current.state === 'Closed' || msg.current.state === 'Offline' ){
 				ConnectServ();
 				//InitialServe('false');
 			} else {Disconnected();}
         },
 		"error": function (msg) {
 			console.log(msg + 'MSG ERR');
-			CheckedConnect(30);
+			CheckedConnect(20);
 			$('.label_status').text('не удалось подключиться');
         },
 };
