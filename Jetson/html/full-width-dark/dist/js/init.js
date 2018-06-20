@@ -335,10 +335,10 @@ var settings = {
   "processData": false,
   "data": String(command),
   "success": function (response) {
-  	alert('Успешно', response);
+  	//alert('Успешно', response);
   },
   "error": function (response) {
-  	alert('Не успешно', response);
+  	//alert('Не успешно', response);
   }
 };
 $.ajax(settings).done(function (response) {
