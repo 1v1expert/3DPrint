@@ -622,14 +622,18 @@ var GetStatePrinter = function () {
   "processData": false,
 		"success": function (msg) {
 			console.log(msg.current.state + 'MSG SUC');
-			if (msg.current.state === 'Operational' || msg.current.state === 'Closed' || msg.current.state === 'Offline' ){
+			if (msg.current.state === 'Closed' || msg.current.state === 'Offline' ){
 				ConnectServ();
+				Disconnected();
 				//InitialServe('false');
-			} else {Disconnected();}
+			};
+			if (msg.current.state === 'Operational') {
+			    Connected();
+            }
         },
 		"error": function (msg) {
 			console.log(msg + 'MSG ERR');
-			CheckedConnect(20);
+			CheckedConnect(5);
 			$('.label_status').text('не удалось подключиться');
         },
 };
