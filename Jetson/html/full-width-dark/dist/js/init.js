@@ -528,7 +528,7 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "connect", "port": "/dev/serial0", "baudrate": 115200, "printerProfile": "Prism_Mini_V2", "save": true, "autoconnect": true}',
+  "data": '{"command": "connect"}',
   "success": function(response) {
   	//alert(response);
 	  console.log(response + 'ConnectServ');
@@ -622,7 +622,7 @@ var GetStatePrinter = function () {
   "processData": false,
 		"success": function (msg) {
 			console.log(msg.current.state + 'MSG SUC');
-			if (msg.current.state === 'Operational'){
+			if (msg.current.state === 'Operational' || msg.current.state === 'Closed'){
 				ConnectServ();
 				//InitialServe('false');
 			} else {Disconnected();}
