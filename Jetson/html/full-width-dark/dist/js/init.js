@@ -415,6 +415,7 @@ function timer(){
   			var temptool1 = response.temperature.tool0.actual * 100 / TARGET;
   			$('#pie_chart_1').find('.percents').text(response.temperature.tool0.actual);
   			$('#pie_chart_1').data('easyPieChart').update(temptool1);
+  			$('#degres_1').text('/' + response.temperature.tool0.target + '°');
   			//$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
   		}
   		else {
@@ -430,6 +431,7 @@ function timer(){
   			var temptool2 = response.temperature.tool1.actual * 100 / TARGET;
   			$('#pie_chart_2').find('.percents').text(response.temperature.tool1.actual);
   			$('#pie_chart_2').data('easyPieChart').update(temptool2);
+  			$('#degres_2').text('/' + response.temperature.tool1.target + '°');
   			//$('#pie_chart_2').find('.percent').text(response.temperature.tool1.actual);
   		}
   		else {
@@ -443,6 +445,7 @@ function timer(){
   			var tempbed = response.temperature.bed.actual * 100 / TARGET;
   			$('#pie_chart_3').find('.percents').text(response.temperature.bed.actual);
   			$('#pie_chart_3').data('easyPieChart').update(tempbed);
+  			$('#degres_3').text('/' + response.temperature.bed.target + '°');
   			//$('#pie_chart_3').find('.percent').text(response.temperature.bed.actual);
   		}
   		else {
