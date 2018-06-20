@@ -704,6 +704,7 @@ $(document).ready(function(){
 	//InitialServe();
 	GetStatePrinter();
 	//GetFilesLocal();
+    ConnectServ();
 	GetFilesLocal("sdcard?recursive=true");
   	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
 });
