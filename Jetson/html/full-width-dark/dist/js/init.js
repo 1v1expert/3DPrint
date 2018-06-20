@@ -17,7 +17,7 @@
 var ApiKeyDev = "E39CDD5E459A4493A6AC51204115204D";
 var ApiKeyProd ="A1DF8B0B3E6743448D60194EAC0F0772";
 var ApiRasp = "5C761F424E5E46EE934DE9F683609B66";
-var ActiveApi = ApiKeyProd;
+var ActiveApi = ApiRasp;
 var PortProd = 5000;
 //var PortTest = 8112;
 var ActivePort = PortProd;
@@ -34,6 +34,76 @@ $('#stopprint').on('click', function () {
 $('#pauseprint').on('click', function () {
     TogglePrint();
 });
+
+$('#platform_restart').on('click', function () {
+    console.log('Platform_restart');
+    RestartPlatform();
+});
+$('#restart_software').on('click', function () {
+    console.log('restart_software');
+    RestartSoftware();
+});
+
+var RestartPlatform= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/core/reboot",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response + ' -- response');
+	  //Connected();
+	  },
+  "error": function(response) {
+  	//CheckedConnect(30);
+  	console.log(response + " - Error get response");
+  	//$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+
+var RestartSoftware= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/core/restart",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response + ' -- response');
+	  //Connected();
+	  },
+  "error": function(response) {
+  	//CheckedConnect(30);
+  	console.log(response + " - Error get response");
+  	//$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
 
 var RestartPrint= function () {
 var settings = {
@@ -404,7 +474,7 @@ var GetState = function (flag) {
                 clearInterval(idIntervals);
              }
              else {
-		idIntervals=setInterval(function(){timer();GetJob();},10000);//опять запускается таймер
+		idIntervals=setInterval(function(){timer();GetJob();},2000);//опять запускается таймер
 	}
   //clearInterval(idIntervals);//тут останавливаем таймер
 
@@ -627,6 +697,8 @@ $(document).ready(function(){
 	$('#degres_2').text('/' + TARGET + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + TARGET + '°');
+	//$('#progress').css('width',  '0%');
+	$('#progress').html('');
 	//$('#pie_chart_34').data('easyPieChart').update(0);
 	//$('#degres_34').text('/' + TARGET + '°');
 	//InitialServe();

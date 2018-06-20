@@ -200,7 +200,7 @@
                             <h6 class="mb-15" id="print_status"></h6>
                             <div class="panel-body">
 										<div class="progress progress-lg">
-											<div class="progress-bar progress-bar-inverse active progress-bar-striped" style="width: 80%;" id="progress" role="progressbar">80%</div>
+											<div class="progress-bar progress-bar-inverse active progress-bar-striped" style="width: 0%;" id="progress" role="progressbar">0%</div>
 										</div><label id="file_name"></label><p></p><label id="estimatedPrintTime"></label>
 									</div>
 
@@ -324,7 +324,7 @@
 <!-- Main Content -->
 		<div class="page-wrapper">
 			<div class="container-fluid pt-25">
-				<div class="col-lg-6 col-sm-12">
+				<div class="col-lg-12 col-sm-12">
 					<div class="panel panel-default card-view">
 						<div class="panel-heading">
 							<div class="pull-left">
@@ -371,9 +371,23 @@
 											</div>
 										</div>
 									</div>
+									<div class="tab-struct vertical-tab custom-tab-1 mt-40" style="float: right; border-bottom: none;margin-top: -130px!important;left: 49px;">
+									<div role="tablist" style="padding-bottom: 10px;">
+                                        <button class="btn btn-success btn-outline btn-rounded" style="width: 200px;" id="restart_software"><code>Рестарт приложения</code></button>
+									</div>
+										<div role="tablist">
+										<button class="btn btn-success btn-outline btn-rounded" style="width: 200px" id="platform_restart"><code>Рестарт платформы </code></button>
+									</div>
+
+										</div>
 								</div>
 							</div>
 						</div>
+						<!--<div class="row">
+							<div class="panel-body">
+
+							</div>
+						</div>-->
 					</div>
 				</div>
 			</div>

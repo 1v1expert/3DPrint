@@ -2365,7 +2365,7 @@ class MachineCom(object):
 						                                                    self._alwaysSendChecksum or
 						                                                    not self._firmware_info_received)
 
-						command_to_send = command.encode("ascii", errors="replace")
+						command_to_send = command.encode("utf-8", errors="replace")
 						if command_requiring_checksum or (command_allowing_checksum and checksum_enabled):
 							self._do_increment_and_send_with_checksum(command_to_send)
 						else:
