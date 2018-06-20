@@ -528,7 +528,7 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "connect"}',
+  "data": '{"command": "connect", "port": "/dev/serial0", "baudrate": 115200, "printerProfile": "Prism_Mini_V2", "save": true, "autoconnect": true}',
   "success": function(response) {
   	//alert(response);
 	  console.log(response + 'ConnectServ');
@@ -704,7 +704,7 @@ $(document).ready(function(){
 	//InitialServe();
 	GetStatePrinter();
 	//GetFilesLocal();
-    ConnectServ();
+    //ConnectServ();
 	GetFilesLocal("sdcard?recursive=true");
   	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
 });
