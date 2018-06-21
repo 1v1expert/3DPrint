@@ -101,8 +101,9 @@
 .tabs__content {
 	display: none;
 	background: #FFF;
-	border: 2px solid #50c4e3;
+	border: 3px solid #50c4e3;
 	border-radius: 0 5px 5px 5px;
+    margin-top: -6px;
 	/*padding: 7px 15px;*/
 }
 .tabs__content.active {
@@ -162,7 +163,9 @@
 		height: 5px;
 		background: #FFF;
 	}}
-
+.menu-main li:after {
+    content: "";
+}
 	</style>
 
 </head>
@@ -175,7 +178,7 @@
 	<div class="tabs">
 		<nav class="navbar navbar-inverse navbar-fixed-top" style="min-height: auto; padding: 0 0 0 0;">
 			<ul class="menu-main">
-				<li class="active" id="maintab">Дом</li>
+				<li class="active" id="maintab">ДОМ</li>
 				<li>Управление</li>
 				<li>Файлы</li>
 				<li>Инструкция</li>
@@ -197,15 +200,28 @@
 
                     <div class="col-lg-12 h-20" style="padding-left: unset;">
 						<div class="well well-lg card-view">
-                            <h6 class="mb-15" id="print_status"></h6>
+                            <!--<h6 class="mb-15" id="print_status"></h6>-->
+                            <h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 3px; font-size: 19px" ><code><b style="font-weight: bold" id="status_print"> ПРИНТЕР ОЖИДАЕТ </b></code></h6>
                             <div class="panel-body">
 										<div class="progress progress-lg">
 											<div class="progress-bar progress-bar-inverse active progress-bar-striped" style="width: 0%;" id="progress" role="progressbar">0%</div>
-										</div><label id="file_name"></label><p></p><label id="estimatedPrintTime"></label>
-									</div>
+										</div>
+                                <div class="col-md-6">
+                                    <label id="file_name" style="color: #fff"></label>
+                                    <p></p>
+                                    <label id="estimatedPrintTime" style="color: #fff"></label>
+                                </div>
+                                <div class="col-md-6" style="text-align: right">
+                                    <label id="test" style="color: #fff"></label>
+                                    <p></p>
+                                    <label id="test2" style="color: #fff"></label>
+                                </div>
+
+
+                            </div>
 
 							<p></p><div class="row" style="text-align: center">
-							<div class="btn-group mt-15 mr-10">
+							<div class="btn-group mt-15 mr-10" style="margin-top: 4px!important;">
 							<button class="btn btn-success btn-outline btn-rounded" id="restartprint"><i style="    font-size: x-large;" class="fa fa-play-circle-o" aria-hidden="true"> restart</i></button>
 								<button class="btn btn-success btn-outline btn-rounded" id="stopprint"><i style="    font-size: x-large;" class="fa fa-stop" aria-hidden="true"> stop</i></button>
 							<button class="btn btn-success btn-outline btn-rounded" id="pauseprint"><i style="    font-size: x-large;" class="fa fa-pause" id="iconpause" aria-hidden="true"> pause</i></button>
@@ -322,8 +338,8 @@
 
   <div class="tabs__content">
 <!-- Main Content -->
-		<div class="page-wrapper">
-			<div class="container-fluid pt-25">
+		<div class="page-wrapper" style="padding: 55px 20px;">
+			<div class="container-fluid pt-25" style="padding-top: 1px !important;">
 				<div class="col-lg-12 col-sm-12">
 					<div class="panel panel-default card-view">
 						<div class="panel-heading">
@@ -741,7 +757,10 @@
 	<!-- Fancy Dropdown JS -->
 	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
 
-	<!-- Sparkline JavaScript -->
+	<!-- Moment JS for convertind data/time -->
+    <script src="dist/js/moment.js"></script>
+
+    <!-- Sparkline JavaScript -->
 	<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
 
 	<!-- Owl JavaScript -->

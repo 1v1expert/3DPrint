@@ -304,12 +304,13 @@ var settings = {
   "success": function (response) {
   	//alert('Успешно', response);
 	  if (response.progress.completion) {
+	      $('#status_print').text("ИДЁТ ПЕЧАТЬ, ОЖИДАЙТЕ...")
           $('#progress').css('width', Math.round(response.progress.completion) + '%');
           $('#progress').html(Math.round(response.progress.completion) + '%');
           console.log(response, response.progress.completion);
           $('#file_name').text("Файл: " + response.job.file.name);
-          $('#estimatedPrintTime').text("Время печати: " + response.job.estimatedPrintTime + "с");
-      }
+          $('#estimatedPrintTime').text("Время печати: " + moment(response.job.estimatedPrintTime).format('hh:mm:ss'));
+      };
 
   },
   "error": function (response) {
