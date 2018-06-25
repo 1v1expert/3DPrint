@@ -30,7 +30,7 @@ var PRINT_PAUSE = false;
 $('#extrude_1').on('click', function () {
     Extrude("tool0", "200");
 }
-});
+);
 $('#retruct_1').on('click', function () {
     Extrude("tool0", "-200");
 });
