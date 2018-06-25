@@ -14,6 +14,28 @@
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<link href="dist/css/style.css" rel="stylesheet" type="text/css">
 	<style>
+		.system_btn{
+			background-color: #0b97c4!important;
+			width: 200px;
+		}
+		.system_btn:active{
+			color: #fff;
+		}
+		.file-box {
+			margin-bottom: 15px;
+		}
+		.file .icon, .file .image {
+			height: 70px;
+		}
+		.file .file-name
+		{
+			font-size: 10px;
+			padding: 3px;
+		}
+		.file .file-name span
+		{
+			font-size: 10px;
+		}
 		.well.well-lg {
     padding: 12px!important;
 }
@@ -201,7 +223,7 @@
                     <div class="col-lg-12 h-20" style="padding-left: unset;">
 						<div class="well well-lg card-view">
                             <!--<h6 class="mb-15" id="print_status"></h6>-->
-                            <h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 3px; font-size: 19px" ><code><b style="font-weight: bold" id="status_print"> ПРИНТЕР ОЖИДАЕТ </b></code></h6>
+                            <h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 3px; font-size: 19px" ><code><b style="font-weight: bold" id="status_print"> ГОТОВ К ПЕЧАТИ </b></code></h6>
                             <div class="panel-body">
 										<div class="progress progress-lg">
 											<div class="progress-bar progress-bar-inverse active progress-bar-striped" style="width: 0%;" id="progress" role="progressbar">0%</div>
@@ -209,10 +231,10 @@
                                 <div class="col-md-6">
                                     <label id="file_name" style="color: #fff"></label>
                                     <p></p>
-                                    <label id="estimatedPrintTime" style="color: #fff"></label>
+                                    <label id="test" style="color: #fff"></label>
                                 </div>
                                 <div class="col-md-6" style="text-align: right">
-                                    <label id="test" style="color: #fff"></label>
+                                    <label id="estimatedPrintTime" style="color: #fff"></label>
                                     <p></p>
                                     <label id="test2" style="color: #fff"></label>
                                 </div>
@@ -222,9 +244,9 @@
 
 							<p></p><div class="row" style="text-align: center">
 							<div class="btn-group mt-15 mr-10" style="margin-top: 4px!important;">
-							<button class="btn btn-success btn-outline btn-rounded" id="restartprint"><i style="    font-size: x-large;" class="fa fa-play-circle-o" aria-hidden="true"> restart</i></button>
-								<button class="btn btn-success btn-outline btn-rounded" id="stopprint"><i style="    font-size: x-large;" class="fa fa-stop" aria-hidden="true"> stop</i></button>
-							<button class="btn btn-success btn-outline btn-rounded" id="pauseprint"><i style="    font-size: x-large;" class="fa fa-pause" id="iconpause" aria-hidden="true"> pause</i></button>
+							<!--<button class="btn btn-success btn-outline btn-rounded" id="restartprint"><i style="    font-size: x-large;" class="fa fa-play-circle-o" aria-hidden="true"> restart</i></button>-->
+								<button class="btn btn-success btn-outline btn-rounded" id="stopprint"><i style="    font-size: x-large;" class="fa fa-stop" aria-hidden="true"> прервать</i></button>
+							<button class="btn btn-success btn-outline btn-rounded" id="pauseprint"><i style="    font-size: x-large;" class="fa fa-pause" id="iconpause" aria-hidden="true"> приостановить</i></button>
                             <!--<button class="btn btn-success btn-outline btn-rounded btn-xs" style="font-size: 8px" onclick="GetJob()" id="printinfo">Пучать info</button>-->
                             </div>
 						</div>
@@ -278,28 +300,28 @@
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pb-0">
 									<div class="row">
-										<div class="col-sm-3 mb-15">
-											<span class="skill-head mb-20">1 сопла</span>
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">T° 1-го сопла</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_1"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<div class="col-sm-3 mb-15">
-											<span class="skill-head mb-20">2 сопла</span>
+										<!--<div class="col-sm-3 mb-15">
+											<span class="skill-head mb-20">T° 2 сопло</span>
 											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_2"></label>
 											<canvas height="100" width="100"></canvas></span>
-										</div>
-										<div class="col-sm-3 mb-15">
-											<span class="skill-head mb-20">стола</span>
+										</div>-->
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">T° стола</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_3"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<div class="col-sm-3 mb-15">
+										<div class="col-sm-4 mb-15">
 											<span class="skill-head mb-20">вентилятор</span>
 											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="20">
 												<span class="degreess  percents degrees head-font">20</span>
@@ -368,7 +390,7 @@
 														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Z" class="btn" data-action="incrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
 														</td>
 														<td class="separator"></td>
-														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Y" class="btn" data-action="incrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a></td>
+														<td><a href="#" tabindex="-1" title="Дальше" id="UP_Y" class="btn" data-action="incrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-up" style="font-size: x-large;"></span></a></td>
 														<td class="separator"></td>
 													</tr>
 													<tr>
@@ -379,7 +401,7 @@
 													</tr>
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вниз" id="DOWN_Z" class="btn" data-action="decrementHours" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
-														<td class="separator"></td><td><a href="#" tabindex="-1" title="Вниз" id="Down_Y" class="btn" data-action="decrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
+														<td class="separator"></td><td><a href="#" tabindex="-1" title="Ближе" id="Down_Y" class="btn" data-action="decrementMinutes" style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span class="fa fa-arrow-down" style="font-size: x-large;"></span></a></td>
 														<td class="separator"></td>
 													</tr>
 													</tbody>
@@ -389,10 +411,10 @@
 									</div>
 									<div class="tab-struct vertical-tab custom-tab-1 mt-40" style="float: right; border-bottom: none;margin-top: -130px!important;left: 49px;">
 									<div role="tablist" style="padding-bottom: 10px;">
-                                        <button class="btn btn-success btn-outline btn-rounded" style="width: 200px;" id="restart_software"><code>Рестарт приложения</code></button>
+                                        <button class="btn btn-success btn-outline btn-rounded system_btn" id="restart_software"><code>Рестарт приложения</code></button>
 									</div>
 										<div role="tablist">
-										<button class="btn btn-success btn-outline btn-rounded" style="width: 200px" id="platform_restart"><code>Рестарт платформы </code></button>
+										<button class="btn btn-success btn-outline btn-rounded system_btn" id="platform_restart"><code>Рестарт платформы </code></button>
 									</div>
 
 										</div>
@@ -482,7 +504,7 @@
 												<div class="row">
 													<div class="col-lg-12">
 														<div class="row" id="rowfiles">
-															<!--<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box">
+															<!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12  file-box">
 																<div class="file">
 																	<a href="" onclick="alert('AA')">
 
@@ -497,7 +519,6 @@
 																	</a>
 																</div>
 															</div>-->
-
 
 														</div>
 													</div>
@@ -531,24 +552,50 @@
 			<div class="tabs__content">
 				<div class="page-wrapper">
 				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="table-responsive" >
+								<table class="table-condensed">
+									<thead>
+									<th><a style="font-weight: 900;font-size: 22px;">экструдить</a></th>
+									<th><a style="font-weight: 900;font-size: 22px;">ретрактить</a></th>
+									</thead>
+									<tbody>
+									<tr>
+										<td style="text-align: center"><a class="btn" id="extrude_1" style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">1-ое сопло</a></td>
+										<td style="text-align: center"><a class="btn" id="retruct_1" style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">1-ое сопло</a></td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><a class="btn" id="extrude_2" style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">2-ое сопло</a></td>
+										<td style="text-align: center"><a class="btn" id="retruct_2" style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">2-ое сопло</a></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 
 					<!-- Title -->
-					<div class="row heading-bg">
+					<!--ACTIVE-->
+					<div class="row heading-bg" style="display: none">
 						<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
 						  <h5 class="txt-dark">Инструкция</h5>
 						</div>
 						<!-- Breadcrumb -->
-						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+						<!-- ACTIVE-->
+						<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12" style="display: none">
 						  <ol class="breadcrumb">
 							<li class="active"><span>faq</span></li>
 						  </ol>
 						</div>
 						<!-- /Breadcrumb -->
+					<!-- ACTIVE-->
 					</div>
 					<!-- /Title -->
 
 					<!-- Row -->
-					<div class="row">
+					<!-- ACTIVE-->
+					<div class="row" style="display: none">
 						<div class="col-md-12">
 							<div class="panel panel-default card-view">
 								<div class="panel-wrapper collapse in">

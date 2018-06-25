@@ -25,13 +25,42 @@ var ActivePort = PortProd;
 var idIntervals=0;
 var TARGET = 300;
 
+var PRINT_PAUSE = false;
+
+$('#extrude_1').on('click', function () {
+    Extrude("tool0", "200");
+}
+});
+$('#retruct_1').on('click', function () {
+    Extrude("tool0", "-200");
+});
+$('#extrude_2').on('click', function () {
+    Extrude("tool1", "200");
+});
+$('#retruct_2').on('click', function () {
+    Extrude("tool1", "-200");
+});
+
 $('#restartprint').on('click', function () {
+    $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
     RestartPrint();
 });
 $('#stopprint').on('click', function () {
+    //Add change name status
+    $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
     Stopprint();
 });
 $('#pauseprint').on('click', function () {
+    if (PRINT_PAUSE){
+        $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
+        $('#iconpause').text(' Приостановить');
+        PRINT_PAUSE = false;
+    }
+    else {
+        $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
+        $('#iconpause').text(' Продолжить');
+        PRINT_PAUSE = true;
+    };
     TogglePrint();
 });
 
@@ -43,6 +72,55 @@ $('#restart_software').on('click', function () {
     console.log('restart_software');
     RestartSoftware();
 });
+
+var Extrude = function (vtool, type_exchange) {
+    var command = '{"command": "select", "tool":' + vtool + '}';
+    var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
+    var select_tool = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command,
+  "success": function(response) {
+	  console.log(response + ' -- success selecting');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error selecting");
+  }
+};
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command2,
+  "success": function(response) {
+	  console.log(response + ' -- success extruding/retract');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error extruding/retract");
+  }
+};
+$.ajax(select_tool).done(function (response) {
+    console.log(response);
+});
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
 
 var RestartPlatform= function () {
 var settings = {
@@ -197,9 +275,8 @@ $.ajax(settings).done(function (response) {
     console.log(response);
 });
 };
-
-var OnPrint = function (name_file) {
-  swal({
+var ConfirmPrint = function (name_file) {
+    swal({
             title: "Вы уверены ?",
             text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
             type: "warning",
@@ -211,12 +288,15 @@ var OnPrint = function (name_file) {
             closeOnCancel: false
         }, function(isConfirm){
             if (isConfirm) {
-                swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
-                $('#maintab').click()
+                //swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
+                StartPrint(name_file);
+                $('#maintab').click();
             } else {
                 swal("Отменено", "А ты послушный :)", "error");
             }
         });
+};
+var StartPrint = function (name_file) {
   var settings = {
       "async": true,
       "crossDomain": true,
@@ -229,8 +309,17 @@ var OnPrint = function (name_file) {
       },
       "data": '{"command": "select", "print": true}',
       "processData": false,
-      "success": function(response){GetJob();console.log('SUUCCCCCEEESS'); console.log(response);},
-      "error": function(response){console.log('ERRROE'); console.log(response);swal("Ошибка", "Ошибка печати", "error");}
+      "success": function(response){
+          $('#progress').html('');
+          $('#progress').css('width', '0%');
+          GetJob();
+          console.log('SUUCCCCCEEESS -', response);
+          $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
+          },
+      "error": function(response){
+          console.log('ERRROrE -', response);
+          swal("Ошибка", "Ошибка печати", "error");
+      }
 
 };
   $.ajax(settings).done(function (response) {
@@ -239,8 +328,11 @@ var OnPrint = function (name_file) {
   console.log(name_file);
 };
 
+// Update files local and SD CARD
 $('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').addClass('active');$('#usbfiles').removeClass('active');GetFilesLocal("sdcard?recursive=true");});
 $('#usbfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').removeClass('active');$('#usbfiles').addClass('active');GetFilesLocal("local?force=true&filter=gcode&recursive=true");});
+
+// Get files
 var GetFilesLocal = function (dd) {
     console.log('LOCAL');
     var settings = {
@@ -264,7 +356,7 @@ var GetFilesLocal = function (dd) {
             else {
                 for (var item in response.files) {
                     //alert();
-                    data_html = data_html + "<div class='col-lg-3 col-md-4 col-sm-6 col-xs-12  file-box'><div class='file'><a onclick=\"OnPrint(\'" + response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + response.files[item].name + "<br> <span>Added: --------</span> </div> </a> </div> </div>";
+                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + response.files[item].name + "<br> <span>Added: --------</span> </div> </a> </div> </div>";
 
                 }
                 if (dd === "local?force=true&filter=gcode&recursive=true") {
@@ -304,7 +396,7 @@ var settings = {
   "success": function (response) {
   	//alert('Успешно', response);
 	  if (response.progress.completion) {
-	      $('#status_print').text("ИДЁТ ПЕЧАТЬ, ОЖИДАЙТЕ...")
+	      //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
           $('#progress').css('width', Math.round(response.progress.completion) + '%');
           $('#progress').html(Math.round(response.progress.completion) + '%');
           console.log(response, response.progress.completion);
@@ -427,20 +519,20 @@ function timer(){
 
 
 	};
-  	if (response.temperature.tool1){
-  		if (response.temperature.tool1.target === 0){
-  			var temptool2 = response.temperature.tool1.actual * 100 / TARGET;
-  			$('#pie_chart_2').find('.percents').text(response.temperature.tool1.actual);
-  			$('#pie_chart_2').data('easyPieChart').update(temptool2);
-  			$('#degres_2').text('/' + response.temperature.tool1.target + '°');
-  			//$('#pie_chart_2').find('.percent').text(response.temperature.tool1.actual);
-  		}
-  		else {
-  		var temptools2 = response.temperature.tool1.actual * 100 / response.temperature.tool1.target;
-  		$('#degres_2').text('/' + response.temperature.tool1.target + '°');
-  		$('#pie_chart_2').find('.percents').text(response.temperature.tool1.actual);
-  		$('#pie_chart_2').data('easyPieChart').update(temptools2);}
-	};
+  	//if (response.temperature.tool1){
+  	//	if (response.temperature.tool1.target === 0){
+  	//		var temptool2 = response.temperature.tool1.actual * 100 / TARGET;
+  	//		$('#pie_chart_2').find('.percents').text(response.temperature.tool1.actual);
+  	//		$('#pie_chart_2').data('easyPieChart').update(temptool2);
+  	//		$('#degres_2').text('/' + response.temperature.tool1.target + '°');
+  	//		//$('#pie_chart_2').find('.percent').text(response.temperature.tool1.actual);
+  	//	}
+  	//	else {
+  	//	var temptools2 = response.temperature.tool1.actual * 100 / response.temperature.tool1.target;
+  	//	$('#degres_2').text('/' + response.temperature.tool1.target + '°');
+  	//	$('#pie_chart_2').find('.percents').text(response.temperature.tool1.actual);
+  	//	$('#pie_chart_2').data('easyPieChart').update(temptools2);}
+	//};
   	if (response.temperature.bed){
   		if (response.temperature.bed.target === 0){
   			var tempbed = response.temperature.bed.actual * 100 / TARGET;
@@ -473,7 +565,7 @@ $.ajax(settings).done(function (response) {
 var GetState = function (flag) {
 	if (flag === 'false') {
 		$('#pie_chart_1').data('easyPieChart').update(0);
-			$('#pie_chart_2').data('easyPieChart').update(0);
+			//$('#pie_chart_2').data('easyPieChart').update(0);
 				$('#pie_chart_3').data('easyPieChart').update(0);
                 clearInterval(idIntervals);
              }
@@ -701,8 +793,8 @@ $(document).ready(function(){
 	$('.preloader-it > .la-anim-1').addClass('la-animate');
 	$('#pie_chart_1').data('easyPieChart').update(0);
 	$('#degres_1').text('/' + TARGET + '°');
-	$('#pie_chart_2').data('easyPieChart').update(0);
-	$('#degres_2').text('/' + TARGET + '°');
+	//$('#pie_chart_2').data('easyPieChart').update(0);
+	//$('#degres_2').text('/' + TARGET + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + TARGET + '°');
 	//$('#progress').css('width',  '0%');
