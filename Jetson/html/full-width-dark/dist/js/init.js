@@ -28,17 +28,17 @@ var TARGET = 300;
 var PRINT_PAUSE = false;
 
 $('#extrude_1').on('click', function () {
-    Extrude("tool0", "200");
+    Extrude("tool0", "5");
 }
 );
 $('#retruct_1').on('click', function () {
-    Extrude("tool0", "-200");
+    Extrude("tool0", "-5");
 });
 $('#extrude_2').on('click', function () {
-    Extrude("tool1", "200");
+    Extrude("tool1", "5");
 });
 $('#retruct_2').on('click', function () {
-    Extrude("tool1", "-200");
+    Extrude("tool1", "-5");
 });
 
 $('#restartprint').on('click', function () {
