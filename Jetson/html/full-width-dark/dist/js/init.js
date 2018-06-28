@@ -41,6 +41,32 @@ $('#retruct_2').on('click', function () {
     Extrude("tool1", "-5");
 });
 
+$('#up_t_tool').on('click', function () {
+    var t = $('#t_tool').text();
+    var c_t = +t;
+    $('#t_tool').text(c_t+1);
+});
+
+$('#down_t_tool').on('click', function () {
+    var t = $('#t_tool').text();
+    var c_t = +t;
+    $('#t_tool').text(c_t-1);
+});
+
+$('#up_t_board').on('click', function () {
+    var t = $('#t_board').text();
+    var c_t = +t;
+    $('#t_board').text(c_t+1);
+});
+
+$('#down_t_board').on('click', function () {
+    var t = $('#t_board').text();
+    var c_t = +t;
+    $('#t_board').text(c_t-1);
+});
+
+
+
 $('#restartprint').on('click', function () {
     $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
     RestartPrint();
