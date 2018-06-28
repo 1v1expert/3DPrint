@@ -68,11 +68,13 @@ $('#down_t_board').on('click', function () {
 $('#set_temp_tool').on('click', function () {
     var t = $('#t_tool').text();
     var c_t = +t;
-    SetTemperature(c_t);
+    SetTemperature_tool(c_t);
 });
 
 $('#set_temp_board').on('click', function () {
-
+    var t = $('#t_board').text();
+    var c_t = +t;
+    SetTemperature_bed(c_t);
 });
 
 
@@ -109,7 +111,36 @@ $('#restart_software').on('click', function () {
     RestartSoftware();
 });
 
-var SetTemperature = function (temper) {
+var SetTemperature_bed = function (temper) {
+    //var command = '{"command": "select", "tool":' + vtool + '}';
+    //var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
+    //var command3 = '{"command": "target", "targets": {"tool0":' + temper + '}}';
+    var command4 = '{"command": "target", "target":' +  temper + '}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/bed",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command4,
+  "success": function(response) {
+	  console.log(response + ' -- success set temperature');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error set temperature");
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var SetTemperature_tool = function (temper) {
     //var command = '{"command": "select", "tool":' + vtool + '}';
     //var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
     var command3 = '{"command": "target", "targets": {"tool0":' + temper + '}}';
