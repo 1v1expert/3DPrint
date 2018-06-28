@@ -65,6 +65,16 @@ $('#down_t_board').on('click', function () {
     $('#t_board').text(c_t-1);
 });
 
+$('#set_temp_tool').on('click', function () {
+    var t = $('#t_tool').text();
+    var c_t = +t;
+    SetTemperature(c_t);
+});
+
+$('#set_temp_board').on('click', function () {
+
+});
+
 
 
 $('#restartprint').on('click', function () {
@@ -98,6 +108,34 @@ $('#restart_software').on('click', function () {
     console.log('restart_software');
     RestartSoftware();
 });
+
+var SetTemperature = function (temper) {
+    //var command = '{"command": "select", "tool":' + vtool + '}';
+    //var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
+    var command3 = '{"command": "target", "targets": {"tool0":' + temper + '}}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command3,
+  "success": function(response) {
+	  console.log(response + ' -- success set temperature');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error set temperature");
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
 
 var Extrude = function (vtool, type_exchange) {
     var command = '{"command": "select", "tool":' + vtool + '}';
