@@ -64,6 +64,12 @@ $('#down_t_board').on('click', function () {
     var c_t = +t;
     $('#t_board').text(c_t-1);
 });
+$('#zero_temp_board').on('click', function () {
+    $('#t_board').text(0);
+});
+$('#zero_temp_tool').on('click', function () {
+    $('#t_tool').text(0);
+});
 
 $('#set_temp_tool').on('click', function () {
     var t = $('#t_tool').text();
@@ -77,7 +83,11 @@ $('#set_temp_board').on('click', function () {
     SetTemperature_bed(c_t);
 });
 
+$('#restart_touchui').on('click', function () {
+    Restart_touchui();
+});
 
+//restart_touchui
 
 $('#restartprint').on('click', function () {
     $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
@@ -111,10 +121,127 @@ $('#restart_software').on('click', function () {
     RestartSoftware();
 });
 
+$('#M999').on('click', function () {
+    M999();
+});
+
+$('#calibr').on('click', function () {
+    console.log('restart_software');
+    Calibrate();
+});
+$('#reset_pl').on('click', function () {
+    console.log('restart_pl');
+    Reset_plate();
+});
+
+var Restart_touchui= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "restart_touchui"}',
+  "success": function(response) {
+	  console.log(response + ' -- success restart');
+	  },
+  "error": function(response) {
+  	console.log(response + " - Error restart touchui");
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var Reset_plate= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "reset_pl"}',
+  "success": function(response) {
+
+	  console.log(response + ' -- success reset plate');
+
+	  },
+  "error": function(response) {
+
+  	console.log(response + " - Error stopping print");
+
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var M999 = function () {
+    var command4 = '{"command": "M999"}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command4,
+  "success": function(response) {
+	  console.log(response + ' -- success send M999');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error send M999 command");
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var Calibrate = function () {
+    var command4 = '{"commands": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command4,
+  "success": function(response) {
+	  console.log(response + ' -- success send command to calibrate');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error send command to calibrate");
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+
 var SetTemperature_bed = function (temper) {
-    //var command = '{"command": "select", "tool":' + vtool + '}';
-    //var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
-    //var command3 = '{"command": "target", "targets": {"tool0":' + temper + '}}';
     var command4 = '{"command": "target", "target":' +  temper + '}';
     var settings = {
         "async": true,
@@ -141,8 +268,6 @@ $.ajax(settings).done(function (response) {
 };
 
 var SetTemperature_tool = function (temper) {
-    //var command = '{"command": "select", "tool":' + vtool + '}';
-    //var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
     var command3 = '{"command": "target", "targets": {"tool0":' + temper + '}}';
     var settings = {
         "async": true,
@@ -210,10 +335,10 @@ var settings = {
   }
 };
 $.ajax(select_tool).done(function (response) {
-    console.log(response);
+    console.log(response,'settings ->' ,select_tool);
 });
 $.ajax(settings).done(function (response) {
-    console.log(response);
+    console.log(response, 'settings ->', settings);
 });
 };
 
@@ -496,7 +621,8 @@ var settings = {
           $('#progress').html(Math.round(response.progress.completion) + '%');
           console.log(response, response.progress.completion);
           $('#file_name').text("Файл: " + response.job.file.name);
-          $('#estimatedPrintTime').text("Время печати: " + moment(response.job.estimatedPrintTime).format('hh:mm:ss'));
+          $('#estimatedPrintTime').text("Время печати: " + moment(response.progress.printTimeLeft).format('hh:mm:ss'));
+          $('#printTime').text("Печатается: " + moment(response.progress.printTime).format('hh:mm:ss'));
       };
 
   },
