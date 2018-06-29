@@ -98,7 +98,8 @@ $('#stopprint').on('click', function () {
     $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
     Stopprint();
 });
-$('#pauseprint').on('click', function () {
+//pauseprint_2
+$('#pauseprint_2').on('click', function () {
     if (PRINT_PAUSE){
         $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
         $('#iconpause').text(' Приостановить');
@@ -107,6 +108,22 @@ $('#pauseprint').on('click', function () {
     else {
         $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
         $('#iconpause').text(' Продолжить');
+        PRINT_PAUSE = true;
+    };
+    TogglePrint();
+});
+
+$('#pauseprint').on('click', function () {
+    if (PRINT_PAUSE){
+        $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
+        $('#iconpause').text(' Приостановить');
+        //RESUME_PRINTING();
+        PRINT_PAUSE = false;
+    }
+    else {
+        $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
+        $('#iconpause').text(' Продолжить');
+        PAUSE_PRINTING();
         PRINT_PAUSE = true;
     };
     TogglePrint();
@@ -133,6 +150,60 @@ $('#reset_pl').on('click', function () {
     console.log('restart_pl');
     Reset_plate();
 });
+
+var RESUME_PRINTING = function () {
+    var command4 = '{"command": "M999"}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command4,
+  "success": function(response) {
+	  console.log(response + ' -- success resume printing');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error ruseme printing");
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
+
+var PAUSE_PRINTING = function () {
+    var command4 = '{"commands": ["G91", "G1 Z+15 F3000", "G90", "G1 X-50 Y-50"]}';
+    //'{"command": "M999"}';
+    //G91|G1_Z+15_F3000|G90|G1_X-50_Y-50
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": command4,
+  "success": function(response) {
+	  console.log(response + ' -- success resume printing');
+	  },
+  "error": function(response) {
+      console.log(response + " - Error ruseme printing");
+  }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
 
 var Restart_touchui= function () {
 var settings = {
