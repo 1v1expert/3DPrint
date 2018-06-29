@@ -217,7 +217,7 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "restart_touchui"}',
+  "data": '{"action": "restart_touchui"}',
   "success": function(response) {
 	  console.log(response + ' -- success restart');
 	  },
