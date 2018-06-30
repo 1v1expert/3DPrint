@@ -234,7 +234,7 @@ var Reset_plate= function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/custom/reset_pl",
   "method": "POST",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -242,7 +242,7 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "reset_pl"}',
+  //"data": '{"command": "reset_pl"}',
   "success": function(response) {
 
 	  console.log(response + ' -- success reset plate');
