@@ -365,7 +365,7 @@ $.ajax(settings).done(function (response) {
 };
 
 var Extrude = function (vtool, type_exchange) {
-    var command = '{"command": "select", "tool":' + vtool + '}';
+    var command = '{"command": "select", "tool": "' + vtool + '"}';
     var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
     var select_tool = {
   "async": false,
