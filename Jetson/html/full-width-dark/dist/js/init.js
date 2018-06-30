@@ -575,8 +575,8 @@ var ConfirmPrint = function (name_file) {
             confirmButtonColor: "#f8b32d",
             confirmButtonText: "Да, я сделаю это",
             cancelButtonText: "Нет, не хооочу",
-            closeOnConfirm: false,
-            closeOnCancel: false
+            closeOnConfirm: true,
+            closeOnCancel: true
         }, function(isConfirm){
             if (isConfirm) {
                 //swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
