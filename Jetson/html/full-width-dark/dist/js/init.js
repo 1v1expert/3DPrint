@@ -151,8 +151,14 @@ $('#reset_pl').on('click', function () {
     Reset_plate();
 });
 
-var RESUME_PRINTING = function () {
-    var command4 = '{"command": "M999"}';
+$('#m306').on('click', function () {
+    console.log('m306');
+    //Reset_plate();
+    M306();
+});
+
+var M306 = function () {
+    var command4 = '{"command": "M306"}';
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -166,10 +172,10 @@ var RESUME_PRINTING = function () {
   "processData": false,
   "data": command4,
   "success": function(response) {
-	  console.log(response + ' -- success resume printing');
+	  console.log(response + ' -- success M306');
 	  },
   "error": function(response) {
-      console.log(response + " - Error ruseme printing");
+      console.log(response + " - Error M306");
   }
 };
 $.ajax(settings).done(function (response) {
