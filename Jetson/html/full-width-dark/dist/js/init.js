@@ -692,8 +692,8 @@ var settings = {
           $('#progress').html(Math.round(response.progress.completion) + '%');
           console.log(response, response.progress.completion);
           $('#file_name').text("Файл: " + response.job.file.name);
-          $('#estimatedPrintTime').text("Время печати: " + moment(response.progress.printTimeLeft).format('hh:mm:ss'));
-          $('#printTime').text("Печатается: " + moment(response.progress.printTime).format('hh:mm:ss'));
+          $('#estimatedPrintTime').text("Время печати: " + moment(Number(response.progress.printTimeLeft)).format('hh:mm:ss'));
+          $('#printTime').text("Печатается: " + moment(Number(response.progress.printTime)).format('hh:mm:ss'));
       };
 
   },
