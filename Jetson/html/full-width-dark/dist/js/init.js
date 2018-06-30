@@ -209,7 +209,7 @@ var Restart_touchui= function () {
 var settings = {
   "async": true,
   "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/custom/restart_touchui",
   "method": "POST",
   "headers": {
   	"x-api-key": ActiveApi,
@@ -217,7 +217,7 @@ var settings = {
 	  "cache-control": "no-cache"
   },
   "processData": false,
-  "data": '{"command": "restart_touchui"}',
+  //"data": '{"command": "restart_touchui"}',
   "success": function(response) {
 	  console.log(response + ' -- success restart');
 	  },
