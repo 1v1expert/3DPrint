@@ -108,9 +108,9 @@ $('#pauseprint_2').on('click', function () {
     else {
         $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
         $('#iconpause').text(' Продолжить');
+        PAUSE_PRINTING();
         PRINT_PAUSE = true;
     };
-    TogglePrint();
 });
 
 $('#pauseprint').on('click', function () {
@@ -123,7 +123,6 @@ $('#pauseprint').on('click', function () {
     else {
         $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
         $('#iconpause').text(' Продолжить');
-        PAUSE_PRINTING();
         PRINT_PAUSE = true;
     };
     TogglePrint();
