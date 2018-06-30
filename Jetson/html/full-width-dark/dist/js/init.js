@@ -368,7 +368,7 @@ var Extrude = function (vtool, type_exchange) {
     var command = '{"command": "select", "tool":' + vtool + '}';
     var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
     var select_tool = {
-  "async": true,
+  "async": false,
   "crossDomain": true,
   "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
   "method": "POST",
@@ -387,7 +387,7 @@ var Extrude = function (vtool, type_exchange) {
   }
 };
 var settings = {
-  "async": true,
+  "async": false,
   "crossDomain": true,
   "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
   "method": "POST",
