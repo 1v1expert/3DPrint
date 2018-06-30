@@ -158,7 +158,8 @@ $('#m306').on('click', function () {
 });
 
 var M306 = function () {
-    var command4 = '{"command": "M306"}';
+    //M306 Z0 \n G28 \n M500
+    var command4 = '{"commands": ["M306 Z0", "G28", "M500"]}';
     var settings = {
         "async": true,
         "crossDomain": true,
