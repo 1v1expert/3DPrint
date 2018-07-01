@@ -1089,7 +1089,7 @@ var IsConnectServer = function () {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": URL + "/api/connection",
+        "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
         "method": "GET",
         "headers": {
             "x-api-key": ActiveApi,
