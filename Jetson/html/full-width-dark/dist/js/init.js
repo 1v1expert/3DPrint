@@ -1097,6 +1097,10 @@ var IsConnectServer = function () {
         },
         "processData": false,
         "success": function () {
+            $.cookie('remember_token_P5000', "vladdos|ad0fa7482cd23a282c1378c833066a5b957beea5");
+            $.cookie('remember_token_P8112', "vladdos|4a1ea141831da52212bfafd404ca46f3d2ea4cfc");
+            $.cookie('session_P5000', ".eJyFjE0LgjAYgP9KvGcJsdvASwQLwUXSCL0Mc8tN3BS3ZSr-96iTt87PxwLsOQgrAbnBiwCY4oAW2D0AwQUnOr-nI4loRJqsIfoaklOmyUzDFCeqwPSQ3qQicx7DGoDiwjjlpn3pnWRu6gUg49t2QzZ3rt-ywNmrGuNf7a0Y2B9uhbWqM9uNoElXmuO5wj3m9VddPwVRRfQ.DhlMNg.uvCR5ocnuDo2XGN1x5K1w2rLzbw");
+            $.cookie('session_P8112', ".eJyrVopPK0otzlCyKikqTdVRis9MUbKqVlJIUrJSispyNPV3CTT2dYnK9ncPy_EN98qMcvc0iMyNLI_K8sr2A7L9coEwPNBWqVZHKTMlNa8ks6RSL7G0JCO-pLIgVckqrzQnB0kGyfSU3IqMKPegsuRyW7Du0uLUongC8sWpxcWZ-XnIxiQZZjglhziZJoWEGfilg5TWAgDnPUU4.DdtdYQ.fjfm0oiW3tn_1kQzjpcvIPJiUng");
             var socket = new WebSocket(UrlSocket);
             socket.onmessage = function(event) {
                 ProcessingData(event.data);
