@@ -1071,7 +1071,7 @@ var ProcessingData = function (data) {
         //-----
         var event = JSON.parse(strData, function (key, value) {
 
-            if (key == 'event') {console.log('RINF EVENT', value['payload']['x'], value['payload']['y']); $('#coorX').text(value['payload']['x']); $('#coorY').text(value['payload']['y']); $('#coorX').text(value['payload']['Z']); return value['payload'];}
+            if (key == 'event') {console.log('RINF EVENT', value['payload']['x'], value['payload']['y']); $('#coorX').text(value['payload']['x']); $('#coorY').text(value['payload']['y']); $('#coorZ').text(value['payload']['Z']); return value['payload'];}
             if (key == 'current') {console.log('PAYLOAD ->', value['current'])};
             return value
         });
