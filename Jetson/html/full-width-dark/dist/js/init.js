@@ -21,7 +21,7 @@ var ActiveApi = ApiRasp;
 var PortProd = 5000;
 //var PortTest = 8112;
 var ActivePort = PortProd;
-var URL = "//localhost:" + ActivePort;
+var URL = "//127.0.0.1:" + ActivePort;
 var UrlSocket = "ws:" + URL + "/sockjs/627/mvy2qfdj/websocket";
 
 var idIntervals=0;
