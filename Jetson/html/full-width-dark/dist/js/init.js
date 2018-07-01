@@ -1039,7 +1039,7 @@ var GetPosition = function () {
     var settings = {
         "async": true,
         "crossDomain": true,
-        "url": URL + "/api/printer/command",
+        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
         "method": "POST",
         "headers": {
             "x-api-key": ActiveApi,
