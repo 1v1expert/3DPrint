@@ -21,6 +21,8 @@ var ActiveApi = ApiRasp;
 var PortProd = 5000;
 //var PortTest = 8112;
 var ActivePort = PortProd;
+var URL = "//localhost:" + ActivePort;
+var UrlSocket = "ws:" + URL + "/sockjs/627/mvy2qfdj/websocket";
 
 var idIntervals=0;
 var TARGET = 300;
@@ -1031,6 +1033,83 @@ $.ajax(settings).done(function (response) {
 });
 };
 
+var GetPosition = function () {
+    //M306 Z0 \n G28 \n M500
+    var command = '{"commands": ["M114"]}';
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": URL + "/api/printer/command",
+        "method": "POST",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "data": command,
+        "success": function(response) {
+            console.log(response + ' -- success get response position');
+            },
+        "error": function(response) {
+            console.log(response + " - Error get response position");
+        }};
+    $.ajax(settings).done(function (response) {console.log(response);});
+};
+
+var ProcessingData = function (data) {
+    //console.log('============');
+    var foundPos = data.indexOf('a[');
+    if (~foundPos)
+    {
+        var strData = data.substring(foundPos+1);
+        var jsonData = JSON.parse(strData)[0];
+        //console.log('Совпадение есть -- >');
+        //console.log(jsonData[0]);
+        //-----
+        var event = JSON.parse(strData, function (key, value) {
+
+            if (key == 'event') {console.log('RINF EVENT', value['payload']['x'], value['payload']['y']); $('#coorX').text(value['payload']['x']); $('#coorY').text(value['payload']['y']); $('#coorX').text(value['payload']['Z']); return value['payload'];}
+            if (key == 'current') {console.log('PAYLOAD ->', value['current'])};
+            return value
+        });
+        console.log("!!!!_____-=", event[0].event);
+        console.log("!!!!_____-=", event[0].current);
+        //if (jsonData[0]['event']['payload']){
+         //   console.log('!!!! - ', jsonData[0]['event']['payload']);
+        //}
+        //-----
+        console.log(data);
+    };
+    //console.log(event);
+};
+
+var IsConnectServer = function () {
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": URL + "/api/connection",
+        "method": "GET",
+        "headers": {
+            "x-api-key": ActiveApi,
+            "content-type": "application/json",
+            "cache-control": "no-cache"
+        },
+        "processData": false,
+        "success": function () {
+            var socket = new WebSocket(UrlSocket);
+            socket.onmessage = function(event) {
+                ProcessingData(event.data);
+                GetPosition();
+            };
+        },
+        "error": function () {
+            $('#status_print').text("ПРОБЛЕМА С СЕРВЕРОМ...");
+        },
+    };
+    $.ajax(settings).done(function (response) {console.log(response)});
+};
+
 var GetStatePrinter = function () {
 	var settings = {
   "async": true,
@@ -1052,6 +1131,8 @@ var GetStatePrinter = function () {
 			};
 			if (msg.current.state === 'Operational') {
 			    Connected();
+			    IsConnectServer();
+			    GetPosition();
             }
         },
 		"error": function (msg) {
