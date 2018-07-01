@@ -1101,6 +1101,8 @@ var IsConnectServer = function () {
             socket.onmessage = function(event) {
                 ProcessingData(event.data);
                 GetPosition();
+                alert('Active connection');
+                alert(event);
             };
         },
         "error": function () {
