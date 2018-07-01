@@ -890,6 +890,8 @@ function timer(){
 $.ajax(settings).done(function (response) {
     console.log(response);
 });
+GetPosition();
+
 }
 var GetState = function (flag) {
 	if (flag === 'false') {
@@ -1104,10 +1106,10 @@ var IsConnectServer = function () {
             //alert(socket);
             //alert(socket2);
             console.log(socket, "EEQQQ");
-            socket.onopen = function() { alert("Connection opened...") };
+            //socket.onopen = function() { alert("Connection opened...") };
             socket.onmessage = function(event) {
                 ProcessingData(event.data);
-                GetPosition();
+
                 //alert('Active connection');
                 //alert(event);
             };
