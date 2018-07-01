@@ -1102,8 +1102,8 @@ var IsConnectServer = function () {
             var socket2 = new WebSocket("ws://0.0.0.0:5000/sockjs/627/mvy2qfdj/websocket");
             alert(socket);
             alert(socket2);
-            socket.onopen = function() { alert("Connection opened...") };
-            socket.onmessage = function(event) {
+            socket2.onopen = function() { alert("Connection opened...") };
+            socket2.onmessage = function(event) {
                 ProcessingData(event.data);
                 GetPosition();
                 //alert('Active connection');
