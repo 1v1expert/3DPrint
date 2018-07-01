@@ -1098,7 +1098,7 @@ var IsConnectServer = function () {
         "processData": false,
         "success": function () {
             //"ws://127.0.0.1:5000/sockjs/627/mvy2qfdj/websocket"
-            var socket = new WebSocket(UrlSocket);
+            var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/627/mvy2qfdj/websocket");
             socket.onopen = function() { alert("Connection opened...") };
             socket.onmessage = function(event) {
                 ProcessingData(event.data);
