@@ -1123,6 +1123,7 @@ var GetStatePrinter = function () {
   },
   "processData": false,
 		"success": function (msg) {
+      IsConnectServer();
 			console.log(msg.current.state + 'MSG SUC');
 			if (msg.current.state === 'Closed' || msg.current.state === 'Offline' ){
 				ConnectServ();
@@ -1131,7 +1132,6 @@ var GetStatePrinter = function () {
 			};
 			if (msg.current.state === 'Operational') {
 			    Connected();
-			    IsConnectServer();
 			    GetPosition();
             }
         },
