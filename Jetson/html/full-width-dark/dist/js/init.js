@@ -1059,68 +1059,6 @@ var GetPosition = function () {
     $.ajax(settings).done(function (response) {console.log(response);});
 };
 
-var ProcessingData = function (data) {
-    //console.log('============');
-    var foundPos = data.indexOf('a[');
-    if (~foundPos)
-    {
-        var strData = data.substring(foundPos+1);
-        var jsonData = JSON.parse(strData)[0];
-        //console.log('Совпадение есть -- >');
-        //console.log(jsonData[0]);
-        //-----
-        var event = JSON.parse(strData, function (key, value) {
-
-            if (key == 'event') {console.log('RINF EVENT', value['payload']['x'], value['payload']['y']); $('#coorX').text(value['payload']['x']); $('#coorY').text(value['payload']['y']); $('#coorZ').text(value['payload']['z']); $('#coorE').text(value['payload']['e']); return value['payload'];}
-            if (key == 'current') {console.log('PAYLOAD ->', value['current'])};
-            return value
-        });
-        console.log("!!!!_____-=", event[0].event);
-        console.log("!!!!_____-=", event[0].current);
-        //if (jsonData[0]['event']['payload']){
-         //   console.log('!!!! - ', jsonData[0]['event']['payload']);
-        //}
-        //-----
-        console.log(data);
-    };
-    //console.log(event);
-};
-
-var IsConnectServer = function () {
-    console.log('Start func IsConnectServer');
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/connection",
-        "method": "GET",
-        "headers": {
-            "x-api-key": ActiveApi,
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-        },
-        "processData": false,
-        "success": function () {
-            //"ws://127.0.0.1:5000/sockjs/627/mvy2qfdj/websocket"
-            //var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/627/mvy2qfdj/websocket");
-            var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/049/lvva5lo4/websocket");
-            //alert(socket);
-            //alert(socket2);
-            console.log(socket, "EEQQQ");
-            //socket.onopen = function() { alert("Connection opened...") };
-            socket.onmessage = function(event) {
-                ProcessingData(event.data);
-
-                //alert('Active connection');
-                //alert(event);
-            };
-
-        },
-        "error": function () {
-            $('#status_print').text("ПРОБЛЕМА С СЕРВЕРОМ...");
-        },
-    };
-    $.ajax(settings).done(function (response) {console.log(response)});
-};
 
 var GetStatePrinter = function () {
 	var settings = {
