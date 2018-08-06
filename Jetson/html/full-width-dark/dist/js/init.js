@@ -1135,7 +1135,7 @@ var GetStatePrinter = function () {
   },
   "processData": false,
 		"success": function (msg) {
-      IsConnectServer();
+      //IsConnectServer();
 			console.log(msg.current.state + 'MSG SUC');
 			if (msg.current.state === 'Closed' || msg.current.state === 'Offline' ){
 				ConnectServ();
