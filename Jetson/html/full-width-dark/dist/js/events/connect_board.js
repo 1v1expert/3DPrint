@@ -31,7 +31,21 @@ var PrinterState = function (state) {
             loaderBg: '#f8b32d',
             icon: 'success',
             hideAfter: 3500,
-            stack: 6
+            stack: 7
+        });
+    }, 30);
+};
+var MessageOutput = function (msg) {
+    "use strict";
+    window.setTimeout(function () {
+        $.toast({
+            heading: 'Состояние:',
+            text: msg,
+            position: 'bottom-right',
+            loaderBg: '#f8b32d',
+            icon: 'warning',
+            hideAfter: 3500,
+            stack: 7
         });
     }, 30);
 };

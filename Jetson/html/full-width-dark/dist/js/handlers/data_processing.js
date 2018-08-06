@@ -7,7 +7,7 @@
 */
 var ChangedState = function (state) {
     if (state === 'Operational'){
-        SuccessConect();
+        PrinterState('Готово к печати');
     }
     else {
         PrinterState(state);
@@ -35,7 +35,7 @@ var ProcessingData = function (data) {
                 $('#coorE').text(value['payload']['e']);
                 return value['payload'];
             }
-            if (key === 'current') {ChangedState(value['state']['text']);console.log('StatE ->', value['state']['text'])};
+            if (key === 'current') {ChangedState(value['state']['text']);MessageOutput(value['messages']);MessageOutput(value['logs']);console.log('StatE ->', value)};
             return value;
         });
         //console.log("!!!!_____-=", event[0].event);
@@ -44,7 +44,7 @@ var ProcessingData = function (data) {
          //   console.log('!!!! - ', jsonData[0]['event']['payload']);
         //}
         //-----
-        console.log(data);
+        console.log('!!!! - ', data);
     };
     //console.log(event);
 };
