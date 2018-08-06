@@ -26,13 +26,11 @@ var IsConnectServer = function () {
             var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/049/lvva5lo4/websocket");
             //alert(socket);
             //alert(socket2);
-            console.log(socket, "EEQQQ");
+            //console.log(socket, "EEQQQ");
             //socket.onopen = function() { alert("Connection opened...") };
             socket.onmessage = function(event) {
                 ProcessingData(event.data);
 
-                //alert('Active connection');
-                //alert(event);
             };
 
         },

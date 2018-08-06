@@ -5,7 +5,14 @@
    __copyright__ = 'Copyright (C) 2018 VLADDOS'
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
-
+var ChangedState = function (state) {
+    if (state === 'Operational'){
+        SuccessConect();
+    }
+    else {
+        PrinterState(state);
+    }
+};
 var ProcessingData = function (data) {
     "use strict";
     //console.log('============');
@@ -19,12 +26,20 @@ var ProcessingData = function (data) {
         //-----
         var event = JSON.parse(strData, function (key, value) {
 
-            if (key === 'event') {console.log('RINF EVENT', value['payload']['x'], value['payload']['y']); $('#coorX').text(value['payload']['x']); $('#coorY').text(value['payload']['y']); $('#coorZ').text(value['payload']['z']); $('#coorE').text(value['payload']['e']); return value['payload'];}
-            if (key === 'current') {console.log('PAYLOAD ->', value['current'])};
-            return value
+            if (key === 'event') {
+                console.log('Event - ' , value);
+                //console.log('RINF EVENT', value['payload']['x'], value['payload']['y']);
+                $('#coorX').text(value['payload']['x']);
+                $('#coorY').text(value['payload']['y']);
+                $('#coorZ').text(value['payload']['z']);
+                $('#coorE').text(value['payload']['e']);
+                return value['payload'];
+            }
+            if (key === 'current') {ChangedState(value['state']['text']);console.log('StatE ->', value['state']['text'])};
+            return value;
         });
-        console.log("!!!!_____-=", event[0].event);
-        console.log("!!!!_____-=", event[0].current);
+        //console.log("!!!!_____-=", event[0].event);
+        //console.log("!!!!_____-=", event[0].current);
         //if (jsonData[0]['event']['payload']){
          //   console.log('!!!! - ', jsonData[0]['event']['payload']);
         //}

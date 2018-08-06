@@ -1081,6 +1081,7 @@ var GetStatePrinter = function () {
 				//InitialServe('false');
 			};
 			if (msg.current.state === 'Operational') {
+			    SuccessConect();
 			    Connected();
 			    GetPosition();
             }
@@ -1170,7 +1171,7 @@ $(document).ready(function(){
 
 /*****Load function start*****/
 $(window).on("load", function() {
-	$(".preloader-it").delay(500).fadeOut("slow");
+    $(".preloader-it").delay(500).fadeOut("slow");
 	/*Progress Bar Animation*/
 	var progressAnim = $('.progress-anim');
 	if( progressAnim.length > 0 ){
