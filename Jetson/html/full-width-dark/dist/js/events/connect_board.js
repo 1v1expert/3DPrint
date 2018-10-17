@@ -24,6 +24,7 @@ var SuccessConect = function () {
 var PrinterState = function (state) {
     "use strict";
     window.setTimeout(function () {
+        $.toast().reset('all');
         $.toast({
             heading: 'Состояние:',
             text: state,
@@ -38,12 +39,13 @@ var PrinterState = function (state) {
 var MessageOutput = function (msg) {
     "use strict";
     window.setTimeout(function () {
+        $.toast().reset('all');
         $.toast({
-            heading: 'Состояние:',
+            heading: 'Мессаджи:',
             text: msg,
             position: 'bottom-right',
             loaderBg: '#f8b32d',
-            icon: 'warning',
+            icon: 'info',
             hideAfter: 3500,
             stack: 7
         });
