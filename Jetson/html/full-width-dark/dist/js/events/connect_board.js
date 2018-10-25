@@ -23,6 +23,7 @@ var SuccessConect = function () {
 
 var PrinterState = function (state) {
     "use strict";
+    $('#status_printt').text(state);
     window.setTimeout(function () {
         $.toast().reset('all');
         $.toast({

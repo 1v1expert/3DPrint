@@ -11,11 +11,12 @@ global.global_state = '';
 var ChangedState = function (state) {
     if (state === global_state){
         console.log(state);
-        //PrinterState('Готово к печати');
+        $('#status_printt').text(state);
     }
     else {
         global_state = state;
         PrinterState(translate_state[state]);
+        $('#status_printt').text(state);
     }
 };
 var InfoPrinting = function (progress) {
