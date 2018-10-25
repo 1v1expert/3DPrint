@@ -1,3 +1,4 @@
 translate_state = {
-    Operational: "Готов к печати"
+    Operational: "Готов к печати",
+    Printing: "Идёт печать"
 };

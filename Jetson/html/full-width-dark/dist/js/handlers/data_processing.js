@@ -26,8 +26,8 @@ var InfoPrinting = function (progress) {
     }
     else {
         console.log('printtime ->', progress.printTime);
-        $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(progress.printTime)).utc().format('HH:mm:ss'));
-        $('#printTime').text("Осталось: " + moment.unix(Number(progress.printTimeLeft)).utc().format('HH:mm:ss'));
+        $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(progress.printTime)).utc().format('HHH:mm:ss'));
+        $('#printTime').text("Осталось: " + moment.unix(Number(progress.printTimeLeft)).utc().format('HHH:mm:ss'));
       };
 };
 var ProcessingData = function (data) {
