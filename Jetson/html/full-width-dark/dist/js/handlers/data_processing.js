@@ -8,15 +8,23 @@
 var global = window || this;
 global.global_state = '';
 
+var ChangeStatePrint = function (state) {
+    $('#status_print').text(state);
+
+    if (global_state === 'Printing' && state === 'Operational'){
+        $('#estimatedPrintTime').text('');
+        $('#printTime').text('');
+    }
+    PrinterState(translate_state[state]);
+    global_state = state;
+};
 var ChangedState = function (state) {
     if (state === global_state){
         console.log(state);
         $('#status_printt').text(state);
     }
     else {
-        global_state = state;
-        PrinterState(translate_state[state]);
-        $('#status_printt').text(state);
+        ChangeStatePrint(state);
     }
 };
 var InfoPrinting = function (progress) {
