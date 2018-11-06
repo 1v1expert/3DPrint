@@ -27,7 +27,7 @@ software/dist
 pypy
 OctoPrint.egg-info
 *.orig
-
+config/config.js
 *.codekit
 
 env

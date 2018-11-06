@@ -20,7 +20,6 @@ var ActiveApi = "A1DF8B0B3E6743448D60194EAC0F0772";
 var PortProd = 5000;
 //var PortTest = 8112;
 var ActivePort = PortProd;
-
 var idIntervals=0;
 var TARGET = 300;
 var OnPrint = function (name_file) {

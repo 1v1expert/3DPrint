@@ -27,6 +27,14 @@ var UrlSocket = "ws:" + URL + "/sockjs/627/mvy2qfdj/websocket";
 var idIntervals=0;
 var TARGET = 300;
 
+$('.js-click-modal').click(function(){
+  $('.container').addClass('modal-open');
+});
+
+$('.js-close-modal').click(function(){
+  $('.container').removeClass('modal-open');
+});
+
 var PRINT_PAUSE = false;
 
 $('#extrude_1').on('click', function () {
