@@ -9,7 +9,7 @@ var global = window || this;
 global.global_state = '';
 
 var ChangeStatePrint = function (state) {
-    $('#status_print').text(state);
+    $('#status_print').text(translate_state[state]);
 
     if (global_state === 'Printing' && state === 'Operational'){
         $('#estimatedPrintTime').text('');
@@ -20,7 +20,7 @@ var ChangeStatePrint = function (state) {
 };
 var ChangedState = function (state) {
     if (state === global_state){
-        console.log(state);
+        //console.log(state);
         $('#status_printt').text(state);
     }
     else {
@@ -30,7 +30,7 @@ var ChangedState = function (state) {
 var InfoPrinting = function (progress) {
     "use strict";
     if (progress.printTime === null){
-        console.log("NULLLLLLL!!!!");
+        //console.log("NULLLLLLL!!!!");
     }
     else {
         console.log('printtime ->', progress.printTime);
@@ -47,12 +47,12 @@ var ProcessingData = function (data) {
         var strData = data.substring(foundPos+1);
         var jsonData = JSON.parse(strData)[0];
         //console.log('Совпадение есть -- >');
-        console.log(jsonData[0]);
+        //console.log(jsonData[0]);
         //-----
         var event = JSON.parse(strData, function (key, value) {
 
             if (key === 'event') {
-                console.log('Event - ' , value);
+                //console.log('Event - ' , value);
                 //console.log('RINF EVENT', value['payload']['x'], value['payload']['y']);
                 $('#coorX').text(value['payload']['x']);
                 $('#coorY').text(value['payload']['y']);
@@ -65,7 +65,7 @@ var ProcessingData = function (data) {
                 InfoPrinting(value['progress']);
                 //MessageOutput(value['messages']);
                 //MessageOutput(value['logs']);
-                console.log('StatE ->', value);
+                //console.log('StatE ->', value);
             }
             return value;
         });
@@ -75,7 +75,7 @@ var ProcessingData = function (data) {
          //   console.log('!!!! - ', jsonData[0]['event']['payload']);
         //}
         //-----
-        console.log('!!!! - ', data);
-    };
+        //console.log('!!!! - ', data);
+    }
     //console.log(event);
 };

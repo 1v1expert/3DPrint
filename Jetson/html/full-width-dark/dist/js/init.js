@@ -735,7 +735,7 @@ var settings = {
 	      //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
           $('#progress').css('width', Math.round(response.progress.completion) + '%');
           $('#progress').html(Math.round(response.progress.completion) + '%');
-          console.log(response, response.progress.completion);
+          //console.log(response, response.progress.completion);
           $('#file_name').text("Файл: " + response.job.file.name);
           //$('#estimatedPrintTime').text("Время печати: " + moment(Number(response.job.estimatedPrintTime)).format('hh:mm:ss'));
           //$('#printTime').text("Печатается: " + moment(Number(response.job.lastPrintTime)).format('hh:mm:ss'));
@@ -747,7 +747,7 @@ var settings = {
   }
 };
 $.ajax(settings).done(function (response) {
-    console.log(response);
+    //console.log(response);
 });
 };
 /*****Connect Octoprint Serve ******/
