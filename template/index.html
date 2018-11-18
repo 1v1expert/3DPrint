@@ -194,6 +194,70 @@
 .menu-main li:after {
     content: "";
 }
+		.tabss {
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0;
+  overflow: hidden; }
+  .tabss [class^="tab"] label,
+  .tabss [class*=" tab"] label {
+    color: #efedef;
+    cursor: pointer;
+    display: block;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 0em;
+    padding: 1.5rem 0;
+    text-align: center; }
+  .tabss [class^="tab"] [type="radio"],
+  .tabss [class*=" tab"] [type="radio"] {
+    border-bottom: 3px solid rgba(239, 237, 239, 0.5);
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out; }
+    .tabss [class^="tab"] [type="radio"]:hover, .tabss [class^="tab"] [type="radio"]:focus,
+    .tabss [class*=" tab"] [type="radio"]:hover,
+    .tabss [class*=" tab"] [type="radio"]:focus {
+      border-bottom: 3px solid #fd264f!important; }
+    .tabss [class^="tab"] [type="radio"]:checked,
+    .tabss [class*=" tab"] [type="radio"]:checked {
+      border-bottom: 4px solid #fd264f!important; }
+    .tabss [class^="tab"] [type="radio"]:checked + div,
+    .tabss [class*=" tab"] [type="radio"]:checked + div {
+      opacity: 1; }
+    .tabss [class^="tab"] [type="radio"] + div,
+    .tabss [class*=" tab"] [type="radio"] + div {
+      display: block;
+      opacity: 0;
+      padding: 2rem 0;
+      width: 90%;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out; }
+  .tabss .tab-2 {
+    width: 50%; }
+    .tabss .tab-2 [type="radio"] + div {
+      width: 200%;
+      margin-left: 200%; }
+    .tabss .tab-2 [type="radio"]:checked + div {
+      margin-left: 0; }
+    .tabss .tab-2:last-child [type="radio"] + div {
+      margin-left: 100%; }
+    .tabss .tab-2:last-child [type="radio"]:checked + div {
+      margin-left: -100%; }
 	</style>
 
 </head>
@@ -566,7 +630,15 @@
 			<div class="tabs__content">
 				<div class="page-wrapper">
 				<div class="container-fluid">
-					<div class="row">
+					<div class="tabss">
+  <div class="tab-2">
+    <label for="tab2-1">Преднагрев</label>
+    <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+    <div>
+      <!--Header section
+      <h4>Tab One</h4>-->
+      <!-- Maybe to-do -->
+		<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
 						<div class="col-md-4 col-sm-4 col-lg-4" style="padding-left: 2px; padding-right: 0px">
 							<div class="table-responsive" >
 								<table class="table-condensed">
@@ -611,12 +683,20 @@
 										<td><a id="set_temp_board" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">ЗАДАТЬ</a></td>
 										<td><a id="zero_temp_board" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a></td>
 									</tr>
+									<tr></tr>
 									</tbody>
 								</table>
 							</div>
 						</div>
 					</div>
-					<div class="row" style="padding-top: 8px;">
+    </div>
+  </div>
+  <div class="tab-2">
+    <label for="tab2-2">Сервисное меню</label>
+    <input id="tab2-2" name="tabs-two" type="radio">
+    <div>
+      <!--<h4>Tab Two</h4>-->
+      <div class="row" style="padding-top: 8px;margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
 						<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 4px">
 							<a id="calibr" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">Калибровка</a>
 						</div>
@@ -636,11 +716,15 @@
 							<a id="M999" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">M999</a>
 						</div>
 					</div>
-					<div class="row" style="padding-top: 8px;">
+					<div class="row" style="padding-top: 8px;margin-right: 0px;margin-left: 0px;text-align: -webkit-center;>
 						<div class="col-lg-2 col-md-2 col-sm-2" style="padding-left: 4px">
 							<a id="m306" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">M306</a>
 						</div>
 					</div>
+    </div>
+  </div>
+</div>
+
 					<!--<div></div>-->
 			<!-- END tabs CONTENT SERVICE -->
 					<!-- Title -->
@@ -870,13 +954,13 @@
 	<script src="dist/other_js/skills-counter-data.js"></script>
 
 	<!-- Fancy Dropdown JS -->
-	<script src="dist/js/dropdown-bootstrap-extended.js"></script>
+	<!--TO DO maybe including<script src="dist/js/dropdown-bootstrap-extended.js"></script>-->
 
 	<!-- Moment JS for convertind data/time -->
     <script src="dist/other_js/moment.js"></script>
 
     <!-- Sparkline JavaScript -->
-	<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>
+	<!--TO DO maybe including<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>-->
 
 	<!-- Owl JavaScript -->
 	<script src="dist/owl.carousel/dist/owl.carousel.min.js"></script>
@@ -887,7 +971,7 @@
 	<script src="dist/sweetalert/dist/sweetalert.min.js"></script>
 
 	<!-- EChartJS JavaScript -->
-	<script src="vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
+	<!--TO DO maybe including<script src="vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
 	<script src="vendors/echarts-liquidfill.min.js"></script>
 	<!-- import configuration -->
 	<script src="../config/config.js"></script>
