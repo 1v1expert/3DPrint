@@ -37,19 +37,7 @@ $('.js-close-modal').click(function(){
 
 var PRINT_PAUSE = false;
 
-$('#extrude_1').on('click', function () {
-    Extrude("tool0", "5");
-}
-);
-$('#retruct_1').on('click', function () {
-    Extrude("tool0", "-5");
-});
-$('#extrude_2').on('click', function () {
-    Extrude("tool1", "5");
-});
-$('#retruct_2').on('click', function () {
-    Extrude("tool1", "-5");
-});
+
 
 $('#up_t_tool').on('click', function () {
     var t = $('#t_tool').text();
@@ -353,108 +341,6 @@ var Calibrate = function () {
 };
 $.ajax(settings).done(function (response) {
     console.log(response);
-});
-};
-
-
-var SetTemperature_bed = function (temper) {
-    var command4 = '{"command": "target", "target":' +  temper + '}';
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/bed",
-        "method": "POST",
-        "headers": {
-            "x-api-key": ActiveApi,
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": command4,
-  "success": function(response) {
-	  console.log(response + ' -- success set temperature');
-	  },
-  "error": function(response) {
-      console.log(response + " - Error set temperature");
-  }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
-
-var SetTemperature_tool = function (temper) {
-    var command3 = '{"command": "target", "targets": {"tool0":' + temper + '}}';
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
-        "method": "POST",
-        "headers": {
-            "x-api-key": ActiveApi,
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": command3,
-  "success": function(response) {
-	  console.log(response + ' -- success set temperature');
-	  },
-  "error": function(response) {
-      console.log(response + " - Error set temperature");
-  }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
-
-var Extrude = function (vtool, type_exchange) {
-    var command = '{"command": "select", "tool": "' + vtool + '"}';
-    var command2 = '{"command": "extrude", "amount":' + type_exchange + '}';
-    var select_tool = {
-  "async": false,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": command,
-  "success": function(response) {
-	  console.log(response + ' -- success selecting');
-	  },
-  "error": function(response) {
-      console.log(response + " - Error selecting");
-  }
-};
-var settings = {
-  "async": false,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/printer/tool",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": command2,
-  "success": function(response) {
-	  console.log(response + ' -- success extruding/retract');
-	  },
-  "error": function(response) {
-      console.log(response + " - Error extruding/retract");
-  }
-};
-$.ajax(select_tool).done(function (response) {
-    console.log(response,'settings ->' ,select_tool);
-});
-$.ajax(settings).done(function (response) {
-    console.log(response, 'settings ->', settings);
 });
 };
 

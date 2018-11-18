@@ -23,6 +23,7 @@ var IsConnectServer = function () {
         "success": function () {
             //"ws://127.0.0.1:5000/sockjs/627/mvy2qfdj/websocket"
             //var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/627/mvy2qfdj/websocket");
+            //Set socket connection
             var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/049/lvva5lo4/websocket");
             //alert(socket);
             //alert(socket2);
@@ -38,5 +39,5 @@ var IsConnectServer = function () {
             $('#status_print').text("ПРОБЛЕМА С СЕРВЕРОМ...");
         },
     };
-    $.ajax(settings).done(function (response) {console.log(response)});
+    $.ajax(settings).done(function (response) {console.log(response);});
 };

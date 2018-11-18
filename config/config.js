@@ -2,6 +2,23 @@ translate_state = {
     Operational: "Готов к печати",
     Printing: "Идёт печать"
 },
+    Definition = {
+    Extrude: 5
+    },
+    Temp = {
+        PLA: {
+            Bed: 70,
+            Tool: 200
+        },
+        ABS: {
+            Bed: 70,
+            Tool: 200
+        },
+        Default: {
+            Bed: 70,
+            Tool: 200
+        }
+    },
 buttons = {
     General:
     [
