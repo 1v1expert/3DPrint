@@ -1,6 +1,9 @@
 translate_state = {
     Operational: "Готов к печати",
-    Printing: "Идёт печать"
+    Printing: "Идёт печать",
+    Pausing: "Пауза",
+    Error: "Ошибка",
+    Cancelling: "Отмена"
 },
     Definition = {
     Extrude: 5

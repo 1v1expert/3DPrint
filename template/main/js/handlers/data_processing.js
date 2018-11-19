@@ -35,7 +35,7 @@ var InfoPrinting = function (info) {
         //console.log("NULLLLLLL!!!!");
     }
     else {
-        console.log('printtime ->', info.progress.printTime);
+        //console.log('printtime ->', info.progress.printTime);
         $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(info.progress.printTime)).utc().format('HHH:mm:ss'));
         $('#printTime').text("Осталось: " + moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
         $('#progress').html(Math.round(info.progress.completion) + '%');
@@ -47,6 +47,7 @@ var ProcessingData = function (data) {
     "use strict";
     //console.log('============');
     var foundPos = data.indexOf('a[');
+    //console.log('Process data', data);
     if (~foundPos)
     {
         var strData = data.substring(foundPos+1);
@@ -57,6 +58,7 @@ var ProcessingData = function (data) {
         var event = JSON.parse(strData, function (key, value) {
 
             if (key === 'event') {
+                console.log('key event-> ', value);
                 //console.log('Event - ' , value);
                 //console.log('RINF EVENT', value['payload']['x'], value['payload']['y']);
                 $('#coorX').text(value['payload']['x']);
@@ -66,8 +68,10 @@ var ProcessingData = function (data) {
                 return value['payload'];
             }
             if (key === 'current') {
-                ChangedState(value['state']['text']);
+                console.log('key current-> ', value);
+                ChangedState(value.state.text);
                 InfoPrinting(value);
+
                 //InfoPrinting(value['progress']);
                 //MessageOutput(value['messages']);
                 //MessageOutput(value['logs']);
