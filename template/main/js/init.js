@@ -97,20 +97,20 @@ $('#stopprint').on('click', function () {
     Stopprint();
 });
 //pauseprint_2
-$('#pauseprint_2').on('click', function () {
-    if (PRINT_PAUSE){
-        $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
-        $('#iconpause').text(' Приостановить');
-        RESUMES_PRINTING();
-        PRINT_PAUSE = false;
-    }
-    else {
-        $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
-        $('#iconpause').text(' Продолжить');
-        PAUSE_PRINTING();
-        PRINT_PAUSE = true;
-    };
-});
+//$('#pauseprint_2').on('click', function () {
+//    if (PRINT_PAUSE){
+ //       //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
+//        $('#iconpause').text(' Приостановить');
+//        RESUMES_PRINTING();
+//        PRINT_PAUSE = false;
+//    }
+//    else {
+        //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
+ //       $('#iconpause').text(' Продолжить');
+ //       PAUSE_PRINTING();
+ //       PRINT_PAUSE = true;
+ //   };
+//});
 
 $('#pauseprint').on('click', function () {
     if (PRINT_PAUSE){
@@ -1057,13 +1057,15 @@ $(document).ready(function(){
 	//$('#pie_chart_34').data('easyPieChart').update(0);
 	//$('#degres_34').text('/' + TARGET + '°');
 	//InitialServe();
-	GetStatePrinter();
+	//GetStatePrinter();
 	//GetFilesLocal();
     //ConnectServ();
-	GetFilesLocal("sdcard?recursive=true");
-  	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
+	// Get FILES
+    // GetFilesLocal("sdcard?recursive=true");
+  	// GetFilesLocal("local?force=true&filter=gcode&recursive=true");
   	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
+  	ConnectServer();
 });
 /*****Ready function end*****/
 

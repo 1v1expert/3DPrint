@@ -9,6 +9,52 @@
 var global = window || this;
 global.global_state = '';
 
+var UpdateTemps = function (temps) {
+    "use strict";
+    if (temps.bed){
+        $('#pie_chart_3').find('.percents').text(temps.bed.actual);
+        var tempbed = temps.bed.actual * 100 / temps.bed.target;
+  		if (temps.bed.target === 0) {
+            tempbed = temps.bed.actual * 100 / Definition.Target;
+        }
+  		$('#pie_chart_3').data('easyPieChart').update(tempbed);
+  		$('#degres_3').text('/' + temps.bed.target + '°');
+	}
+
+	if (temps.tool0) {
+        $('#pie_chart_1').find('.percents').text(temps.tool0.actual);
+        var temptool = temps.tool0.actual * 100 / temps.tool0.target;
+        if (temps.tool0.target === 0) {
+            temptool = temps.tool0.actual * 100 / Definition.Target;
+
+        }
+        $('#pie_chart_1').data('easyPieChart').update(temptool);
+        $('#degres_1').text('/' + temps.tool0.target + '°');
+    }
+  			//$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
+};
+var HandlerState = function (value) {
+  "use strict";
+  var state = value.state.text;
+  var rus_state = (translate_state[state]) ? translate_state[state]: state;
+  if (state === global_state) {
+  }
+  else {
+      $('#status_print').text(rus_state);
+      global_state = state;
+  }
+};
+var CurrentEvent = function (value) {
+    "use strict";
+    if (value.temps.length){
+        console.log('Have temps', value.temps);
+        UpdateTemps(value.temps[0]);
+    }
+    if (value.state){
+        HandlerState(value);
+    }
+
+};
 var ChangeStatePrint = function (state) {
     "use strict";
     $('#status_print').text(translate_state[state]);
@@ -21,6 +67,7 @@ var ChangeStatePrint = function (state) {
     global_state = state;
 };
 var ChangedState = function (state) {
+    "use strict";
     if (state === global_state){
         //console.log(state);
         $('#status_printt').text(state);
@@ -43,6 +90,13 @@ var InfoPrinting = function (info) {
         $('#file_name').text("Файл: " + info.job.file.name);
     }
 };
+var PositionUpdate = function (value) {
+    "use strict";
+    $('#coorX').text(value.payload.x);
+    $('#coorY').text(value.payload.y);
+    $('#coorZ').text(value.payload.z);
+    $('#coorE').text(value.payload.e);
+};
 var ProcessingData = function (data) {
     "use strict";
     //console.log('============');
@@ -52,26 +106,20 @@ var ProcessingData = function (data) {
     {
         var strData = data.substring(foundPos+1);
         var jsonData = JSON.parse(strData)[0];
-        //console.log('Совпадение есть -- >');
-        //console.log(jsonData[0]);
-        //-----
         var event = JSON.parse(strData, function (key, value) {
 
             if (key === 'event') {
-                console.log('key event-> ', value);
+                //console.log('key event-> ', value);
                 //console.log('Event - ' , value);
                 //console.log('RINF EVENT', value['payload']['x'], value['payload']['y']);
-                $('#coorX').text(value['payload']['x']);
-                $('#coorY').text(value['payload']['y']);
-                $('#coorZ').text(value['payload']['z']);
-                $('#coorE').text(value['payload']['e']);
-                return value['payload'];
+                if (value.type === "PositionUpdate") {PositionUpdate(value);} else {console.log('key event-> ', value);}
+                return value.payload;
             }
             if (key === 'current') {
                 console.log('key current-> ', value);
-                ChangedState(value.state.text);
-                InfoPrinting(value);
-
+                //ChangedState(value.state.text);
+                //InfoPrinting(value);
+                CurrentEvent(value);
                 //InfoPrinting(value['progress']);
                 //MessageOutput(value['messages']);
                 //MessageOutput(value['logs']);

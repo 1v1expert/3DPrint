@@ -1,12 +1,13 @@
 translate_state = {
     Operational: "Готов к печати",
     Printing: "Идёт печать",
-    Pausing: "Пауза",
+    Paused: "Пауза",
     Error: "Ошибка",
     Cancelling: "Отмена"
 },
     Definition = {
-    Extrude: 5
+    Extrude: 5,
+    Target: 300
     },
     Temp = {
         PLA: {

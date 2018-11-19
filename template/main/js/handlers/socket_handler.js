@@ -6,7 +6,7 @@
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
 
-var IsConnectServer = function () {
+var ConnectServer = function () {
     "use strict";
     console.log('Start func IsConnectServer');
     var settings = {
