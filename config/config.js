@@ -15,8 +15,8 @@ translate_state = {
             Tool: 200
         },
         Default: {
-            Bed: 70,
-            Tool: 200
+            Bed: 72,
+            Tool: 201
         }
     },
 buttons = {

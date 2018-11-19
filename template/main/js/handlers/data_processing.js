@@ -5,10 +5,12 @@
    __copyright__ = 'Copyright (C) 2018 VLADDOS'
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
+
 var global = window || this;
 global.global_state = '';
 
 var ChangeStatePrint = function (state) {
+    "use strict";
     $('#status_print').text(translate_state[state]);
 
     if (global_state === 'Printing' && state === 'Operational'){
@@ -27,16 +29,19 @@ var ChangedState = function (state) {
         ChangeStatePrint(state);
     }
 };
-var InfoPrinting = function (progress) {
+var InfoPrinting = function (info) {
     "use strict";
-    if (progress.printTime === null){
+    if (info.progress.printTime === null){
         //console.log("NULLLLLLL!!!!");
     }
     else {
-        console.log('printtime ->', progress.printTime);
-        $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(progress.printTime)).utc().format('HHH:mm:ss'));
-        $('#printTime').text("Осталось: " + moment.unix(Number(progress.printTimeLeft)).utc().format('HHH:mm:ss'));
-      };
+        console.log('printtime ->', info.progress.printTime);
+        $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(info.progress.printTime)).utc().format('HHH:mm:ss'));
+        $('#printTime').text("Осталось: " + moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
+        $('#progress').html(Math.round(info.progress.completion) + '%');
+        $('#progress').css('width', Math.round(info.progress.completion) + '%');
+        $('#file_name').text("Файл: " + info.job.file.name);
+    }
 };
 var ProcessingData = function (data) {
     "use strict";
@@ -62,7 +67,8 @@ var ProcessingData = function (data) {
             }
             if (key === 'current') {
                 ChangedState(value['state']['text']);
-                InfoPrinting(value['progress']);
+                InfoPrinting(value);
+                //InfoPrinting(value['progress']);
                 //MessageOutput(value['messages']);
                 //MessageOutput(value['logs']);
                 //console.log('StatE ->', value);

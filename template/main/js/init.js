@@ -534,7 +534,7 @@ var StartPrint = function (name_file) {
       "success": function(response){
           $('#progress').html('');
           $('#progress').css('width', '0%');
-          GetJob();
+          //GetJob();
           console.log('SUUCCCCCEEESS -', response);
           $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
           },
@@ -795,7 +795,9 @@ var GetState = function (flag) {
                 clearInterval(idIntervals);
              }
              else {
-		idIntervals=setInterval(function(){timer();GetJob();},2000);//опять запускается таймер
+		idIntervals=setInterval(function(){timer();
+		//GetJob();
+		},2000);//опять запускается таймер
 	}
   //clearInterval(idIntervals);//тут останавливаем таймер
 
@@ -1060,6 +1062,8 @@ $(document).ready(function(){
     //ConnectServ();
 	GetFilesLocal("sdcard?recursive=true");
   	GetFilesLocal("local?force=true&filter=gcode&recursive=true");
+  	$('#t_board').text(String(Temp.Default.Bed));
+  	$('#t_tool').text(String(Temp.Default.Tool));
 });
 /*****Ready function end*****/
 
