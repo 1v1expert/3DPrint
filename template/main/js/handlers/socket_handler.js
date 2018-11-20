@@ -33,7 +33,7 @@ var ConnectServer = function () {
                 if (event.wasClean) {
                     alert('Соединение закрыто чисто');
                 } else {
-                    alert('Обрыв соединения'); // например, "убит" процесс сервера
+                    alert('Обрыв соединения');
                     }
                     alert('Код: ' + event.code + ' причина: ' + event.reason);
             };
@@ -47,11 +47,10 @@ var ConnectServer = function () {
             }
 
         };
-        settings.error = function (response) {
+        settings.error = function () {
             $('#status_print').text("ПРОБЛЕМА С СЕРВЕРОМ...");
             is_connect_server = false;
             MessageOutput('Ошибка', 'подключения сервера, повтор через 5с', 'error', 2900);
-            console.log(response);
             setTimeout(function () {
                 ConnectServer();
                 }, 5000);

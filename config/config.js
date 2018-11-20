@@ -7,8 +7,8 @@ translate_state = {
     Cancelling: "Печать отменена"
 },
     Definition = {
-    Extrude: 5,
-    Target: 300
+        Extrude: 5,
+        Target: 300
     },
     Temp = {
         PLA: {
@@ -25,6 +25,8 @@ translate_state = {
         }
     },
 buttons = {
+    OnPause: '{"command": "M999"}',
+    CancPause: '{"command": "M999"}',
     General:
     [
         {

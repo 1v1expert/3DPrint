@@ -27,3 +27,18 @@ $('#ABS').on('click', function () {
     SetTemperature_bed(String(Temp.ABS.Bed));
     SetTemperature_tool(String(Temp.ABS.Tool));
 });
+$('#dpauseprint_1').on('click', function () {
+    TrigeredPrint();
+  //  if (PRINT_PAUSE){
+ //       //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
+ //       $('#dpauseprint_2').text(" Приостановить");
+ //       RESUMES_PRINTING();
+  //      PRINT_PAUSE = false;
+  //  }
+  //  else {
+        //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
+ //       $('#dpauseprint_2').text(' Продолжить');
+ //       PAUSE_PRINTING();
+ //       PRINT_PAUSE = true;
+  //  };
+});

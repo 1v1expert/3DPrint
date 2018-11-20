@@ -70,12 +70,24 @@ $.ajax(settings).done(function (response) {
     console.log(response);
 });
 };
-
+var TrigeredPrint = function () {
+    var command = buttons.OnPause;
+    if (global_state === 'Pausing' || global_state === 'Paused') {
+        alert('Pausing');
+        command = buttons.CancPause;
+    }
+    settings.url = URL + '/api/printer/command';
+    settings.data = command;
+    settings.async = true;
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+};
 
 var Extrude = function (vtool, type_exchange) {
     var command = '{"command": "select", "tool": "' + vtool + '"}';
     var extrude = '{"command": "extrude", "amount":' + type_exchange + '}';
-//select tool
+    //select tool
     settings.url = URL + '/api/printer/tool';
     settings.data = command;
     $.ajax(settings).done(function (response) {

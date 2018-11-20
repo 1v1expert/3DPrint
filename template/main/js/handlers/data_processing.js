@@ -48,6 +48,9 @@ var ShowPrintInfo = function (info) {
     $('#progress').html(Math.round(info.progress.completion) + '%');
     $('#progress').css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
+    // name buttons
+    $('#iconpause2').text(' Приостановить#2');
+    $('#iconpause').text(' Приостановить#1');
 };
 var HandlerState = function (value) {
   "use strict";
@@ -56,15 +59,19 @@ var HandlerState = function (value) {
   if (state === 'Printing') {
       ShowPrintInfo(value);
   }
+  if (state === 'Pausing' || state === 'Paused') {
+      $('#iconpause2').text(' Продолжить#2');
+      $('#iconpause').text(' Продолжить#1');
+  }
   if (state === global_state) {
   }
   else {
-      if (global_state === 'Printing' && state === 'Operational') {
-          CancelPrint();
-      }
       $('#status_print').text(rus_state);
       PrinterState(rus_state);
       global_state = state;
+      if (global_state === 'Printing' && state === 'Operational') {
+          CancelPrint();
+      }
   }
 };
 var CurrentEvent = function (value) {
