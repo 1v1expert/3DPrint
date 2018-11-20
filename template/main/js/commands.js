@@ -8,7 +8,7 @@
 "use strict";
 var ActivePort = 5000;
 var ActiveApi = "5C761F424E5E46EE934DE9F683609B66";
-var URL = "http://127.0.0.1:" + String(ActivePort) + "/api/";
+var URL = "http://127.0.0.1:" + String(ActivePort);
 var settings = {
   "async": false,
   "crossDomain": true,
