@@ -8,7 +8,7 @@
 "use strict";
 var ActivePort = 5000;
 var ActiveApi = "5C761F424E5E46EE934DE9F683609B66";
-var URL = "http://127.0.0.1:" + ActivePort + "/api/printer/";
+var URL = "http://127.0.0.1:" + String(ActivePort) + "/api/";
 var settings = {
   "async": false,
   "crossDomain": true,
@@ -23,9 +23,39 @@ var settings = {
   "processData": false,
   "data": ''
 };
+/*****Connect Octoprint Serve ******/
+var ConnectPrinter = function () {
+    settings.async = true;
+    settings.url = URL + "/api/connection";
+    settings.data = '{"command": "connect"}';
+    settings.error = function (response) {
+      console.log('error->', settings.url, response);
+    };
+    settings.success = function (response) {
+        is_connect_printer = true;
+        console.log(response);
+    };
+    //console.log('connect printer');
+
+  //"success": function(response) {
+  	//alert(response);
+	//  console.log(response + 'ConnectServ');
+	 // Connected();
+	 // },
+  //"error": function(response) {
+   //   clearInterval(GLOBAL_TIMER);
+  //	CheckedConnect(5);
+  //	console.log(response + 'Error connect serv');
+ // 	$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+   //             }
+//};
+$.ajax(settings).done(function (response) {console.log(settings, response);});
+};
 var SetTemperature_bed = function (temper) {
     var command = '{"command": "target", "target":' +  temper + '}';
-    settings.url = URL + 'bed';
+    settings.url = URL + '/api/printer/bed';
     settings.data = command;
 $.ajax(settings).done(function (response) {
     console.log(response);
@@ -34,7 +64,7 @@ $.ajax(settings).done(function (response) {
 
 var SetTemperature_tool = function (temper) {
     var command = '{"command": "target", "targets": {"tool0":' + temper + '}}';
-    settings.url = URL + 'tool';
+    settings.url = URL + '/api/printer/tool';
     settings.data = command;
 $.ajax(settings).done(function (response) {
     console.log(response);
@@ -46,7 +76,7 @@ var Extrude = function (vtool, type_exchange) {
     var command = '{"command": "select", "tool": "' + vtool + '"}';
     var extrude = '{"command": "extrude", "amount":' + type_exchange + '}';
 //select tool
-    settings.url = URL + 'tool';
+    settings.url = URL + '/api/printer/tool';
     settings.data = command;
     $.ajax(settings).done(function (response) {
         console.log(response,'settings ->' , settings);

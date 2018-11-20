@@ -23,7 +23,7 @@ var SuccessConect = function () {
 
 var PrinterState = function (state) {
     "use strict";
-    $('#status_printt').text(state);
+    //$('#status_printt').text(state);
     window.setTimeout(function () {
         $.toast().reset('all');
         $.toast({
@@ -37,18 +37,18 @@ var PrinterState = function (state) {
         });
     }, 30);
 };
-var MessageOutput = function (msg) {
+var MessageOutput = function (headings, msgs, icons, hideAfters) {
     "use strict";
     window.setTimeout(function () {
         $.toast().reset('all');
         $.toast({
-            heading: 'Мессаджи:',
-            text: msg,
+            heading: headings,
+            text: msgs,
             position: 'bottom-right',
             loaderBg: '#f8b32d',
-            icon: 'info',
-            hideAfter: 3500,
+            icon: icons,
+            hideAfter: hideAfters,
             stack: 7
-        });
+        }).error();
     }, 30);
 };

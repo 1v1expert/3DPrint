@@ -97,20 +97,20 @@ $('#stopprint').on('click', function () {
     Stopprint();
 });
 //pauseprint_2
-//$('#pauseprint_2').on('click', function () {
-//    if (PRINT_PAUSE){
+$('#pauseprint_2').on('click', function () {
+    if (PRINT_PAUSE){
  //       //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
-//        $('#iconpause').text(' Приостановить');
-//        RESUMES_PRINTING();
-//        PRINT_PAUSE = false;
-//    }
-//    else {
+        $('#iconpause').text(' Приостановить');
+        RESUMES_PRINTING();
+        PRINT_PAUSE = false;
+    }
+    else {
         //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
- //       $('#iconpause').text(' Продолжить');
- //       PAUSE_PRINTING();
- //       PRINT_PAUSE = true;
- //   };
-//});
+        $('#iconpause').text(' Продолжить');
+        PAUSE_PRINTING();
+        PRINT_PAUSE = true;
+    };
+});
 
 $('#pauseprint').on('click', function () {
     if (PRINT_PAUSE){
@@ -578,7 +578,7 @@ var GetFilesLocal = function (dd) {
             else {
                 for (var item in response.files) {
                     //alert();
-                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-6 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + response.files[item].name + "<br> <span>Added: --------</span> </div> </a> </div> </div>";
+                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + response.files[item].name + "\' ) \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + response.files[item].name + "<br> <span>Added: --------</span> </div> </a> </div> </div>";
 
                 }
                 if (dd === "local?force=true&filter=gcode&recursive=true") {
@@ -603,39 +603,7 @@ var GetFilesLocal = function (dd) {
     console.log(response);
 });};
 
-var GetJob = function () {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
-  "method": "GET",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  "success": function (response) {
-  	//alert('Успешно', response);
-	  if (response.progress.completion) {
-	      //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
-          $('#progress').css('width', Math.round(response.progress.completion) + '%');
-          $('#progress').html(Math.round(response.progress.completion) + '%');
-          //console.log(response, response.progress.completion);
-          $('#file_name').text("Файл: " + response.job.file.name);
-          //$('#estimatedPrintTime').text("Время печати: " + moment(Number(response.job.estimatedPrintTime)).format('hh:mm:ss'));
-          //$('#printTime').text("Печатается: " + moment(Number(response.job.lastPrintTime)).format('hh:mm:ss'));
-      };
 
-  },
-  "error": function (response) {
-  	//alert('Не успешно', response);
-  }
-};
-$.ajax(settings).done(function (response) {
-    //console.log(response);
-});
-};
 /*****Connect Octoprint Serve ******/
 var PrintHead = function (command) {
 var settings = {

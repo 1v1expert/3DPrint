@@ -7,7 +7,7 @@
 */
 
 var global = window || this;
-global.global_state = '';
+global.global_state = null;
 
 var UpdateTemps = function (temps) {
     "use strict";
@@ -33,21 +33,43 @@ var UpdateTemps = function (temps) {
     }
   			//$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
 };
+var CancelPrint = function () {
+    "use strict";
+    $('#estimatedPrintTime').text('');
+    $('#printTime').text('');
+    $('#file_name').text('');
+    $('#progress').css('width', '0%');
+    $('#progress').html('');
+};
+var ShowPrintInfo = function (info) {
+    "use strict";
+    $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(info.progress.printTime)).utc().format('HHH:mm:ss'));
+    $('#printTime').text("Осталось: " + moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
+    $('#progress').html(Math.round(info.progress.completion) + '%');
+    $('#progress').css('width', Math.round(info.progress.completion) + '%');
+    $('#file_name').text("Файл: " + info.job.file.name);
+};
 var HandlerState = function (value) {
   "use strict";
   var state = value.state.text;
   var rus_state = (translate_state[state]) ? translate_state[state]: state;
+  if (state === 'Printing') {
+      ShowPrintInfo(value);
+  }
   if (state === global_state) {
   }
   else {
+      if (global_state === 'Printing' && state === 'Operational') {
+          CancelPrint();
+      }
       $('#status_print').text(rus_state);
+      PrinterState(rus_state);
       global_state = state;
   }
 };
 var CurrentEvent = function (value) {
     "use strict";
     if (value.temps.length){
-        console.log('Have temps', value.temps);
         UpdateTemps(value.temps[0]);
     }
     if (value.state){
@@ -73,7 +95,7 @@ var ChangedState = function (state) {
         $('#status_printt').text(state);
     }
     else {
-        ChangeStatePrint(state);
+        //ChangeStatePrint(state);
     }
 };
 var InfoPrinting = function (info) {
@@ -109,7 +131,7 @@ var ProcessingData = function (data) {
         var event = JSON.parse(strData, function (key, value) {
 
             if (key === 'event') {
-                //console.log('key event-> ', value);
+                console.log('key event-> ', value);
                 //console.log('Event - ' , value);
                 //console.log('RINF EVENT', value['payload']['x'], value['payload']['y']);
                 if (value.type === "PositionUpdate") {PositionUpdate(value);} else {console.log('key event-> ', value);}
