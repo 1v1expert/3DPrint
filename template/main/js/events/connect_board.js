@@ -49,6 +49,6 @@ var MessageOutput = function (headings, msgs, icons, hideAfters) {
             icon: icons,
             hideAfter: hideAfters,
             stack: 7
-        }).error();
+        });
     }, 30);
 };
