@@ -12,7 +12,8 @@ var ConnectServer = function () {
     "use strict";
     console.log('Start func IsConnectServer');
     settings.async = true;
-    settings.url = URL + "/api/connection";
+    settings.url = "http://127.0.0.1:5000/api/connection";
+        //URL + "/api/connection";
     settings.method = "GET";
     settings.success = function (response) {
             //"ws://127.0.0.1:5000/sockjs/627/mvy2qfdj/websocket"
@@ -46,10 +47,11 @@ var ConnectServer = function () {
             }
 
         };
-        settings.error = function () {
+        settings.error = function (response) {
             $('#status_print').text("ПРОБЛЕМА С СЕРВЕРОМ...");
             is_connect_server = false;
             MessageOutput('Ошибка', 'подключения сервера, повтор через 5с', 'error', 2900);
+            console.log(response);
             setTimeout(function () {
                 ConnectServer();
                 }, 5000);
