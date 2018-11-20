@@ -97,16 +97,16 @@ $('#stopprint').on('click', function () {
     Stopprint();
 });
 //pauseprint_2
-$('#pauseprint_2').on('click', function () {
+$('#dpauseprint_2').on('click', function () {
     if (PRINT_PAUSE){
  //       //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
-        $('#iconpause').text(' Приостановить');
+        $('#dpauseprint_2').text(" Приостановить");
         RESUMES_PRINTING();
         PRINT_PAUSE = false;
     }
     else {
         //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
-        $('#iconpause').text(' Продолжить');
+        $('#dpauseprint_2').text(' Продолжить');
         PAUSE_PRINTING();
         PRINT_PAUSE = true;
     };
@@ -120,7 +120,7 @@ $('#pauseprint').on('click', function () {
         PRINT_PAUSE = false;
     }
     else {
-        $('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
+        //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
         $('#iconpause').text(' Продолжить');
         PRINT_PAUSE = true;
     };
