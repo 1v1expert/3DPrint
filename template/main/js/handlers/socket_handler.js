@@ -12,7 +12,7 @@ var ConnectServer = function () {
     "use strict";
     console.log('Start func IsConnectServer');
     settings.async = true;
-    settings.url = URL + "/api/connection";
+    settings.url = "http://127.0.0.1:5000/api/connection";
         //URL + "/api/connection";
     settings.method = "GET";
     settings.success = function (response) {
