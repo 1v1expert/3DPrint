@@ -49,8 +49,8 @@ var ShowPrintInfo = function (info) {
     $('#progress').css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
     // name buttons
-    $('#iconpause2').text(' Приостановить#2');
-    $('#iconpause').text(' Приостановить#1');
+    $('#iconpause2').text(' Пауза#2');
+    $('#iconpause').text(' Пауза#1');
 };
 var HandlerState = function (value) {
   "use strict";
