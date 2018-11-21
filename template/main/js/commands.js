@@ -79,6 +79,9 @@ var TrigeredPrint = function () {
     setting.error = function (response) {
         console.log(response);
     };
+    setting.success = function (response) {
+        console.log(response);
+    };
     //var command =
     //alert('OnPause');
     console.log(global_state);
