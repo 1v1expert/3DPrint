@@ -72,6 +72,8 @@ $.ajax(settings).done(function (response) {
 };
 var TrigeredPrint = function () {
     var command = buttons.OnPause;
+    alert('OnPause');
+    console.log(global_state);
     if (global_state === 'Pausing' || global_state === 'Paused') {
         alert('Pausing');
         console.log(global_state);

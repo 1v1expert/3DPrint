@@ -114,14 +114,14 @@ $('#stopprint').on('click', function () {
 
 $('#pauseprint').on('click', function () {
     if (PRINT_PAUSE){
-        $('#status_print').text("ИДЁТ ПЕЧАТЬ...");
-        $('#iconpause').text(' Приостановить');
+        //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
+        //$('#iconpause').text(' Приостановить');
         //RESUME_PRINTING();
         PRINT_PAUSE = false;
     }
     else {
         //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
-        $('#iconpause').text(' Продолжить');
+        //$('#iconpause').text(' Продолжить');
         PRINT_PAUSE = true;
     };
     TogglePrint();
