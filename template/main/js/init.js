@@ -91,11 +91,11 @@ $('#restartprint').on('click', function () {
     $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
     RestartPrint();
 });
-$('#stopprint').on('click', function () {
+//$('#stopprint').on('click', function () {
     //Add change name status
-    $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
-    Stopprint();
-});
+//    $('#status_print').text("ПЕЧАТЬ ПРЕРВАНА");
+//    Stopprint();
+//});
 //pauseprint_2
 //$('#dpauseprint_2').on('click', function () {
 //    if (PRINT_PAUSE){

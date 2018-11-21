@@ -62,6 +62,6 @@ var ConnectServer = function () {
             setTimeout(function () {
                 ConnectServer();
                 }, 5000);
-        }}
+        }};
     $.ajax(setting).done(function (response) {console.log(response);});
 };

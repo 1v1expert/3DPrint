@@ -29,16 +29,7 @@ $('#ABS').on('click', function () {
 });
 $('#dpauseprint_1').on('click', function () {
     TrigeredPrint();
-  //  if (PRINT_PAUSE){
- //       //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
- //       $('#dpauseprint_2').text(" Приостановить");
- //       RESUMES_PRINTING();
-  //      PRINT_PAUSE = false;
-  //  }
-  //  else {
-        //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
- //       $('#dpauseprint_2').text(' Продолжить');
- //       PAUSE_PRINTING();
- //       PRINT_PAUSE = true;
-  //  };
+});
+$('#stopprint').on('click', function () {
+    Stopprint();
 });
