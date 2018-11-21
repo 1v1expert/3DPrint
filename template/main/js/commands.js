@@ -75,7 +75,7 @@ var TrigeredPrint = function () {
     setting.url = URL + "/api/printer/command";
     setting.method = "POST";
     setting.data = buttons.OnPause;
-    setting.async = false;
+    setting.async = true;
     setting.error = function (response) {
         console.log(response);
     };

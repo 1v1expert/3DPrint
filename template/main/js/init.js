@@ -1034,6 +1034,7 @@ $(document).ready(function(){
   	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
   	ConnectServer();
+  	GetPosition();
 });
 /*****Ready function end*****/
 
