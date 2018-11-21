@@ -64,6 +64,7 @@ var HandlerState = function (value) {
       $('#iconpause').text(' Продолжить#1');
   }
   if (state === global_state) {
+      $('#status_print').text(rus_state);
   }
   else {
       $('#status_print').text(rus_state);

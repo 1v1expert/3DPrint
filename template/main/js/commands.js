@@ -82,6 +82,7 @@ var TrigeredPrint = function () {
     settings.url = URL + '/api/printer/command';
     settings.data = command;
     settings.async = true;
+    console.log(settings);
     $.ajax(settings).done(function (response) {
         console.log(response, settings);
     });
