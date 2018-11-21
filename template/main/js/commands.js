@@ -71,6 +71,7 @@ $.ajax(settings).done(function (response) {
 });
 };
 var TrigeredPrint = function () {
+    "use strict";
     var command = buttons.OnPause;
     alert('OnPause');
     console.log(global_state);
@@ -79,12 +80,14 @@ var TrigeredPrint = function () {
         console.log(global_state);
         command = buttons.CancPause;
     }
-    settings.url = URL + '/api/printer/command';
-    settings.data = command;
-    settings.async = true;
-    console.log(settings);
-    $.ajax(settings).done(function (response) {
-        console.log(response, settings);
+    var setting = settings;
+    setting.url = URL + '/api/printer/command';
+    setting.method = 'POST';
+    setting.data = command;
+    setting.async = true;
+    console.log(setting);
+    $.ajax(setting).done(function (response) {
+        console.log(response, setting);
     });
 };
 
