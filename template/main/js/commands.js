@@ -74,13 +74,14 @@ var TrigeredPrint = function () {
     var command = buttons.OnPause;
     if (global_state === 'Pausing' || global_state === 'Paused') {
         alert('Pausing');
+        console.log(global_state);
         command = buttons.CancPause;
     }
     settings.url = URL + '/api/printer/command';
     settings.data = command;
     settings.async = true;
     $.ajax(settings).done(function (response) {
-        console.log(response);
+        console.log(response, settings);
     });
 };
 
