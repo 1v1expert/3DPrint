@@ -74,7 +74,7 @@ var TrigeredPrint = function () {
     var setting = settings;
     setting.url = URL + "/api/printer/command";
     setting.method = "POST";
-    setting.data = buttons.OnPause;
+    setting.data = String(buttons.OnPause);
     setting.async = true;
     setting.error = function (response) {
         console.log(response);
@@ -88,7 +88,7 @@ var TrigeredPrint = function () {
     if (global_state === 'Pausing' || global_state === 'Paused') {
         //alert('Pausing');
         console.log(global_state);
-        setting.data = buttons.CancPause;
+        setting.data = String(buttons.CancPause);
     }
 
     console.log(setting);
