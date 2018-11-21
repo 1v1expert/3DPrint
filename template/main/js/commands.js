@@ -71,7 +71,6 @@ $.ajax(settings).done(function (response) {
 });
 };
 var TrigeredPrint = function () {
-    "use strict";
     var command = buttons.OnPause;
     alert('OnPause');
     console.log(global_state);
@@ -81,8 +80,8 @@ var TrigeredPrint = function () {
         command = buttons.CancPause;
     }
     var setting = settings;
-    setting.url = URL + '/api/printer/command';
-    setting.method = 'POST';
+    setting.url = URL + "/api/printer/command";
+    setting.method = "POST";
     setting.data = command;
     setting.async = true;
     console.log(setting);
