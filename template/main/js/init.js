@@ -112,20 +112,20 @@ $('#restartprint').on('click', function () {
 //    };
 //});
 
-$('#pauseprint').on('click', function () {
-    if (PRINT_PAUSE){
+//$('#pauseprint').on('click', function () {
+//    if (PRINT_PAUSE){
         //$('#status_print').text("ИДЁТ ПЕЧАТЬ...");
         //$('#iconpause').text(' Приостановить');
         //RESUME_PRINTING();
-        PRINT_PAUSE = false;
-    }
-    else {
+//        PRINT_PAUSE = false;
+//    }
+//    else {
         //$('#status_print').text("ПЕЧАТЬ ПРИОСТАНОВЛЕНА");
         //$('#iconpause').text(' Продолжить');
-        PRINT_PAUSE = true;
-    };
-    TogglePrint();
-});
+//        PRINT_PAUSE = true;
+//    };
+//    TogglePrint();
+//});
 
 $('#platform_restart').on('click', function () {
     console.log('Platform_restart');
@@ -436,36 +436,36 @@ $.ajax(settings).done(function (response) {
 });
 };
 
-var TogglePrint= function () {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": '{"command": "pause", "action": "toggle"}',
-  "success": function(response) {
+//var TogglePrint= function () {
+//var settings = {
+//  "async": true,
+//  "crossDomain": true,
+//  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+//  "method": "POST",
+//  "headers": {
+//  	"x-api-key": ActiveApi,
+///	  "content-type": "application/json",
+//	  "cache-control": "no-cache"
+//  },
+//  "processData": false,
+//  "data": '{"command": "pause", "action": "toggle"}',
+//  "success": function(response) {
   	//alert(response);
-	  console.log(response + ' -- success toggle print');
-	  //Connected();
-	  },
-  "error": function(response) {
+//	  console.log(response + ' -- success toggle print');
+//	  //Connected();
+//	  },
+//  "error": function(response) {
   	//CheckedConnect(30);
-  	console.log(response + " - Error toggle print");
+//  	console.log(response + " - Error toggle print");
   	//$('.label_status').text('не удалось подключиться');
   	//var status = document.getElementById("status");
   	//status.innerText = "Не удалось подключиться";
-                }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
+//                }
+//};
+//$.ajax(settings).done(function (response) {
+//    console.log(response);
+//});
+//};
 
 var Stopprint= function () {
 var settings = {

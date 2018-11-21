@@ -33,3 +33,6 @@ $('#dpauseprint_1').on('click', function () {
 $('#stopprint').on('click', function () {
     Stopprint();
 });
+$('#pauseprint').on('click', function () {
+   SystemTrigeredPrint();
+});

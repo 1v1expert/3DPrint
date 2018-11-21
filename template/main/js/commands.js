@@ -70,6 +70,28 @@ $.ajax(settings).done(function (response) {
     console.log(response);
 });
 };
+var SystemTrigeredPrint= function () {
+    var setting = settings;
+    setting.url = URL + "/api/job";
+    setting.method = "POST";
+    setting.data = '{"command": "pause", "action": "pause"}';
+    setting.async = true;
+    setting.error = function (response) {
+        console.log(response);
+    };
+    setting.success = function (response) {
+        console.log(response);
+    };
+    if (global_state === 'Pausing' || global_state === 'Paused') {
+        //alert('Pausing');
+        console.log(global_state);
+        setting.data = '{"command": "pause", "action": "resume"}';
+    }
+    console.log(setting);
+    $.ajax(setting).done(function (response) {
+    console.log('Done-->', response);
+});
+};
 var TrigeredPrint = function () {
     var setting = settings;
     setting.url = URL + "/api/printer/command";
