@@ -71,19 +71,20 @@ $.ajax(settings).done(function (response) {
 });
 };
 var TrigeredPrint = function () {
-    var command = buttons.OnPause;
-    alert('OnPause');
+    var setting = settings;
+    setting.url = URL + "/api/printer/command";
+    setting.method = "POST";
+    setting.data = buttons.OnPause;
+    setting.async = true;
+    //var command =
+    //alert('OnPause');
     console.log(global_state);
     if (global_state === 'Pausing' || global_state === 'Paused') {
         alert('Pausing');
         console.log(global_state);
-        command = buttons.CancPause;
+        setting.data = buttons.CancPause;
     }
-    var setting = settings;
-    setting.url = URL + "/api/printer/command";
-    setting.method = "POST";
-    setting.data = command;
-    setting.async = true;
+
     console.log(setting);
     $.ajax(setting).done(function (response) {
         console.log(response, setting);
