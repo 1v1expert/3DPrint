@@ -25,8 +25,8 @@ translate_state = {
         }
     },
 buttons = {
-    OnPause: '{"command": "M999"}',
-    CancPause: '{"command": "M999"}',
+    OnPause: '{"command": "M600"}',
+    CancPause: '{"command": "M601"}',
     General:
     [
         {
