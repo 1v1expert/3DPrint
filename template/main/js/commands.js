@@ -75,7 +75,7 @@ var TrigeredPrint = function () {
     setting.url = URL + "/api/printer/command";
     setting.method = "POST";
     setting.data = buttons.OnPause;
-    setting.async = true;
+    setting.async = false;
     setting.error = function (response) {
         console.log(response);
     };
@@ -86,14 +86,14 @@ var TrigeredPrint = function () {
     //alert('OnPause');
     console.log(global_state);
     if (global_state === 'Pausing' || global_state === 'Paused') {
-        alert('Pausing');
+        //alert('Pausing');
         console.log(global_state);
         setting.data = buttons.CancPause;
     }
 
     console.log(setting);
     $.ajax(setting).done(function (response) {
-        console.log(response, setting);
+        console.log('Done-', response, setting);
     });
 };
 
