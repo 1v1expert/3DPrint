@@ -76,6 +76,9 @@ var TrigeredPrint = function () {
     setting.method = "POST";
     setting.data = buttons.OnPause;
     setting.async = true;
+    setting.error = function (response) {
+        console.log(response);
+    };
     //var command =
     //alert('OnPause');
     console.log(global_state);
