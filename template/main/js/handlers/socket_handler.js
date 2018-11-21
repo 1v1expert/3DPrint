@@ -10,12 +10,13 @@ var is_connect_server = false, is_connect_printer = false;
 var socket = null;
 var ConnectServer = function () {
     "use strict";
+    var setting = settings;
     console.log('Start func IsConnectServer');
-    settings.async = true;
-    settings.url = "http://127.0.0.1:5000/api/connection";
+    setting.async = true;
+    setting.url = "http://127.0.0.1:5000/api/connection";
         //URL + "/api/connection";
-    settings.method = "GET";
-    settings.success = function (response) {
+    setting.method = "GET";
+    setting.success = function (response) {
             //"ws://127.0.0.1:5000/sockjs/627/mvy2qfdj/websocket"
             //var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/627/mvy2qfdj/websocket");
             //Set socket connection
@@ -47,7 +48,7 @@ var ConnectServer = function () {
             }
 
         };
-        settings.error = function () {
+        setting.error = function () {
             $('#status_print').text("ПРОБЛЕМА С СЕРВЕРОМ...");
             is_connect_server = false;
             MessageOutput('Ошибка', 'подключения сервера, повтор через 5с', 'error', 2900);
@@ -55,5 +56,5 @@ var ConnectServer = function () {
                 ConnectServer();
                 }, 5000);
         };
-    $.ajax(settings).done(function (response) {console.log(response);});
+    $.ajax(setting).done(function (response) {console.log(response);});
 };
