@@ -6,10 +6,10 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
-
+from config import config
 from tornado.options import define, options
 
-define("port", default=8890, help="run on the given port", type=int)
+define("port", default=config.PORT, help="run on the given port", type=int)
 
 
 class Application(tornado.web.Application):
@@ -19,10 +19,6 @@ class Application(tornado.web.Application):
 			"static_path": os.path.join(os.path.dirname(__file__), "static")
 		}
 		tornado.web.Application.__init__(self, handlers, **settings)
-		
-		# MongoDB
-		#self.connection = pymongo.Connection(MONGODB_HOST, MONGODB_PORT)
-		#self.db = self.connection["mallertv"]
 
 
 class BaseHandler(tornado.web.RequestHandler):
@@ -34,8 +30,6 @@ class BaseHandler(tornado.web.RequestHandler):
 class RootHandler(tornado.web.RequestHandler):
 	def get(self):
 		self.render("template/index.html", title="3dprint server", items={})
-		#result = list(self.db.contents.find({}, limit=1))[0]["_id"]
-		#self.write(str("Hello"))
 
 
 def main():
