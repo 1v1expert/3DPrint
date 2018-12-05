@@ -34,7 +34,6 @@ var ConnectOctoprint = function () {
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
             AuthSocket(response.name, response.session);
             OctoPrint.socket.connect();
-            //OctoPrint.socket.sendAuth(response.name, response.session);
             OctoPrint.socket.onMessage("*", function(message) {
                 is_connect_server = true;
                 ProcessingData(message);
@@ -44,7 +43,5 @@ var ConnectOctoprint = function () {
         .error(function (response) {
             Show_connection_status('Не запущено ядро приложения ', response, 'error');
         });
-
-    //console.log(name, session);
 };
 

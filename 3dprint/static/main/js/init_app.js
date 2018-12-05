@@ -5,12 +5,27 @@
 	1.Ready function
 	2.Load function
 	3.Full height function
-	4.Jetson function
+	4.APP function
 	5.Chat App function
 	6.Resize function
  ** ***************************************/
+"use strict";
+var ActiveApi = DATA.config.Apikey;
+var ActivePort = 5000;
+var URL = "http://127.0.0.1:" + ActivePort;
+$('.js-click-modal').click(function(){
+  $('.container').addClass('modal-open');
+});
 
- "use strict";
+$('.js-close-modal').click(function(){
+  $('.container').removeClass('modal-open');
+});
+
+ /** ***************************************/
+
+
+
+"use strict";
 
 var InitApp = function () {
 	$('.preloader-it > .la-anim-1').addClass('la-animate');
