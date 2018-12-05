@@ -974,7 +974,7 @@
 
 
     <!-- jQuery -->
-    <script>var Config = '{% raw config %}' </script>
+    <script>var DATA = JSON.parse('{% raw config %}') ; console.log(DATA)</script>
     <script src="{{ static_url('dist/jquery/dist/jquery.min.js')}}" ></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -1031,6 +1031,7 @@
 	<!-- Toast JavaScript -->
 
     <script src="{{ static_url('dist/jquery-toast-plugin/dist/jquery.toast.min.js') }}"></script>
+	<script src="{{ static_url('main/js/events/info_msg.js') }}"></script>
 	<!-- Include script processing data -->
 
     <!-- Temporary comment this scripts
@@ -1040,7 +1041,11 @@
     <script src="{{ static_url('main/js/commands.js') }}"></script>
     <script src="{{ static_url('main/js/handlers/socket_handler.js') }}"></script>
 	<!-- Init JavaScript -->
+	<script src="{{ static_url('main/js/handlers/data_processing.js') }}"></script>
+	<script src="{{ static_url('main/js/handlers/start_app.js') }}"></script>
     <script src="{{ static_url('main/js/init_app.js') }}"></script>
+
+
     <!-- Temporary comment this scripts
     <script src="{{ static_url('main/js/init.js') }}"></script>
 	<script src="{{ static_url('main/js/handlers/views_handler.js') }}"></script>
@@ -1057,5 +1062,6 @@
 	<script src="{{ static_url('main/js/octo_js/app/client/connection.js') }}"></script>
 	<script src="{{ static_url('main/js/octo_js/app/client/system.js') }}"></script>
 	<script src="{{ static_url('main/js/octo_js/app/client/files.js') }}"></script>
+<script src="{{ static_url('main/js/handlers/packed_client.js') }}"></script>
 </body>
 </html>

@@ -15,9 +15,9 @@
 var InitApp = function () {
 	$('.preloader-it > .la-anim-1').addClass('la-animate');
 	$('#pie_chart_1').data('easyPieChart').update(0);
-	$('#degres_1').text('/' + TARGET + '°');
+	$('#degres_1').text('/' + DATA.Definition.Target + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
-	$('#degres_3').text('/' + TARGET + '°');
+	$('#degres_3').text('/' + DATA.Definition.Target + '°');
 	$('#progress').html('');
 	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
@@ -26,6 +26,7 @@ var InitApp = function () {
 $(document).ready(function(){
 	App();
 	InitApp();
+	ConnectOctoprint();
 });
 /*****Ready function end*****/
 

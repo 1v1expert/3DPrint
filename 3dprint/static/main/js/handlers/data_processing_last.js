@@ -85,7 +85,41 @@ var CurrentEvent = function (value) {
     }
 
 };
+var ChangeStatePrint = function (state) {
+    "use strict";
+    $('#status_print').text(translate_state[state]);
 
+    if (global_state === 'Printing' && state === 'Operational'){
+        $('#estimatedPrintTime').text('');
+        $('#printTime').text('');
+    }
+    PrinterState(translate_state[state]);
+    global_state = state;
+};
+var ChangedState = function (state) {
+    "use strict";
+    if (state === global_state){
+        //console.log(state);
+        $('#status_printt').text(state);
+    }
+    else {
+        //ChangeStatePrint(state);
+    }
+};
+var InfoPrinting = function (info) {
+    "use strict";
+    if (info.progress.printTime === null){
+        //console.log("NULLLLLLL!!!!");
+    }
+    else {
+        //console.log('printtime ->', info.progress.printTime);
+        $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(info.progress.printTime)).utc().format('HHH:mm:ss'));
+        $('#printTime').text("Осталось: " + moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
+        $('#progress').html(Math.round(info.progress.completion) + '%');
+        $('#progress').css('width', Math.round(info.progress.completion) + '%');
+        $('#file_name').text("Файл: " + info.job.file.name);
+    }
+};
 var PositionUpdate = function (value) {
     "use strict";
     $('#coorX').text(value.payload.x);
@@ -95,21 +129,41 @@ var PositionUpdate = function (value) {
 };
 var ProcessingData = function (data) {
     "use strict";
-    console.log(data);
-    switch(data.event) {
-        case 'event':
-            switch (data.data.type){
-                case 'PositionUpdate':
-                    PositionUpdate(data.data);
-                    break;
-                default:
-                    console.log("Untracked event - ", data);
-
+    //console.log('============');
+    var foundPos = data.indexOf('a[');
+    //console.log('Process data', data);
+    if (~foundPos)
+    {
+        var strData = data.substring(foundPos+1);
+        var jsonData = JSON.parse(strData)[0];
+        var event = JSON.parse(strData, function (key, value) {
+            console.log(value);
+            if (key === 'event') {
+                console.log('key event-> ', value);
+                //console.log('Event - ' , value);
+                //console.log('RINF EVENT', value['payload']['x'], value['payload']['y']);
+                if (value.type === "PositionUpdate") {PositionUpdate(value);} else {console.log('key event-> ', value);}
+                return value.payload;
             }
-            break;
-        case 'current':
-            CurrentEvent(data.data);
-
-
+            if (key === 'current') {
+                console.log('key current-> ', value);
+                //ChangedState(value.state.text);
+                //InfoPrinting(value);
+                CurrentEvent(value);
+                //InfoPrinting(value['progress']);
+                //MessageOutput(value['messages']);
+                //MessageOutput(value['logs']);
+                console.log('StatE ->', value);
+            }
+            return value;
+        });
+        //console.log("!!!!_____-=", event[0].event);
+        //console.log("!!!!_____-=", event[0].current);
+        //if (jsonData[0]['event']['payload']){
+         //   console.log('!!!! - ', jsonData[0]['event']['payload']);
+        //}
+        //-----
+        //console.log('!!!! - ', data);
     }
+    //console.log(event);
 };
