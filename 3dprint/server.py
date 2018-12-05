@@ -8,6 +8,7 @@ import tornado.options
 import tornado.web
 from config import config
 from tornado.options import define, options
+import json
 
 define("port", default=config.PORT, help="run on the given port", type=int)
 
@@ -29,8 +30,7 @@ class BaseHandler(tornado.web.RequestHandler):
 
 class RootHandler(tornado.web.RequestHandler):
 	def get(self):
-		self.render("template/index.html", title="3dprint server", items={})
-
+		self.render("template/index.html", title="3dprint server", config=json.dumps(config.CONFIG))
 
 def main():
 	tornado.options.parse_command_line()
