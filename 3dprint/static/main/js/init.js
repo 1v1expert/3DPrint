@@ -1033,7 +1033,7 @@ $(document).ready(function(){
   	// GetFilesLocal("local?force=true&filter=gcode&recursive=true");
   	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
-  	ConnectServer();
+  	//ConnectServer();
   	//GetPosition();
 });
 /*****Ready function end*****/

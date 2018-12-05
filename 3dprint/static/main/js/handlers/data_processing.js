@@ -137,7 +137,7 @@ var ProcessingData = function (data) {
         var strData = data.substring(foundPos+1);
         var jsonData = JSON.parse(strData)[0];
         var event = JSON.parse(strData, function (key, value) {
-
+            console.log(value);
             if (key === 'event') {
                 console.log('key event-> ', value);
                 //console.log('Event - ' , value);
@@ -153,7 +153,7 @@ var ProcessingData = function (data) {
                 //InfoPrinting(value['progress']);
                 //MessageOutput(value['messages']);
                 //MessageOutput(value['logs']);
-                //console.log('StatE ->', value);
+                console.log('StatE ->', value);
             }
             return value;
         });

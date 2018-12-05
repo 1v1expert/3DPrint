@@ -5,14 +5,16 @@
     <title>3DPrint</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="author" content="VLADDOS"/>
+    <link href="{{ static_url('dist/datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ static_url('dist/jquery-toast-plugin/dist/jquery.toast.min.css') }}" rel="stylesheet" type="text/css">
 
-    <link href="dist/datatables/media/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
-	<link href="dist/jquery-toast-plugin/dist/jquery.toast.min.css" rel="stylesheet" type="text/css">
 	<!--alerts CSS -->
-		<link href="dist/sweetalert/dist/sweetalert.css" rel="stylesheet" type="text/css">
+    <link href="{{ static_url('dist/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css">
+
     <!-- Custom CSS -->
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
-	<link href="main/css/style.css" rel="stylesheet" type="text/css">
+	<link href="{{ static_url('main/css/style.css') }}" rel="stylesheet" type="text/css">
+	<!--<link href="main/css/style.css" rel="stylesheet" type="text/css">-->
 	<style>
 		.dropdown-menu {
 			border-radius: 14px;
@@ -972,62 +974,90 @@
 
 
     <!-- jQuery -->
-    <script src="dist/jquery/dist/jquery.min.js"></script>
+    <script src="{{ static_url('dist/jquery/dist/jquery.min.js')}}" ></script>
+
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="dist/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <script src="{{ static_url('dist/bootstrap/dist/js/bootstrap.min.js')}}" ></script>
 	<!-- Data table JavaScript -->
-	<script src="dist/datatables/media/js/jquery.dataTables.min.js"></script>
 
+    <script src="{{ static_url('dist/datatables/media/js/jquery.dataTables.min.js')}}" ></script>
 	<!-- Slimscroll JavaScript -->
-	<script src="dist/other_js/jquery.slimscroll.js"></script>
 
+    <script src="{{ static_url('dist/other_js/jquery.slimscroll.js')}}" ></script>
 	<!-- Progressbar Animation JavaScript -->
-	<script src="dist/waypoints/lib/jquery.waypoints.min.js"></script>
-	<script src="dist/jquery.counterup/jquery.counterup.min.js"></script>
+
+    <script src="{{ static_url('dist/waypoints/lib/jquery.waypoints.min.js')}}" ></script>
+
+    <script src="{{ static_url('dist/jquery.counterup/jquery.counterup.min.js')}}" ></script>
                 <!-- Progressbar Animation JavaScript -->
-	<script src="dist/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
-	<script src="dist/other_js/skills-counter-data.js"></script>
+
+    <script src="{{ static_url('dist/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js')}}" ></script>
+    <script src="{{ static_url('dist/other_js/skills-counter-data.js')}}" ></script>
+
 
 	<!-- Fancy Dropdown JS -->
 	<!--TO DO maybe including<script src="dist/js/dropdown-bootstrap-extended.js"></script>-->
 
 	<!-- Moment JS for convertind data/time -->
-    <script src="dist/other_js/moment.js"></script>
+	<script src="{{ static_url('dist/other_js/moment.js')}}" ></script>
 
     <!-- Sparkline JavaScript -->
 	<!--TO DO maybe including<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>-->
 
 	<!-- Owl JavaScript -->
-	<script src="dist/owl.carousel/dist/owl.carousel.min.js"></script>
 
+	<script src="{{ static_url('dist/owl.carousel/dist/owl.carousel.min.js') }}"></script>
 	<!-- Switchery JavaScript -->
-	<script src="dist/switchery/dist/switchery.min.js"></script>
+
+    <script src="{{ static_url('dist/switchery/dist/switchery.min.js') }}"></script>
 	<!-- Sweet-Alert  -->
-	<script src="dist/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="{{ static_url('dist/sweetalert/dist/sweetalert.min.js') }}"></script>
 
 	<!-- EChartJS JavaScript -->
 	<!--TO DO maybe including<script src="vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
 	<script src="vendors/echarts-liquidfill.min.js"></script>
 	<!-- import configuration -->
-	<script src="../config/config.js"></script>
+
+    <script src="{{ static_url('config.js') }}"></script>
 	<!-- Cookie juery -->
-	<script src="dist/other_js/jquery.cookie.js"></script>
+
+    <script src="{{ static_url('dist/other_js/jquery.cookie.js') }}"></script>
 	<!-- Websocket -->
-	<script src="dist/other_js/web_socket.js"></script>
+
+    <script src="{{ static_url('dist/other_js/web_socket.js') }}"></script>
 	<!-- Toast JavaScript -->
-	<script src="dist/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+
+    <script src="{{ static_url('dist/jquery-toast-plugin/dist/jquery.toast.min.js') }}"></script>
 	<!-- Include script processing data -->
-	<script src="main/js/handlers/data_processing.js"></script>
+
+    <script src="{{ static_url('main/js/handlers/data_processing.js') }}"></script>
 	<!-- Init start socket connection -->
-	<script src="main/js/commands.js"></script>
-	<script src="main/js/handlers/socket_handler.js"></script>
+
+    <script src="{{ static_url('main/js/commands.js') }}"></script>
+
+    <script src="{{ static_url('main/js/handlers/socket_handler.js') }}"></script>
 	<!-- Init JavaScript -->
 
-	<script src="main/js/init.js"></script>
-	<script src="main/js/handlers/views_handler.js"></script>
-	<script src="main/js/events/connect_board.js"></script>
+
+    <script src="{{ static_url('main/js/init.js') }}"></script>
+	<script src="{{ static_url('main/js/handlers/views_handler.js') }}"></script>
+	<script src="{{ static_url('main/js/events/connect_board.js') }}"></script>
 	<!--<script src="dist/js/dashboard-data.js"></script>-->
+	<!-- Include octo js -->
+
+
+	<script src="{{ static_url('main/js/octo_js/lib/lodash.min.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/lib/sockjs.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/base.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/settings.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/socket.js') }}"></script>
+
+	<script src="{{ static_url('main/js/octo_js/app/client/browser.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/connection.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/system.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/files.js') }}"></script>
 </body>
 </html>
