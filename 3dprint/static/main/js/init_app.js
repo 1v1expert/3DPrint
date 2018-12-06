@@ -20,7 +20,27 @@ $('.js-click-modal').click(function(){
 $('.js-close-modal').click(function(){
   $('.container').removeClass('modal-open');
 });
-
+var ConfirmPrint = function (name_file) {
+    swal({
+            title: "Вы уверены ?",
+            text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f8b32d",
+            confirmButtonText: "Да, я сделаю это",
+            cancelButtonText: "Нет, не хооочу",
+            closeOnConfirm: true,
+            closeOnCancel: true
+        }, function(isConfirm){
+            if (isConfirm) {
+                //swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
+                StartPrint(name_file);
+                $('#maintab').click();
+            } else {
+                swal("Отменено", "А ты послушный :)", "error");
+            }
+        });
+};
  /** ***************************************/
 
 

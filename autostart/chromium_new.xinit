@@ -8,7 +8,7 @@ TOUCHUI_EXTRA='echo "TouchUI: screensaver enabled"'
 TOUCHUI_PORT="5001"
 TOUCHUI_EXECUTE="matchbox-window-manager & unclutter -idle 0.1 &"
 CHROME_BIN="chromium-browser"
-AUTODETECT_PORT=true
+AUTODETECT_PORT=false
 
 # Uncomment the next variable to generate a full log under ~/.config/chromium/chrome_debug.log
 # or to enable the remote deugger, forward port by haproxy or by tunnel
@@ -89,7 +89,7 @@ CHROME_ARGS="	--no-first-run --kiosk $TOUCHUI_ARGS $TOUCHUI_DEBUG
 [ -r $TOUCHUI_DIR/calibration.sh ] && . $TOUCHUI_DIR/calibration.sh
 
 # Start local web server to host the startup page to avoid CORS problems using local files
-python $TOUCHUI_DIR/.3DPrint/3dprint/server.py &
+/home/pi/oprint/bin/python $TOUCHUI_DIR/.3DPrint/3dprint/server.py &
 
 # Start window manager, unclutter to remove cursor and start chromium as specific user
 eval $TOUCHUI_EXTRA &
