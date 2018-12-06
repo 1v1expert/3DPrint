@@ -23,11 +23,11 @@ class Application(tornado.web.Application):
 		tornado.web.Application.__init__(self, handlers, **settings)
 
 
+
 class RootHandler(tornado.web.RequestHandler):
 	def get(self):
-		FULL_DATA = dict(config=config.CONFIG, Definition=config.Definition)
-		self.render("template/index.html", title="3dprint server", config=json.dumps(FULL_DATA))
-
+		FullData = dict(config=config.CONFIG, Definition=config.Definition)
+		self.render("template/index.html", title="3dprint server", config=json.dumps(FullData))
 
 def main():
 	tornado.options.parse_command_line()

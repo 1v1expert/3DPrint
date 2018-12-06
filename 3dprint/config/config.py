@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-PORT = 8891
+PORT = 5001
 cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo="
 CONFIG = {
 	"BaseUrl": "http://localhost:5000",
