@@ -30,6 +30,36 @@ var GetPosition = function () {
         }};
     $.ajax(settings).done(function (response) {console.log(response);});
 };
+var Stopprint= function () {
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
+  "method": "POST",
+  "headers": {
+  	"x-api-key": ActiveApi,
+	  "content-type": "application/json",
+	  "cache-control": "no-cache"
+  },
+  "processData": false,
+  "data": '{"command": "cancel"}',
+  "success": function(response) {
+  	//alert(response);
+	  console.log(response + ' -- success stoping print');
+	  //Connected();
+	  },
+  "error": function(response) {
+  	//CheckedConnect(30);
+  	console.log(response + " - Error stopping print");
+  	//$('.label_status').text('не удалось подключиться');
+  	//var status = document.getElementById("status");
+  	//status.innerText = "Не удалось подключиться";
+                }
+};
+$.ajax(settings).done(function (response) {
+    console.log(response);
+});
+};
 var PrintHead = function (command) {
     "use strict";
 var settings = {
