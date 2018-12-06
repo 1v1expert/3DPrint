@@ -58,7 +58,7 @@ $.ajax(settings).done(function (response) {
 
 var StartPrint = function (location, name_file) {
     "use strict";
-    OctoPrint.files.select(location, name_file, true)
+    OctoPrint.files.select('local', decodeURI(name_file), true)
         .done(function (response) {
             console.log(response);
         });
@@ -67,7 +67,7 @@ var StartPrint = function (location, name_file) {
 var GetFiles = function (url) {
     "use strict";
     var data_html = "";
-    OctoPrint.files.listForLocation('local', true)
+    OctoPrint.files.listForLocation('local?force=true', true)
         .done(function(response) {
             console.log("### Files:");
             _.each(response.files, function(entry) {

@@ -13,48 +13,56 @@ $('#UP_Z').on('click', function () {
 		//alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "z": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#UP_Y').on('click', function () {
 		//alert('UP Y' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "y": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#DOWN_Z').on('click', function () {
 		//alert('DOWN Z' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "z": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#Down_Y').on('click', function () {
 		//alert('DOWN Y' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "y": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#Home_Z').on('click', function () {
 		//alert('Home Z' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "home", "axes": ["z"]}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#Home_XY').on('click', function () {
 		//alert('Home XY' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "home", "axes": ["x", "y"]}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#Left_X').on('click', function () {
 		//alert('Left X' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "x": -' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#Right_X').on('click', function () {
 		//alert('Right X' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "x": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
 		console.log(command);
+		GetPosition();
 		PrintHead(command);
     });
 $('#up_t_tool').on('click', function () {
