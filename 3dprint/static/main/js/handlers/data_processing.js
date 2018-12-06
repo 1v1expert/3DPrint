@@ -63,14 +63,14 @@ var HandlerState = function (value) {
       $('#iconpause2').text(' Продолжить#2');
       $('#iconpause').text(' Продолжить#1');
   }
-  if (state === global_state) {
+  if (state === global.global_state) {
       $('#status_print').text(rus_state);
   }
   else {
       $('#status_print').text(rus_state);
       PrinterState(rus_state);
-      global_state = state;
-      if (global_state === 'Printing' && state === 'Operational') {
+      global.global_state = state;
+      if (global.global_state === 'Printing' && state === 'Operational') {
           CancelPrint();
       }
   }
