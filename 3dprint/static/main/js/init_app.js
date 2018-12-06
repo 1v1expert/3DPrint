@@ -20,7 +20,7 @@ $('.js-click-modal').click(function(){
 $('.js-close-modal').click(function(){
   $('.container').removeClass('modal-open');
 });
-var ConfirmPrint = function (name_file) {
+var ConfirmPrint = function (location, name_file) {
     swal({
             title: "Вы уверены ?",
             text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
@@ -33,8 +33,7 @@ var ConfirmPrint = function (name_file) {
             closeOnCancel: true
         }, function(isConfirm){
             if (isConfirm) {
-                //swal("Отправлено", "Вот ты упёртый ! Теперь жди !", "success");
-                StartPrint(name_file);
+                StartPrint(location, name_file);
                 $('#maintab').click();
             } else {
                 swal("Отменено", "А ты послушный :)", "error");
