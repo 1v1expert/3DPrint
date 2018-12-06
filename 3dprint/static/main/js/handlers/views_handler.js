@@ -106,7 +106,33 @@ $('#set_temp_board').on('click', function () {
     var c_t = +t;
     SetTemperature_bed(c_t);
 });
+$('#platform_restart').on('click', function () {
+    console.log('Platform_restart');
+    RestartPlatform();
+});
+$('#restart_software').on('click', function () {
+    console.log('restart_software');
+    RestartSoftware();
+});
 
+$('#M999').on('click', function () {
+    M999();
+});
+
+$('#calibr').on('click', function () {
+    console.log('restart_software');
+    Calibrate();
+});
+$('#reset_pl').on('click', function () {
+    console.log('restart_pl');
+    Reset_plate();
+});
+
+$('#m306').on('click', function () {
+    console.log('m306');
+    //Reset_plate();
+    M306();
+});
 $('#restart_touchui').on('click', function () {
     Restart_touchui();
 });
