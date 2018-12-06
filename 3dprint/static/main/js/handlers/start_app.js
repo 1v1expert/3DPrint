@@ -42,6 +42,9 @@ var ConnectOctoprint = function () {
         })
         .error(function (response) {
             Show_connection_status('Не запущено ядро приложения ', response, 'error');
+            setTimeout(function() {
+                ConnectOctoprint();
+                }, 2000);
         });
 };
 
