@@ -24,12 +24,12 @@ var GetFiles = function (url) {
                 if (entry.children) {
                     if (entry.children.length > 0) {
                         for (var children in entry.children) {
-                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + children.path + ", " + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + children.date + "</span> </div> </a> </div> </div>";
+                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + children.path + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + children.date + "</span> </div> </a> </div> </div>";
                         }
                     }
                 }
                 else {
-                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + entry.path + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.display + "<br> <span>Доб: " + entry.date + "</span> </div> </a> </div> </div>";
+                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + entry.path + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.display + "<br> <span>Доб: " + entry.date + "</span> </div> </a> </div> </div>";
                 }
             });
             if (url === "local?force=true&filter=gcode&recursive=true") {
