@@ -224,7 +224,7 @@ $.ajax(settings).done(function (response) {
 
 var StartPrint = function (location, name_file) {
     "use strict";
-    OctoPrint.files.select('local', decodeURI(name_file), true)
+    OctoPrint.files.select(location, decodeURI(name_file), true)
         .done(function (response) {
             console.log(response);
         });
@@ -233,7 +233,7 @@ var StartPrint = function (location, name_file) {
 var GetFiles = function (url) {
     "use strict";
     var data_html = "";
-    OctoPrint.files.listForLocation('local?force=true', true)
+    OctoPrint.files.listForLocation(url, true)
         .done(function(response) {
             console.log("### Files:");
             _.each(response.files, function(entry) {
@@ -241,21 +241,21 @@ var GetFiles = function (url) {
                 if (entry.children) {
                     if (entry.children.length > 0) {
                         for (var children in entry.children) {
-                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + children.path + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + children.date + "</span> </div> </a> </div> </div>";
+                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                         }
                     }
                 }
                 else {
-                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + entry.path + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.display + "<br> <span>Доб: " + entry.date + "</span> </div> </a> </div> </div>";
+                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.display + "<br> <span>Доб: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                 }
             });
-            if (url === "local?force=true&filter=gcode&recursive=true") {
+            if (url === 'local?force=true') {
                 $('#usbfiles').css('visibility', 'visible');
                 if ($('#usbfiles').hasClass('active')) {
                     $('#rowfiles').html(data_html);
                 }
             }
-            if (url === "sdcard?recursive=true") {
+            if (url === 'sdcard?force=true') {
                 if ($('#localfiles').hasClass('active')) {
                     $('#rowfiles').html(data_html);
                 }}

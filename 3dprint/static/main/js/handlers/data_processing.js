@@ -41,10 +41,25 @@ var CancelPrint = function () {
     $('#progress').css('width', '0%');
     $('#progress').html('');
 };
+function ShowTime(totalSeconds) {
+    "use strict";
+    this.totalSeconds = Number(totalSeconds);
+    this.hours = Math.floor(this.totalSeconds / 3600);
+    this.totalSeconds %= 3600;
+    this.minutes = Math.floor(this.totalSeconds / 60);
+    this.seconds = this.totalSeconds % 60;
+    //return this.hours + ':' + this.minutes + ':' + this.seconds
+}
+ShowTime.prototype.toString = function() {
+    "use strict";
+    return this.hours + ':' + this.minutes + ':' + this.seconds;
+};
 var ShowPrintInfo = function (info) {
     "use strict";
-    $('#estimatedPrintTime').text("Печатается: " + moment.unix(Number(info.progress.printTime)).utc().format('HHH:mm:ss'));
-    $('#printTime').text("Осталось: " + moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
+    $('#estimatedPrintTime').text("Печатается: " + new ShowTime(info.progress.printTime).toString());
+        //moment.unix(Number(info.progress.printTime)).utc().format('HH:mm:ss'));
+    $('#printTime').text("Осталось: " + new ShowTime(info.progress.printTimeLeft).toString());
+        //moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
     $('#progress').html(Math.round(info.progress.completion) + '%');
     $('#progress').css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);

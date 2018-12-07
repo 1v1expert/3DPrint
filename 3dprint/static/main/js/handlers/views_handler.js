@@ -7,8 +7,11 @@
 */
 "use strict";
 /********/
-$('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').addClass('active');$('#usbfiles').removeClass('active');GetFiles("sdcard?recursive=true");});
-$('#usbfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').removeClass('active');$('#usbfiles').addClass('active');GetFiles("local?force=true&filter=gcode&recursive=true");});
+$('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').addClass('active');$('#usbfiles').removeClass('active');GetFiles('sdcard?force=true');});
+//GetFiles("sdcard?recursive=true");});
+$('#usbfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').removeClass('active');$('#usbfiles').addClass('active');
+GetFiles('local?force=true');});
+//GetFiles("local?force=true&filter=gcode&recursive=true");});
 $('#UP_Z').on('click', function () {
 		//alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());
 		var command = '{"command": "jog", "z": ' + $('#myTabs_8').find('.active').find('a').text() + '}';
