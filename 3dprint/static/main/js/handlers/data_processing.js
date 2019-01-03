@@ -26,7 +26,6 @@ var UpdateTemps = function (temps) {
         var temptool = temps.tool0.actual * 100 / temps.tool0.target;
         if (temps.tool0.target === 0) {
             temptool = temps.tool0.actual * 100 / Definition.Target;
-
         }
         $('#pie_chart_1').data('easyPieChart').update(temptool);
         $('#degres_1').text('/' + temps.tool0.target + '°');
@@ -119,12 +118,9 @@ var ProcessingData = function (data) {
                     break;
                 default:
                     console.log("Untracked event - ", data);
-
             }
             break;
         case 'current':
             CurrentEvent(data.data);
-
-
     }
 };
