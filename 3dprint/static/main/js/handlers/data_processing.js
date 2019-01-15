@@ -32,14 +32,15 @@ var UpdateTemps = function (temps) {
     }
   			//$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
 };
-var CancelPrint = function () {
+function CancelPrint() {
     "use strict";
     $('#estimatedPrintTime').text('');
     $('#printTime').text('');
     $('#file_name').text('');
-    $('#progress').css('width', '0%');
-    $('#progress').html('');
-};
+    $('#progress')
+        .css('width', '0%')
+        .html('');
+}
 function ShowTime(totalSeconds) {
     "use strict";
     this.totalSeconds = Number(totalSeconds);
@@ -66,7 +67,7 @@ var ShowPrintInfo = function (info) {
     $('#iconpause2').text(' Пауза#2');
     $('#iconpause').text(' Пауза#1');
 };
-var HandlerState = function (value) {
+function HandlerState(value) {
   "use strict";
   var state = value.state.text;
   var rus_state = (translate_state[state]) ? translate_state[state]: state;
@@ -88,7 +89,7 @@ var HandlerState = function (value) {
           CancelPrint();
       }
   }
-};
+}
 var CurrentEvent = function (value) {
     "use strict";
     if (value.temps.length){
@@ -97,17 +98,16 @@ var CurrentEvent = function (value) {
     if (value.state){
         HandlerState(value);
     }
-
 };
 
-var PositionUpdate = function (value) {
+function PositionUpdate(value) {
     "use strict";
     $('#coorX').text(value.payload.x);
     $('#coorY').text(value.payload.y);
     $('#coorZ').text(value.payload.z);
     $('#coorE').text(value.payload.e);
-};
-var ProcessingData = function (data) {
+}
+function ProcessingData(data) {
     "use strict";
     console.log(data);
     switch(data.event) {
@@ -123,4 +123,4 @@ var ProcessingData = function (data) {
         case 'current':
             CurrentEvent(data.data);
     }
-};
+}

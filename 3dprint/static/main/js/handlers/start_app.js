@@ -18,14 +18,14 @@ var Show_connection_status = function (msg, resp, status) {
         console.log(status, 'MSG: ' + msg, 'Response: ',  resp);
     }
 };
-var AuthSocket = function (name, session) {
+function AuthSocket(name, session) {
     "use strict";
     console.log(name, session);
     setTimeout(function() {
         OctoPrint.socket.sendAuth(name, session);
         }, 1000);
-};
-var ConnectOctoprint = function () {
+}
+function ConnectOctoprint() {
     "use strict";
     OctoPrint.options.baseurl = DATA.config.BaseUrl;
     OctoPrint.options.apikey = DATA.config.Apikey;
@@ -46,5 +46,5 @@ var ConnectOctoprint = function () {
                 ConnectOctoprint();
                 }, 2000);
         });
-};
+}
 

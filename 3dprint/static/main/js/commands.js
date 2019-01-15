@@ -23,36 +23,37 @@ var settings = {
   "processData": false,
   "data": ''
 };
+function CopyObjects(data) {
+    var clone = {};
+    for (var key in data) {
+        clone[key] = data[key];
+    }
+    return clone;
+}
+function PrintObject(data) {
+    var strobj = '';
+    for (var key in data) {
+        strobj += key + ': ' + data[key] + '\n';
+    }
+    console.log(strobj);
+}
 /*****Connect Octoprint Serve ******/
-var ConnectPrinter = function () {
-    settings.async = true;
-    settings.url = URL + "/api/connection";
-    settings.data = '{"command": "connect"}';
-    settings.error = function (response) {
-      console.log('error->', settings.url, response);
+function ConnectPrinter() {
+    var setting = CopyObjects(settings);
+    setting.async = true;
+    setting.url = URL + "/api/connection";
+    setting.data = '{"command": "connect"}';
+    setting.error = function (response) {
+      console.log('error->', setting.url, response);
     };
-    settings.success = function (response) {
+    setting.success = function (response) {
         is_connect_printer = true;
         console.log(response);
     };
-    //console.log('connect printer');
-
-  //"success": function(response) {
-  	//alert(response);
-	//  console.log(response + 'ConnectServ');
-	 // Connected();
-	 // },
-  //"error": function(response) {
-   //   clearInterval(GLOBAL_TIMER);
-  //	CheckedConnect(5);
-  //	console.log(response + 'Error connect serv');
- // 	$('.label_status').text('не удалось подключиться');
-  	//var status = document.getElementById("status");
-  	//status.innerText = "Не удалось подключиться";
-   //             }
-//};
-$.ajax(settings).done(function (response) {console.log(settings, response);});
-};
+    $.ajax(setting).done(function (response) {
+        console.log(setting, response);
+    });
+}
 var SetTemperature_bed = function (temper) {
     var command = '{"command": "target", "target":' +  temper + '}';
     settings.url = URL + '/api/printer/bed';
@@ -63,10 +64,11 @@ $.ajax(settings).done(function (response) {
 };
 
 var SetTemperature_tool = function (temper) {
+    var setting = CopyObjects(settings);
     var command = '{"command": "target", "targets": {"tool0":' + temper + '}}';
-    settings.url = URL + '/api/printer/tool';
-    settings.data = command;
-$.ajax(settings).done(function (response) {
+    setting.url = URL + '/api/printer/tool';
+    setting.data = command;
+$.ajax(setting).done(function (response) {
     console.log(response);
 });
 };
@@ -93,7 +95,7 @@ var SystemTrigeredPrint= function () {
 });
 };
 var TrigeredPrint = function () {
-    var setting = settings;
+    var setting = CopyObjects(settings);
     setting.url = URL + "/api/printer/command";
     setting.method = "POST";
     setting.data = String(buttons.OnPause);
@@ -119,20 +121,24 @@ var TrigeredPrint = function () {
     });
 };
 
-var Extrude = function (vtool, type_exchange) {
+function Extrude(vtool, type_exchange) {
     var command = '{"command": "select", "tool": "' + vtool + '"}';
     var extrude = '{"command": "extrude", "amount":' + type_exchange + '}';
     //select tool
-    settings.url = URL + '/api/printer/tool';
-    settings.data = command;
-    $.ajax(settings).done(function (response) {
-        console.log(response,'settings ->' , settings);
-    }
-    );
+    var setting = CopyObjects(settings);
+    setting.url = URL + '/api/printer/tool';
+    setting.data = command;
+    //$.ajax(settings).done(function (response) {
+    //    console.log(response,'settings ->' , settings);
+    //}
+    //);
     //extrude plastic
-    settings.data = extrude;
-    $.ajax(settings).done(function (response) {
-        console.log(response, 'settings ->', settings);
-    });
+    PrintObject(setting);
+    setting.data = extrude;
+    PrintObject(setting);
+    //console.log(setting.data);
+    //$.ajax(settings).done(function (response) {
+    //    console.log(response, 'settings ->', settings);
+    //});
 };
 

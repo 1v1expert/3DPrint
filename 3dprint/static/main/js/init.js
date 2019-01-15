@@ -605,7 +605,7 @@ var GetFilesLocal = function (dd) {
 
 
 /*****Connect Octoprint Serve ******/
-var PrintHead = function (command) {
+function PrintHead(command) {
 var settings = {
   "async": true,
   "crossDomain": true,
