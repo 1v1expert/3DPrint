@@ -9,7 +9,8 @@
 var ActivePort = 5000;
 var ActiveApi = "5C761F424E5E46EE934DE9F683609B66";
 var URL = "http://127.0.0.1:" + String(ActivePort);
-var settings = {
+var settings = window || this;
+settings = {
   "async": false,
   "crossDomain": true,
   "url": URL,
@@ -128,17 +129,17 @@ function Extrude(vtool, type_exchange) {
     var setting = CopyObjects(settings);
     setting.url = URL + '/api/printer/tool';
     setting.data = command;
-    //$.ajax(settings).done(function (response) {
-    //    console.log(response,'settings ->' , settings);
-    //}
-    //);
+    $.ajax(settings).done(function (response) {
+        console.log(response,'settings ->' , settings);
+    }
+    );
     //extrude plastic
     PrintObject(setting);
     setting.data = extrude;
     PrintObject(setting);
     //console.log(setting.data);
-    //$.ajax(settings).done(function (response) {
-    //    console.log(response, 'settings ->', settings);
-    //});
+    $.ajax(settings).done(function (response) {
+        console.log(response, 'settings ->', settings);
+    });
 };
 

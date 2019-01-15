@@ -60,8 +60,9 @@ $.ajax(settings).done(function (response) {
     console.log(response);
 });
 };
-var Calibrate = function () {
-    var command4 = '{"commands": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]}';
+function Calibrate() {
+    "use strict";
+    var command = '{"commands": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]}';
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -73,7 +74,7 @@ var Calibrate = function () {
             "cache-control": "no-cache"
   },
   "processData": false,
-  "data": command4,
+  "data": command,
   "success": function(response) {
 	  console.log(response + ' -- success send command to calibrate');
 	  },
@@ -81,9 +82,9 @@ var Calibrate = function () {
       console.log(response + " - Error send command to calibrate");
   }
 };
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
 };
 var RestartSoftware= function () {
 var settings = {
