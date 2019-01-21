@@ -34,6 +34,8 @@ function ConnectOctoprint() {
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
             AuthSocket(response.name, response.session);
             OctoPrint.socket.connect();
+            //Fix todo: Connect witch Printer offline
+            ConnectPrinter();
             OctoPrint.socket.onMessage("*", function(message) {
                 is_connect_server = true;
                 ProcessingData(message);
