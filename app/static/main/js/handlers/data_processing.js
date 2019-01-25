@@ -90,7 +90,10 @@ function HandlerState(value) {
       }
   }
 }
-var CurrentEvent = function (value) {
+function Processing_logs() {
+    //message-text
+}
+function CurrentEvent(value) {
     "use strict";
     if (value.temps.length){
         UpdateTemps(value.temps[0]);

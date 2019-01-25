@@ -851,10 +851,20 @@
 		<footer class="footer container-fluid pl-30 pr-30">
 					<div class="row">
 						<div class="col-sm-6">
-							<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
+							<div class="col-sm-10">
+								<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
+							</div>
+							<div class="col-sm-2">
+								<div alt="default" data-toggle="modal" style="    padding-top: 11px;"
+									 data-target=".bs-example-modal-lg" class="model_img img-responsive">
+									<i class="fa fa-spin fa-gear"></i> <span class="text-muted"></span>
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-6">
+
 							<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+
 						</div>
 					</div>
 				</footer>
@@ -972,6 +982,28 @@
 
 				<!-- footer -->
 
+<!-- sample modal content -->
+										<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+											<div class="modal-dialog modal-lg">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+														<h5 class="modal-title" id="myLargeModalLabel">Stack trace</h5>
+													</div>
+													<div class="modal-body">
+														<div class="form-group">
+																<label for="message-text" class="control-label mb-10">Message:</label>
+																<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>
+															</div>
+													</div>
+
+												</div>
+												<!-- /.modal-content -->
+											</div>
+											<!-- /.modal-dialog -->
+										</div>
+										<!-- /.modal -->
+										<!-- Button trigger modal -->
 
     <!-- jQuery -->
     <script>var DATA = JSON.parse('{% raw config %}') ; console.log(DATA)</script>
