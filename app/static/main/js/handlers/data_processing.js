@@ -90,8 +90,13 @@ function HandlerState(value) {
       }
   }
 }
-function Processing_logs() {
-    //message-text
+function Processing_logs(data) {
+    "use strict";
+    var full_logs = $('#message-text').text() || '';
+    for (var ind in data.logs){
+        full_logs += data.logs[ind] + '\n';
+    }
+    $('#message-text').text(full_logs);
 }
 function CurrentEvent(value) {
     "use strict";
@@ -101,7 +106,10 @@ function CurrentEvent(value) {
     if (value.state){
         HandlerState(value);
     }
-};
+    if (value.logs){
+        Processing_logs(value);
+    }
+}
 
 function PositionUpdate(value) {
     "use strict";
@@ -125,5 +133,9 @@ function ProcessingData(data) {
             break;
         case 'current':
             CurrentEvent(data.data);
+            break;
+        case 'history':
+            Processing_logs(data.data);
+
     }
 }
