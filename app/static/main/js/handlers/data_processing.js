@@ -82,6 +82,7 @@ function HandlerState(value) {
       $('#status_print').text(rus_state);
   }
   else {
+      Apps.Printer._state = state;
       $('#status_print').text(rus_state);
       PrinterState(rus_state);
       global.global_state = state;
@@ -93,10 +94,14 @@ function HandlerState(value) {
 function Processing_logs(data) {
     "use strict";
     var full_logs = $('#message-text').text() || '';
+    if (full_logs.length > 8000){
+        full_logs = full_logs.substr(full_logs.length-5000);
+    }
     for (var ind in data.logs){
         full_logs += data.logs[ind] + '\n';
     }
     $('#message-text').text(full_logs);
+    $('#message-text').animate({ scrollTop: $('#message-text')[0].selectionStart }, "slow");
 }
 function CurrentEvent(value) {
     "use strict";
@@ -107,17 +112,10 @@ function CurrentEvent(value) {
         HandlerState(value);
     }
     if (value.logs){
-        Processing_logs(value);
+        Apps.logs.update(value);
     }
 }
 
-function PositionUpdate(value) {
-    "use strict";
-    $('#coorX').text(value.payload.x);
-    $('#coorY').text(value.payload.y);
-    $('#coorZ').text(value.payload.z);
-    $('#coorE').text(value.payload.e);
-}
 function ProcessingData(data) {
     "use strict";
     console.log(data);
@@ -125,7 +123,7 @@ function ProcessingData(data) {
         case 'event':
             switch (data.data.type){
                 case 'PositionUpdate':
-                    PositionUpdate(data.data);
+                    Apps._position.update(data.data);
                     break;
                 default:
                     console.log("Untracked event - ", data);
@@ -135,7 +133,8 @@ function ProcessingData(data) {
             CurrentEvent(data.data);
             break;
         case 'history':
-            Processing_logs(data.data);
+            Apps.logs.update(data.data);
+        //case ''
 
     }
 }

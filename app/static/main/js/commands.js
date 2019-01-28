@@ -39,32 +39,32 @@ function PrintObject(data) {
     console.log(strobj);
 }
 /*****Connect Octoprint Serve ******/
-function ConnectPrinter() {
+/*function ConnectPrinter() {
     var setting = CopyObjects(settings);
     setting.async = true;
     setting.url = URL + "/api/connection";
     setting.data = '{"command": "connect"}';
-    setting.error = function (response) {
-      console.log('error->', setting.url, response);
+    setting.error = function () {
+      App.is_connect_server = false;
     };
-    setting.success = function (response) {
-        is_connect_printer = true;
-        console.log(response);
+    setting.success = function () {
+        App.is_connect_server = true;
     };
     $.ajax(setting).done(function (response) {
         console.log(setting, response);
     });
-}
-var SetTemperature_bed = function (temper) {
-    var command = '{"command": "target", "target":' +  temper + '}';
+}*/
+
+function SetTemperature_bed(temper) {
+    var command = '{"command": "target", "target":' + temper + '}';
     settings.url = URL + '/api/printer/bed';
     settings.data = command;
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+}
 
-var SetTemperature_tool = function (temper) {
+function SetTemperature_tool(temper) {
     var setting = CopyObjects(settings);
     var command = '{"command": "target", "targets": {"tool0":' + temper + '}}';
     setting.url = URL + '/api/printer/tool';
