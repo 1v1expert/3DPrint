@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-PORT = 5002
+PORT = 5001
 cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo="
 CONFIG = {
 	"BaseUrl": "http://localhost:5000",
@@ -18,6 +18,10 @@ translate_state = {
 	"Offline": "Принтер отключен"
 }
 Definition = {
+	"OffsetZ": {
+		"StepChange": 0.05,
+		"Command": "M206"
+	},
 	"Extrude": 5,
 	"Target": 300
 }
@@ -38,8 +42,8 @@ buttons = {
 				"command": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]
 			},
 			{
-				"name": "M999",
-				"command": "M999",
+				"name": "M500",
+				"command": "M500",
 			}
 		],
 	"Aditional": []

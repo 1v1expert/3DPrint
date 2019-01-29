@@ -91,18 +91,6 @@ function HandlerState(value) {
       }
   }
 }
-function Processing_logs(data) {
-    "use strict";
-    var full_logs = $('#message-text').text() || '';
-    if (full_logs.length > 8000){
-        full_logs = full_logs.substr(full_logs.length-5000);
-    }
-    for (var ind in data.logs){
-        full_logs += data.logs[ind] + '\n';
-    }
-    $('#message-text').text(full_logs);
-    $('#message-text').animate({ scrollTop: $('#message-text')[0].selectionStart }, "slow");
-}
 function CurrentEvent(value) {
     "use strict";
     if (value.temps.length){
@@ -124,6 +112,9 @@ function ProcessingData(data) {
             switch (data.data.type){
                 case 'PositionUpdate':
                     Apps._position.update(data.data);
+                    break;
+                case 'RegisteredMessageReceived':
+                    Apps._offset_position.update(data.data);
                     break;
                 default:
                     console.log("Untracked event - ", data);

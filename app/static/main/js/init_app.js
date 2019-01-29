@@ -18,26 +18,26 @@ $('.js-click-modal').click(function(){
 $('.js-close-modal').click(function(){
   $('.container').removeClass('modal-open');
 });
-var ConfirmPrint = function (location, name_file) {
+function ConfirmPrint(location, name_file) {
     swal({
-            title: "Вы уверены ?",
-            text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#f8b32d",
-            confirmButtonText: "Да, я сделаю это",
-            cancelButtonText: "Нет, не хооочу",
-            closeOnConfirm: true,
-            closeOnCancel: true
-        }, function(isConfirm){
-            if (isConfirm) {
-                StartPrint(location, name_file);
-                $('#maintab').click();
-            } else {
-                swal("Отменено", "А ты послушный :)", "error");
-            }
-        });
-};
+        title: "Вы уверены ?",
+        text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#f8b32d",
+        confirmButtonText: "Да, я сделаю это",
+        cancelButtonText: "Нет, не хооочу",
+        closeOnConfirm: true,
+        closeOnCancel: true
+    }, function (isConfirm) {
+        if (isConfirm) {
+            StartPrint(location, name_file);
+            $('#maintab').click();
+        } else {
+            swal("Отменено", "А ты послушный :)", "error");
+        }
+    });
+}
  /** ***************************************/
 
 var InitApp = function () {

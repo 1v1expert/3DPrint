@@ -8,16 +8,58 @@
 "use strict";
 var is_connect_server = false, is_connect_printer = false;
 var socket = null;
+var def_settings = DATA || {
+    "CONFIG": {
+        "BaseUrl": "http://localhost:5000",
+        "Login": "vladdos",
+        "Password": "@WSX2wsx123",
+        "Apikey": "5C761F424E5E46EE934DE9F683609B66"
+    },
+    "translate_state": {
+        "Operational": "Готов к печати",
+        "Printing": "Идёт печать",
+        "Paused": "Печать приостановлена",
+        "Pausing": "В режиме паузы",
+        "Error": "Ошибка",
+        "Cancelling": "Печать отменена",
+        "Offline": "Принтер отключен"
+    },
+    "Definition": {
+        "OffsetZ": {
+            "StepChange": 0.05,
+            "Command": "M206"
+        },
+        "Extrude": 5,
+        "Target": 300
+    },
+    "Temp": {
+        "PLA": {"Bed": 70, "Tool": 200},
+        "ABS": {"Bed": 70, "Tool": 200},
+        "Default": {"Bed": 72, "Tool": 201}
+    },
+    "buttons":
+        {
+            "OnPause": "M600",
+            "CancPause": "M601",
+            "OffsetZ": "M206",
+            "General": [],
+            "Aditional": []
+        }
+};
 var Apps = {
+    init: function () {
+        // Including buttons from configuration
+        for (var i in DATA.buttons.General) {
+            var command = DATA.buttons.General[i].command;
+            $("#system_commands").append('<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' +
+                DATA.buttons.General[i].name + '</a></li>');
+        }
+        // End filling
+    },
     PlayCommand: function (command) {
         OctoPrint.control.sendGcode(command);
     },
-    init: function () {
-        for (var i in DATA.buttons.General) {
-            var command = DATA.buttons.General[i].command;
-            $("#system_commands").append('<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' + DATA.buttons.General[i].name + '</a></li>');
-        }
-    },
+    _settings: def_settings,
     Printer:
         {
             _state: "",
@@ -53,6 +95,16 @@ var Apps = {
             }
 
         },
+    _offset_position:
+        {
+            _Z: null,
+            update: function (value) {
+                for (var key in value.payload.outputs) {
+                    this._Z = +value.payload.outputs[key];
+                    //console.log('Offset_update - ', value);
+                }
+            }
+        },
     socket: null,
     is_connect_server: false,
     is_connect_printer: false,
@@ -74,21 +126,19 @@ var Apps = {
         }
 };
 var Show_connection_status = function (msg, resp, status) {
-    "use strict";
     $('.label_status').text(msg);
     if (resp === undefined) {
         console.log(status, 'MSG: ' + msg);
     }
     else {
-        console.log(status, 'MSG: ' + msg, 'Response: ',  resp);
+        console.log(status, 'MSG: ' + msg, 'Response: ', resp);
     }
 };
+
 function AuthSocket(name, session) {
-    "use strict";
-    console.log(name, session);
-    setTimeout(function() {
+    setTimeout(function () {
         OctoPrint.socket.sendAuth(name, session);
-        }, 1000);
+    }, 1000);
 }
 function ConnectOctoprint() {
     OctoPrint.options.baseurl = DATA.config.BaseUrl;
@@ -108,6 +158,7 @@ function ConnectOctoprint() {
 
         })
         .error(function (response) {
+            App.is_connect_server = false;
             Show_connection_status('Не запущено ядро приложения ', response, 'error');
             setTimeout(function() {
                 ConnectOctoprint();
