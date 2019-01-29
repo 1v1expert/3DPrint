@@ -55,6 +55,8 @@ $(document).ready(function(){
 	App();
 	InitApp();
 	ConnectOctoprint();
+	Apps.init();
+
 });
 /*****Ready function end*****/
 

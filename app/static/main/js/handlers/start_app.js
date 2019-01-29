@@ -9,9 +9,14 @@
 var is_connect_server = false, is_connect_printer = false;
 var socket = null;
 var Apps = {
-
+    PlayCommand: function (command) {
+        OctoPrint.control.sendGcode(command);
+    },
     init: function () {
-
+        for (var i in DATA.buttons.General) {
+            var command = DATA.buttons.General[i].command;
+            $("#system_commands").append('<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' + DATA.buttons.General[i].name + '</a></li>');
+        }
     },
     Printer:
         {
