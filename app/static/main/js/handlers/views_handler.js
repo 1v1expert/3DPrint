@@ -7,11 +7,53 @@
 */
 "use strict";
 /********/
+/*Offset on Z coordinate module */
+function set_value_position(value) {
+    $('#currentZ').text(value);
+    $('#NewZ').text(value);
+}
+function if_set_position_Z() {
+    if (Apps._position.Z) {
+        set_value_position(Apps._position.Z);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+$('#offsetZ').on('click', function () {
+    GetPosition();
+    if (if_set_position_Z()){
+        GetPosition();
+        if_set_position_Z();
+    }
+    else {
+        GetPosition();
+        setTimeout(function () {if_set_position_Z();}, 2000);
+    }
+});
+$('#down_to_Z').on('click', function () {
+    if ($('#NewZ').text()) {
+        $('#NewZ').text(Math.round(+$('#NewZ').text()) - 1);
+    }
+});
+$('#up_to_Z').on('click', function () {
+    if ($('#NewZ').text()) {
+        $('#NewZ').text(Math.round(+$('#NewZ').text()) + 1);
+    }
+});
+$('#set_offset_z').on('click', function () {
+    if ($('#NewZ').text()) {
+        var command = 'M206 Z' + $('#NewZ').text();
+        OctoPrint.control.sendGcode(command);
+    }
+});
+/* End module offset on Z coordinate module */
 $('#connect').on('click', function () {
    Apps.Printer.ConnectPrinter();
 });
 $('#disconnect').on('click', function () {
-   Apps.Printer.DisconnectPrinter;
+   Apps.Printer.DisconnectPrinter();
 });
 $('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').addClass('active');$('#usbfiles').removeClass('active');GetFiles('sdcard?force=true');});
 //GetFiles("sdcard?recursive=true");});

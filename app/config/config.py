@@ -14,7 +14,8 @@ translate_state = {
 	"Paused": "Печать приостановлена",
 	"Pausing": "В режиме паузы",
 	"Error": "Ошибка",
-	"Cancelling": "Печать отменена"
+	"Cancelling": "Печать отменена",
+	"Offline": "Принтер отключен"
 }
 Definition = {
 	"Extrude": 5,
@@ -27,8 +28,9 @@ Temp = {
 }
 
 buttons = {
-	"OnPause": '{"command": "M600"}',
-	"CancPause": '{"command": "M601"}',
+	"OnPause": "M600",
+	"CancPause": "M601",
+	"OffsetZ": "M206",
 	"General":
 		[
 			{

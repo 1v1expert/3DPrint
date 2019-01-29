@@ -907,6 +907,14 @@
 										<li><a id="calibr">Калибровка</a></li>
 									</ul>
 								</div>
+								<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+									<div alt="default" data-toggle="modal"
+										 data-target="#modaloffsetZ" class="model_img img-responsive">
+										<a class="btn" id="offsetZ"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none; font-size: large">Смещение
+											по Z</a>
+									</div>
+								</div>
 								<!--<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
                                     <a id="restart_software" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 12px 5px; font-size: 12px; border-radius: 10px; text-transform: none">Рестарт приложения</a>
                                 </div>
@@ -1089,7 +1097,7 @@
 					</div>
 					<div class="col-sm-2">
 						<div alt="default" data-toggle="modal" style="    padding-top: 11px;"
-							 data-target=".bs-example-modal-lg" class="model_img img-responsive">
+							 data-target="#stack-trace" class="model_img img-responsive">
 							<i class="fa fa-spin fa-gear"></i> <span class="text-muted"></span>
 						</div>
 					</div>
@@ -1213,9 +1221,8 @@
                 </div>
 
 				<!-- footer -->
-
-<!-- sample modal content -->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<!-- Offset on Z modal content -->
+<div id="stack-trace" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 	 aria-hidden="true" style="display: none;">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
@@ -1227,6 +1234,60 @@
 				<div class="form-group">
 					<label for="message-text" class="control-label mb-10">Message:</label>
 					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Offset on Z modal content -->
+<div id="modaloffsetZ" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabel">Корректировка</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="table-responsive">
+						<table class="table-condensed" style="text-align: center;">
+							<thead>
+							<tr>
+								<th><a>Current Z</a></th>
+								<th><a>New Z</a></th>
+								<th style="text-align: center;font-weight: 900;"><a>Up</a></th>
+								<th style="text-align: center;font-weight: 900;"><a>Down</a></th>
+								<th style="text-align: center;font-weight: 900;"><a>Set value</a></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td style="font-weight: 900;font-size: 19px;" id="currentZ">ss
+								</td>
+								<td style="color: #a23028;font-weight: 900;font-size: 19px;" id="NewZ">ss
+								</td>
+								<td><a id="up_to_Z" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
+								</td>
+								<td><a id="down_to_Z" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-down" style="font-size: x-large;"></span></a>
+								</td>
+								<td><a id="set_offset_z" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--<label for="message-text" class="control-label mb-10">Message:</label>
+					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
 				</div>
 			</div>
 

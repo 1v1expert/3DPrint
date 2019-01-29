@@ -26,7 +26,11 @@ class Application(tornado.web.Application):
 
 class RootHandler(tornado.web.RequestHandler):
 	def get(self):
-		FullData = dict(config=config.CONFIG, Definition=config.Definition)
+		FullData = dict(
+			config=config.CONFIG,
+			Definition=config.Definition,
+			buttons=config.buttons,
+			tranlate=config.translate_state)
 		self.render("template/index.html", title="3dprint server", config=json.dumps(FullData))
 
 def main():
