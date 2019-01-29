@@ -62,7 +62,25 @@ var Apps = {
     _settings: def_settings,
     Printer:
         {
+            MonitorState: function (state) {
+                switch (state){
+                    case 'Operational':
+                        this._state = state;
+                        this._rus_state = Apps._settings.translate_state[state];
+                        this._is_connect_printer = true;
+                        //this._is_connect_printer_octo = true;
+                        break;
+                    case 'Offline':
+                        this._state = state;
+                        this._rus_state = this._settings.translate_state[state];
+                        this._is_connect_printer = false;
+                        break;
+                    default:
+                        console.log('Untracked state: ', state);
+                }
+            },
             _state: "",
+            _rus_state: "",
             ConnectPrinter: function () {
                 //this._state_printer = "connected";
                 OctoPrint.connection.connect();
@@ -71,7 +89,7 @@ var Apps = {
                 //this._state_printer = "disconnected";
                 OctoPrint.connection.disconnect();
             },
-            _is_connect_printer: null,
+            _is_connect_printer: false,
             _is_connect_printer_octo: null
         },
     _position:
@@ -107,7 +125,7 @@ var Apps = {
         },
     socket: null,
     is_connect_server: false,
-    is_connect_printer: false,
+    //is_connect_printer: false,
     logs:
         {
             array: "",
@@ -152,13 +170,13 @@ function ConnectOctoprint() {
             Apps.Printer.ConnectPrinter();
             //ConnectPrinter();
             OctoPrint.socket.onMessage("*", function(message) {
-                App.is_connect_server = true;
+                Apps.is_connect_server = true;
                 ProcessingData(message);
             });
 
         })
         .error(function (response) {
-            App.is_connect_server = false;
+            Apps.is_connect_server = false;
             Show_connection_status('Не запущено ядро приложения ', response, 'error');
             setTimeout(function() {
                 ConnectOctoprint();

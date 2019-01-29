@@ -116,6 +116,15 @@ function ProcessingData(data) {
                 case 'RegisteredMessageReceived':
                     Apps._offset_position.update(data.data);
                     break;
+                case 'PrinterStateChanged':
+                    Apps.Printer.MonitorState(data.data.payload.state_string);
+                    break;
+                case 'Disconnecting':
+                    console.log('Disconnecting');
+                    break;
+                case 'Disconnected':
+                    console.log('Disconnected');
+                    break;
                 default:
                     console.log("Untracked event - ", data);
             }
