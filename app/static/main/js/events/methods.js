@@ -5,32 +5,13 @@
    __copyright__ = 'Copyright (C) 2018 VLADDOS'
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
-var GetPosition = function () {
-    "use strict";
-    console.log('Get position');
-    //M306 Z0 \n G28 \n M500
-    var command = '{"commands": ["M114"]}';
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
-        "method": "POST",
-        "headers": {
-            "x-api-key": ActiveApi,
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-        },
-        "processData": false,
-        "data": command,
-        "success": function(response) {
-            console.log(response + ' -- success get response position');
-            },
-        "error": function(response) {
-            console.log(response + " - Error get response position");
-        }};
-    $.ajax(settings).done(function (response) {console.log(response);});
-};
-var Stopprint= function () {
+"use strict";
+function GetPosition() {
+    Apps.PlayCommand("M114")
+        .done('Success execute command: M114')
+        .error('Error execute command: M114');
+}
+function Stopprint() {
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -41,27 +22,23 @@ var settings = {
 	  "content-type": "application/json",
 	  "cache-control": "no-cache"
   },
-  "processData": false,
-  "data": '{"command": "cancel"}',
-  "success": function(response) {
-  	//alert(response);
-	  console.log(response + ' -- success stoping print');
-	  //Connected();
-	  },
-  "error": function(response) {
-  	//CheckedConnect(30);
-  	console.log(response + " - Error stopping print");
-  	//$('.label_status').text('не удалось подключиться');
-  	//var status = document.getElementById("status");
-  	//status.innerText = "Не удалось подключиться";
-                }
+    "processData": false,
+    "data": '{"command": "cancel"}',
+    "success": function (response) {
+        //alert(response);
+        console.log(response + ' -- success stoping print');
+        //Connected();
+    },
+    "error": function (response) {
+        //CheckedConnect(30);
+        console.log(response + " - Error stopping print");
+    }
 };
 $.ajax(settings).done(function (response) {
     console.log(response);
 });
-};
+}
 function Calibrate() {
-    "use strict";
     var command = '{"commands": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]}';
     var settings = {
         "async": true,
@@ -85,9 +62,8 @@ function Calibrate() {
     $.ajax(settings).done(function (response) {
         console.log(response);
     });
-};
+}
 function RestartSoftware() {
-    "use strict";
     OctoPrint.system.executeCommand('core', 'restart')
         .done('Success execute command: restart touchui')
         .error('Error execute command: restart touchui');
@@ -95,34 +71,11 @@ function RestartSoftware() {
         function(){Apps.Printer.ConnectPrinter();},
         5000);
 }
-var Reset_plate= function () {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/custom/reset_pl",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  //"data": '{"command": "reset_pl"}',
-  "success": function(response) {
-
-	  console.log(response + ' -- success reset plate');
-
-	  },
-  "error": function(response) {
-
-  	console.log(response + " - Error stopping print");
-
-                }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
+function Reset_plate() {
+    OctoPrint.system.executeCommand('custom', 'reset_pl')
+        .done('Success execute command: restart touchui')
+        .error('Error execute command: restart touchui');
+}
 var M999 = function () {
     var command4 = '{"command": "M999"}';
     var settings = {
