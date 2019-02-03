@@ -50,6 +50,11 @@ var InitApp = function () {
 	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
 };
+$(window).load(function() {
+  $('a.btn').click(function() {
+    $(this).toggleClass("active");
+  });
+});
 /*****Ready function start*****/
 $(document).ready(function(){
 	App();

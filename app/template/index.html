@@ -17,6 +17,7 @@
 	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 	<link href="{{ static_url('main/css/style.css') }}" rel="stylesheet" type="text/css">
 	<!--<link href="main/css/style.css" rel="stylesheet" type="text/css">-->
+	<!--<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
 	<style>
 		.file-name {
 			text-overflow: clip;
@@ -331,6 +332,79 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	/* new sty;e for buttons */
+	@media (min-width: 768px) {
+		.modal-dialog {
+			width: max-content;
+		}
+	}
+	.form-control {
+		background-color: #06151E;
+	}
+	.modal-dialog .modal-content {
+		background-color: #06151E;
+	}
+
+	@import url(https://fonts.googleapis.com/css?family=Lato:100);
+
+	.fanbtn {
+		padding: 40px 30px 30px 30px;
+		margin: 0 1px 0 0;
+		text-decoration: none;
+		text-align: center;
+		color: #7f8c8d;
+		cursor: pointer;
+		background: #2c3e50;
+		border-bottom: 10px solid #34495e;
+		transition-property: border-bottom .6s linear 0s;
+		-moz-transition: border-bottom .6s linear 0s;
+		-webkit-transition: border-bottom .6s linear 0s;
+		-o-transition: border-bottom .6s linear 0s;
+		font-size: 25px;
+	}
+
+	.fanbtn.active {
+		border-bottom: 10px solid #50c4e3;
+		color: #50c4e3;
+	}
+
+	.button-group-navigation li {
+		display: inline-block;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		zoom: 1;
+		background: #7f8c8d;
+	}
+
+	.button-group-navigation li .fanbtn {
+		float: left;
+		margin-left: -4px;
+	}
+
+	.button-group-navigation > .fanbtn:first-child,
+	.button-group-navigation li:first-child .fanbtn {
+		margin-left: 0;
+		-webkit-border-top-left-radius: 3px;
+		-webkit-border-bottom-left-radius: 3px;
+		-moz-border-radius-topleft: 3px;
+		-moz-border-radius-bottomleft: 3px;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+
+	.button-group-navigation > .fanbtn:last-child,
+	.button-group-navigation li:last-child > .fanbtn {
+		margin-right: 0;
+		-webkit-border-top-right-radius: 3px;
+		-webkit-border-bottom-right-radius: 3px;
+		-moz-border-radius-topright: 3px;
+		-moz-border-radius-bottomright: 3px;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+
+	/* New style for buttons */
 	.dropdown-menu {
 		position: relative !important;
 	}
@@ -485,7 +559,7 @@
 												<label id="degres_3"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<div class="col-sm-4 mb-15">
+										<div class="col-sm-4 mb-15" data-target="#fanbox" data-toggle="modal">
 											<span class="skill-head mb-20">вентилятор</span>
 											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="0">
 												<span class="degreess  percents degrees head-font">0</span>
@@ -1241,7 +1315,7 @@
 <!-- Offset on Z modal content -->
 <div id="stack-trace" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 	 aria-hidden="true" style="display: none;">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-lg" style="width: 600px">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1305,6 +1379,33 @@
 					</div>
 					<!--<label for="message-text" class="control-label mb-10">Message:</label>
 					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Offset on Z modal content -->
+<div id="fanbox" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" style="    width: max-content;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title">Управление вентилятором</h5>
+			</div>
+			<div class="modal-body" style="text-align: center;padding: 0;">
+				<div class="form-group" style="padding: 0;">
+					<!-- New buttons -->
+					<div class="button-group-navigation" target="_blank">
+						<li><a class=" btn fanbtn" href="#">0%</a></li>
+						<li><a class="btn fanbtn" href="#">50%</a></li>
+						<li><a class="btn fanbtn" href="#">100%</a></li>
+					</div>
+				<!-- end buttons -->
 				</div>
 			</div>
 
