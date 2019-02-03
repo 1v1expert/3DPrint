@@ -12,56 +12,18 @@ function GetPosition() {
         .error('Error execute command: M114');
 }
 function Stopprint() {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/job",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-    "processData": false,
-    "data": '{"command": "cancel"}',
-    "success": function (response) {
-        //alert(response);
-        console.log(response + ' -- success stoping print');
-        //Connected();
-    },
-    "error": function (response) {
-        //CheckedConnect(30);
-        console.log(response + " - Error stopping print");
-    }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
+    OctoPrint.job.cancel()
+        .done(function (response) {
+            console.log('Done cancel print', response);
+        })
+        .error(function (response) {
+            console.log('Error cancel print', response);
+        });
 }
 function Calibrate() {
-    var command = '{"commands": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]}';
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
-        "method": "POST",
-        "headers": {
-            "x-api-key": ActiveApi,
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": command,
-  "success": function(response) {
-	  console.log(response + ' -- success send command to calibrate');
-	  },
-  "error": function(response) {
-      console.log(response + " - Error send command to calibrate");
-  }
-};
-    $.ajax(settings).done(function (response) {
-        console.log(response);
-    });
+    Apps.PlayCommand(["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"])
+        .done('Success execute command: calibrate')
+        .error('Error execute command: calibrate');
 }
 function RestartSoftware() {
     OctoPrint.system.executeCommand('core', 'restart')
@@ -73,65 +35,20 @@ function RestartSoftware() {
 }
 function Reset_plate() {
     OctoPrint.system.executeCommand('custom', 'reset_pl')
-        .done('Success execute command: restart touchui')
-        .error('Error execute command: restart touchui');
+        .done('Success execute command: reset plate')
+        .error('Error execute command: reset plate');
 }
-var M999 = function () {
-    var command4 = '{"command": "M999"}';
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "http://127.0.0.1:" + ActivePort + "/api/printer/command",
-        "method": "POST",
-        "headers": {
-            "x-api-key": ActiveApi,
-            "content-type": "application/json",
-            "cache-control": "no-cache"
-  },
-  "processData": false,
-  "data": command4,
-  "success": function(response) {
-	  console.log(response + ' -- success send M999');
-	  },
-  "error": function(response) {
-      console.log(response + " - Error send M999 command");
-  }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
-var RestartPlatform= function () {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/core/reboot",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  "success": function(response) {
-  	//alert(response);
-	  console.log(response + ' -- response');
-	  //Connected();
-	  },
-  "error": function(response) {
-  	//CheckedConnect(30);
-  	console.log(response + " - Error get response");
-  	//$('.label_status').text('не удалось подключиться');
-  	//var status = document.getElementById("status");
-  	//status.innerText = "Не удалось подключиться";
-                }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
-var PrintHead = function (command) {
-    "use strict";
+function M999() {
+    Apps.PlayCommand("M999")
+        .done('Success execute command: M999')
+        .error('Error execute command: M999');
+}
+function RestartPlatform() {
+    OctoPrint.system.executeCommand('core', 'reboot')
+        .done('Success execute command: reset plate')
+        .error('Error execute command: reset plate');
+}
+function PrintHead(command) {
 var settings = {
   "async": true,
   "crossDomain": true,
@@ -154,18 +71,15 @@ var settings = {
 $.ajax(settings).done(function (response) {
     console.log(response);
 });
-};
-
-var StartPrint = function (location, name_file) {
-    "use strict";
+}
+function StartPrint(location, name_file) {
     OctoPrint.files.select(location, decodeURI(name_file), true)
         .done(function (response) {
             console.log(response);
         });
     console.log(location, name_file);
-};
-var GetFiles = function (url) {
-    "use strict";
+}
+function GetFiles(url) {
     var data_html = "";
     OctoPrint.files.listForLocation(url, true)
         .done(function(response) {
@@ -194,4 +108,4 @@ var GetFiles = function (url) {
                     $('#rowfiles').html(data_html);
                 }}
     });
-};
+}
