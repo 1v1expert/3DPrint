@@ -72,7 +72,7 @@ var Apps = {
                         break;
                     case 'Offline':
                         this._state = state;
-                        this._rus_state = this._settings.translate_state[state];
+                        this._rus_state = Apps._settings.translate_state[state];
                         this._is_connect_printer = false;
                         break;
                     default:

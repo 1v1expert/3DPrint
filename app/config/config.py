@@ -15,7 +15,8 @@ translate_state = {
 	"Pausing": "В режиме паузы",
 	"Error": "Ошибка",
 	"Cancelling": "Печать отменена",
-	"Offline": "Принтер отключен"
+	"Offline": "Принтер отключен",
+	"Connecting": "Подключение"
 }
 Definition = {
 	"OffsetZ": {

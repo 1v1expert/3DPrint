@@ -5,6 +5,10 @@
    __copyright__ = 'Copyright (C) 2018 VLADDOS'
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
+
+// Get all commands from system:
+// OctoPrint.system.getCommands().done(function(response){console.log(response)})
+
 "use strict";
 var ActivePort = 5000;
 var ActiveApi = "5C761F424E5E46EE934DE9F683609B66";
@@ -55,6 +59,12 @@ function PrintObject(data) {
     });
 }*/
 
+function Restart_touchui() {
+    OctoPrint.system.executeCommand('custom', 'restart_touchui')
+        .done('Success execute command: restart touchui')
+        .error('Error execute command: restart touchui');
+}
+
 function SetTemperature_bed(temper) {
     var command = '{"command": "target", "target":' + temper + '}';
     settings.url = URL + '/api/printer/bed';
@@ -69,11 +79,12 @@ function SetTemperature_tool(temper) {
     var command = '{"command": "target", "targets": {"tool0":' + temper + '}}';
     setting.url = URL + '/api/printer/tool';
     setting.data = command;
-$.ajax(setting).done(function (response) {
-    console.log(response);
-});
-};
-var SystemTrigeredPrint= function () {
+    $.ajax(setting).done(function (response) {
+        console.log(response);
+    });
+}
+
+var SystemTrigeredPrint = function () {
     var setting = settings;
     setting.url = URL + "/api/job";
     setting.method = "POST";
@@ -92,8 +103,8 @@ var SystemTrigeredPrint= function () {
     }
     console.log(setting);
     $.ajax(setting).done(function (response) {
-    console.log('Done-->', response);
-});
+        console.log('Done-->', response);
+    });
 };
 var TrigeredPrint = function () {
     var setting = CopyObjects(settings);
