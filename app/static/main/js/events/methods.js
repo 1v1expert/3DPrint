@@ -86,35 +86,15 @@ function Calibrate() {
         console.log(response);
     });
 };
-var RestartSoftware= function () {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "http://127.0.0.1:" + ActivePort + "/api/system/commands/core/restart",
-  "method": "POST",
-  "headers": {
-  	"x-api-key": ActiveApi,
-	  "content-type": "application/json",
-	  "cache-control": "no-cache"
-  },
-  "processData": false,
-  "success": function(response) {
-  	//alert(response);
-	  console.log(response + ' -- response');
-	  //Connected();
-	  },
-  "error": function(response) {
-  	//CheckedConnect(30);
-  	console.log(response + " - Error get response");
-  	//$('.label_status').text('не удалось подключиться');
-  	//var status = document.getElementById("status");
-  	//status.innerText = "Не удалось подключиться";
-                }
-};
-$.ajax(settings).done(function (response) {
-    console.log(response);
-});
-};
+function RestartSoftware() {
+    "use strict";
+    OctoPrint.system.executeCommand('core', 'restart')
+        .done('Success execute command: restart touchui')
+        .error('Error execute command: restart touchui');
+    setTimeout(
+        function(){Apps.Printer.ConnectPrinter();},
+        5000);
+}
 var Reset_plate= function () {
 var settings = {
   "async": true,
