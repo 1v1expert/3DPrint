@@ -45,6 +45,7 @@ var InitApp = function () {
 	$('#pie_chart_1').data('easyPieChart').update(0);
 	$('#degres_1').text('/' + DATA.Definition.Target + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
+	$('#pie_chart_34').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + DATA.Definition.Target + '°');
 	$('#progress').html('');
 	$('#t_board').text(String(Temp.Default.Bed));
@@ -52,13 +53,13 @@ var InitApp = function () {
 };
 $(window).load(function() {
   $('a.fanbtn').click(function() {
+  	$('a.fanbtn.active').removeClass("active");
   	$(this).toggleClass("active");
-  	// for (var bb in $('a.fanbtn')){
-  	// 	$(bb).removeClass("active");
-	// }
+  	var percents = $(this).text().substr(0, $(this).text().length-1);
   	Apps.PlayCommand($(this).attr('data'));
+  	$('#pie_chart_34').find('.percents').text(percents);
+  	$('#pie_chart_34').data('easyPieChart').update(+percents);
   	console.log($(this).attr('data'));
-
   });
 });
 /*****Ready function start*****/
