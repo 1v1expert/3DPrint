@@ -51,8 +51,14 @@ var InitApp = function () {
   	$('#t_tool').text(String(Temp.Default.Tool));
 };
 $(window).load(function() {
-  $('a.btn').click(function() {
-    $(this).toggleClass("active");
+  $('a.fanbtn').click(function() {
+  	$(this).toggleClass("active");
+  	// for (var bb in $('a.fanbtn')){
+  	// 	$(bb).removeClass("active");
+	// }
+  	Apps.PlayCommand($(this).attr('data'));
+  	console.log($(this).attr('data'));
+
   });
 });
 /*****Ready function start*****/
