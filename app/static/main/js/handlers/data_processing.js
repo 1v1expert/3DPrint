@@ -70,7 +70,7 @@ var ShowPrintInfo = function (info) {
 function HandlerState(value) {
   "use strict";
   var state = value.state.text;
-  var rus_state = (translate_state[state]) ? translate_state[state]: state;
+  var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state]: state;
   if (state === 'Printing') {
       ShowPrintInfo(value);
   }
