@@ -22,7 +22,8 @@ var def_settings = DATA || {
         "Pausing": "В режиме паузы",
         "Error": "Ошибка",
         "Cancelling": "Печать отменена",
-        "Offline": "Принтер отключен"
+        "Offline": "Принтер отключен",
+        "Printing from SD": "Печать с SD карты"
     },
     "Definition": {
         "MainTool": "tool0",

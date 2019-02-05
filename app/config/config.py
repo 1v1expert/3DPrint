@@ -16,7 +16,8 @@ translate_state = {
 	"Error": "Ошибка",
 	"Cancelling": "Печать отменена",
 	"Offline": "Принтер отключен",
-	"Connecting": "Подключение"
+	"Connecting": "Подключение",
+	"Printing from SD": "Печать с SD карты"
 }
 Definition = {
 	"MainTool": "tool0",
