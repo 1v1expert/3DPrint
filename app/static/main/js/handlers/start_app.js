@@ -25,6 +25,7 @@ var def_settings = DATA || {
         "Offline": "Принтер отключен"
     },
     "Definition": {
+        "MainTool": "tool0",
         "OffsetZ": {
             "StepChange": 0.05,
             "Command": "M206"

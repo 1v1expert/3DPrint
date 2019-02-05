@@ -19,6 +19,7 @@ translate_state = {
 	"Connecting": "Подключение"
 }
 Definition = {
+	"MainTool": "tool0",
 	"OffsetZ": {
 		"StepChange": 0.05,
 		"Command": "M206"
@@ -56,7 +57,7 @@ buttons = {
 			},
 			{
 				"name": "ВЫКЛ Нагрев",
-				"command": ["M104 S0","M140 S0"],
+				"command": ["M104 S0", "M140 S0"],
 			},
 			{
 				"name": "Высота 10мм",

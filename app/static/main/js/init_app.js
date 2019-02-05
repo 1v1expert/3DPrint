@@ -50,6 +50,7 @@ var InitApp = function () {
 	$('#progress').html('');
 	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
+  	$('#nozzle').text(Apps._settings.Definition.MainTool);
 };
 $(window).load(function() {
   $('a.fanbtn').click(function() {
