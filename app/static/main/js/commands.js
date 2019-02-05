@@ -112,5 +112,6 @@ function TrigeredPrint() {
     if (Apps.Printer._state === 'Pausing' || Apps.Printer._state === 'Paused') {
         command = Apps._settings.buttons.CancPause;
     }
+    console.log(command);
     Apps.PlayCommand(command);
 }
