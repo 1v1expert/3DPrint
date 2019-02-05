@@ -56,6 +56,7 @@ $(window).load(function() {
   $('a.toolbtn').click(function() {
       $('a.toolbtn.active').removeClass("active");
       $(this).toggleClass("active");
+
   });
 });
 //Managment fan buttons

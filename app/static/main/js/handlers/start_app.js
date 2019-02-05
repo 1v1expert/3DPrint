@@ -55,6 +55,7 @@ var Apps = {
             $("#system_commands").append('<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' +
                 DATA.buttons.General[i].name + '</a></li>');
         }
+        Apps.Printer.Tool._active_tool = Apps._settings.Definition.MainTool;
         // End filling
     },
     PlayCommand: function (command) {
@@ -80,6 +81,13 @@ var Apps = {
                         console.log('Untracked state: ', state);
                 }
             },
+            Tool: {
+                _active_tool: "",
+                changeTool: function (tool) {
+                    console.log(tool);
+                }
+            },
+
             _state: "",
             _rus_state: "",
             ConnectPrinter: function () {
