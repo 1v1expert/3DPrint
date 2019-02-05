@@ -347,6 +347,7 @@
 
 	@import url(https://fonts.googleapis.com/css?family=Lato:100);
 
+    .toolbtn,
 	.fanbtn {
 		padding: 40px 30px 30px 30px;
 		margin: 0 1px 0 0;
@@ -363,6 +364,7 @@
 		font-size: 25px;
 	}
 
+    .toolbtn.active,
 	.fanbtn.active {
 		border-bottom: 10px solid #50c4e3;
 		color: #50c4e3;
@@ -377,11 +379,13 @@
 		background: #7f8c8d;
 	}
 
+    .button-group-navigation li .toolbtn,
 	.button-group-navigation li .fanbtn {
 		float: left;
 		margin-left: -4px;
 	}
-
+    .button-group-navigation > .toolbtn:first-child,
+	.button-group-navigation li:first-child .toolbtn,
 	.button-group-navigation > .fanbtn:first-child,
 	.button-group-navigation li:first-child .fanbtn {
 		margin-left: 0;
@@ -1446,8 +1450,8 @@
 				<div class="form-group" style="padding: 0;">
 					<!-- New buttons -->
 					<div class="button-group-navigation" target="_blank">
-						<li><a class="btn fanbtn" href="#" data="tool0">tool0</a></li>
-						<li><a class="btn fanbtn" href="#" data="tool1">tool1</a></li>
+						<li><a class="btn toolbtn" href="#" data="tool0">tool0</a></li>
+						<li><a class="btn toolbtn" href="#" data="tool1">tool1</a></li>
 					</div>
 				<!-- end buttons -->
 				</div>

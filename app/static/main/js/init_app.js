@@ -53,6 +53,13 @@ var InitApp = function () {
   	$('#nozzle').text(Apps._settings.Definition.MainTool);
 };
 $(window).load(function() {
+  $('a.toolbtn').click(function() {
+      $('a.toolbtn.active').removeClass("active");
+      $(this).toggleClass("active");
+  });
+});
+//Managment fan buttons
+$(window).load(function() {
   $('a.fanbtn').click(function() {
   	$('a.fanbtn.active').removeClass("active");
   	$(this).toggleClass("active");
