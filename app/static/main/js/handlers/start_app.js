@@ -84,7 +84,11 @@ var Apps = {
             Tool: {
                 _active_tool: "",
                 changeTool: function (tool) {
-                    console.log(tool);
+                    $('#nozzle').text(tool);
+                    this._active_tool = tool;
+                    OctoPrint.printer.selectTool(tool)
+                        .done(function(response) {console.log(response);});
+                    //console.log(tool);
                 }
             },
 

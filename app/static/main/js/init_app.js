@@ -56,7 +56,8 @@ $(window).load(function() {
   $('a.toolbtn').click(function() {
       $('a.toolbtn.active').removeClass("active");
       $(this).toggleClass("active");
-
+      Apps.Printer.Tool.changeTool($(this).text());
+      //console.log($(this).text());
   });
 });
 //Managment fan buttons
@@ -68,7 +69,7 @@ $(window).load(function() {
   	Apps.PlayCommand($(this).attr('data'));
   	$('#pie_chart_34').find('.percents').text(percents);
   	$('#pie_chart_34').data('easyPieChart').update(+percents);
-  	console.log($(this).attr('data'));
+  	//console.log($(this).attr('data'));
   });
 });
 /*****Ready function start*****/
