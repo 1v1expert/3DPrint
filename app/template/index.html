@@ -868,7 +868,8 @@
                                             <thead>
                                             <th><a style="font-weight: 900;font-size: 18px;">Главное сопло: </a></th>
                                             <th><a id="nozzle" style="font-weight: 900;font-size: 18px;"></a></th>
-                                            <th><a class="btn" id="change_tools"
+                                            <th><a class="btn" data-toggle="modal"
+										 data-target="#toolbox" id="change_tools"
                                                    style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">изменить</a>
                                             </th>
                                             </thead>
@@ -1421,6 +1422,32 @@
 						<li><a class="btn fanbtn" href="#" data="M107">0%</a></li>
 						<li><a class="btn fanbtn" href="#" data="M106 S128">50%</a></li>
 						<li><a class="btn fanbtn" href="#" data="M106 S255">100%</a></li>
+					</div>
+				<!-- end buttons -->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Change tool on modal content -->
+<div id="toolbox" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" style="width: max-content;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title">Управление соплом</h5>
+			</div>
+			<div class="modal-body" style="text-align: center;padding: 0;">
+				<div class="form-group" style="padding: 0;">
+					<!-- New buttons -->
+					<div class="button-group-navigation" target="_blank">
+						<li><a class="btn fanbtn" href="#" data="tool0">tool0</a></li>
+						<li><a class="btn fanbtn" href="#" data="tool1">tool1</a></li>
 					</div>
 				<!-- end buttons -->
 				</div>
