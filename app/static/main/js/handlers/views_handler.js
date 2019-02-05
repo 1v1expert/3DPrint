@@ -183,19 +183,30 @@ $('#restart_touchui').on('click', function () {
     Restart_touchui();
 });
 /********/
-$('#extrude_1').on('click', function () {
-    Extrude("tool0", String(Definition.Extrude));
-}
-);
-$('#retruct_1').on('click', function () {
-    Extrude("tool0", -String(Definition.Extrude));
+$('#extract').on('click', function () {
+    Apps.PlayCommand(["M109 S200", "G91", "G1 E15 F200", "G1 E-80 F200", "G1 E-390 F4000"]);
+    //Extrude("tool0", String(Definition.Extrude));
+
 });
-$('#extrude_2').on('click', function () {
-    Extrude("tool1", String(Definition.Extrude));
+$('#download').on('click', function () {
+    Apps.PlayCommand(["M109 S230", "G91", "G1 E30 F150", "G1 E280 F700", "G1 E100 F150"]);
+    //Extrude("tool0", -String(Definition.Extrude));
 });
-$('#retruct_2').on('click', function () {
-    Extrude("tool1", -String(Definition.Extrude));
+$('#extrude').on('click', function () {
+    OctoPrint.printer.extrude(5.0)
+    .done(function(response) {
+        console.log(response);
+    });
+    //Extrude("tool1", String(Definition.Extrude));
 });
+$('#retruct').on('click', function () {
+    OctoPrint.printer.extrude(-5.0)
+    .done(function(response) {
+        console.log(response);
+    });
+    //Extrude("tool1", -String(Definition.Extrude));
+});
+/*********/
 $('#PLA').on('click', function () {
     SetTemperature_bed(String(Temp.PLA.Bed));
     SetTemperature_tool(String(Temp.PLA.Tool));
