@@ -106,51 +106,11 @@ var SystemTrigeredPrint = function () {
         console.log('Done-->', response);
     });
 };
-var TrigeredPrint = function () {
-    var setting = CopyObjects(settings);
-    setting.url = URL + "/api/printer/command";
-    setting.method = "POST";
-    setting.data = String(buttons.OnPause);
-    setting.async = true;
-    setting.error = function (response) {
-        console.log(response);
-    };
-    setting.success = function (response) {
-        console.log(response);
-    };
-    //var command =
-    //alert('OnPause');
-    console.log(global_state);
-    if (global_state === 'Pausing' || global_state === 'Paused') {
-        //alert('Pausing');
-        console.log(global_state);
-        setting.data = String(buttons.CancPause);
+
+function TrigeredPrint() {
+    var command = Apps._settings.buttons.OnPause;
+    if (Apps.Printer._state === 'Pausing' || Apps.Printer._state === 'Paused') {
+        command = Apps._settings.buttons.CancPause;
     }
-
-    console.log(setting);
-    $.ajax(setting).done(function (response) {
-        console.log('Done-', response, setting);
-    });
-};
-
-function Extrude(vtool, type_exchange) {
-    var command = '{"command": "select", "tool": "' + vtool + '"}';
-    var extrude = '{"command": "extrude", "amount":' + type_exchange + '}';
-    //select tool
-    var setting = CopyObjects(settings);
-    setting.url = URL + '/api/printer/tool';
-    setting.data = command;
-    $.ajax(settings).done(function (response) {
-        console.log(response,'settings ->' , settings);
-    }
-    );
-    //extrude plastic
-    PrintObject(setting);
-    setting.data = extrude;
-    PrintObject(setting);
-    //console.log(setting.data);
-    $.ajax(settings).done(function (response) {
-        console.log(response, 'settings ->', settings);
-    });
-};
-
+    Apps.PlayCommand(command);
+}
