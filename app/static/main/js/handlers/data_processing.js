@@ -69,8 +69,12 @@ var ShowPrintInfo = function (info) {
 };
 function HandlerState(value) {
   "use strict";
-  var state = value.state.text;
+  var state = value.state.text || value.state;
   var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state]: state;
+  if (state === 'Closed') {
+      $('#status_print').text("Отключено, подключение...");
+      Apps.Printer.ConnectPrinter();
+  }
   if (state === 'Printing') {
       ShowPrintInfo(value);
   }
@@ -93,6 +97,7 @@ function HandlerState(value) {
 }
 function CurrentEvent(value) {
     "use strict";
+
     if (value.temps.length){
         UpdateTemps(value.temps[0]);
     }

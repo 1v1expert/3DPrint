@@ -186,7 +186,11 @@ function ConnectOctoprint() {
             AuthSocket(response.name, response.session);
             OctoPrint.socket.connect();
             //Fix todo: Connect witch Printer offline
-            Apps.Printer.ConnectPrinter();
+            OctoPrint.connection.getSettings().done(function(response){
+                HandlerState(response.current);
+                console.log(response.current.state);
+            });
+            //Apps.Printer.ConnectPrinter();
             //ConnectPrinter();
             OctoPrint.socket.onMessage("*", function(message) {
                 Apps.is_connect_server = true;

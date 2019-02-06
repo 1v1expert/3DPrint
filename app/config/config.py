@@ -15,9 +15,10 @@ translate_state = {
 	"Pausing": "В режиме паузы",
 	"Error": "Ошибка",
 	"Cancelling": "Печать отменена",
-	"Offline": "Принтер отключен",
+	"Offline": "Принтер offline",
 	"Connecting": "Подключение",
-	"Printing from SD": "Печать с SD карты"
+	"Printing from SD": "Печать с SD карты",
+	"Closed": "Принтер отключен"
 }
 Definition = {
 	"MainTool": "tool0",
