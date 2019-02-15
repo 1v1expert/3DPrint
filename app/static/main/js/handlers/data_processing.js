@@ -9,7 +9,7 @@
 var global = window || this;
 global.global_state = null;
 
-var UpdateTemps = function (temps) {
+function UpdateTemps(temps) {
     "use strict";
     if (temps.bed){
         $('#pie_chart_3').find('.percents').text(temps.bed.actual);
@@ -31,7 +31,7 @@ var UpdateTemps = function (temps) {
         $('#degres_1').text('/' + temps.tool0.target + '°');
     }
   			//$('#pie_chart_1').find('.percent').text(response.temperature.tool0.actual);
-};
+}
 function CancelPrint() {
     "use strict";
     $('#estimatedPrintTime').text('');
@@ -60,40 +60,45 @@ var ShowPrintInfo = function (info) {
         //moment.unix(Number(info.progress.printTime)).utc().format('HH:mm:ss'));
     $('#printTime').text("Осталось: " + new ShowTime(info.progress.printTimeLeft).toString());
         //moment.unix(Number(info.progress.printTimeLeft)).utc().format('HHH:mm:ss'));
-    $('#progress').html(Math.round(info.progress.completion) + '%');
-    $('#progress').css('width', Math.round(info.progress.completion) + '%');
+    $('#progress')
+        .html(Math.round(info.progress.completion) + '%')
+        .css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
     // name buttons
     $('#iconpause2').text(' Пауза#2');
     $('#iconpause').text(' Пауза#1');
 };
+
 function HandlerState(value) {
-  "use strict";
-  var state = value.state.text || value.state;
-  var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state]: state;
-  if (state === 'Closed') {
-      $('#status_print').text("Отключено, подключение...");
-      Apps.Printer.ConnectPrinter();
-  }
-  if (state === 'Printing') {
-      ShowPrintInfo(value);
-  }
-  if (state === 'Pausing' || state === 'Paused') {
-      $('#iconpause2').text(' Продолжить#2');
-      $('#iconpause').text(' Продолжить#1');
-  }
-  if (state === global.global_state) {
-      $('#status_print').text(rus_state);
-  }
-  else {
-      Apps.Printer._state = state;
-      $('#status_print').text(rus_state);
-      PrinterState(rus_state);
-      global.global_state = state;
-      if (global.global_state === 'Printing' && state === 'Operational') {
-          CancelPrint();
-      }
-  }
+    "use strict";
+    var state = value.state.text || value.state;
+    var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state] : state;
+    if (state === 'Closed') {
+        $('#status_print').text("Отключено, подключение...");
+        Apps.Printer.ConnectPrinter();
+    }
+    if (state === 'Printing') {
+        ShowPrintInfo(value);
+    }
+    if (state === 'Pausing' || state === 'Paused') {
+        $('#iconpause2').text(' Продолжить#2');
+        $('#iconpause').text(' Продолжить#1');
+    }
+    // Is bed construction ->
+    if (state !== Apps.Printer._state) {
+        //Apps.Printer._state = state;
+        $('#status_print').text(rus_state);
+        PrinterState(rus_state);
+        //global.global_state = state;
+        if (Apps.Printer._state === 'Printing' && state === 'Operational') {
+            CancelPrint();
+        }
+        Apps.Printer._state = state;
+        Apps.Printer._rus_state = rus_state;
+    }
+    else {
+        $('#status_print').text(rus_state);
+    }
 }
 function CurrentEvent(value) {
     "use strict";
