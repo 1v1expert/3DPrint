@@ -1,0 +1,152 @@
+accessControl:
+  enabled: true
+  salt: fcxG0LUAIJ8gHOXuswWHIdp9zWU8Aq1t
+api:
+  allowCrossOrigin: true
+  key: 5C761F424E5E46EE934DE9F683609B66
+appearance:
+  colorTransparent: true
+controls:
+- command: M114
+  name: GetPosition
+  regex: X:([0-9.]+) Y:([0-9.]+) Z:([0-9.]+) E:([0-9.]+)
+  template: 'Position: X={0}, Y={1}, Z={2}, E={3}'
+  type: feedback_command
+- command: M206
+  name: GetZ
+  regex: X:( [+-]?[0-9.]+) Y:( [+-]?[0-9.]+) Z:( [+-]?[0-9.]+)
+  template: '{2}'
+  type: feedback_command
+feature:
+  legacyPluginAssets: true
+  modelSizeDetection: false
+  printCancelConfirmation: false
+gcodeViewer:
+  enabled: false
+plugins:
+  _disabled:
+  - announcements
+  - tracking
+  - octoprint_eta
+  - softwareupdate
+  actioncommands:
+    command_definitions:
+    - action: restart_touchui
+      command: sudo service touchui restart
+      enabled: true
+      type: system
+    - action: rr
+      command: M114
+      enabled: true
+      type: gcode
+    - action: zz
+      command: M206
+      enabled: true
+      type: gcode
+  announcements:
+    _config_version: 1
+    channels:
+      _blog:
+        read_until: 1513605600
+      _important:
+        read_until: 1509547500
+      _octopi:
+        read_until: 1527588900
+      _plugins:
+        read_until: 1529280000
+      _releases:
+        read_until: 1523631300
+  cura:
+    cura_engine: /usr/local/bin/cura_engine
+  discovery:
+    publicPort: 80
+    upnpUuid: 1df39ebb-5d71-4436-b788-ebf1e6f4ae7e
+  softwareupdate:
+    _config_version: 6
+    check_providers:
+      actioncommands: actioncommands
+      systemcommandeditor: systemcommandeditor
+      touchui: touchui
+    checks:
+      octoprint:
+        checkout_folder: /home/pi/OctoPrint
+        prerelease: true
+        prerelease_channel: rc/maintenance
+  touchui:
+    colors:
+      fontSize: '14'
+      mainColor: '#2931CE'
+      termColor: '#FFFFFF'
+    refreshCSS: true
+    useCustomization: true
+  tracking:
+    enabled: false
+    events:
+      plugin: false
+      printer: false
+      printjob: false
+      startup: false
+      throttled: false
+      update: false
+printerParameters: {}
+printerProfiles:
+  default: _default
+serial:
+  additionalPorts:
+  - /dev/ttyAMA0
+  alwaysSendChecksum: false
+  baudrate: 250000
+  disconnectOnErrors: false
+  ignoreErrorsFromFirmware: true
+  log: true
+  longRunningCommands:
+  - G4
+  - G28
+  - G29
+  - G30
+  - G31
+  - G32
+  - M600
+  - M601
+  maxCommunicationTimeouts:
+    long: 3
+    printing: 3
+  port: /dev/ttyAMA0
+  supportResendsWithoutOk: always
+  swallowOkAfterResend: false
+  timeout:
+    communication: 5.0
+    communicationBusy: 4.0
+    connection: 2.0
+    detection: 0.5
+    sdStatus: 5.0
+    sdStatusAutoreport: 5.0
+    temperature: 7.0
+    temperatureAutoreport: 3.0
+  waitForStartOnConnect: false
+server:
+  commands:
+    serverRestartCommand: sudo service octoprint restart
+    systemRestartCommand: sudo shutdown -r now
+    systemShutdownCommand: sudo shutdown -h now
+  firstRun: false
+  host: 0.0.0.0
+  onlineCheck:
+    enabled: false
+  pluginBlacklist:
+    enabled: true
+  secretKey: ooxL8dgdh5zPMl8bDY1pf3RM7GR47goz
+  seenWizards:
+    corewizard: 3
+    cura: null
+    tracking: null
+system:
+  actions:
+  - action: restart_touchui
+    command: sudo service touchui restart
+    confirm: You are about to shutdown the system.
+    name: restart_touchui
+  - action: reset_pl
+    command: gpio -g mode 23 out && gpio -g write 23 0 && sleep 4 && gpio -g write 23 1
+    confirm: You are about reset plate.
+    name: reset_pl

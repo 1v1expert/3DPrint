@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3DPrint</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="author" content="VLADDOS"/>
+	<link href="{{ static_url('dist/datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet"
+		  type="text/css">
+	<link href="{{ static_url('dist/jquery-toast-plugin/dist/jquery.toast.min.css') }}" rel="stylesheet"
+		  type="text/css">
+
+	<!--alerts CSS -->
+	<link href="{{ static_url('dist/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css">
+
+	<!-- Custom CSS -->
+	<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+	<link href="{{ static_url('main/css/style.css') }}" rel="stylesheet" type="text/css">
+	<!--<link href="main/css/style.css" rel="stylesheet" type="text/css">-->
+	<!--<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
+	<style>
+		.file-name {
+			text-overflow: clip;
+			overflow: hidden;
+		}
+
+		.dropdown-menu {
+			border-radius: 14px;
+			border: none;
+			background: #6ac2e0;
+		}
+
+		.mb-15 {
+			margin-bottom: 8px !important;
+		}
+
+		.card-view.panel .panel-body {
+			padding: 2px 0 0px !important;
+		}
+
+		.system_btn {
+			background-color: #0b97c4 !important;
+			width: 200px;
+		}
+
+		.system_btn:active {
+			color: #fff;
+		}
+
+		.file-box {
+			margin-bottom: 15px;
+		}
+
+		.file .icon, .file .image {
+			height: 70px;
+		}
+
+		.file .file-name {
+			font-size: 10px;
+			padding: 3px;
+		}
+
+		.file .file-name span {
+			font-size: 10px;
+		}
+
+		.well.well-lg {
+			padding: 12px !important;
+		}
+
+		.panel-body {
+			padding: 0px;
+		}
+
+		.easypiechart .degreess:after {
+			content: "%";
+			font-size: 14px;
+			margin-left: 1px;
+		}
+
+		.menu-main {
+			padding: inherit;
+			/*display: -webkit-flex;
+            display: -ms-flexbox;*/
+			display: flex;
+			-webkit-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			list-style: none;
+			position: relative;
+			margin: -1px 0 0 -1px;
+		}
+
+		.menu-main li:last-child:after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			right: -2px;
+			z-index: -1;
+			height: 5px;
+			background: #50c4e3;
+		}
+
+		.menu-main li:not(.active):last-child:after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			right: -2px;
+			z-index: -1;
+			height: 5px;
+			background: none;
+		}
+
+		.menu-main:after {
+			content: '';
+			display: table;
+			clear: both;
+		}
+
+		.menu-main li {
+			flex: 1 0 auto;
+			padding: 9px 15px;
+			margin: 1px 0 0 1px;
+			background: #50c4e3;
+			color: #FFF;
+			position: relative;
+			border: solid #50c4e3;
+			border-width: 2px 2px 0;
+			border-radius: 5px 5px 0 0;
+			text-align: center;
+		}
+
+		.menu-main li:not(.active) {
+			cursor: pointer;
+		}
+
+		.menu-main li:not(.active):hover {
+			background: #50c4e3;
+			border-color: #50c4e3;
+		}
+
+		.menu-main .active {
+			background: #030d13;
+			color: #fff;
+			border-color: #030d13;
+		}
+
+		.menu-main .active:after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			right: 0;
+			height: 5px;
+			background: #50c4e3;
+		}
+
+		.tabs__content {
+			display: none;
+			background: #FFF;
+			border: 3px solid #50c4e3;
+			border-radius: 0 5px 5px 5px;
+			margin-top: -6px;
+			/*padding: 7px 15px;*/
+		}
+
+		.tabs__content.active {
+			display: block;
+		}
+
+		.vertical .menu-main {
+			float: left;
+			display: block;
+		}
+
+		.vertical .menu-main li {
+			float: none;
+			border-width: 2px 0 2px 2px;
+			border-radius: 5px 0 0 5px;
+		}
+
+		.vertical .menu-main li:last-child:before {
+			display: none;
+		}
+
+		.vertical .menu-main .active:after {
+			left: auto;
+			top: 0;
+			right: -2px;
+			bottom: 0;
+			width: 2px;
+			height: auto;
+		}
+
+		.vertical .tabs__content {
+			overflow: hidden;
+		}
+
+		@media screen and (max-width: 650px) {
+
+			.menu-main li {
+				-webkit-flex: 1 0 auto;
+				-ms-flex: 1 0 auto;
+				flex: 1 0 auto;
+			}
+
+			.vertical .menu-main {
+				float: none;
+				display: -webkit-flex;
+				display: -ms-flexbox;
+				display: flex;
+			}
+
+			.vertical .menu-main li {
+				border-width: 2px 2px 0;
+				border-radius: 5px 5px 0 0;
+			}
+
+			.vertical .menu-main li:last-child:before {
+				display: block;
+			}
+
+			.vertical .menu-main .active:after {
+				top: auto;
+				bottom: -5px;
+				left: 0;
+				right: 0;
+				width: auto;
+				height: 5px;
+				background: #FFF;
+			}
+		}
+
+		.menu-main li:after {
+			content: "";
+		}
+
+		.tabss {
+			display: block;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: flex;
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			flex-wrap: wrap;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		.tabss [class^="tab"] label,
+		.tabss [class*=" tab"] label {
+			color: #efedef;
+			cursor: pointer;
+			display: block;
+			font-size: 1.1em;
+			font-weight: 300;
+			line-height: 0em;
+			padding: 1.5rem 0;
+			text-align: center;
+		}
+
+		.tabss [class^="tab"] [type="radio"],
+		.tabss [class*=" tab"] [type="radio"] {
+			border-bottom: 3px solid rgba(239, 237, 239, 0.5);
+			cursor: pointer;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			display: block;
+			width: 100%;
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.tabss [class^="tab"] [type="radio"]:hover, .tabss [class^="tab"] [type="radio"]:focus,
+		.tabss [class*=" tab"] [type="radio"]:hover,
+		.tabss [class*=" tab"] [type="radio"]:focus {
+			border-bottom: 3px solid #fd264f !important;
+		}
+
+		.tabss [class^="tab"] [type="radio"]:checked,
+		.tabss [class*=" tab"] [type="radio"]:checked {
+			border-bottom: 4px solid #fd264f !important;
+		}
+
+		.tabss [class^="tab"] [type="radio"]:checked + div,
+		.tabss [class*=" tab"] [type="radio"]:checked + div {
+			opacity: 1;
+		}
+
+		.tabss [class^="tab"] [type="radio"] + div,
+		.tabss [class*=" tab"] [type="radio"] + div {
+			display: block;
+			opacity: 0;
+			padding: 2rem 0;
+			width: 90%;
+			-webkit-transition: all 0.3s ease-in-out;
+			-moz-transition: all 0.3s ease-in-out;
+			-o-transition: all 0.3s ease-in-out;
+			transition: all 0.3s ease-in-out;
+		}
+
+		.tabss .tab-2 {
+			width: 50%;
+		}
+
+		.tabss .tab-2 [type="radio"] + div {
+			width: 200%;
+			margin-left: 200%;
+		}
+
+		.tabss .tab-2 [type="radio"]:checked + div {
+			margin-left: 0;
+		}
+
+		.tabss .tab-2:last-child [type="radio"] + div {
+			margin-left: 100%;
+		}
+
+		.tabss .tab-2:last-child [type="radio"]:checked + div {
+			margin-left: -100%;
+		}
+	</style>
+
+</head>
+<body>
+<div class="preloader-it">
+	<div class="la-anim-1"></div>
+</div>
+<style>
+	/* new sty;e for buttons */
+	@media (min-width: 768px) {
+		.modal-dialog {
+			width: max-content;
+		}
+	}
+	.form-control {
+		background-color: #06151E;
+	}
+	.modal-dialog .modal-content {
+		background-color: #06151E;
+	}
+
+	@import url(https://fonts.googleapis.com/css?family=Lato:100);
+
+    .toolbtn,
+	.fanbtn {
+		padding: 40px 30px 30px 30px;
+		margin: 0 1px 0 0;
+		text-decoration: none;
+		text-align: center;
+		color: #7f8c8d;
+		cursor: pointer;
+		background: #2c3e50;
+		border-bottom: 10px solid #34495e;
+		transition-property: border-bottom .6s linear 0s;
+		-moz-transition: border-bottom .6s linear 0s;
+		-webkit-transition: border-bottom .6s linear 0s;
+		-o-transition: border-bottom .6s linear 0s;
+		font-size: 25px;
+	}
+
+    .toolbtn.active,
+	.fanbtn.active {
+		border-bottom: 10px solid #50c4e3;
+		color: #50c4e3;
+	}
+
+	.button-group-navigation li {
+		display: inline-block;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		zoom: 1;
+		background: #7f8c8d;
+	}
+
+    .button-group-navigation li .toolbtn,
+	.button-group-navigation li .fanbtn {
+		float: left;
+		margin-left: -4px;
+	}
+    .button-group-navigation > .toolbtn:first-child,
+	.button-group-navigation li:first-child .toolbtn,
+	.button-group-navigation > .fanbtn:first-child,
+	.button-group-navigation li:first-child .fanbtn {
+		margin-left: 0;
+		-webkit-border-top-left-radius: 3px;
+		-webkit-border-bottom-left-radius: 3px;
+		-moz-border-radius-topleft: 3px;
+		-moz-border-radius-bottomleft: 3px;
+		border-top-left-radius: 3px;
+		border-bottom-left-radius: 3px;
+	}
+
+    .button-group-navigation > .toolbtn:last-child,
+	.button-group-navigation li:last-child > .toolbtn,
+	.button-group-navigation > .fanbtn:last-child,
+	.button-group-navigation li:last-child > .fanbtn {
+		margin-right: 0;
+		-webkit-border-top-right-radius: 3px;
+		-webkit-border-bottom-right-radius: 3px;
+		-moz-border-radius-topright: 3px;
+		-moz-border-radius-bottomright: 3px;
+		border-top-right-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+
+	/* New style for buttons */
+	.dropdown-menu {
+		position: relative !important;
+	}
+
+    .dropdown-menu > li > a {
+        font-size: 25px;
+        padding: 3px 22px;
+        color: #f4f4f4;
+        font-weight: 900;
+        text-shadow: 2px 1px 1px #212121, 5px 0 1em #f4f4f4;
+    }
+
+    .dropdown-menu {
+        /*height: 200px;*/
+        overflow-y: scroll;
+    }
+
+</style>
+
+<!-- NAVBAR -->
+<div class="tabs">
+	<nav class="navbar navbar-inverse navbar-fixed-top" style="min-height: auto; padding: 0 0 0 0;">
+		<ul class="menu-main">
+			<li class="active" id="maintab">ДОМ</li>
+			<li id="manage_print">Управление</li>
+			<li>Файлы</li>
+			<li>Сервис</li>
+		</ul>
+	</nav>
+	<div class="tabs__content  active">
+		<div class="page-wrapper">
+			<div class="container-fluid pt-25" style="padding-top: 1px !important;">
+				<!-- Row -->
+				<div style="
+    width: 96%;
+    position: absolute;
+    /* width: 500px; */
+    /* height: 200px; */
+    /*margin: 5% auto;*/
+    /* padding: 10px; */
+    top: 12%;
+">
+
+					<div class="col-lg-12 h-20" style="padding-left: unset;">
+						<div class="well well-lg card-view">
+							<h6 class="mb-15" id="print_status"></h6>
+							<h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 3px; font-size: 19px">
+							<code><b style="font-weight: bold" id="status_print"> ожидание </b></code></h6>
+							<!-- Must be figure text this -->
+							<!--<div class="container">-->
+								<!--<div class="text"></div>-->
+							<!--</div>-->
+							<div class="panel-body">
+								<div class="progress progress-lg">
+									<div class="progress-bar progress-bar-inverse active progress-bar-striped"
+										 style="width: 0%;" id="progress" role="progressbar">0%
+									</div>
+								</div>
+								<div class="col-md-6 col-xs-6">
+									<label id="file_name" style="color: #fff"></label>
+									<p></p>
+									<label id="test" style="color: #fff"></label>
+								</div>
+								<div class="col-md-6 col-xs-6" style="text-align: right">
+									<label id="estimatedPrintTime" style="color: #fff"></label>
+									<p></p>
+									<label id="printTime" style="color: #fff"></label>
+								</div>
+							</div>
+
+							<p></p>
+							<div class="row" style="text-align: center">
+								<div class="btn-group mt-15 mr-10" style="margin-top: 4px!important;">
+									<!--<button class="btn btn-success btn-outline btn-rounded" id="restartprint"><i style="    font-size: x-large;" class="fa fa-play-circle-o" aria-hidden="true"> restart</i></button>-->
+									<button class="btn btn-success btn-outline btn-rounded" id="dpauseprint_1"><i
+											style="    font-size: x-large;" class="fa fa-pause" aria-hidden="true"
+											id="iconpause2"> пауза#2</i></button>
+									<button class="btn btn-success btn-outline btn-rounded" id="stopprint"><i
+											style="    font-size: x-large;" class="fa fa-stop" aria-hidden="true">
+										прервать</i></button>
+									<button class="btn btn-success btn-outline btn-rounded" id="pauseprint"><i
+											style="    font-size: x-large;" class="fa fa-pause" id="iconpause"
+											aria-hidden="true"> пауза#1</i></button>
+									<!--<button class="btn btn-success btn-outline btn-rounded btn-xs" style="font-size: 8px" onclick="GetJob()" id="printinfo">Пучать info</button>-->
+								</div>
+							</div>
+
+							<!--<div class="form-wrap">
+								<div class="form-group">
+									<label class="control-label mb-10" for="baudrates">Baudrates:</label>
+									<select id="baudrates" class="form-control required" name="country">
+										<!--<option value="1">India</option>
+										<option value="2">Australia</option>
+										<option value="3">USA</option>
+										<option value="4">Japan</option>
+									</select>
+								</div>
+							<div class="form-group">
+								<label class="control-label mb-5" for="baudrates">Baudrates:</label>
+								<label id="baudrates"  type="text" name="address" class="form-control required" value=""></label>
+							</div>
+						</div>-->
+						</div>
+					</div>
+					<!--
+                                        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-3">
+                                            <div class="panel panel-default card-view">
+                                                <div class="panel-wrapper collapse in">
+                                                    <div class="panel-body sm-data-box-1">
+                                                        <span class="uppercase-font weight-500 font-14 block text-center txt-dark">Состояние принтера</span>
+                                                        <div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+                                                            <span class="counter-anim" data>12</span>%<span></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                    -->
+				</div>
+				<div style="
+    position: absolute;
+    width: 96%;
+    /* height: 200px; */
+    margin: 3% auto;
+    /* padding: 10px; */
+    bottom: 0%;
+">
+					<div class="col-lg-12 h-10" style="padding-left: unset;">
+						<div class="panel panel-default card-view" style="margin-bottom: 10px; padding: unset">
+							<!--<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">Температура</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>-->
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pb-0">
+									<div class="row">
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20"
+												  style="text-transform: unset">t° 1-го СОПЛА</span>
+											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_1"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<!--<div class="col-sm-3 mb-15">
+											<span class="skill-head mb-20">T° 2 сопло</span>
+											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="100">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_2"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>-->
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20" style="text-transform: unset">t° СТОЛА</span>
+											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_3"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<div class="col-sm-4 mb-15" data-target="#fanbox" data-toggle="modal">
+											<span class="skill-head mb-20">вентилятор</span>
+											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="100">
+												<span class="degreess  percents degrees head-font">0</span>
+												<label id="degres_34"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer container-fluid pl-30 pr-30">
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="col-sm-8">
+						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+					</div>
+					<div class="col-sm-4">
+						<p><label class="connection_label"></label></p>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="col-sm-6 right">
+						<p onclick="Apps.Printer.ConnectPrinter()" id="connect"><code>подключить</code></p>
+					</div>
+					<div class="col-sm-6 left">
+						<p onclick="Apps.Printer.DisconnectPrinter()" id="disconnect"><code>отключить</code></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<div class="tabs__content">
+		<!-- Main Content -->
+		<div class="page-wrapper" style="padding: 55px 20px;">
+			<div class="container-fluid pt-25" style="padding-top: 1px !important;">
+				<div class="col-lg-12 col-sm-12">
+					<div class="panel panel-default card-view">
+						<div class="panel-heading" style="display:none;">
+							<div class="pull-left">
+								<h6 class="panel-title txt-dark">Движение по осям</h6>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body">
+								<p class="text-muted">Движение <code>осуществляйте курсорами </code></p>
+								<div class="tab-struct vertical-tab custom-tab-1 mt-40"
+									 style="margin-top: 17px!important;margin-bottom: 12px">
+									<ul role="tablist" class="nav nav-tabs ver-nav-tab" id="myTabs_8"
+										style="min-height: 170px; width: 100px">
+										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab"
+																				  role="tab" id="home_tab_8"
+																				  href="#home_8">0.1</a></li>
+										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8"
+																			role="tab" href="#profile_8"
+																			aria-expanded="false">1</a></li>
+										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8"
+																			role="tab" href="#profile_8"
+																			aria-expanded="false">10</a></li>
+										<li class="dropdown" role="presentation">
+											<a data-toggle="tab" id="profile_tab_9" role="tab" href="#profile_8"
+											   aria-expanded="false">100</a></li>
+									</ul>
+									<div class="datepicker">
+										<div class="timepicker">
+											<div class="table-responsive" style="margin-left: 25%;">
+												<table class="table-condensed ">
+													<tbody>
+													<tr>
+														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Z"
+															   class="btn" data-action="incrementHours"
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
+														</td>
+														<td class="separator"></td>
+														<td><a href="#" tabindex="-1" title="Дальше" id="UP_Y"
+															   class="btn" data-action="incrementMinutes"
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
+														</td>
+														<td class="separator"></td>
+													</tr>
+													<tr>
+														<td style="text-align: center"><a href="#" tabindex="-1"
+																						  title="Дом" id="Home_Z"
+																						  class="btn"
+																						  data-action="decrementHours"
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-home" style="font-size: 35px"></span></a>
+														</td>
+														<td class="separator"><a href="#" tabindex="-1" title="Влево"
+																				 id="Left_X" class="btn"
+																				 data-action="decrementHours"
+																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-arrow-left"
+																style="font-size: 35px;"></span></a></td>
+														<td style="text-align: center"><a href="#" tabindex="-1"
+																						  title="Дом" id="Home_XY"
+																						  class="btn"
+																						  data-action="decrementHours"
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-home" style="font-size: 35px;"></span></a>
+														</td>
+														<td><a href="#" tabindex="-1" title="Вправо" id="Right_X"
+															   class="btn" data-action="decrementHours"
+															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-arrow-right"
+																style="font-size: 35px;"></span></a></td>
+													</tr>
+													<tr>
+														<td><a href="#" tabindex="-1" title="Вниз" id="DOWN_Z"
+															   class="btn" data-action="decrementHours"
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-arrow-down"
+																style="font-size: 35px;"></span></a></td>
+														<td class="separator"></td>
+														<td><a href="#" tabindex="-1" title="Ближе" id="Down_Y"
+															   class="btn" data-action="decrementMinutes"
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																class="fa fa-arrow-down"
+																style="font-size: 35px;"></span></a></td>
+														<td class="separator"></td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="tab-struct vertical-tab custom-tab-1 mt-40"
+										 style="float: right; border-bottom: none;margin-top: -130px!important;left: 49px;">
+										<div role="tablist" style="padding-bottom: 10px;">
+											<label style="padding-right: 10px;"><code>X: </code></label><label
+												id="coorX">0.1</label>
+										</div>
+										<div role="tablist" style="padding-bottom: 10px;">
+											<label style="padding-right: 10px;"><code>Y: </code></label><label
+												id="coorY">0.1</label>
+										</div>
+										<div role="tablist" style="padding-bottom: 10px;">
+											<label style="padding-right: 10px;"><code>Z: </code></label><label
+												id="coorZ">0.1</label>
+										</div>
+										<div role="tablist" style="padding-bottom: 10px;">
+											<label style="padding-right: 10px;"><code>E: </code></label><label
+												id="coorE">0.1</label>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--<div class="row">
+							<div class="panel-body">
+
+							</div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Row -->
+
+
+			<!-- footer -->
+			<footer class="footer container-fluid pl-30 pr-30">
+				<div class="row">
+					<div class="col-sm-6">
+						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
+					</div>
+					<div class="col-sm-6">
+						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+
+	</div>
+	<div class="tabs__content">
+		<!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<!-- Title -->
+				<div class="row heading-bg">
+					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+						<h5 class="txt-dark">Менеджер файлов</h5>
+					</div>
+					<!-- Breadcrumb -->
+					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+						<ol class="breadcrumb">
+							<li class="active"><span>file manager</span></li>
+						</ol>
+					</div>
+					<!-- /Breadcrumb -->
+				</div>
+				<!-- /Title -->
+				<!-- Row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="">
+										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 file-directory pa-0">
+											<div class="ibox float-e-margins">
+												<div class="ibox-content">
+													<div class="file-manager">
+														<!--<div class="mt-20 mb-20 ml-15 mr-15">
+                                                            <div class="fileupload btn btn-success btn-anim btn-block"><i class="fa fa-upload"></i><span class="btn-text">Upload files</span>
+                                                                <input type="file" class="upload">
+                                                            </div>
+                                                        </div>
+                                                        <div class="pl-15 mb-30">
+                                                            <a href="#" class="file-control active">All</a>
+                                                            <a href="#" class="file-control">Documents</a>
+                                                        </div>
+-->
+														<h6 class="mb-10 pl-15">Хранилища</h6>
+														<ul class="folder-list mb-30">
+															<li class="active" id="localfiles"><a><i
+																	class="zmdi zmdi-folder"></i> SD card</a></li>
+															<li id="usbfiles"><a><i class="zmdi zmdi-folder"></i>
+																USB</a></li>
+														</ul>
+														<div class="clearfix"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-xs-3 col-sm-9 file-sec pt-20">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="row" id="rowfiles">
+														<!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12  file-box">
+                                                            <div class="file">
+                                                                <a href="" onclick="alert('AA')">
+
+                                                                    <div class="icon">
+                                                                        <i class="zmdi zmdi-file-text"></i>
+                                                                    </div>
+                                                                    <div class="file-name">
+                                                                        Document_2016.doc
+                                                                        <br>
+                                                                        <span>Added: Jan 11, 2016</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>-->
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /Row -->
+
+
+			<!-- footer -->
+			<footer class="footer container-fluid pl-30 pr-30">
+				<div class="row">
+					<div class="col-sm-6">
+						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
+					</div>
+					<div class="col-sm-6">
+						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+	</div>
+	<!-- Tabs CONTENT SERVICE -->
+	<div class="tabs__content">
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="tabss">
+					<div class="tab-2">
+						<label for="tab2-1">Преднагрев</label>
+						<input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+						<div>
+							<style>
+								.table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
+									padding: 2px;
+								}
+							</style>
+							<!--Header section
+                            <h4>Tab One</h4>-->
+							<!-- Maybe to-do -->
+                            <div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
+								<div class="col-md-6 col-sm-6 col-lg-6" style="padding-left: 2px; padding-right: 0px">
+									<div class="table-responsive">
+										<table class="table-condensed">
+                                            <thead>
+                                            <th><a style="font-weight: 900;font-size: 18px;">Главное сопло: </a></th>
+                                            <th><a id="nozzle" style="font-weight: 900;font-size: 18px;"></a></th>
+                                            <th><a class="btn" data-toggle="modal"
+										 data-target="#toolbox" id="change_tools"
+                                                   style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">изменить</a>
+                                            </th>
+                                            </thead>
+											<tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
+								<div class="col-md-4 col-sm-4 col-lg-4" style="padding-left: 2px; padding-right: 0px">
+									<div class="table-responsive">
+										<table class="table-condensed">
+											<thead>
+											<th colspan="2" style="text-align: center;"><a style="font-weight: 900;font-size: 18px;">управление пластиком</a></th>
+											<!--<th><a style="font-weight: 900;font-size: 18px;">ретрактить</a></th>-->
+											</thead>
+											<tbody>
+											<tr>
+												<td style="text-align: center"><a class="btn" id="extract"
+																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">извлечь</a></td>
+												<td style="text-align: center"><a class="btn" id="download"
+																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">загрузить</a></td>
+											</tr>
+											<tr>
+												<td style="text-align: center"><a class="btn" id="extrude"
+																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">экструдить</a></td>
+												<td style="text-align: center"><a class="btn" id="retruct"
+																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">ретрактить</a></td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-md-8 col-sm-8 col-lg-8"
+									 style="padding-left: unset; padding-right: unset">
+									<div class="table-responsive">
+										<table class="table-condensed">
+											<thead>
+											<th></th>
+											<th colspan="6"><a
+													style="font-weight: 900; font-size: 20px;text-align: center">задать
+												температуру</a></th>
+											</thead>
+											<tbody>
+											<tr>
+												<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>
+												<td><a id="t_tool" class="btn"
+													   style="width:75px; border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">200</a>
+												</td>
+												<td><a id="up_t_tool" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+														class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
+												</td>
+												<td><a id="down_t_tool" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+														class="fa fa-arrow-down" style="font-size: x-large;"></span></a>
+												</td>
+												<td><a id="set_temp_tool" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
+												</td>
+												<td><a id="zero_temp_tool" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>
+												</td>
+											</tr>
+											<tr>
+												<td><a style="font-weight: 900; font-size: 15px;">T° стола</a></td>
+												<td><a id="t_board" class="btn"
+													   style="width:75px;border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">70</a>
+												</td>
+												<td><a id="up_t_board" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+														class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
+												</td>
+												<td><a id="down_t_board" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+														class="fa fa-arrow-down" style="font-size: x-large;"></span></a>
+												</td>
+												<td><a id="set_temp_board" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
+												</td>
+												<td><a id="zero_temp_board" class="btn"
+													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>
+												</td>
+											</tr>
+											</tbody>
+										</table>
+										<table class="table-condensed">
+											<tr>
+												<td></td>
+												<td></td>
+												<td class="btn" id="PLA"
+													style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">
+													PLA
+												</td>
+												<td class="btn" id="ABS"
+													style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">
+													ABS
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-2">
+						<label for="tab2-2">Сервисное меню</label>
+						<input id="tab2-2" name="tabs-two" type="radio">
+						<div>
+							<!--<h4>Tab Two</h4>-->
+							<div class="row"
+								 style="padding-top: 8px;margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
+								<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+									<!--<a id="calibr" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">Калибровка</a>-->
+									<button aria-expanded="false" data-toggle="dropdown" class="btn dropdown-toggle "
+											type="button"
+											style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none;font-size: large">
+										<i class="fa fa-cog" style="font-size: large"></i> Рестарт <span
+											class="caret"></span></button>
+									<ul role="menu" class="dropdown-menu">
+										<li><a id="restart_software">Приложения</a></li>
+										<li><a id="platform_restart">Платформы</a></li>
+										<li><a id="reset_pl">Платы</a></li>
+										<li class="divider"></li>
+										<li><a id="restart_touchui">Интерфейса</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+									<!--<a id="calibr" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">Калибровка</a>-->
+									<button aria-expanded="false" data-toggle="dropdown" class="btn dropdown-toggle "
+											type="button"
+											style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none; font-size: large">
+										<i class="fa fa-cogs" style="font-size: large"></i> Системные <span
+											class="caret"></span></button>
+									<ul role="menu" class="dropdown-menu" id="system_commands">
+										<li><a id="m306">M306</a></li>
+										<li><a id="M999">M999</a></li>
+										<li class="divider"></li>
+										<li><a id="calibr">Калибровка</a></li>
+									</ul>
+								</div>
+								<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+									<div alt="default" data-toggle="modal"
+										 data-target="#modaloffsetZ" class="model_img img-responsive">
+										<a class="btn" id="offsetZ"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none; font-size: large">Смещение
+											по Z</a>
+									</div>
+								</div>
+								<!--<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+                                    <a id="restart_software" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 12px 5px; font-size: 12px; border-radius: 10px; text-transform: none">Рестарт приложения</a>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+                                    <a id="platform_restart" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 12px 5px; font-size: 12px; border-radius: 10px; text-transform: none">Рестарт платформы</a>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
+                                    <a id="reset_pl" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 12px 5px; font-size: 12px; border-radius: 10px; text-transform: none">Рестарт платы</a>
+                                </div>
+                                -->
+
+								<!--</div>
+                                <div class="row" style="padding-top: 8px;margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
+                                    <div class="col-lg-4 col-md-4 col-sm-4" style="padding-left: 4px">
+                                        <a id="m306" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">M306</a>
+                                    </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4" style="padding-left: 4px">
+                                        <a id="M999" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none">M999</a>
+                                    </div>
+                  <div class="col-lg-4 col-md-4 col-sm-4" style="padding-left: 4px">
+                                        <a id="restart_touchui" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 12px 5px; font-size: 12px; border-radius: 10px; text-transform: none">Рестарт интерфейса</a>
+                                    </div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!--<div></div>-->
+			<!-- END tabs CONTENT SERVICE -->
+			<!-- Title -->
+			<!--ACTIVE-->
+			<div class="row heading-bg" style="display: none">
+				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+					<h5 class="txt-dark">Сервисное меню</h5>
+				</div>
+				<!-- Breadcrumb -->
+				<!-- ACTIVE-->
+				<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12" style="display: none">
+					<ol class="breadcrumb">
+						<li class="active"><span>Service</span></li>
+					</ol>
+				</div>
+				<!-- /Breadcrumb -->
+				<!-- ACTIVE-->
+			</div>
+			<!-- /Title -->
+
+			<!-- Row -->
+			<!-- ACTIVE-->
+			<div class="row" style="display: none">
+				<div class="col-md-12">
+					<div class="panel panel-default card-view">
+						<div class="panel-wrapper collapse in">
+							<div class="panel-body pa-15">
+								<div class="panel-group accordion-struct" role="tablist" aria-multiselectable="true">
+									<div class="panel panel-default">
+										<div class="panel-heading activestate" role="tab" id="headingFive">
+											<a role="button" data-toggle="collapse" href="#collapseFive"
+											   aria-expanded="true" aria-controls="collapseFive">Руководство</a>
+										</div>
+										<div id="collapseFive" class="panel-collapse collapse in" role="tabpanel"
+											 aria-labelledby="headingFive">
+											<div class="panel-group accordion-struct accordion-style-1" id="accordion_2"
+												 role="tablist" aria-multiselectable="true">
+												<div class="panel panel-default">
+													<div class="panel-heading" role="tab" id="heading_10">
+														<a role="button" data-toggle="collapse"
+														   data-parent="#accordion_2" href="#collapse_10"
+														   aria-expanded="false" class="collapsed">
+															<div class="icon-ac-wrap pr-20"><span class="plus-ac"><i
+																	class="ti-plus"></i></span><span class="minus-ac"><i
+																	class="ti-minus"></i></span></div>
+															печать</a>
+													</div>
+													<div id="collapse_10" class="panel-collapse collapse"
+														 role="tabpanel" aria-expanded="false" style="height: 0px;">
+														<div class="panel-body pa-15"> Anim pariatur cliche
+															reprehenderit, enim eiusmod high life accusamus terry
+															richardson ad squid. 3 wolf moon officia aute, non cupidatat
+															skateboard dolor brunch. Food truck quinoa nesciunt laborum
+															eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+															on it squid single-origin coffee nulla assumenda shoreditch
+															et. Nihil anim keffiyeh helvetica, craft beer la.
+														</div>
+													</div>
+												</div>
+												<div class="panel panel-default">
+													<div class="panel-heading" role="tab" id="heading_11">
+														<a class="collapsed" role="button" data-toggle="collapse"
+														   data-parent="#accordion_2" href="#collapse_11"
+														   aria-expanded="false">
+															<div class="icon-ac-wrap pr-20"><span class="plus-ac"><i
+																	class="ti-plus"></i></span><span class="minus-ac"><i
+																	class="ti-minus"></i></span></div>
+															обслуживание</a>
+													</div>
+													<div id="collapse_11" class="panel-collapse collapse"
+														 role="tabpanel" aria-expanded="false" style="height: 0px;">
+														<div class="panel-body pa-15"> Anim pariatur cliche
+															reprehenderit, enim eiusmod high life accusamus terry
+															richardson ad squid. 3 wolf moon officia aute, non cupidatat
+															skateboard dolor brunch. Food truck quinoa nesciunt laborum
+															eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+															on it squid single-origin coffee nulla assumenda shoreditch
+															et. Nihil anim keffiyeh helvetica,
+														</div>
+													</div>
+												</div>
+												<div class="panel panel-default">
+													<div class="panel-heading" role="tab" id="heading_12">
+														<a class="collapsed" role="button" data-toggle="collapse"
+														   data-parent="#accordion_2" href="#collapse_12"
+														   aria-expanded="false">
+															<div class="icon-ac-wrap pr-20"><span class="plus-ac"><i
+																	class="ti-plus"></i></span><span class="minus-ac"><i
+																	class="ti-minus"></i></span></div>
+															движение по осям</a>
+													</div>
+													<div id="collapse_12" class="panel-collapse collapse"
+														 role="tabpanel" aria-expanded="false">
+														<div class="panel-body pa-15"> Anim pariatur cliche
+															reprehenderit, enim eiusmod high life accusamus terry
+															richardson ad squid. 3 wolf moon officia aute, non cupidatat
+															skateboard dolor brunch. Food truck quinoa nesciunt laborum
+															eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+															on it squid single-origin coffee nulla assumenda shoreditch
+															et. Nihil anim keffiyeh helvetica, inable VHS.
+														</div>
+													</div>
+												</div>
+												<div class="panel panel-default">
+													<div class="panel-heading" role="tab" id="heading_13">
+														<a class="collapsed" role="button" data-toggle="collapse"
+														   data-parent="#accordion_2" href="#collapse_13"
+														   aria-expanded="false">
+															<div class="icon-ac-wrap pr-20"><span class="plus-ac"><i
+																	class="ti-plus"></i></span><span class="minus-ac"><i
+																	class="ti-minus"></i></span></div>
+															обслуживание</a>
+													</div>
+													<div id="collapse_13" class="panel-collapse collapse"
+														 role="tabpanel" aria-expanded="false">
+														<div class="panel-body pa-15"> Anim pariatur cliche
+															reprehenderit, enim eiusmod high life accusamus terry
+															richardson ad squid. 3 wolf moon officia aute, non cupidatat
+															skateboard dolor brunch. Food truck quinoa nesciunt laborum
+															eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
+															on it squid single-origin coffee nulla assumenda shoreditch
+															et. Nihil anim keffiyeh helvetica, inable VHS.
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading" role="tab" id="headingSix">
+											<a class="collapsed" role="button" data-toggle="collapse"
+											   data-parent="#accordion" href="#collapseSix" aria-expanded="false"
+											   aria-controls="collapseSix">Видеоматериалы</a>
+										</div>
+										<div id="collapseSix" class="panel-collapse collapse" role="tabpanel"
+											 aria-labelledby="headingSix">
+											<div class="panel-body pa-15">Видосики</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer container-fluid pl-30 pr-30">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="col-sm-10">
+						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
+					</div>
+					<div class="col-sm-2">
+						<div alt="default" data-toggle="modal" style="    padding-top: 11px;"
+							 data-target="#stack-trace" class="model_img img-responsive">
+							<i class="fa fa-spin fa-gear"></i> <span class="text-muted"></span>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+
+					<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+<div class="tabs__content"></div>
+</div>
+
+<!-- .tabs -->
+
+<!--<nav class="navbar navbar-inverse navbar-fixed-top">
+
+            <div class="col-lg-2">
+            <div class="nav-header pull-left">
+                <div class="logo-wrap">
+                    <a href="3dprint.html">
+                        <img class="brand-img" src="dist/img/logo.png" alt="brand"/>
+                        <span class="brand-text">3DPRINT</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-7">
+        <ul class="menu-main">
+  <li><a href="" class="current">ДОМ</a></li>
+
+ <li><a href="3d_files.html">Настройки</a></li>
+  <li><a href="3d_services.html">Обслуживание</a></li>
+            <li><a href="3d_settings.html">информация</a></li>
+</ul>
+    </div>
+</nav>
+ <!-- Main Content
+		<div class="page-wrapper">
+			<div class="container-fluid pt-25">
+<!-- Row
+				<div class="row">
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-3">
+						<div class="well well-lg card-view">
+							<h6 class="mb-15" id="status">Принтер ожидает</h6>
+							<p></p>
+							<button class="btn btn-success btn-outline btn-rounded" onclick="ConnectServ()" id="connect">Подключиться</button>
+							<button class="btn btn-success btn-outline btn-rounded disabled" onclick="DisconnectServ()" id="disconnect">Отключиться</button>
+							<!--<div class="form-wrap">
+								<div class="form-group">
+									<label class="control-label mb-10" for="baudrates">Baudrates:</label>
+									<select id="baudrates" class="form-control required" name="country">
+										<!--<option value="1">India</option>
+										<option value="2">Australia</option>
+										<option value="3">USA</option>
+										<option value="4">Japan</option>
+									</select>
+								</div>
+							<div class="form-group">
+								<label class="control-label mb-5" for="baudrates">Baudrates:</label>
+								<label id="baudrates"  type="text" name="address" class="form-control required" value=""></label>
+							</div>
+						</div>
+						</div>
+                    </div>
+
+					<div class="col-lg-3 col-md-6 col-sm-6 col-xs-3">
+						<div class="panel panel-default card-view">
+							<div class="panel-wrapper collapse in">
+                                <div class="panel-body sm-data-box-1">
+									<span class="uppercase-font weight-500 font-14 block text-center txt-dark">Состояние принтера</span>
+									<div class="cus-sat-stat weight-500 txt-success text-center mt-5">
+										<span class="counter-anim" data>12</span>%<span></span>
+									</div>
+								</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6">
+                        <div class="panel panel-default card-view">
+							<div class="panel-heading">
+								<div class="pull-left">
+									<h6 class="panel-title txt-dark">Температура</h6>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pb-0">
+									<div class="row">
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">1 сопла</span>
+											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="86">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_1"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">2 сопла</span>
+											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="46">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_2"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										<div class="col-sm-4 mb-15">
+											<span class="skill-head mb-20">стола</span>
+											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="90">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_3"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+                </div>
+
+				<!-- footer -->
+<!-- Offset on Z modal content -->
+<div id="stack-trace" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg" style="width: 600px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabel">Stack trace</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="message-text" class="control-label mb-10">Message:</label>
+					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Offset on Z modal content -->
+<div id="modaloffsetZ" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabel">Корректировка</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="table-responsive">
+						<table class="table-condensed" style="text-align: center;">
+							<thead>
+							<tr>
+								<th><a>Current Z</a></th>
+								<th><a>New Z</a></th>
+								<th style="text-align: center;font-weight: 900;"><a>Up</a></th>
+								<th style="text-align: center;font-weight: 900;"><a>Down</a></th>
+								<th style="text-align: center;font-weight: 900;"><a>Set value</a></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td style="font-weight: 900;font-size: 19px;" id="currentZ">
+								</td>
+								<td style="color: #a23028;font-weight: 900;font-size: 19px;" id="NewZ">
+								</td>
+								<td><a id="up_to_Z" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
+								</td>
+								<td><a id="down_to_Z" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-down" style="font-size: x-large;"></span></a>
+								</td>
+								<td><a id="set_offset_z" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--<label for="message-text" class="control-label mb-10">Message:</label>
+					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Offset on Z modal content -->
+<div id="fanbox" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" style="    width: max-content;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title">Управление вентилятором</h5>
+			</div>
+			<div class="modal-body" style="text-align: center;padding: 0;">
+				<div class="form-group" style="padding: 0;">
+					<!-- New buttons -->
+					<div class="button-group-navigation" target="_blank">
+						<li><a class="btn fanbtn" href="#" data="M107">0%</a></li>
+						<li><a class="btn fanbtn" href="#" data="M106 S128">50%</a></li>
+						<li><a class="btn fanbtn" href="#" data="M106 S255">100%</a></li>
+					</div>
+				<!-- end buttons -->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Change tool on modal content -->
+<div id="toolbox" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" style="width: max-content;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title">Управление соплом</h5>
+			</div>
+			<div class="modal-body" style="text-align: center;padding: 0;">
+				<div class="form-group" style="padding: 0;">
+					<!-- New buttons -->
+					<div class="button-group-navigation" target="_blank">
+						<li><a class="btn toolbtn active" href="#" data="tool0">tool0</a></li>
+						<li><a class="btn toolbtn" href="#" data="tool1">tool1</a></li>
+					</div>
+				<!-- end buttons -->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Button trigger modal -->
+
+<!-- jQuery -->
+    <script>var DATA = JSON.parse('{% raw config %}') ; console.log(DATA)</script>
+    <script src="{{ static_url('dist/jquery/dist/jquery.min.js')}}" ></script>
+
+    <!-- Bootstrap Core JavaScript -->
+
+    <script src="{{ static_url('dist/bootstrap/dist/js/bootstrap.min.js')}}" ></script>
+	<!-- Data table JavaScript -->
+
+    <script src="{{ static_url('dist/datatables/media/js/jquery.dataTables.min.js')}}" ></script>
+	<!-- Slimscroll JavaScript -->
+
+    <script src="{{ static_url('dist/other_js/jquery.slimscroll.js')}}" ></script>
+	<!-- Progressbar Animation JavaScript -->
+
+    <script src="{{ static_url('dist/waypoints/lib/jquery.waypoints.min.js')}}" ></script>
+
+    <script src="{{ static_url('dist/jquery.counterup/jquery.counterup.min.js')}}" ></script>
+                <!-- Progressbar Animation JavaScript -->
+
+    <script src="{{ static_url('dist/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js')}}" ></script>
+    <script src="{{ static_url('dist/other_js/skills-counter-data.js')}}" ></script>
+
+
+	<!-- Fancy Dropdown JS -->
+	<!--TO DO maybe including<script src="dist/js/dropdown-bootstrap-extended.js"></script>-->
+
+	<!-- Moment JS for convertind data/time -->
+	<script src="{{ static_url('dist/other_js/moment.js')}}" ></script>
+
+    <!-- Sparkline JavaScript -->
+	<!--TO DO maybe including<script src="vendors/jquery.sparkline/dist/jquery.sparkline.min.js"></script>-->
+
+	<!-- Owl JavaScript -->
+
+	<script src="{{ static_url('dist/owl.carousel/dist/owl.carousel.min.js') }}"></script>
+	<!-- Switchery JavaScript -->
+
+    <script src="{{ static_url('dist/switchery/dist/switchery.min.js') }}"></script>
+	<!-- Sweet-Alert  -->
+
+    <script src="{{ static_url('dist/sweetalert/dist/sweetalert.min.js') }}"></script>
+
+	<!-- EChartJS JavaScript -->
+	<!--TO DO maybe including<script src="vendors/bower_components/echarts/dist/echarts-en.min.js"></script>
+	<script src="vendors/echarts-liquidfill.min.js"></script>
+	<!-- import configuration -->
+
+    <script src="{{ static_url('config.js') }}"></script>
+	<!-- Cookie juery -->
+
+    <script src="{{ static_url('dist/other_js/jquery.cookie.js') }}"></script>
+	<!-- Websocket -->
+    <!-- Temporary comment this scripts
+    <script src="{{ static_url('dist/other_js/web_socket.js') }}"></script>
+	<!-- Toast JavaScript -->
+
+    <script src="{{ static_url('dist/jquery-toast-plugin/dist/jquery.toast.min.js') }}"></script>
+	<script src="{{ static_url('main/js/events/info_msg.js') }}"></script>
+	<!-- Include script processing data -->
+
+    <!-- Temporary comment this scripts
+    <script src="{{ static_url('main/js/handlers/data_processing.js') }}"></script>
+	<!-- Init start socket connection -->
+    <!-- Temporary comment this scripts
+    <script src="{{ static_url('main/js/commands.js') }}"></script>
+    <script src="{{ static_url('main/js/handlers/socket_handler.js') }}"></script>
+	<!-- Init JavaScript -->
+	<script src="{{ static_url('main/js/commands.js') }}"></script>
+	<script src="{{ static_url('main/js/events/methods.js') }}"></script>
+	<script src="{{ static_url('main/js/handlers/views_handler.js') }}"></script>
+	<script src="{{ static_url('main/js/handlers/data_processing.js') }}"></script>
+	<script src="{{ static_url('main/js/handlers/start_app.js') }}"></script>
+    <script src="{{ static_url('main/js/init_app.js') }}"></script>
+
+
+    <!-- Temporary comment this scripts
+    #<script src="{{ static_url('main/js/init.js') }}"></script>
+	#<script src="{{ static_url('main/js/handlers/views_handler.js') }}"></script>
+	#<script src="{{ static_url('main/js/events/connect_board.js') }}"></script>
+	<!--<script src="dist/js/dashboard-data.js"></script>-->
+	<!-- Include octo js -->
+	<script src="{{ static_url('main/js/octo_js/lib/lodash.min.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/lib/sockjs.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/base.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/settings.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/socket.js') }}"></script>
+
+    <script src="{{ static_url('main/js/octo_js/app/client/job.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/browser.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/connection.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/system.js') }}"></script>
+	<script src="{{ static_url('main/js/octo_js/app/client/files.js') }}"></script>
+	<script src="{{ static_url('main/js/handlers/packed_client.js') }}"></script>
+</body>
+</html>

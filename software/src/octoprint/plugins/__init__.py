@@ -1,1 +1,0 @@
-# make our plugins testable

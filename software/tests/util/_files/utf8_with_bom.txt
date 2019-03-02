@@ -1,3 +1,0 @@
-﻿# This is a text file encoded in UTF8 with a BOM
-
-Here are some umlauts: äöüÄÖÜß
