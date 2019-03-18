@@ -71,7 +71,8 @@ var ShowPrintInfo = function (info) {
 
 function HandlerState(value) {
     "use strict";
-    var state = value.state.text || value.state;
+    console.log('Handler state:', value, Apps.Printer._state);
+    var state = value.state.text || undefined; //|| value.state;
     var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state] : state;
     if (state === 'Closed') {
         $('#status_print').text("Отключено, подключение...");
@@ -90,7 +91,7 @@ function HandlerState(value) {
         $('#status_print').text(rus_state);
         PrinterState(rus_state);
         //global.global_state = state;
-        if (Apps.Printer._state === 'Printing' && state === 'Operational') {
+        if ((Apps.Printer._state === 'Printing' || Apps.Printer._state === 'Printing from SD') && state === 'Operational') {
             CancelPrint();
         }
         Apps.Printer._state = state;

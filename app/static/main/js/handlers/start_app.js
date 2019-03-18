@@ -100,6 +100,27 @@ var Apps = {
 
             _state: "",
             _rus_state: "",
+            _is_pause: false,
+            Switch_pause: function () {
+                this._is_pause = !this._is_pause;
+                var command = Apps._settings.buttons.OnPause;
+                if (Apps.Printer._state === ('Pausing' || 'Paused')) {
+                    this._is_pause = false;
+                    //command = Apps._settings.buttons.CancPause;
+                }
+
+
+                if (this._is_pause){
+                    $('#iconpause2').text(' Продолжить#2');
+                    $('#iconpause').text(' Продолжить#1');
+                }
+                else {
+                    $('#iconpause2').text(' Пауза#2');
+                    $('#iconpause').text(' Пауза#1');
+                    command = Apps._settings.buttons.CancPause;
+                }
+                Apps.PlayCommand(command);
+            },
             ConnectPrinter: function () {
                 //this._state_printer = "connected";
                 OctoPrint.connection.connect();

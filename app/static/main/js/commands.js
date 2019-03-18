@@ -108,11 +108,9 @@ var SystemTrigeredPrint = function () {
 };
 
 function TrigeredPrint() {
-    var command = Apps._settings.buttons.OnPause;
-    if (Apps.Printer._state === 'Pausing' || Apps.Printer._state === 'Paused') {
-        command = Apps._settings.buttons.CancPause;
-    }
-    console.log(command);
-    alert('State: ' + ((Apps.Printer._state !== undefined) ? 'undefined\n' : Apps.Printer._state) +  command);
-    Apps.PlayCommand(command);
+    Apps.Printer.Switch_pause();
+
+    //console.log(command, Apps.Printer._state);
+    //alert('State: ' + Apps.Printer._state +  command);
+    //Apps.PlayCommand(command);
 }
