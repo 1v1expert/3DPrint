@@ -113,5 +113,6 @@ function TrigeredPrint() {
         command = Apps._settings.buttons.CancPause;
     }
     console.log(command);
+    alert('State: ' + ((Apps.Printer._state !== undefined) ? 'undefined\n' : Apps.Printer._state) +  command);
     Apps.PlayCommand(command);
 }
