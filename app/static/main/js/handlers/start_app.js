@@ -111,12 +111,12 @@ var Apps = {
 
 
                 if (this._is_pause){
-                    $('#iconpause2').text(' Продолжить#2');
-                    $('#iconpause').text(' Продолжить#1');
+                    $('#iconpause2').text(' Продолжить');
+                    //$('#iconpause').text(' Продолжить#1');
                 }
                 else {
-                    $('#iconpause2').text(' Пауза#2');
-                    $('#iconpause').text(' Пауза#1');
+                    $('#iconpause2').text(' Пауза');
+                    //$('#iconpause').text(' Пауза#1');
                     command = Apps._settings.buttons.CancPause;
                 }
                 Apps.PlayCommand(command);
