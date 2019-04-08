@@ -123,7 +123,8 @@ var Apps = {
             },
             ConnectPrinter: function () {
                 //this._state_printer = "connected";
-                OctoPrint.connection.connect();
+                ConnectOctoprint();
+                //OctoPrint.connection.connect();
             },
             DisconnectPrinter: function () {
                 //this._state_printer = "disconnected";
