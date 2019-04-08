@@ -129,6 +129,7 @@ var Apps = {
                 //this._state_printer = "disconnected";
                 OctoPrint.connection.disconnect();
             },
+
             _is_connect_printer: false,
             _is_connect_printer_octo: null
         },
