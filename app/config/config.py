@@ -2,6 +2,12 @@
 
 PORT = 5001
 cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo="
+FileManager = {
+	"Destination": "/Users/vladislavsazonov/PycharmProjects/3DQuality/test",
+	"Source": "/Users/vladislavsazonov/PycharmProjects/3DQuality/3DPrint",
+	"Suffix": ".gcode"
+
+}
 CONFIG = {
 	"BaseUrl": "http://localhost:5000",
 	"Login": "vladdos",

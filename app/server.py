@@ -15,13 +15,33 @@ define("port", default=config.PORT, help="run on the given port", type=int)
 
 class Application(tornado.web.Application):
 	def __init__(self):
-		handlers = [(r"/", RootHandler), ]
+		handlers = [(r"/", RootHandler),
+		            (r"/manage_file", FileManager)]
 		settings = {
 			"cookie_secret": config.cookie_secret,
 			"static_path": os.path.join(os.path.dirname(__file__), "static")
 		}
 		tornado.web.Application.__init__(self, handlers, **settings)
 
+
+class FileManager(tornado.web.RequestHandler):
+	@tornado.web.asynchronous
+	def get(self, *args, **kwargs):
+		self.write(json.dumps({'Files': self.get_files()}))
+		self.get_files()
+		self.finish()
+	
+	@staticmethod
+	def get_files():
+		files = []
+		for root, directories, filenames in os.walk(config.FileManager['Source']):
+			for filename in filenames:
+				if filename.endswith(config.FileManager['Suffix']):
+					files.append({'path': root + filename,
+					              'name': filename})
+				#print(filename.endswith('xml'))
+				os.path.join(root, filename)
+		return files
 
 
 class RootHandler(tornado.web.RequestHandler):
