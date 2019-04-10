@@ -18,10 +18,25 @@ $('.js-click-modal').click(function(){
 $('.js-close-modal').click(function(){
   $('.container').removeClass('modal-open');
 });
+function CopyFile(filepath, name) {
+	alert('Копируется файл' + filepath);
+	$.ajax(
+        {
+            "async": true,
+            "url": "http://localhost:5001/manage_file?name=" + name +  "&copy=" + filepath,
+            "method": "POST",
+			//"data": String({"copy": filepath})
+    }).done(function (response){
+    	alert('Файл скопирован');
+    })
+		.error(function (response) {
+			alert('Файл не скопирован');
+        });
+}
 function ConfirmPrint(location, name_file) {
     swal({
         title: "Вы уверены ?",
-        text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
+        text: "Файл " + name_file + " будет скопирован на внутреннюю память",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#f8b32d",
@@ -31,7 +46,8 @@ function ConfirmPrint(location, name_file) {
         closeOnCancel: true
     }, function (isConfirm) {
         if (isConfirm) {
-            StartPrint(location, name_file);
+        	CopyFile(location, name_file);
+            //StartPrint(location, name_file);
             $('#maintab').click();
         } else {
             swal("Отменено", "А ты послушный :)", "error");

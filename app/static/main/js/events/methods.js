@@ -79,6 +79,27 @@ function StartPrint(location, name_file) {
         });
     console.log(location, name_file);
 }
+function CustomGetFiles() {
+    var data_html = "";
+    $.ajax(
+        {
+            "async": true,
+            "url": "http://localhost:5001/manage_file",
+            "method": "GET"
+    }).done(function (response){
+        console.log(response);
+        _.each(JSON.parse(response).files, function(entry) {
+            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + entry.path + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.name + "<br> </div> </a> </div> </div>";
+        });
+        $('#rowfiles').html(data_html);
+        //alert(response);
+    })
+        .error(function (message) {
+            alert(message);
+            //console.log(message);
+
+        });
+}
 function GetFiles(url) {
     var data_html = "";
     OctoPrint.files.listForLocation(url, true)

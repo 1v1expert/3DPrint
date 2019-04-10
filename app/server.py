@@ -9,6 +9,7 @@ import tornado.web
 from config import config
 from tornado.options import define, options
 import json
+from shutil import copy2
 
 define("port", default=config.PORT, help="run on the given port", type=int)
 
@@ -27,9 +28,25 @@ class Application(tornado.web.Application):
 class FileManager(tornado.web.RequestHandler):
 	@tornado.web.asynchronous
 	def get(self, *args, **kwargs):
-		self.write(json.dumps({'Files': self.get_files()}))
-		self.get_files()
+		self.write(json.dumps({'files': self.get_files()}))
 		self.finish()
+		
+	def post(self, *args, **kwargs):
+		print(vars(self))
+		#arguments = self.get_arguments()
+		path = self.get_argument('copy')
+		name = self.get_argument('name')
+		#delete_path_file = self.get_argument('delete')
+		#print('\n', copy_path_file, delete_path_file)
+		print('\n', path, name)
+		self.copy_file(path, name)
+		self.write(json.dumps({'File': path}))
+	
+	
+	@staticmethod
+	def copy_file(src, name):
+		copy2(src, config.FileManager['Destination'] + '/' + name)
+	
 	
 	@staticmethod
 	def get_files():
@@ -37,7 +54,7 @@ class FileManager(tornado.web.RequestHandler):
 		for root, directories, filenames in os.walk(config.FileManager['Source']):
 			for filename in filenames:
 				if filename.endswith(config.FileManager['Suffix']):
-					files.append({'path': root + filename,
+					files.append({'path': root + '/' + filename,
 					              'name': filename})
 				#print(filename.endswith('xml'))
 				os.path.join(root, filename)
