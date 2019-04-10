@@ -3,8 +3,8 @@
 PORT = 5001
 cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo="
 FileManager = {
-	"Destination": "/home/pi/watched",
-	"Source": "/home/pi/flashdrive",
+	"Destination": "/home/pi/.octoprint/watched",
+	"Source": "/home/pi/.octoprint/flashdrive",
 	"Suffix": ".gcode"
 
 }
