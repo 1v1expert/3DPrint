@@ -151,7 +151,7 @@ Swal.fire({
 }
 
 function CommandFile(filepath, name, command) {
-	alert('Копируется файл' + filepath);
+	//alert('Копируется файл' + filepath);
 	$.ajax(
         {
             "async": true,
@@ -160,14 +160,24 @@ function CommandFile(filepath, name, command) {
 			"data": JSON.stringify({"path": filepath,
 			"command": command, "name": name})
     }).done(function (response){
-    	alert('Файл скопирован');
+    	Swal.fire(
+            'Скопировано!',
+            'Ваш файл успешно скопирован.',
+            'success'
+        );
+    	//alert('Файл скопирован');
     })
 		.error(function (response) {
-			alert('Файл не скопирован');
+			Swal.fire(
+            'Не скопировано!',
+            'Произошла проблема',
+            'error'
+        );
+			//alert('Файл не скопирован');
         });
 }
 function ConfirmCopy(location, name_file) {
-    swal({
+    Swal.fire({
         title: "Вы уверены ?",
         text: "Файл " + name_file + " будет скопирован на внутреннюю память",
         type: "warning",
@@ -177,15 +187,23 @@ function ConfirmCopy(location, name_file) {
         cancelButtonText: "Нет, не хооочу",
         closeOnConfirm: true,
         closeOnCancel: true
-    }, function (isConfirm) {
-        if (isConfirm) {
-        	CommandFile(location, name_file, "copy");
-            //StartPrint(location, name_file);
-            $('#maintab').click();
-        } else {
-            swal("Отменено", "А ты послушный :)", "error");
-        }
-    });
+    }).then((result) => {
+  if (result.value)
+	{
+		CommandFile(location, name_file, "copy");
+
+    }})
+  // }
+  //   , function (isConfirm) {
+  //       if (isConfirm) {
+  //       	//alert('confirm')
+  //       	CommandFile(location, name_file, "copy");
+  //           //StartPrint(location, name_file);
+  //           $('#maintab').click();
+  //       } else {
+  //           swal("Отменено", "А ты послушный :)", "error");
+  //       }
+  //   });
 }
  /** ***************************************/
 
