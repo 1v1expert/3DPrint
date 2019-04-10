@@ -33,24 +33,11 @@ class FileManager(tornado.web.RequestHandler):
 		self.finish()
 		
 	def post(self, *args, **kwargs):
-		
-		#name, command, path = data.get('name'), data.get('command'), data.get('path')
 		if self.parse_body(self.request.body):
 			self.write(json.dumps({'Result': 'success'}))
 		else:
 			self.write_error(404)
-		#print(vars(self))
-		#arguments = self.get_arguments()
-		#path = self.get_argument('copy')
-		#name = self.get_argument('name')
 		
-		#print(, , )
-		#delete_path_file = self.get_argument('delete')
-		#print('\n', copy_path_file, delete_path_file)
-		#print('\n', path, name)
-		#self.copy_file(path, name)
-		
-	
 	def parse_body(self, body):
 		try:
 			p_body = tornado.escape.json_decode(body)
@@ -58,14 +45,12 @@ class FileManager(tornado.web.RequestHandler):
 			if command:
 				method = getattr(self, command + '_file')
 				method(p_body.get('path'), p_body.get('name'))
-			
 		except:
 			return False
 	
 	@staticmethod
 	def copy_file(src, name):
 		copy2(src, config.FileManager['Destination'] + '/' + name)
-	
 	
 	@staticmethod
 	def get_files():
