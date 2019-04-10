@@ -18,6 +18,138 @@ $('.js-click-modal').click(function(){
 $('.js-close-modal').click(function(){
   $('.container').removeClass('modal-open');
 });
+function ConfirmPrintOrDelete(location, name_file) {
+	//let timerInterval
+Swal.fire({
+  title: 'Файл ' + name_file,
+  html:
+    // 'I will close in <strong></strong> seconds.<br/><br/>' +
+    // '<button id="increase" class="btn btn-warning">' +
+    //   'I need 5 more seconds!' +
+    // '</button><br/>' +
+    '<button id="delete" class="btn btn-danger">' +
+      'Удалить файл' +
+    '</button><br/>' +
+    '<button id="sent_file" class="btn btn-success">' +
+      'Отправить на печать' +
+    '</button><br/>' +
+    '<button id="close" class="btn btn-primary">' +
+      'Закрыть' +
+    '</button>',
+  //timer: 10000,
+  onBeforeOpen: () => {
+    var content = Swal.getContent();
+    var $ = content.querySelector.bind(content);
+
+    var delete_file = $('#delete');
+    var sent_file = $('#sent_file');
+    var close = $('#close');
+    //const increase = $('#increase')
+
+    Swal.showLoading();
+
+    delete_file.addEventListener('click', () => {
+    	DeleteFile(location, name_file);
+      swal("Успешно", "Файл " + name_file + "успешно удалён" , "success");
+    });
+
+    sent_file.addEventListener('click', () => {
+    	StartPrint(location, name_file);
+    	$('#maintab').click();
+      //swal("Отменено", "А ты послушный :)", "error");
+
+    });
+
+    close.addEventListener('click', () => {
+      Swal.close()
+
+    });
+
+    // increase.addEventListener('click', () => {
+    //   Swal.increaseTimer(5000)
+    // })
+
+    // timerInterval = setInterval(() => {
+    //   Swal.getContent().querySelector('strong')
+    //     .textContent = (Swal.getTimerLeft() / 1000)
+    //       .toFixed(0)
+    // }, 100)
+  },
+  // onClose: () => {
+  //   clearInterval(timerInterval)
+  // }
+});
+	// Swal.fire({
+	// 	text: "text",
+	// 	content: "content",
+	// 	title: "Test",
+	// 	buttons: {
+  //   		cancel: {
+  //   			text: "Cancel",
+  //   			value: null,
+  //  		 		visible: false,
+  //   			className: "",
+  //   			closeModal: true,
+	// 		},
+	// 		catch: {
+  //   			text: "Throw Pokéball!",
+	// 			value: "catch",
+	// 		},
+	// 		confirm: {
+  //   text: "OK",
+  //   value: true,
+  //   visible: true,
+  //   className: "",
+  //   closeModal: true
+  // }
+	// 		//defeat: true,
+	// 	}
+	// }, function () {
+  //
+  //   });
+    // swal("A wild Pikachu appeared! What do you want to do?", {
+    	// buttons: {
+    	// 	cancel: "Run away!",
+	// 		catch: {
+    	// 		text: "Throw Pokéball!",
+	// 			value: "catch",
+	// 		},
+	// 		defeat: true,
+	// 	},
+	// })
+		// .then((value) => {
+		// 	switch (value) {
+		// 		case "defeat":
+		// 			swal("Pikachu fainted! You gained 500 XP!");
+		// 			break;
+		// 		case "catch":
+		// 			swal("Gotcha!", "Pikachu was caught!", "success");
+		// 			break;
+		// 		default:
+		// 			swal("Got away safely!");
+		// 	}
+		// });
+    // swal({
+    //     title: "Вы уверены ?",
+    //     text: "Файл " + name_file + " будет скопирован на внутреннюю память",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#f8b32d",
+    //     confirmButtonText: "Да, я сделаю это",
+    //     cancelButtonText: "Нет, не хооочу",
+    //     closeOnConfirm: true,
+    //     closeOnCancel: true
+    // }, function (isConfirm) {
+    //     if (isConfirm) {
+    //     	CommandFile(location, name_file, "copy");
+    //         StartPrint(location, name_file);
+    //         $('#maintab').click();
+    //     } else {
+    //         swal("Отменено", "А ты послушный :)", "error");
+    //     }
+    // });
+}
+
 function CommandFile(filepath, name, command) {
 	alert('Копируется файл' + filepath);
 	$.ajax(
