@@ -10,6 +10,7 @@ from config import config
 from tornado.options import define, options
 import json
 from shutil import copy2
+import tornado.escape
 
 define("port", default=config.PORT, help="run on the given port", type=int)
 
@@ -32,16 +33,34 @@ class FileManager(tornado.web.RequestHandler):
 		self.finish()
 		
 	def post(self, *args, **kwargs):
-		print(vars(self))
+		
+		#name, command, path = data.get('name'), data.get('command'), data.get('path')
+		if self.parse_body(self.request.body):
+			self.write(json.dumps({'Result': 'success'}))
+		else:
+			self.write_error(404)
+		#print(vars(self))
 		#arguments = self.get_arguments()
-		path = self.get_argument('copy')
-		name = self.get_argument('name')
+		#path = self.get_argument('copy')
+		#name = self.get_argument('name')
+		
+		#print(, , )
 		#delete_path_file = self.get_argument('delete')
 		#print('\n', copy_path_file, delete_path_file)
-		print('\n', path, name)
-		self.copy_file(path, name)
-		self.write(json.dumps({'File': path}))
+		#print('\n', path, name)
+		#self.copy_file(path, name)
+		
 	
+	def parse_body(self, body):
+		try:
+			p_body = tornado.escape.json_decode(body)
+			command = p_body.get('command', None)
+			if command:
+				method = getattr(self, command + '_file')
+				method(p_body.get('path'), p_body.get('name'))
+			
+		except:
+			return False
 	
 	@staticmethod
 	def copy_file(src, name):
