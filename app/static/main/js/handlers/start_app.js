@@ -123,7 +123,8 @@ var Apps = {
             },
             ConnectPrinter: function () {
                 //this._state_printer = "connected";
-                OctoPrint.connection.connect();
+                ConnectOctoprint();
+                //OctoPrint.connection.connect();
             },
             DisconnectPrinter: function () {
                 //this._state_printer = "disconnected";
@@ -203,6 +204,7 @@ function ConnectOctoprint() {
     OctoPrint.options.apikey = DATA.config.Apikey;
     OctoPrint.browser.login(DATA.config.Login, DATA.config.Password, true)
         .done(function(response) {
+            OctoPrint.connection.connect();
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
             AuthSocket(response.name, response.session);
             OctoPrint.socket.connect();
