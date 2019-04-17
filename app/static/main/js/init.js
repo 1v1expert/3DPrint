@@ -497,6 +497,7 @@ $.ajax(settings).done(function (response) {
     console.log(response);
 });
 };
+//function ChooseMethodeFile()
 var ConfirmPrint = function (name_file) {
     swal({
             title: "Вы уверены ?",
