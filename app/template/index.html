@@ -22,6 +22,110 @@
 	<!--<link href="main/css/style.css" rel="stylesheet" type="text/css">-->
 	<!--<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
 	<style>
+		/* new style button */
+				* {
+		  box-sizing: border-box;
+		}
+
+		.button_style {
+		  font-size: 5vw;
+		  border: none;
+		  background-color: #ebebf0;
+		  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+		  -webkit-user-select: none;
+			 -moz-user-select: none;
+			  -ms-user-select: none;
+				  user-select: none;
+		  position: relative;
+		  z-index: 1;
+		  padding: 0;
+		}
+		@media (min-width: 40em) {
+		  .button_style {
+			font-size: 2em;
+		  }
+		}
+		.button_style:before {
+		  content: "";
+		  position: absolute;
+		  z-index: -1;
+		  width: 10px;
+		  right: 0;
+		  top: 0;
+		  bottom: 0;
+		  background-color: rgba(0, 10, 50, 0.2);
+		  transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:after {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: #ebebf0;
+		  z-index: -1;
+		}
+		.button_style:hover:before, .button_style:focus:before {
+		  -webkit-transform: translate3D(10px, 0, 0);
+				  transform: translate3D(10px, 0, 0);
+		}
+		.button_style:active:before {
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:focus, .button_style:active {
+		  outline: none;
+		}
+		.button_style .button__inner_style {
+		  text-transform: uppercase;
+		  letter-spacing: 0.15px;
+		  color: #333;
+		  /*padding: 1em 1.5em;*/
+		  background-color: #fbfbfb;
+		  display: block;
+		  width: 100%;
+		  height: 100%;
+		  transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  position: relative;
+		  -webkit-transform: translate3D(0, -20px, 0);
+				  transform: translate3D(0, -20px, 0);
+			font-sbize: 18px!important;
+		}
+		.button_style:hover .button__inner_style, .button_style:focus .button__inner_style {
+		  -webkit-transform: translate3D(0, -20px, 0);
+				  transform: translate3D(0, -20px, 0);
+		}
+		.button_style:active .button__inner_style {
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:hover .button__inner_style, .button_style:focus .button__inner_style {
+		  background-color: #fff;
+		}
+
+		.button--secondary {
+		  background-color: #017fa1;/*#00d18e;*/
+		  z-index: 0;
+		}
+		.button--secondary:after {
+		  background-color: #017fa1;/*#00d18e;*/
+		}
+		.button--secondary .button__inner_style {
+		  background-color: #00a5d1;/*#00ffb2;*/
+		}
+		.button--secondary:hover .button__inner_style, .button--secondary:focus .button__inner_style {
+		  background-color: #00a5d1;/*#11ffb3;*/
+		}
+
+		/* end new style */
 		.file-name {
 			text-overflow: clip;
 			overflow: hidden;
@@ -732,16 +836,17 @@
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
-					<div class="col-md-8 col-sm-8 col-lg-8"
+					<div class="col-md-12 col-sm-12 col-lg-12"
 						 style="padding-left: unset; padding-right: unset">
 						<div class="table-responsive">
 							<table class="table-condensed">
 								<thead>
 								<!--<th></th>-->
-								<!--<th colspan="6"><a-->
-										<!--style="font-weight: 900; font-size: 20px;text-align: center">задать-->
-									<!--температуру</a></th>-->
-								<!--</thead>-->
+								<th colspan="4" style="text-align: center;padding-left: 60px;"><a
+										style="font-weight: 900; font-size: 20px;text-align: center">1</a></th>
+								<th colspan="4" style="text-align: center;padding-left: 55px;"><a
+										style="font-weight: 900; font-size: 20px;text-align: center">2</a></th>
+								</thead>
 								<tbody>
 								<tr>
 									<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>
@@ -751,9 +856,22 @@
 											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
 									</td>
 									<td><a id="t_tool" class="btn"
-										   style="width:75px; border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">200</a>
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>
 									</td>
 									<td><a id="down_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+									<td style="padding: 0px 30px;"></td>
+									<!-- second extruder -->
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>
+									</td>
+									<td><a id="" class="btn"
 										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
 											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
 									</td>
@@ -772,7 +890,7 @@
 											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
 									</td>
 									<td><a id="t_board" class="btn"
-										   style="width:75px;border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">70</a>
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">70</a>
 									</td>
 									<td><a id="down_t_board" class="btn"
 										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
@@ -784,6 +902,50 @@
 									<!--<td><a id="zero_temp_board" class="btn"-->
 										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
 									<!--</td>-->
+								</tr>
+								<tr>
+									<td><a style="font-weight: 900; font-size: 15px;">скорость</a></td>
+
+									<td><a id="up_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="t_tool" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>
+									</td>
+									<td><a id="down_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+									<td style="padding: 0px 30px;"></td>
+									<!-- second extruder -->
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>
+									</td>
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4" style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 140px; height: 40px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">отмена</span>
+										</button>
+									</td>
+									<td colspan="4" style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 140px; height: 40px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">принять</span>
+										</button>
+									</td>
 								</tr>
 								</tbody>
 							</table>
