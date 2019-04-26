@@ -21,7 +21,8 @@ class Application(tornado.web.Application):
 		            (r"/manage_file", FileManager)]
 		settings = {
 			"cookie_secret": config.cookie_secret,
-			"static_path": os.path.join(os.path.dirname(__file__), "static")
+			"static_path": os.path.join(os.path.dirname(__file__), "static"),
+			"template_path": "app/templates"
 		}
 		tornado.web.Application.__init__(self, handlers, **settings)
 
@@ -66,12 +67,19 @@ class FileManager(tornado.web.RequestHandler):
 
 
 class RootHandler(tornado.web.RequestHandler):
+	# def get_template_path(self):
+	#
+	# 	print(self.settings)
+	# 	print()
+	# 	return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "app/templates/")
 	def get(self):
+		print(self.get_template_path())
 		FullData = dict(
 			config=config.CONFIG,
 			Definition=config.Definition,
 			buttons=config.buttons, translate_state=config.translate_state)
-		self.render("template/index.html", title="3dprint server", config=json.dumps(FullData))
+		self.render("base.html", title="3dprint server", config=json.dumps(FullData))
+
 
 def main():
 	tornado.options.parse_command_line()
