@@ -29,10 +29,10 @@ Swal.fire({
     // '</button><br/>' +
     '<button id="delete" class="btn btn-danger">' +
       'Удалить файл' +
-    '</button><br/>' +
+    '</button>' + //<br/>' +
     '<button id="sent_file" class="btn btn-success">' +
       'Отправить на печать' +
-    '</button><br/>' +
+    '</button>' + //<br/>' +
     '<button id="close" class="btn btn-primary">' +
       'Закрыть' +
     '</button>',

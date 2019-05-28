@@ -97,13 +97,15 @@ function CustomGetFiles() {
     }).done(function (response){
         console.log(response);
         _.each(JSON.parse(response).files, function(entry) {
-            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmCopy(\'" + entry.path + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.name + "<br> </div> </a> </div> </div>";
+            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmCopy(\'" + entry.path + "\' , \'" + entry.name + "\') \" > " +
+                // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
+                "<div class='file-name'>" + entry.name + "<br> </div> </a> </div> </div>";
         });
         $('#rowfiles').html(data_html);
         //alert(response);
     })
         .error(function (message) {
-            alert(message);
+            alert("Произошла ошибка при чтении файлов");
             //console.log(message);
 
         });
@@ -118,12 +120,14 @@ function GetFiles(url) {
                 if (entry.children) {
                     if (entry.children.length > 0) {
                         for (var children in entry.children) {
-                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                            data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                         }
                     }
                 }
                 else {
-                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.display + "<br> <span>Доб: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                    data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > " +
+                        // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
+                        "<div class='file-name'>" + entry.display + "<br> <span>Доб: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                 }
             });
             // if (url === 'local?force=true') {

@@ -2,6 +2,8 @@
 
 PORT = 5001
 cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo="
+Chamber = False
+Two_nozzle_version = False
 FileManager = {
 	"Destination": "/home/pi/.octoprint/watched",
 	"Source": "/home/pi/.octoprint/flashdrive",
