@@ -72,12 +72,43 @@ $.ajax(settings).done(function (response) {
     console.log(response);
 });
 }
+function DeleteFile(location, name_file) {
+    OctoPrint.files.delete(location, decodeURI(name_file))
+        .done(function (response) {
+            console.log(response);
+        });
+    console.log(location, name_file);
+    GetFiles('local?force=true');
+}
 function StartPrint(location, name_file) {
     OctoPrint.files.select(location, decodeURI(name_file), true)
         .done(function (response) {
             console.log(response);
         });
     console.log(location, name_file);
+}
+function CustomGetFiles() {
+    var data_html = "";
+    $.ajax(
+        {
+            "async": true,
+            "url": "http://localhost:5001/manage_file",
+            "method": "GET"
+    }).done(function (response){
+        console.log(response);
+        _.each(JSON.parse(response).files, function(entry) {
+            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmCopy(\'" + entry.path + "\' , \'" + entry.name + "\') \" > " +
+                // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
+                "<div class='file-name'>" + entry.name + "<br> </div> </a> </div> </div>";
+        });
+        $('#rowfiles').html(data_html);
+        //alert(response);
+    })
+        .error(function (message) {
+            alert("Произошла ошибка при чтении файлов");
+            //console.log(message);
+
+        });
 }
 function GetFiles(url) {
     var data_html = "";
@@ -89,23 +120,31 @@ function GetFiles(url) {
                 if (entry.children) {
                     if (entry.children.length > 0) {
                         for (var children in entry.children) {
-                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                            data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                         }
                     }
                 }
                 else {
-                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrint(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name'>" + entry.display + "<br> <span>Доб: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                    data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > " +
+                        // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
+                        "<div class='file-name'>" + entry.display + "<br> <span>Доб: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                 }
             });
+            // if (url === 'local?force=true') {
+            //     $('#usbfiles').css('visibility', 'visible');
+            //     if ($('#usbfiles').hasClass('active')) {
+            //         $('#rowfiles').html(data_html);
+            //     }
+            // }
             if (url === 'local?force=true') {
                 $('#usbfiles').css('visibility', 'visible');
-                if ($('#usbfiles').hasClass('active')) {
-                    $('#rowfiles').html(data_html);
+                if ($('#localfiles').hasClass('active')) {
+                     $('#rowfiles').html(data_html);
                 }
             }
-            if (url === 'sdcard?force=true') {
-                if ($('#localfiles').hasClass('active')) {
-                    $('#rowfiles').html(data_html);
-                }}
+            // if (url === 'sdcard?force=true') {
+            //     if ($('#localfiles').hasClass('active')) {
+            //         $('#rowfiles').html(data_html);
+            //     }}
     });
 }
