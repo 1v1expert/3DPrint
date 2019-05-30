@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>3DPrint</title>
+	<!--TODO: download media css-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 	<meta name="author" content="VLADDOS"/>
 	<link href="{{ static_url('dist/datatables/media/css/jquery.dataTables.min.css') }}" rel="stylesheet"
@@ -19,6 +22,110 @@
 	<!--<link href="main/css/style.css" rel="stylesheet" type="text/css">-->
 	<!--<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
 	<style>
+		/* new style button */
+				* {
+		  box-sizing: border-box;
+		}
+
+		.button_style {
+		  font-size: 5vw;
+		  border: none;
+		  background-color: #ebebf0;
+		  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+		  -webkit-user-select: none;
+			 -moz-user-select: none;
+			  -ms-user-select: none;
+				  user-select: none;
+		  position: relative;
+		  z-index: 1;
+		  padding: 0;
+		}
+		@media (min-width: 40em) {
+		  .button_style {
+			font-size: 2em;
+		  }
+		}
+		.button_style:before {
+		  content: "";
+		  position: absolute;
+		  z-index: -1;
+		  width: 10px;
+		  right: 0;
+		  top: 0;
+		  bottom: 0;
+		  background-color: rgba(0, 10, 50, 0.2);
+		  transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:after {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: #ebebf0;
+		  z-index: -1;
+		}
+		.button_style:hover:before, .button_style:focus:before {
+		  -webkit-transform: translate3D(10px, 0, 0);
+				  transform: translate3D(10px, 0, 0);
+		}
+		.button_style:active:before {
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:focus, .button_style:active {
+		  outline: none;
+		}
+		.button_style .button__inner_style {
+		  text-transform: uppercase;
+		  letter-spacing: 0.15px;
+		  color: #333;
+		  /*padding: 1em 1.5em;*/
+		  background-color: #fbfbfb;
+		  display: block;
+		  width: 100%;
+		  height: 100%;
+		  transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  position: relative;
+		  -webkit-transform: translate3D(0, -20px, 0);
+				  transform: translate3D(0, -20px, 0);
+			font-sbize: 18px!important;
+		}
+		.button_style:hover .button__inner_style, .button_style:focus .button__inner_style {
+		  -webkit-transform: translate3D(0, -20px, 0);
+				  transform: translate3D(0, -20px, 0);
+		}
+		.button_style:active .button__inner_style {
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:hover .button__inner_style, .button_style:focus .button__inner_style {
+		  background-color: #fff;
+		}
+
+		.button--secondary {
+		  background-color: #017fa1;/*#00d18e;*/
+		  z-index: 0;
+		}
+		.button--secondary:after {
+		  background-color: #017fa1;/*#00d18e;*/
+		}
+		.button--secondary .button__inner_style {
+		  background-color: #00a5d1;/*#00ffb2;*/
+		}
+		.button--secondary:hover .button__inner_style, .button--secondary:focus .button__inner_style {
+		  background-color: #00a5d1;/*#11ffb3;*/
+		}
+
+		/* end new style */
 		.file-name {
 			text-overflow: clip;
 			overflow: hidden;
@@ -434,10 +541,14 @@
 <div class="tabs">
 	<nav class="navbar navbar-inverse navbar-fixed-top" style="min-height: auto; padding: 0 0 0 0;">
 		<ul class="menu-main">
-			<li class="active" id="maintab">ДОМ</li>
-			<li id="manage_print">Управление</li>
-			<li>Файлы</li>
-			<li>Сервис</li>
+			<li class="active" id="maintab">
+				<i class="fa fa-home" aria-hidden="true"></i></li>
+			<li id="manage_print">
+				<i class="fa fa-print" aria-hidden="true" style="font-weight: bold;">&nbsp; Печать</i></li>
+			<li><i class="fa fa-cogs" aria-hidden="true" style="font-weight: bold;">&nbsp; Настройки</i></li>
+			<li><i class="fa fa-gear" aria-hidden="true" style="font-weight: bold;">&nbsp; Обслуживание</i></li>
+			<li><i class="fa fa-arrows" aria-hidden="true" style="font-weight: bold;">&nbsp; Движение по осям</i></li>
+			<li><i class="fa fa-arrows" aria-hidden="true" style="font-weight: bold;">&nbsp; Cервисное меню</i></li>
 		</ul>
 	</nav>
 	<div class="tabs__content  active">
@@ -456,9 +567,11 @@
 
 					<div class="col-lg-12 h-20" style="padding-left: unset;">
 						<div class="well well-lg card-view">
-							<h6 class="mb-15" id="print_status"></h6>
-							<h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 3px; font-size: 19px">
-							<code><b style="font-weight: bold" id="status_print"> ожидание </b></code></h6>
+							<!--<h6 class="mb-15" id="print_status"></h6>-->
+							<h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 2px; font-size: 29px">
+							<code><b id="status_print"> ожидание </b></code></h6>
+									<!--style="font-weight: bold" -->
+
 							<!-- Must be figure text this -->
 							<!--<div class="container">-->
 								<!--<div class="text"></div>-->
@@ -551,34 +664,41 @@
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pb-0">
 									<div class="row">
-										<div class="col-sm-4 mb-15">
+										<div class="col-sm-3 mb-15 ">
 											<span class="skill-head mb-20"
 												  style="text-transform: unset">t° 1-го СОПЛА</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_1"></label>
-											<canvas height="100" width="100"></canvas></span>
+											<canvas height="20" width="20"></canvas></span>
 										</div>
-										<!--<div class="col-sm-3 mb-15">
-											<span class="skill-head mb-20">T° 2 сопло</span>
-											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="100">
-												<span class="degrees percents head-font">0</span>
-												<label id="degres_2"></label>
-											<canvas height="100" width="100"></canvas></span>
-										</div>-->
-										<div class="col-sm-4 mb-15">
+										<!--<div class="col-sm-2 mb-15">-->
+											<!--<span class="skill-head mb-20">T° 2 сопло</span>-->
+											<!--<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="100">-->
+												<!--<span class="degrees percents head-font">0</span>-->
+												<!--<label id="degres_2"></label>-->
+											<!--<canvas height="20" width="20"></canvas></span>-->
+										<!--</div>-->
+										<div class="col-sm-3 mb-15">
 											<span class="skill-head mb-20" style="text-transform: unset">t° СТОЛА</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_3"></label>
-											<canvas height="100" width="100"></canvas></span>
+											<canvas height="20" width="20"></canvas></span>
 										</div>
-										<div class="col-sm-4 mb-15" data-target="#fanbox" data-toggle="modal">
-											<span class="skill-head mb-20">вентилятор</span>
+										<div class="col-sm-3 mb-15" data-target="#fanbox" data-toggle="modal">
+											<span class="skill-head mb-20">Обдув</span>
 											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="100">
 												<span class="degreess  percents degrees head-font">0</span>
 												<label id="degres_34"></label>
-											<canvas height="100" width="100"></canvas></span>
+											<canvas height="20" width="20"></canvas></span>
+										</div>
+										<div class="col-sm-3 mb-15" data-target="#fanbox" data-toggle="modal">
+											<span class="skill-head mb-20">Скорость</span>
+											<span id="pie_chart_4" class="easypiechart skill-circle" data-percent="100">
+												<span class="degreess  percents degrees head-font">0</span>
+												<label id="degres_4"></label>
+											<canvas height="20" width="20"></canvas></span>
 										</div>
 									</div>
 								</div>
@@ -609,7 +729,324 @@
 			</div>
 		</footer>
 	</div>
+	<!-- Print window -->
+	<div class="tabs__content">
+		<!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<!-- Title -->
+				<div class="row heading-bg">
+					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+						<h5 class="txt-dark">Менеджер файлов</h5>
+					</div>
+					<!-- Breadcrumb -->
+					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+						<ol class="breadcrumb">
+							<li class="active"><span>file manager</span></li>
+						</ol>
+					</div>
+					<!-- /Breadcrumb -->
+				</div>
+				<!-- /Title -->
+				<!-- Row -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default card-view pa-0">
+							<div class="panel-wrapper collapse in">
+								<div class="panel-body pa-0">
+									<div class="">
+										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 file-directory pa-0">
+											<div class="ibox float-e-margins">
+												<div class="ibox-content">
+													<div class="file-manager">
+														<!--<div class="mt-20 mb-20 ml-15 mr-15">
+                                                            <div class="fileupload btn btn-success btn-anim btn-block"><i class="fa fa-upload"></i><span class="btn-text">Upload files</span>
+                                                                <input type="file" class="upload">
+                                                            </div>
+                                                        </div>
+                                                        <div class="pl-15 mb-30">
+                                                            <a href="#" class="file-control active">All</a>
+                                                            <a href="#" class="file-control">Documents</a>
+                                                        </div>
+-->
+														<h6 class="mb-10 pl-15">Хранилища</h6>
+														<ul class="folder-list mb-30">
+															<li class="active" id="localfiles"><a><i
+																	class="zmdi zmdi-folder"></i> SD card</a></li>
+															<li id="usbfiles"><a><i class="zmdi zmdi-folder"></i>
+																USB</a></li>
+														</ul>
+														<div class="clearfix"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3 col-md-3 col-xs-3 col-sm-9 file-sec pt-20">
+											<div class="row">
+												<div class="col-lg-12">
+													<div class="row" id="rowfiles">
+														<!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12  file-box">
+                                                            <div class="file">
+                                                                <a href="" onclick="alert('AA')">
 
+                                                                    <div class="icon">
+                                                                        <i class="zmdi zmdi-file-text"></i>
+                                                                    </div>
+                                                                    <div class="file-name">
+                                                                        Document_2016.doc
+                                                                        <br>
+                                                                        <span>Added: Jan 11, 2016</span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>-->
+
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /Row -->
+
+
+			<!-- footer -->
+			<footer class="footer container-fluid pl-30 pr-30">
+				<div class="row">
+					<div class="col-sm-6">
+						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
+					</div>
+					<div class="col-sm-6">
+						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+	</div>
+	<!-- Settings window -->
+	<div class="tabs__content">
+		<!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
+					<div class="col-md-12 col-sm-12 col-lg-12"
+						 style="padding-left: unset; padding-right: unset">
+						<div class="table-responsive">
+							<table class="table-condensed">
+								<thead>
+								<!--<th></th>-->
+								<th colspan="4" style="text-align: center;padding-left: 60px;"><a
+										style="font-weight: 900; font-size: 20px;text-align: center">1</a></th>
+								<th colspan="4" style="text-align: center;padding-left: 55px;"><a
+										style="font-weight: 900; font-size: 20px;text-align: center">2</a></th>
+								</thead>
+								<tbody>
+								<tr>
+									<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>
+
+									<td><a id="up_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="t_tool" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>
+									</td>
+									<td><a id="down_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+									<td style="padding: 0px 30px;"></td>
+									<!-- second extruder -->
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>
+									</td>
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+									<!--<td><a id="set_temp_tool" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
+									<!--</td>-->
+									<!--<td><a id="zero_temp_tool" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
+									<!--</td>-->
+								</tr>
+								<tr>
+									<td><a style="font-weight: 900; font-size: 15px;">T° стола</a></td>
+
+									<td><a id="up_t_board" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="t_board" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">70</a>
+									</td>
+									<td><a id="down_t_board" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+									<!--<td><a id="set_temp_board" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
+									<!--</td>-->
+									<!--<td><a id="zero_temp_board" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
+									<!--</td>-->
+								</tr>
+								<tr>
+									<td><a style="font-weight: 900; font-size: 15px;">скорость</a></td>
+
+									<td><a id="up_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="t_tool" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>
+									</td>
+									<td><a id="down_t_tool" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+									<td style="padding: 0px 30px;"></td>
+									<!-- second extruder -->
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+									</td>
+									<td><a id="" class="btn"
+										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>
+									</td>
+									<td><a id="" class="btn"
+										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4" style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 140px; height: 40px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">отмена</span>
+										</button>
+									</td>
+									<td colspan="4" style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 140px; height: 40px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">принять</span>
+										</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+							<!--<table class="table-condensed">-->
+								<!--<tr>-->
+									<!--<td></td>-->
+									<!--<td></td>-->
+									<!--<td class="btn" id="PLA"-->
+										<!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">-->
+										<!--PLA-->
+									<!--</td>-->
+									<!--<td class="btn" id="ABS"-->
+										<!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">-->
+										<!--ABS-->
+									<!--</td>-->
+								<!--</tr>-->
+							<!--</table>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Service window  // Обслуживание-->
+	<div class="tabs__content">
+		<!-- Main Content -->
+		<div class="page-wrapper">
+			<div class="container-fluid">
+				<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
+					<div class="col-md-6 col-sm-6 col-lg-6"
+						 style="padding-left: unset; padding-right: unset">
+						<div class="table-responsive">
+							<table class="table-condensed">
+								<thead>
+								</thead>
+								<tbody>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Пренагрев PLA</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Пренагрев ABS</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Охладить экструдер</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Загрузить пластик</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Выгрузить пластик</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Настройки экструдера</span>
+										</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Move to axes window -->
 	<div class="tabs__content">
 		<!-- Main Content -->
 		<div class="page-wrapper" style="padding: 55px 20px;">
@@ -758,106 +1195,7 @@
 
 
 	</div>
-	<div class="tabs__content">
-		<!-- Main Content -->
-		<div class="page-wrapper">
-			<div class="container-fluid">
-				<!-- Title -->
-				<div class="row heading-bg">
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-dark">Менеджер файлов</h5>
-					</div>
-					<!-- Breadcrumb -->
-					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-						<ol class="breadcrumb">
-							<li class="active"><span>file manager</span></li>
-						</ol>
-					</div>
-					<!-- /Breadcrumb -->
-				</div>
-				<!-- /Title -->
-				<!-- Row -->
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-default card-view pa-0">
-							<div class="panel-wrapper collapse in">
-								<div class="panel-body pa-0">
-									<div class="">
-										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 file-directory pa-0">
-											<div class="ibox float-e-margins">
-												<div class="ibox-content">
-													<div class="file-manager">
-														<!--<div class="mt-20 mb-20 ml-15 mr-15">
-                                                            <div class="fileupload btn btn-success btn-anim btn-block"><i class="fa fa-upload"></i><span class="btn-text">Upload files</span>
-                                                                <input type="file" class="upload">
-                                                            </div>
-                                                        </div>
-                                                        <div class="pl-15 mb-30">
-                                                            <a href="#" class="file-control active">All</a>
-                                                            <a href="#" class="file-control">Documents</a>
-                                                        </div>
--->
-														<h6 class="mb-10 pl-15">Хранилища</h6>
-														<ul class="folder-list mb-30">
-															<li class="active" id="localfiles"><a><i
-																	class="zmdi zmdi-folder"></i> SD card</a></li>
-															<li id="usbfiles"><a><i class="zmdi zmdi-folder"></i>
-																USB</a></li>
-														</ul>
-														<div class="clearfix"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-3 col-md-3 col-xs-3 col-sm-9 file-sec pt-20">
-											<div class="row">
-												<div class="col-lg-12">
-													<div class="row" id="rowfiles">
-														<!--<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12  file-box">
-                                                            <div class="file">
-                                                                <a href="" onclick="alert('AA')">
 
-                                                                    <div class="icon">
-                                                                        <i class="zmdi zmdi-file-text"></i>
-                                                                    </div>
-                                                                    <div class="file-name">
-                                                                        Document_2016.doc
-                                                                        <br>
-                                                                        <span>Added: Jan 11, 2016</span>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                        </div>-->
-
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<!-- /Row -->
-
-
-			<!-- footer -->
-			<footer class="footer container-fluid pl-30 pr-30">
-				<div class="row">
-					<div class="col-sm-6">
-						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
-					</div>
-					<div class="col-sm-6">
-						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
-					</div>
-				</div>
-			</footer>
-
-		</div>
-	</div>
 	<!-- Tabs CONTENT SERVICE -->
 	<div class="tabs__content">
 		<div class="page-wrapper">
@@ -918,75 +1256,75 @@
 										</table>
 									</div>
 								</div>
-								<div class="col-md-8 col-sm-8 col-lg-8"
-									 style="padding-left: unset; padding-right: unset">
-									<div class="table-responsive">
-										<table class="table-condensed">
-											<thead>
-											<th></th>
-											<th colspan="6"><a
-													style="font-weight: 900; font-size: 20px;text-align: center">задать
-												температуру</a></th>
-											</thead>
-											<tbody>
-											<tr>
-												<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>
-												<td><a id="t_tool" class="btn"
-													   style="width:75px; border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">200</a>
-												</td>
-												<td><a id="up_t_tool" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-														class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
-												</td>
-												<td><a id="down_t_tool" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-														class="fa fa-arrow-down" style="font-size: x-large;"></span></a>
-												</td>
-												<td><a id="set_temp_tool" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
-												</td>
-												<td><a id="zero_temp_tool" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>
-												</td>
-											</tr>
-											<tr>
-												<td><a style="font-weight: 900; font-size: 15px;">T° стола</a></td>
-												<td><a id="t_board" class="btn"
-													   style="width:75px;border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">70</a>
-												</td>
-												<td><a id="up_t_board" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-														class="fa fa-arrow-up" style="font-size: x-large;"></span></a>
-												</td>
-												<td><a id="down_t_board" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-														class="fa fa-arrow-down" style="font-size: x-large;"></span></a>
-												</td>
-												<td><a id="set_temp_board" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
-												</td>
-												<td><a id="zero_temp_board" class="btn"
-													   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>
-												</td>
-											</tr>
-											</tbody>
-										</table>
-										<table class="table-condensed">
-											<tr>
-												<td></td>
-												<td></td>
-												<td class="btn" id="PLA"
-													style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">
-													PLA
-												</td>
-												<td class="btn" id="ABS"
-													style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">
-													ABS
-												</td>
-											</tr>
-										</table>
-									</div>
-								</div>
+								<!--<div class="col-md-8 col-sm-8 col-lg-8"-->
+									 <!--style="padding-left: unset; padding-right: unset">-->
+									<!--<div class="table-responsive">-->
+										<!--<table class="table-condensed">-->
+											<!--<thead>-->
+											<!--<th></th>-->
+											<!--<th colspan="6"><a-->
+													<!--style="font-weight: 900; font-size: 20px;text-align: center">задать-->
+												<!--температуру</a></th>-->
+											<!--</thead>-->
+											<!--<tbody>-->
+											<!--<tr>-->
+												<!--<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>-->
+												<!--<td><a id="t_tool" class="btn"-->
+													   <!--style="width:75px; border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">200</a>-->
+												<!--</td>-->
+												<!--<td><a id="up_t_tool" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+														<!--class="fa fa-arrow-up" style="font-size: x-large;"></span></a>-->
+												<!--</td>-->
+												<!--<td><a id="down_t_tool" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+														<!--class="fa fa-arrow-down" style="font-size: x-large;"></span></a>-->
+												<!--</td>-->
+												<!--<td><a id="set_temp_tool" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
+												<!--</td>-->
+												<!--<td><a id="zero_temp_tool" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
+												<!--</td>-->
+											<!--</tr>-->
+											<!--<tr>-->
+												<!--<td><a style="font-weight: 900; font-size: 15px;">T° стола</a></td>-->
+												<!--<td><a id="t_board" class="btn"-->
+													   <!--style="width:75px;border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px 5px; border-radius: 100px;color: #a23028;font-weight: 900;font-size: 19px;text-transform: none">70</a>-->
+												<!--</td>-->
+												<!--<td><a id="up_t_board" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+														<!--class="fa fa-arrow-up" style="font-size: x-large;"></span></a>-->
+												<!--</td>-->
+												<!--<td><a id="down_t_board" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+														<!--class="fa fa-arrow-down" style="font-size: x-large;"></span></a>-->
+												<!--</td>-->
+												<!--<td><a id="set_temp_board" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
+												<!--</td>-->
+												<!--<td><a id="zero_temp_board" class="btn"-->
+													   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
+												<!--</td>-->
+											<!--</tr>-->
+											<!--</tbody>-->
+										<!--</table>-->
+										<!--<table class="table-condensed">-->
+											<!--<tr>-->
+												<!--<td></td>-->
+												<!--<td></td>-->
+												<!--<td class="btn" id="PLA"-->
+													<!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">-->
+													<!--PLA-->
+												<!--</td>-->
+												<!--<td class="btn" id="ABS"-->
+													<!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">-->
+													<!--ABS-->
+												<!--</td>-->
+											<!--</tr>-->
+										<!--</table>-->
+									<!--</div>-->
+								<!--</div>-->
 							</div>
 						</div>
 					</div>
@@ -1229,6 +1567,7 @@
 			</div>
 		</footer>
 	</div>
+
 </div>
 <div class="tabs__content"></div>
 </div>
