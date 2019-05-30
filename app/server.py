@@ -74,11 +74,11 @@ class RootHandler(tornado.web.RequestHandler):
 	# 	return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "app/templates/")
 	def get(self):
 		print(self.get_template_path())
-		FullData = dict(
+		full_data = dict(
 			config=config.CONFIG,
 			Definition=config.Definition,
-			buttons=config.buttons, translate_state=config.translate_state)
-		self.render("base.html", title="3dprint server", config=json.dumps(FullData))
+			buttons=config.buttons, translate_state=config.translate_state, chambery=config.Chamber, )
+		self.render("base.html",  title="3dprint server", config=json.dumps(full_data), chambery=config.Chamber)
 
 
 def main():

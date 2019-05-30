@@ -327,7 +327,7 @@
 	</style>
 
 </head>
-<script>var DATA = JSON.parse('{% raw config %}') ; console.log(DATA)</script>
-{% module Template("index.html") %}
+<script>var DATA = JSON.parse('{% raw config %}') ; console.log(DATA); console.log('{{chambery}}')</script>
+{% module Template("index.html", chambery=chambery) %}
 
 </html>

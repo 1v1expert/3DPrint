@@ -9,15 +9,26 @@
 var global = window || this;
 global.global_state = null;
 
+function update_chambery(temp) {
+    if (DATA.chambery) {
+        var pie_chart_chambery = $('#pie_chart_chambery');
+        pie_chart_chambery.find('.percents').text(temp);
+        pie_chart_chambery.data('easyPieChart').update(temp);
+        console.log(temp);
+        // console.log(temp + DATA.Chambery);
+    }
+}
+
 function UpdateTemps(temps) {
     "use strict";
     if (temps.bed){
-        $('#pie_chart_3').find('.percents').text(temps.bed.actual);
+        var pie_chart_3 = $('#pie_chart_3');
+        pie_chart_3.find('.percents').text(temps.bed.actual);
         var tempbed = temps.bed.actual * 100 / temps.bed.target;
   		if (temps.bed.target === 0) {
             tempbed = temps.bed.actual * 100 / Definition.Target;
         }
-  		$('#pie_chart_3').data('easyPieChart').update(tempbed);
+  		pie_chart_3.data('easyPieChart').update(tempbed);
   		$('#degres_3').text('/' + temps.bed.target + '°');
 	}
 
@@ -102,7 +113,18 @@ function HandlerState(value) {
     }
 }
 function CurrentEvent(value) {
-    "use strict";
+    // "use strict";
+    const regex = /(Recv:\s+(ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
+    const regex2 = /((ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
+    if (value.messages) {
+        if (value.messages[0].length) {
+            console.log(value.messages[0]);
+            console.log(regex2.test(value.messages[0]));
+
+            var tt = regex2.exec(value.messages[0]).groups.chambery;
+            update_chambery(tt);
+        }
+    }
 
     if (value.temps.length){
         UpdateTemps(value.temps[0]);

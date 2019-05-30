@@ -222,7 +222,7 @@
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pb-0">
 									<div class="row">
-										<div class="col-sm-4 mb-15">
+										{% if chambery %} <div class="col-sm-3 mb-15"> {% else%} <div class="col-sm-4 mb-15"> {% end %}
 											<span class="skill-head mb-20"
 												  style="text-transform: unset">t° 1-го СОПЛА</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
@@ -230,21 +230,24 @@
 												<label id="degres_1"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<!--<div class="col-sm-3 mb-15">
-											<span class="skill-head mb-20">T° 2 сопло</span>
-											<span id="pie_chart_2" class="easypiechart skill-circle" data-percent="100">
+										{% if chambery %}
+										<div class="col-sm-3 mb-15">
+											<span class="skill-head mb-20">T° chambers</span>
+											<span id="pie_chart_chambery" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
-												<label id="degres_2"></label>
+												<label id="degres_chambery"></label>
 											<canvas height="100" width="100"></canvas></span>
-										</div>-->
-										<div class="col-sm-4 mb-15">
+										</div>
+										{% end %}
+										{% if chambery %} <div class="col-sm-3 mb-15"> {% else%} <div class="col-sm-4 mb-15"> {% end %}
 											<span class="skill-head mb-20" style="text-transform: unset">t° СТОЛА</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_3"></label>
 											<canvas height="100" width="100"></canvas></span>
 										</div>
-										<div class="col-sm-4 mb-15" data-target="#fanbox" data-toggle="modal">
+											{% if chambery %} <div class="col-sm-3 mb-15" data-target="#fanbox" data-toggle="modal"> {% else%} <div class="col-sm-4 mb-15" data-target="#fanbox" data-toggle="modal"> {% end %}
+										<!--<div class="col-sm-4 mb-15" data-target="#fanbox" data-toggle="modal">-->
 											<span class="skill-head mb-20">вентилятор</span>
 											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="100">
 												<span class="degreess  percents degrees head-font">0</span>

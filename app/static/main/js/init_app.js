@@ -218,6 +218,12 @@ var InitApp = function () {
 	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
   	$('#nozzle').text(Apps._settings.Definition.MainTool);
+  	if (DATA.chambery){
+  	    $('#pie_chart_chambery').data('easyPieChart').update(0);
+  	    // $('#degres_chambery').text('/' + DATA.Definition.Target + '°');
+
+  	    // pie_chart_chambery
+    }
 };
 $(window).load(function() {
   $('a.toolbtn').click(function() {
