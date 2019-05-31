@@ -115,16 +115,16 @@ function HandlerState(value) {
 function CurrentEvent(value) {
     // "use strict";
     // const regex = /(Recv:\s+(ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
-    var regex2 = new RegExp(/((ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/);
-    if (value.messages) {
-        if (value.messages[0].length) {
-            console.log(value.messages[0]);
-            console.log(regex2.test(value.messages[0]));
-
-            var tt = regex2.exec(value.messages[0]).groups.chambery;
-            update_chambery(tt);
-        }
-    }
+    // var regex2 = /((ok\s+)?.*(C\d*):)(\d+.\d)/;
+    // if (value.messages) {
+    //     if (value.messages[0].length) {
+    //         console.log(value.messages[0]);
+    //         console.log(regex2.test(value.messages[0]));
+    //
+    //         var tt = regex2.exec(value.messages[0]).groups.chambery;
+    //         update_chambery(tt);
+    //     }
+    // }
 
     if (value.temps.length){
         UpdateTemps(value.temps[0]);
