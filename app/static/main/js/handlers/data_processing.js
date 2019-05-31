@@ -114,8 +114,8 @@ function HandlerState(value) {
 }
 function CurrentEvent(value) {
     // "use strict";
-    const regex = /(Recv:\s+(ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
-    const regex2 = /((ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
+    // const regex = /(Recv:\s+(ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
+    var regex2 = new RegExp(/((ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/);
     if (value.messages) {
         if (value.messages[0].length) {
             console.log(value.messages[0]);
