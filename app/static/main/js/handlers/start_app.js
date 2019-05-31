@@ -219,10 +219,8 @@ function ConnectOctoprint() {
             OctoPrint.socket.onMessage("*", function(message) {
                 Apps.is_connect_server = true;
                 ProcessingData(message);
-            })
-                .onClose(function(message) {
-                    ConnectOctoprint();
             });
+
 
         })
         .error(function (response) {
