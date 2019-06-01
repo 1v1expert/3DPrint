@@ -21,6 +21,16 @@ function update_chambery(temp) {
 
 function UpdateTemps(temps) {
     "use strict";
+    if (temps.chamber && DATA.chambery) {
+        var pie_chart_chambery = $('#pie_chart_chambery');
+        pie_chart_chambery.find('.percents').text(temps.chamber.actual);
+        var temp_chamber = temps.chamber.actual * 100 / temps.chamber.target;
+        if (temps.chamber.target === 0) {
+            temp_chamber = temps.chamber.actual * 100 / Definition.Target;
+        }
+        pie_chart_chambery.data('easyPieChart').update(temp_chamber);
+        // console.log(temp);
+    }
     if (temps.bed){
         var pie_chart_3 = $('#pie_chart_3');
         pie_chart_3.find('.percents').text(temps.bed.actual);
@@ -113,7 +123,7 @@ function HandlerState(value) {
     }
 }
 function CurrentEvent(value) {
-    // "use strict";
+    "use strict";
     // const regex = /(Recv:\s+(ok\s+)?.*(C\d*):)(?<chambery>\d+.\d)/;
     // var regex2 = /((ok\s+)?.*(C\d*):)(\d+.\d)/;
     // if (value.messages) {
