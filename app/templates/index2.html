@@ -261,7 +261,7 @@
 											<canvas height="100" width="100"></canvas></span>
 										</div>
 										{% end %}
-										<div class="col-sm-2 mb-15">
+										<div class="col-sm-2 mb-15" data-target="#modalTemperature2" data-toggle="modal">
 											<span class="skill-head mb-20" style="text-transform: unset">t° СТОЛА</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
@@ -1338,7 +1338,7 @@
 </div>
 <!-- /.modal -->
 
-<!-- Temperature modal content -->
+<!-- Temperature tool modal content -->
 <div id="modalTemperature1" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2"
 	 aria-hidden="true" style="display: none;">
 	<div class="modal-dialog modal-lg">
@@ -1346,6 +1346,54 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<h5 class="modal-title" id="myLargeModalLabel2" style="text-transform: initial;">Установить температуру 1-го сопла</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="table-responsive">
+						<table class="table-condensed" style="text-align: center;">
+							<thead>
+							<tr>
+								<td><a id="up_t_tool" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+								</td>
+								<td><a id="t_tool" class="btn"
+									   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">201</a>
+								</td>
+								<td><a id="down_t_tool" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+								</td>
+								<td style="padding: 0px 30px;"></td>
+							<td><a id="" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
+								</td>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+					<!--<label for="message-text" class="control-label mb-10">Message:</label>
+					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Temperature tool modal content -->
+<div id="modalTemperature2" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel4"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabel4" style="text-transform: initial;">Установить температуру стола</h5>
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
