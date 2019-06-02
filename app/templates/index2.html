@@ -4,6 +4,9 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	.file-box {
+    margin-bottom: 5px!important;
+}
 	a:active {
 		color: #333 !important;
 	}
@@ -317,18 +320,18 @@
 		<div class="page-wrapper">
 			<div class="container-fluid">
 				<!-- Title -->
-				<div class="row heading-bg">
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-						<h5 class="txt-dark">Менеджер файлов</h5>
-					</div>
-					<!-- Breadcrumb -->
-					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-						<ol class="breadcrumb">
-							<li class="active"><span>file manager</span></li>
-						</ol>
-					</div>
-					<!-- /Breadcrumb -->
-				</div>
+				<!--<div class="row heading-bg">-->
+					<!--<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">-->
+						<!--<h5 class="txt-dark">Менеджер файлов</h5>-->
+					<!--</div>-->
+					<!--&lt;!&ndash; Breadcrumb &ndash;&gt;-->
+					<!--<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">-->
+						<!--<ol class="breadcrumb">-->
+							<!--<li class="active"><span>file manager</span></li>-->
+						<!--</ol>-->
+					<!--</div>-->
+					<!--&lt;!&ndash; /Breadcrumb &ndash;&gt;-->
+				<!--</div>-->
 				<!-- /Title -->
 				<!-- Row -->
 				<div class="row">
@@ -567,7 +570,7 @@
 								<tbody>
 								<tr>
 									<td style="padding: 18px;text-align: center;">
-										<button class="button_style button--secondary"
+										<button id="PLA" class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Пренагрев PLA</span>
@@ -576,7 +579,7 @@
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;">
-										<button class="button_style button--secondary"
+										<button id="ABS" class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Пренагрев ABS</span>
@@ -1365,7 +1368,7 @@
 										class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
 								</td>
 								<td style="padding: 0px 30px;"></td>
-							<td><a id="" class="btn"
+							<td><a id="set_temp_tool" class="btn"
 									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
 								</td>
 							</thead>
@@ -1401,19 +1404,19 @@
 						<table class="table-condensed" style="text-align: center;">
 							<thead>
 							<tr>
-								<td><a id="up_t_tool" class="btn"
+								<td><a id="up_t_board" class="btn"
 									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
 										class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
 								</td>
-								<td><a id="t_tool" class="btn"
+								<td><a id="t_board" class="btn"
 									   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">201</a>
 								</td>
-								<td><a id="down_t_tool" class="btn"
+								<td><a id="down_t_board" class="btn"
 									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
 										class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
 								</td>
 								<td style="padding: 0px 30px;"></td>
-							<td><a id="" class="btn"
+							<td><a id="set_temp_board" class="btn"
 									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
 								</td>
 							</thead>
