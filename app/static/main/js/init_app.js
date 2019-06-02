@@ -252,6 +252,8 @@ $(document).ready(function(){
 	ConnectOctoprint();
 	Apps.init();
 
+
+
 });
 /*****Ready function end*****/
 
@@ -274,7 +276,7 @@ $(window).on("load", function() {
 			  offset: 'bottom-in-view'
 			});
 		}
-	};
+	}
     $('ul.menu-main').on('click', 'li:not(.active)', function() {
 		$(this)
 			.addClass('active').siblings().removeClass('active')
@@ -289,6 +291,9 @@ $(window).on("load", function() {
 		$('ul.menu-main li').eq(tabIndex).click();
 	});
 
+    // another style
+    document.styleSheets[0].insertRule('a:active { color: #333 !important; }', 0);
+    document.styleSheets[0].insertRule('a:visited { color: white !important; }', 0);
 });
 /*****Load function* end*****/
 

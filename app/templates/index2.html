@@ -4,6 +4,14 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	a:active {
+		color: #333 !important;
+	}
+
+	/*a:visited {*/
+		/*color: white !important;*/
+	/*}*/
+
 	/* new sty;e for buttons */
 	@media (min-width: 768px) {
 		.modal-dialog {
@@ -229,7 +237,7 @@
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pb-0">
 									<div class="row">
-										<div class="col-sm-3 mb-15 ">
+										<div class="col-sm-3 mb-15 " data-target="#modalTemperature1" data-toggle="modal">
 											<span class="skill-head mb-20"
 												  style="text-transform: unset">t° 1-го СОПЛА</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
@@ -395,145 +403,145 @@
 
 		</div>
 	</div>
-	<!-- Settings window -->
-	<div class="tabs__content">
-		<!-- Main Content -->
-		<div class="page-wrapper">
-			<div class="container-fluid">
-				<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">
-					<div class="col-md-12 col-sm-12 col-lg-12"
-						 style="padding-left: unset; padding-right: unset">
-						<div class="table-responsive">
-							<table class="table-condensed">
-								<thead>
-								<!--<th></th>-->
-								<th colspan="4" style="text-align: center;padding-left: 60px;"><a
-										style="font-weight: 900; font-size: 20px;text-align: center">1</a></th>
-								<th colspan="4" style="text-align: center;padding-left: 55px;"><a
-										style="font-weight: 900; font-size: 20px;text-align: center">2</a></th>
-								</thead>
-								<tbody>
-								<tr>
-									<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>
-
-									<td><a id="up_t_tool" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
-									</td>
-									<td><a id="t_tool" class="btn"
-										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>
-									</td>
-									<td><a id="down_t_tool" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
-									</td>
-									<td style="padding: 0px 30px;"></td>
-									<!-- second extruder -->
-									<td><a id="" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
-									</td>
-									<td><a id="" class="btn"
-										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>
-									</td>
-									<td><a id="" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
-									</td>
-									<!--<td><a id="set_temp_tool" class="btn"-->
-										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
-									<!--</td>-->
-									<!--<td><a id="zero_temp_tool" class="btn"-->
-										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
-									<!--</td>-->
-								</tr>
-								<tr>
-									<td><a style="font-weight: 900; font-size: 15px;">T° стола</a></td>
-
-									<td><a id="up_t_board" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
-									</td>
-									<td><a id="t_board" class="btn"
-										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">70</a>
-									</td>
-									<td><a id="down_t_board" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
-									</td>
-									<!--<td><a id="set_temp_board" class="btn"-->
-										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
-									<!--</td>-->
-									<!--<td><a id="zero_temp_board" class="btn"-->
-										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>-->
-									<!--</td>-->
-								</tr>
-								<tr>
-									<td><a style="font-weight: 900; font-size: 15px;">скорость</a></td>
-
-									<td><a id="up_t_tool" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
-									</td>
-									<td><a id="t_tool" class="btn"
-										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>
-									</td>
-									<td><a id="down_t_tool" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
-									</td>
-									<td style="padding: 0px 30px;"></td>
-									<!-- second extruder -->
-									<td><a id="" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
-									</td>
-									<td><a id="" class="btn"
-										   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>
-									</td>
-									<td><a id="" class="btn"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-											class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4" style="padding: 22px;text-align: center;">
-										<button class="button_style button--secondary"
-												style="width: 140px; height: 40px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">отмена</span>
-										</button>
-									</td>
-									<td colspan="4" style="padding: 22px;text-align: center;">
-										<button class="button_style button--secondary"
-												style="width: 140px; height: 40px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">принять</span>
-										</button>
-									</td>
-								</tr>
-								</tbody>
-							</table>
+	<!--&lt;!&ndash; Settings window &ndash;&gt;-->
+	<!--<div class="tabs__content">-->
+		<!--&lt;!&ndash; Main Content &ndash;&gt;-->
+		<!--<div class="page-wrapper">-->
+			<!--<div class="container-fluid">-->
+				<!--<div class="row" style="margin-right: 0px;margin-left: 0px;text-align: -webkit-center;">-->
+					<!--<div class="col-md-12 col-sm-12 col-lg-12"-->
+						 <!--style="padding-left: unset; padding-right: unset">-->
+						<!--<div class="table-responsive">-->
 							<!--<table class="table-condensed">-->
+								<!--<thead>-->
+								<!--&lt;!&ndash;<th></th>&ndash;&gt;-->
+								<!--<th colspan="4" style="text-align: center;padding-left: 60px;"><a-->
+										<!--style="font-weight: 900; font-size: 20px;text-align: center">1</a></th>-->
+								<!--<th colspan="4" style="text-align: center;padding-left: 55px;"><a-->
+										<!--style="font-weight: 900; font-size: 20px;text-align: center">2</a></th>-->
+								<!--</thead>-->
+								<!--<tbody>-->
 								<!--<tr>-->
-									<!--<td></td>-->
-									<!--<td></td>-->
-									<!--<td class="btn" id="PLA"-->
-										<!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">-->
-										<!--PLA-->
+									<!--<td><a style="font-weight: 900; font-size: 15px;">T° сопла</a></td>-->
+
+									<!--<td><a id="up_t_tool" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-left" style="font-size: x-large;"></span></a>-->
 									<!--</td>-->
-									<!--<td class="btn" id="ABS"-->
-										<!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">-->
-										<!--ABS-->
+									<!--<td><a id="t_tool" class="btn"-->
+										   <!--style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>-->
+									<!--</td>-->
+									<!--<td><a id="down_t_tool" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-right" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--<td style="padding: 0px 30px;"></td>-->
+									<!--&lt;!&ndash; second extruder &ndash;&gt;-->
+									<!--<td><a id="" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-left" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--<td><a id="" class="btn"-->
+										   <!--style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">200</a>-->
+									<!--</td>-->
+									<!--<td><a id="" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-right" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--&lt;!&ndash;<td><a id="set_temp_tool" class="btn"&ndash;&gt;-->
+										   <!--&lt;!&ndash;style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>&ndash;&gt;-->
+									<!--&lt;!&ndash;</td>&ndash;&gt;-->
+									<!--&lt;!&ndash;<td><a id="zero_temp_tool" class="btn"&ndash;&gt;-->
+										   <!--&lt;!&ndash;style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>&ndash;&gt;-->
+									<!--&lt;!&ndash;</td>&ndash;&gt;-->
+								<!--</tr>-->
+								<!--<tr>-->
+									<!--<td><a style="font-weight: 900; font-size: 15px;">T° стола</a></td>-->
+
+									<!--<td><a id="up_t_board" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-left" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--<td><a id="t_board" class="btn"-->
+										   <!--style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">70</a>-->
+									<!--</td>-->
+									<!--<td><a id="down_t_board" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-right" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--&lt;!&ndash;<td><a id="set_temp_board" class="btn"&ndash;&gt;-->
+										   <!--&lt;!&ndash;style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>&ndash;&gt;-->
+									<!--&lt;!&ndash;</td>&ndash;&gt;-->
+									<!--&lt;!&ndash;<td><a id="zero_temp_board" class="btn"&ndash;&gt;-->
+										   <!--&lt;!&ndash;style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none">0</a>&ndash;&gt;-->
+									<!--&lt;!&ndash;</td>&ndash;&gt;-->
+								<!--</tr>-->
+								<!--<tr>-->
+									<!--<td><a style="font-weight: 900; font-size: 15px;">скорость</a></td>-->
+
+									<!--<td><a id="up_t_tool" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-left" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--<td><a id="t_tool" class="btn"-->
+										   <!--style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>-->
+									<!--</td>-->
+									<!--<td><a id="down_t_tool" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-right" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--<td style="padding: 0px 30px;"></td>-->
+									<!--&lt;!&ndash; second extruder &ndash;&gt;-->
+									<!--<td><a id="" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-left" style="font-size: x-large;"></span></a>-->
+									<!--</td>-->
+									<!--<td><a id="" class="btn"-->
+										   <!--style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">100 %</a>-->
+									<!--</td>-->
+									<!--<td><a id="" class="btn"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+											<!--class="fa fa-arrow-right" style="font-size: x-large;"></span></a>-->
 									<!--</td>-->
 								<!--</tr>-->
+								<!--<tr>-->
+									<!--<td colspan="4" style="padding: 22px;text-align: center;">-->
+										<!--<button class="button_style button&#45;&#45;secondary"-->
+												<!--style="width: 140px; height: 40px">-->
+											<!--<span class="button__inner_style"-->
+												  <!--style="color: white;font-weight: 900;font-size: 21px;">отмена</span>-->
+										<!--</button>-->
+									<!--</td>-->
+									<!--<td colspan="4" style="padding: 22px;text-align: center;">-->
+										<!--<button class="button_style button&#45;&#45;secondary"-->
+												<!--style="width: 140px; height: 40px">-->
+											<!--<span class="button__inner_style"-->
+												  <!--style="color: white;font-weight: 900;font-size: 21px;">принять</span>-->
+										<!--</button>-->
+									<!--</td>-->
+								<!--</tr>-->
+								<!--</tbody>-->
 							<!--</table>-->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+							<!--&lt;!&ndash;<table class="table-condensed">&ndash;&gt;-->
+								<!--&lt;!&ndash;<tr>&ndash;&gt;-->
+									<!--&lt;!&ndash;<td></td>&ndash;&gt;-->
+									<!--&lt;!&ndash;<td></td>&ndash;&gt;-->
+									<!--&lt;!&ndash;<td class="btn" id="PLA"&ndash;&gt;-->
+										<!--&lt;!&ndash;style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">&ndash;&gt;-->
+										<!--&lt;!&ndash;PLA&ndash;&gt;-->
+									<!--&lt;!&ndash;</td>&ndash;&gt;-->
+									<!--&lt;!&ndash;<td class="btn" id="ABS"&ndash;&gt;-->
+										<!--&lt;!&ndash;style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 55px; border-radius: 10px; text-transform: none">&ndash;&gt;-->
+										<!--&lt;!&ndash;ABS&ndash;&gt;-->
+									<!--&lt;!&ndash;</td>&ndash;&gt;-->
+								<!--&lt;!&ndash;</tr>&ndash;&gt;-->
+							<!--&lt;!&ndash;</table>&ndash;&gt;-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
 
 	<!-- Service window  // Обслуживание-->
 	<div class="tabs__content">
@@ -549,7 +557,7 @@
 								</thead>
 								<tbody>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 18px;text-align: center;">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -558,7 +566,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 18px;text-align: center;">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -567,7 +575,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 18px;text-align: center;">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -576,7 +584,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 18px;text-align: center;">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -585,7 +593,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 18px;text-align: center;">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -594,7 +602,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 10px;text-align: center;">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -652,13 +660,13 @@
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Z"
 															   class="btn" data-action="incrementHours"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
 														</td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Дальше" id="UP_Y"
 															   class="btn" data-action="incrementMinutes"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
 														</td>
 														<td class="separator"></td>
@@ -668,38 +676,38 @@
 																						  title="Дом" id="Home_Z"
 																						  class="btn"
 																						  data-action="decrementHours"
-																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-home" style="font-size: 35px"></span></a>
 														</td>
 														<td class="separator"><a href="#" tabindex="-1" title="Влево"
 																				 id="Left_X" class="btn"
 																				 data-action="decrementHours"
-																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-arrow-left"
 																style="font-size: 35px;"></span></a></td>
 														<td style="text-align: center"><a href="#" tabindex="-1"
 																						  title="Дом" id="Home_XY"
 																						  class="btn"
 																						  data-action="decrementHours"
-																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-home" style="font-size: 35px;"></span></a>
 														</td>
 														<td><a href="#" tabindex="-1" title="Вправо" id="Right_X"
 															   class="btn" data-action="decrementHours"
-															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 12px 23px; border-radius: 10px"><span
 																class="fa fa-arrow-right"
 																style="font-size: 35px;"></span></a></td>
 													</tr>
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вниз" id="DOWN_Z"
 															   class="btn" data-action="decrementHours"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
 																style="font-size: 35px;"></span></a></td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Ближе" id="Down_Y"
 															   class="btn" data-action="decrementMinutes"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
 																style="font-size: 35px;"></span></a></td>
 														<td class="separator"></td>
@@ -1245,13 +1253,13 @@
 
 				<!-- footer -->
 <!-- Offset on Z modal content -->
-<div id="stack-trace" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+<div id="stack-trace" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel3"
 	 aria-hidden="true" style="display: none;">
 	<div class="modal-dialog modal-lg" style="width: 600px">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-				<h5 class="modal-title" id="myLargeModalLabel">Stack trace</h5>
+				<h5 class="modal-title" id="myLargeModalLabel3">Stack trace</h5>
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
@@ -1320,7 +1328,56 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<!-- Offset on Z modal content -->
+
+<!-- Temperature modal content -->
+<div id="modalTemperature1" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel2"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabel2" style="text-transform: initial;">Установить температуру 1-го сопла</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="table-responsive">
+						<table class="table-condensed" style="text-align: center;">
+							<thead>
+							<tr>
+								<td><a id="up_t_tool" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
+								</td>
+								<td><a id="t_tool" class="btn"
+									   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">201</a>
+								</td>
+								<td><a id="down_t_tool" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
+										class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
+								</td>
+								<td style="padding: 0px 30px;"></td>
+							<td><a id="" class="btn"
+									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
+								</td>
+							</thead>
+							<tbody>
+
+							</tbody>
+						</table>
+					</div>
+					<!--<label for="message-text" class="control-label mb-10">Message:</label>
+					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Change value fan -->
 <div id="fanbox" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 	 aria-hidden="true" style="display: none;">
 	<div class="modal-dialog modal-lg">

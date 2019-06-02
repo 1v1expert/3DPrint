@@ -9,7 +9,6 @@
 		  type="text/css">
 	<link href="{{ static_url('dist/jquery-toast-plugin/dist/jquery.toast.min.css') }}" rel="stylesheet"
 		  type="text/css">
-
 	<!--alerts CSS -->
 	<link href="{{ static_url('dist/sweetalert/dist/sweetalert.css') }}" rel="stylesheet" type="text/css">
 
@@ -18,7 +17,111 @@
 	<link href="{{ static_url('main/css/style.css') }}" rel="stylesheet" type="text/css">
 	<!--<link href="main/css/style.css" rel="stylesheet" type="text/css">-->
 	<!--<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">-->
-	<style>
+<style>
+		/* new style button */
+				* {
+		  box-sizing: border-box;
+		}
+
+		.button_style {
+		  font-size: 5vw;
+		  border: none;
+		  background-color: #ebebf0;
+		  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+		  -webkit-user-select: none;
+			 -moz-user-select: none;
+			  -ms-user-select: none;
+				  user-select: none;
+		  position: relative;
+		  z-index: 1;
+		  padding: 0;
+		}
+		@media (min-width: 40em) {
+		  .button_style {
+			font-size: 2em;
+		  }
+		}
+		.button_style:before {
+		  content: "";
+		  position: absolute;
+		  z-index: -1;
+		  width: 10px;
+		  right: 0;
+		  top: 0;
+		  bottom: 0;
+		  background-color: rgba(0, 10, 50, 0.2);
+		  transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:after {
+		  content: "";
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: #ebebf0;
+		  z-index: -1;
+		}
+		.button_style:hover:before, .button_style:focus:before {
+		  -webkit-transform: translate3D(10px, 0, 0);
+				  transform: translate3D(10px, 0, 0);
+		}
+		.button_style:active:before {
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:focus, .button_style:active {
+		  outline: none;
+		}
+		.button_style .button__inner_style {
+		  text-transform: uppercase;
+		  letter-spacing: 0.15px;
+		  color: #333;
+		  /*padding: 1em 1.5em;*/
+		  background-color: #fbfbfb;
+		  display: block;
+		  width: 100%;
+		  height: 100%;
+		  transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+		  position: relative;
+		  -webkit-transform: translate3D(0, -20px, 0);
+				  transform: translate3D(0, -20px, 0);
+			font-sbize: 18px!important;
+		}
+		.button_style:hover .button__inner_style, .button_style:focus .button__inner_style {
+		  -webkit-transform: translate3D(0, -20px, 0);
+				  transform: translate3D(0, -20px, 0);
+		}
+		.button_style:active .button__inner_style {
+		  -webkit-transform: translate3D(0, 0, 0);
+				  transform: translate3D(0, 0, 0);
+		}
+		.button_style:hover .button__inner_style, .button_style:focus .button__inner_style {
+		  background-color: #fff;
+		}
+
+		.button--secondary {
+		  background-color: #017fa1;/*#00d18e;*/
+		  z-index: 0;
+		}
+		.button--secondary:after {
+		  background-color: #017fa1;/*#00d18e;*/
+		}
+		.button--secondary .button__inner_style {
+		  background-color: #00a5d1;/*#00ffb2;*/
+		}
+		.button--secondary:hover .button__inner_style, .button--secondary:focus .button__inner_style {
+		  background-color: #00a5d1;/*#11ffb3;*/
+		}
+
+		/* end new style */
 		.file-name {
 			text-overflow: clip;
 			overflow: hidden;
