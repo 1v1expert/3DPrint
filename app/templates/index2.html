@@ -252,6 +252,15 @@
 												<!--<label id="degres_2"></label>-->
 											<!--<canvas height="20" width="20"></canvas></span>-->
 										<!--</div>-->
+										{% if chambery %}
+										<div class="col-sm-2 mb-15">
+											<span class="skill-head mb-20">T° chambers</span>
+											<span id="pie_chart_chambery" class="easypiechart skill-circle" data-percent="100">
+												<span class="degrees percents head-font">0</span>
+												<label id="degres_chambery"></label>
+											<canvas height="100" width="100"></canvas></span>
+										</div>
+										{% end %}
 										<div class="col-sm-2 mb-15">
 											<span class="skill-head mb-20" style="text-transform: unset">t° СТОЛА</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
