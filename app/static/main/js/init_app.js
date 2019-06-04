@@ -213,18 +213,41 @@ var InitApp = function () {
 	$('#degres_1').text('/' + DATA.Definition.Target + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#pie_chart_34').data('easyPieChart').update(0);
+	$('#pie_chart_feed_rate').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + DATA.Definition.Target + '°');
 	$('#progress').html('');
+	$('#pie_chart_feed_rate').data('easyPieChart').update(50);
 	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
-  	$('#nozzle').text(Apps._settings.Definition.MainTool);
-  	if (DATA.chambery){
-  	    $('#pie_chart_chambery').data('easyPieChart').update(0);
-  	    // $('#degres_chambery').text('/' + DATA.Definition.Target + '°');
+     $('#nozzle').text(Apps._settings.Definition.MainTool);
+     if (DATA.chambery) {
+         $('#pie_chart_chambery').data('easyPieChart').update(0);
+         // $('#degres_chambery').text('/' + DATA.Definition.Target + '°');
 
-  	    // pie_chart_chambery
-    }
-};
+         // pie_chart_chambery
+     }
+     $(".js-range-slider").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.feed_rate = data.from;
+        	var pie_chart_feed_rate = $('#pie_chart_feed_rate');
+        	pie_chart_feed_rate.data('easyPieChart').update(data.from_percent);
+            pie_chart_feed_rate.find('.percents').text(data.from);
+        	console.log('Change', data.from, data.from_percent);
+        }
+    });
+     var range_feed_rate = $(".js-range-slider").data("ionRangeSlider");
+     range_feed_rate.update({
+         min: 50,
+         max: 150,
+		 from: Apps.feed_rate,
+         step: 5,
+         skin: "big"
+     });
+
+     // $("#range_feed_rate").ionRangeSlider({
+     //
+     // });
+ };
 $(window).load(function() {
   $('a.toolbtn').click(function() {
       $('a.toolbtn.active').removeClass("active");
@@ -234,16 +257,17 @@ $(window).load(function() {
   });
 });
 //Managment fan buttons
-$(window).load(function() {
-  $('a.fanbtn').click(function() {
-  	$('a.fanbtn.active').removeClass("active");
-  	$(this).toggleClass("active");
-  	var percents = $(this).text().substr(0, $(this).text().length-1);
-  	Apps.PlayCommand($(this).attr('data'));
-  	$('#pie_chart_34').find('.percents').text(percents);
-  	$('#pie_chart_34').data('easyPieChart').update(+percents);
-  	//console.log($(this).attr('data'));
-  });
+$(window).load(function () {
+    $('a.fanbtn').click(function () {
+        $('a.fanbtn.active').removeClass("active");
+        $(this).toggleClass("active");
+        var percents = $(this).text().substr(0, $(this).text().length - 1);
+        Apps.PlayCommand($(this).attr('data'));
+        $('#pie_chart_34').find('.percents').text(percents);
+        $('#pie_chart_34').data('easyPieChart').update(+percents);
+
+        //console.log($(this).attr('data'));
+    });
 });
 /*****Ready function start*****/
 $(document).ready(function(){
@@ -251,9 +275,6 @@ $(document).ready(function(){
 	InitApp();
 	ConnectOctoprint();
 	Apps.init();
-
-
-
 });
 /*****Ready function end*****/
 
@@ -292,8 +313,8 @@ $(window).on("load", function() {
 	});
 
     // another style
-    document.styleSheets[0].insertRule('a:active { color: #333 !important; }', 0);
-    document.styleSheets[0].insertRule('a:visited { color: white !important; }', 0);
+    // document.styleSheets[0].insertRule('a:active { color: #333 !important; }', 0);
+    // document.styleSheets[0].insertRule('a:visited { color: white !important; }', 0);
 });
 /*****Load function* end*****/
 

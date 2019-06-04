@@ -176,6 +176,11 @@ $('#reset_pl').on('click', function () {
     console.log('restart_pl');
     Reset_plate();
 });
+$('#shutdown_pl').on('click', function () {
+    console.log('restart_pl');
+    ShutdownPlatform();
+});
+
 
 $('#m306').on('click', function () {
     console.log('m306');
@@ -195,6 +200,14 @@ $('#download').on('click', function () {
     Apps.PlayCommand(["M109 S230", "G91", "G1 E30 F150", "G1 E280 F700", "G1 E100 F150"]);
     //Extrude("tool0", -String(Definition.Extrude));
 });
+$('#set_feed_rate').on('click', function () {
+    OctoPrint.printer.setFeedrate(+Apps.feed_rate)
+    .done(function(response) {
+        console.log(response);
+    });
+    //Extrude("tool1", String(Definition.Extrude));
+});
+
 $('#extrude').on('click', function () {
     OctoPrint.printer.extrude(5.0)
     .done(function(response) {

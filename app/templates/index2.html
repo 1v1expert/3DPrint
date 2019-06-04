@@ -4,6 +4,12 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	.irs-from, .irs-to, .irs-single {
+		top: -10px;
+	}
+	.irs-from, .irs-to, .irs-single {
+		font-size: 20px;
+	}
 	.file-box {
     margin-bottom: 5px!important;
 }
@@ -240,7 +246,7 @@
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pb-0">
 									<div class="row">
-										<div class="col-sm-2 mb-15 " data-target="#modalTemperature1" data-toggle="modal">
+										<div class="col-sm-2 mb-15 " style="margin-left: 75px;" data-target="#modalTemperature1" data-toggle="modal">
 											<span class="skill-head mb-20"
 												  style="text-transform: unset">t° 1-го СОПЛА</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
@@ -257,7 +263,7 @@
 										<!--</div>-->
 										{% if chambery %}
 										<div class="col-sm-2 mb-15">
-											<span class="skill-head mb-20">T° chambers</span>
+											<span class="skill-head mb-20">t° камеры</span>
 											<span id="pie_chart_chambery" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_chambery"></label>
@@ -278,11 +284,11 @@
 												<label id="degres_34"></label>
 											<canvas height="20" width="20"></canvas></span>
 										</div>
-										<div class="col-sm-2 mb-15" data-target="#fanbox" data-toggle="modal">
+										<div class="col-sm-2 mb-15" data-target="#print_speed" data-toggle="modal">
 											<span class="skill-head mb-20">Скорость</span>
-											<span id="pie_chart_4" class="easypiechart skill-circle" data-percent="100">
-												<span class="degreess  percents degrees head-font">0</span>
-												<label id="degres_4"></label>
+											<span id="pie_chart_feed_rate" class="easypiechart skill-circle" data-percent="100">
+												<span class="degreess  percents degrees head-font">100</span>
+												<label id="degres_feed_rate"></label>
 											<canvas height="20" width="20"></canvas></span>
 										</div>
 									</div>
@@ -340,7 +346,7 @@
 							<div class="panel-wrapper collapse in">
 								<div class="panel-body pa-0">
 									<div class="">
-										<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 file-directory pa-0">
+										<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 file-directory pa-0">
 											<div class="ibox float-e-margins">
 												<div class="ibox-content">
 													<div class="file-manager">
@@ -356,9 +362,9 @@
 -->
 														<h6 class="mb-10 pl-15">Хранилища</h6>
 														<ul class="folder-list mb-30">
-															<li class="active" id="localfiles"><a><i
+															<li class="active" id="localfiles" style="font-size: large;"><a><i
 																	class="zmdi zmdi-folder"></i> SD card</a></li>
-															<li id="usbfiles"><a><i class="zmdi zmdi-folder"></i>
+															<li id="usbfiles" style="font-size: large;"><a><i class="zmdi zmdi-folder"></i>
 																USB</a></li>
 														</ul>
 														<div class="clearfix"></div>
@@ -366,7 +372,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-lg-9 col-md-9 col-xs-3 col-sm-9 file-sec pt-20">
+										<div class="col-lg-10 col-md-10 col-xs-10 col-sm-10 file-sec pt-20">
 											<div class="row">
 												<div class="col-lg-12">
 													<div class="row" id="rowfiles">
@@ -569,7 +575,72 @@
 								</thead>
 								<tbody>
 								<tr>
+									<td style="padding: 22px;text-align: center;">
+										<button id="restart_software" class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт приложения</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
 									<td style="padding: 18px;text-align: center;">
+										<button class="button_style button--secondary" id="platform_restart"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт платформы</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;" >
+										<button class="button_style button--secondary" id="reset_pl"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт платы</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;">
+										<button class="button_style button--secondary" id="restart_touchui"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт интерфейса</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;">
+										<button class="button_style button--secondary" id="shutdown_pl"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Выключение платы</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px" onclick="Apps.PlayCommand('M104 S0,M140 S0')">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Выключить нагрев</span>
+										</button>
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-lg-6"
+						 style="padding-left: unset; padding-right: unset">
+						<div class="table-responsive">
+							<table class="table-condensed">
+								<thead>
+								</thead>
+								<tbody>
+								<tr>
+									<td style="padding: 22px;text-align: center;">
 										<button id="PLA" class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -596,7 +667,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 18px;text-align: center;">
+									<td style="padding: 18px;text-align: center;" id="download">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -605,7 +676,7 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 18px;text-align: center;">
+									<td style="padding: 18px;text-align: center;" id="extract">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
@@ -614,11 +685,38 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 18px;text-align: center;">
+									<td style="padding: 18px;text-align: center;" data-toggle="modal" data-target="#modaloffsetZ" id="offsetZ">
 										<button class="button_style button--secondary"
 												style="width: 330px; height: 26px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Настройки экструдера</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;" id="m306">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">M306</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;" id="M999">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">M999</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand('M206 Z0,M666 X0 Y0 Z0,G32,G31,G28,G1 Z22.1 F2000,G30 Y0,M374,M500,G28')">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 26px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Калибровка</span>
 										</button>
 									</td>
 								</tr>
@@ -650,17 +748,20 @@
 								<div class="tab-struct vertical-tab custom-tab-1 mt-40"
 									 style="margin-top: 17px!important;margin-bottom: 12px">
 									<ul role="tablist" class="nav nav-tabs ver-nav-tab" id="myTabs_8"
-										style="min-height: 170px; width: 100px">
-										<li class="active" role="presentation"><a aria-expanded="true" data-toggle="tab"
+										style="min-height: 170px; width: 110px">
+										<li class="active" role="presentation" style="font-size: large;">
+											<a aria-expanded="true" data-toggle="tab"
 																				  role="tab" id="home_tab_8"
 																				  href="#home_8">0.1</a></li>
-										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8"
+										<li role="presentation" class="" style="font-size: large;">
+											<a data-toggle="tab" id="profile_tab_8"
 																			role="tab" href="#profile_8"
 																			aria-expanded="false">1</a></li>
-										<li role="presentation" class=""><a data-toggle="tab" id="profile_tab_8"
+										<li role="presentation" class="" style="font-size: large;">
+											<a data-toggle="tab" id="profile_tab_8"
 																			role="tab" href="#profile_8"
 																			aria-expanded="false">10</a></li>
-										<li class="dropdown" role="presentation">
+										<li class="dropdown" role="presentation" style="font-size: large;">
 											<a data-toggle="tab" id="profile_tab_9" role="tab" href="#profile_8"
 											   aria-expanded="false">100</a></li>
 									</ul>
@@ -672,13 +773,13 @@
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Z"
 															   class="btn" data-action="incrementHours"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
 														</td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Дальше" id="UP_Y"
 															   class="btn" data-action="incrementMinutes"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
 														</td>
 														<td class="separator"></td>
@@ -688,38 +789,38 @@
 																						  title="Дом" id="Home_Z"
 																						  class="btn"
 																						  data-action="decrementHours"
-																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-home" style="font-size: 35px"></span></a>
 														</td>
 														<td class="separator"><a href="#" tabindex="-1" title="Влево"
 																				 id="Left_X" class="btn"
 																				 data-action="decrementHours"
-																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-arrow-left"
 																style="font-size: 35px;"></span></a></td>
 														<td style="text-align: center"><a href="#" tabindex="-1"
 																						  title="Дом" id="Home_XY"
 																						  class="btn"
 																						  data-action="decrementHours"
-																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-home" style="font-size: 35px;"></span></a>
 														</td>
 														<td><a href="#" tabindex="-1" title="Вправо" id="Right_X"
 															   class="btn" data-action="decrementHours"
-															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 12px 23px; border-radius: 10px"><span
+															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-arrow-right"
 																style="font-size: 35px;"></span></a></td>
 													</tr>
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вниз" id="DOWN_Z"
 															   class="btn" data-action="decrementHours"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
 																style="font-size: 35px;"></span></a></td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Ближе" id="Down_Y"
 															   class="btn" data-action="decrementMinutes"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 18px 28px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
 																style="font-size: 35px;"></span></a></td>
 														<td class="separator"></td>
@@ -825,12 +926,12 @@
 											<!--<th><a style="font-weight: 900;font-size: 18px;">ретрактить</a></th>-->
 											</thead>
 											<tbody>
-											<tr>
-												<td style="text-align: center"><a class="btn" id="extract"
-																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">извлечь</a></td>
-												<td style="text-align: center"><a class="btn" id="download"
-																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">загрузить</a></td>
-											</tr>
+											<!--<tr>-->
+												<!--<td style="text-align: center"><a class="btn" id="extract"-->
+																				  <!--style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">извлечь</a></td>-->
+												<!--<td style="text-align: center"><a class="btn" id="download"-->
+																				  <!--style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">загрузить</a></td>-->
+											<!--</tr>-->
 											<tr>
 												<td style="text-align: center"><a class="btn" id="extrude"
 																				  style="border-color: #0b97c4; background-color: #00a5d1; padding: 8px 15px; border-radius: 10px; text-transform: none">экструдить</a></td>
@@ -928,11 +1029,11 @@
 										<i class="fa fa-cog" style="font-size: large"></i> Рестарт <span
 											class="caret"></span></button>
 									<ul role="menu" class="dropdown-menu">
-										<li><a id="restart_software">Приложения</a></li>
-										<li><a id="platform_restart">Платформы</a></li>
-										<li><a id="reset_pl">Платы</a></li>
-										<li class="divider"></li>
-										<li><a id="restart_touchui">Интерфейса</a></li>
+										<!--<li><a id="restart_software">Приложения</a></li>-->
+										<!--<li><a id="platform_restart">Платформы</a></li>-->
+										<!--<li><a id="reset_pl">Платы</a></li>-->
+										<!--<li class="divider"></li>-->
+										<!--<li><a id="restart_touchui">Интерфейса</a></li>-->
 									</ul>
 								</div>
 								<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
@@ -943,20 +1044,20 @@
 										<i class="fa fa-cogs" style="font-size: large"></i> Системные <span
 											class="caret"></span></button>
 									<ul role="menu" class="dropdown-menu" id="system_commands">
-										<li><a id="m306">M306</a></li>
-										<li><a id="M999">M999</a></li>
+										<!--<li><a id="m306">M306</a></li>-->
+										<!--<li><a id="M999">M999</a></li>-->
 										<li class="divider"></li>
 										<!--<li><a id="calibr">Калибровка</a></li>-->
 									</ul>
 								</div>
-								<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
-									<div alt="default" data-toggle="modal"
-										 data-target="#modaloffsetZ" class="model_img img-responsive">
-										<a class="btn" id="offsetZ"
-										   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none; font-size: large">Смещение
-											по Z</a>
-									</div>
-								</div>
+								<!--<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">-->
+									<!--<div alt="default" data-toggle="modal"-->
+										 <!--data-target="#modaloffsetZ" class="model_img img-responsive">-->
+										<!--<a class="btn" id="offsetZ"-->
+										   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 22px; border-radius: 10px; text-transform: none; font-size: large">Смещение-->
+											<!--по Z</a>-->
+									<!--</div>-->
+								<!--</div>-->
 								<!--<div class="col-lg-3 col-md-3 col-sm-3" style="padding-left: 4px">
                                     <a id="restart_software" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 12px 5px; font-size: 12px; border-radius: 10px; text-transform: none">Рестарт приложения</a>
                                 </div>
@@ -1437,6 +1538,62 @@
 </div>
 <!-- /.modal -->
 
+<!-- Print speed modal content -->
+<div id="print_speed" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel5"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabel5" style="text-transform: initial;">Установить скорость печати</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="table-responsive">
+						<table class="table-condensed" style="text-align: center;    width: 500px;">
+							<thead>
+							<tr>
+
+							</tr>
+							<!--<tr>-->
+								<!--<td><a id="up_t_board" class="btn"-->
+									   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+										<!--class="fa fa-arrow-left" style="font-size: x-large;"></span></a>-->
+								<!--</td>-->
+								<!--<td><a id="t_board" class="btn"-->
+									   <!--style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">201</a>-->
+								<!--</td>-->
+								<!--<td><a id="down_t_board" class="btn"-->
+									   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span-->
+										<!--class="fa fa-arrow-right" style="font-size: x-large;"></span></a>-->
+								<!--</td>-->
+								<!--<td style="padding: 0px 30px;"></td>-->
+							<!--<td><a id="set_temp_board" class="btn"-->
+									   <!--style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>-->
+								<!--</td>-->
+							</thead>
+							<tbody>
+							<tr><td>
+								<input type="text" class="js-range-slider" name="range_feed_rate" id="range_feed_rate" value=""/>
+								</td>
+								<!--<td>установить</td>-->
+							</tr>
+							<tr><td style="padding: 25px 0px 0px 0px;"><a id="set_feed_rate" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none" >Установить</a></td></tr>
+							</tbody>
+						</table>
+					</div>
+					<!--<label for="message-text" class="control-label mb-10">Message:</label>
+					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <!-- Change value fan -->
 <div id="fanbox" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
 	 aria-hidden="true" style="display: none;">
@@ -1566,6 +1723,8 @@
 	<script src="{{ static_url('main/js/handlers/data_processing.js') }}"></script>
 	<script src="{{ static_url('main/js/handlers/start_app.js') }}"></script>
     <script src="{{ static_url('main/js/init_app.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+
 
 
     <!-- Temporary comment this scripts

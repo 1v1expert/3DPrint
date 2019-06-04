@@ -134,6 +134,7 @@ var Apps = {
             _is_connect_printer: false,
             _is_connect_printer_octo: null
         },
+    feed_rate: 100,
     _position:
         {
             X: null,
