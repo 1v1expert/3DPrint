@@ -157,6 +157,11 @@ function ProcessingData(data) {
             break;
         case 'history':
             Apps.logs.update(data.data);
+            break;
+        case 'plugin':
+            var system_info = "cpu.%: " + data.data.data["cpu.%"] + "; mem.%: " + data.data.data["mem.%"] + "; temp: " + data.data.data["temp"];
+            $('#system_info').text(system_info);
+            break;
         //case ''
 
     }
