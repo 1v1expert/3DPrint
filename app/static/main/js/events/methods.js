@@ -126,21 +126,21 @@ function GetFiles(url) {
                 if (entry.children) {
                     if (entry.children.length > 0) {
                         for (var children in entry.children) {
-                            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name' style='font-size: large;'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                            data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name' style='font-size: x-large;'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                         }
                     }
                 }
                 else {
-                    var name = "";
-                    if (entry.display.length > 14){
-                        name = entry.display.substring(0, 14) + "...";
-                    }
-                    else {
-                        name = entry.display;
-                    }
-                    data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-3  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > " +
+                    var name = entry.display;
+                    // if (entry.display.length > 14){
+                    //     name = entry.display.substring(0, 14) + "...";
+                    // }
+                    // else {
+                    //     name = entry.display;
+                    // }
+                    data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > " +
                         // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
-                        "<div class='file-name' style='font-size: large;'>" + name + "<br> <span>Доб: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                        "<div class='file-name' style='font-size: x-large;'>" + name + "<br> <span>Добавлен: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
                 }
             });
             // if (url === 'local?force=true') {

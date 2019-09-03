@@ -201,6 +201,18 @@ function AuthSocket(name, session) {
         OctoPrint.socket.sendAuth(name, session);
     }, 1000);
 }
+
+// function ConnectOctoprint2() {
+//     var client1 = new OctoPrintClient({baseurl: "http://localhost:5000", apikey: "100AC91FCAF844DC84CA0734C1EEDCBE"});
+//         //DATA.config.Apikey});
+//     client1.connection.connect();
+//     client1.socket.connect();
+//     client1.socket.onMessage("*", function(message) {
+//                 Apps.is_connect_server = true;
+//                 ProcessingData(message);
+//             });
+//     return client1;
+// }
 function ConnectOctoprint() {
     OctoPrint.options.baseurl = DATA.config.BaseUrl;
     OctoPrint.options.apikey = DATA.config.Apikey;
@@ -208,6 +220,7 @@ function ConnectOctoprint() {
         .done(function(response) {
             OctoPrint.connection.connect();
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
+            console.log('name ', response.name, 'session', response.session);
             AuthSocket(response.name, response.session);
             OctoPrint.socket.connect();
             //Fix todo: Connect witch Printer offline
