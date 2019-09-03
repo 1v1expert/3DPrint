@@ -1,0 +1,109 @@
+<div id="data-touchui" data-less="{{ plugin_touchui_lessPath }}" data-css="{{ plugin_touchui_cssPath }}"></div>
+
+<form class="form-horizontal">
+
+	<div class="control-group">
+
+		<div class="controls">
+			<label class="checkbox">
+				<input type="checkbox" data-bind="checked: settings.hasVisibleSettings"> Display 'TouchUI settings' when the touch interface is inactive.
+			</label>
+		</div>
+
+		<div class="controls">
+			<label class="checkbox">
+				<input type="checkbox" data-bind="checked: settings.automaticallyLoadResolution"> Start TouchUI automatically onload based on resolution.
+			</label>
+		</div>
+
+		<div class="controls">
+			<label class="checkbox">
+				<input type="checkbox" data-bind="checked: settings.automaticallyLoadTouch"> Start TouchUI automatically onload based on touch device.
+			</label>
+		</div>
+
+		<div class="controls">
+			<label class="checkbox">
+				<input type="checkbox" data-bind="checked: settings.useCustomization"> Enable customization
+			</label>
+		</div>
+
+	</div>
+
+	<div class="control-group" data-bind="css: { disabled: !settings.useCustomization() }">
+		<fieldset>
+
+			<legend>
+				<span>Customization</span>
+				<label class="checkbox pull-right">
+					<input type="checkbox" data-bind="checked: settings.colors.useLocalFile">
+					Use local file
+				</label>
+			</legend>
+
+			<div data-bind="visible: settings.colors.useLocalFile()">
+				<div class="control-group">
+					<label class="control-label" for="settings-touchui-path">Path to file:</label>
+					<div class="controls">
+						<input type="text" data-bind="value: settings.colors.customPath" id="settings-touchui-path" aria-haspopup="true" role="textbox" placeholder="/home/pi/my-variables.less">
+					</div>
+				</div>
+			</div>
+
+			<div data-bind="visible: !settings.colors.useLocalFile()">
+				<div class="colorPickers">
+					<div class="controls">
+						<label>Main color:</label>
+						<div class="colorPicker" id="colorPicker1">
+							<input type="text" class="colorInput input-block-level" data-bind="value: settings.colors.mainColor">
+							<a class="color"><span class="colorInner" data-bind="style: { backgroundColor: settings.colors.mainColor }"></span></a>
+							<div class="track"><div class="close"></div></div>
+							<ul class="dropdown"><li></li></ul>
+						</div>
+					</div>
+
+					<div class="controls">
+						<label>Terminal color:</label>
+						<div class="colorPicker" id="colorPicker2">
+							<input type="text" class="colorInput input-block-level" data-bind="value: settings.colors.termColor">
+							<a class="color"><span class="colorInner" data-bind="style: { backgroundColor: settings.colors.termColor }"></span></a>
+							<div class="track"><div class="close"></div></div>
+							<ul class="dropdown"><li></li></ul>
+						</div>
+					</div>
+
+					<div class="controls">
+						<label>Background color:</label>
+						<div class="colorPicker" id="colorPicker3">
+							<input type="text" class="colorInput input-block-level" data-bind="value: settings.colors.bgColor">
+							<a class="color"><span class="colorInner" data-bind="style: { backgroundColor: settings.colors.bgColor }"></span></a>
+							<div class="track"><div class="close"></div></div>
+							<ul class="dropdown"><li></li></ul>
+						</div>
+					</div>
+
+					<div class="controls">
+						<label>Text color:</label>
+						<div class="colorPicker" id="colorPicker4">
+							<input type="text" class="colorInput input-block-level" data-bind="value: settings.colors.textColor">
+							<a class="color"><span class="colorInner" data-bind="style: { backgroundColor: settings.colors.textColor }"></span></a>
+							<div class="track"><div class="close"></div></div>
+							<ul class="dropdown"><li></li></ul>
+						</div>
+					</div>
+
+					<div class="controls">
+						<label>Font size:</label>
+						<select data-bind="value: settings.colors.fontSize">
+							<option value="14">Small</option>
+							<option value="16" selected>Normal</option>
+							<option value="18">Large</option>
+							<option value="20">Extra Large</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
+		</fieldset>
+	</div>
+</form>

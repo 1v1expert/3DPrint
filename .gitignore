@@ -40,3 +40,6 @@ venv33
 venv34
 venv35
 venv36
+
+dist/
+*.egg-info/
