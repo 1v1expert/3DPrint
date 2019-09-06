@@ -197,10 +197,9 @@ var Show_connection_status = function (msg, resp, status) {
 };
 
 function AuthSocket(name, session) {
-    OctoPrint.socket.sendAuth(name, session);
-    // setTimeout(function () {
-    //
-    // }, 1000);
+    setTimeout(function () {
+        OctoPrint.socket.sendAuth(name, session);
+    }, 1000);
 }
 
 // function ConnectOctoprint2() {
@@ -242,7 +241,7 @@ function ConnectOctoprint() {
             Show_connection_status('Не запущено ядро приложения ', response, 'error');
             setTimeout(function() {
                 ConnectOctoprint();
-                }, 10000);
+                }, 2000);
         });
 }
 
