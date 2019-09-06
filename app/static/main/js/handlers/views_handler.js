@@ -54,8 +54,17 @@ $('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles
 GetFiles('local?force=true');});
 //GetFiles("sdcard?recursive=true");});
 $('#usbfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').removeClass('active');$('#usbfiles').addClass('active');
+
 //GetFiles('local?force=true');
 CustomGetFiles();});
+
+$('#usb2files').on('click', function () {
+    $('#rowfiles').html('');
+    $('#localfiles').removeClass('active');
+    $('#usbfiles').removeClass('active');
+    $('#usb2files').addClass('active');
+    CustomGetFiles();
+});
 //GetFiles("local?force=true&filter=gcode&recursive=true");});
 $('#UP_Z').on('click', function () {
     //alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());

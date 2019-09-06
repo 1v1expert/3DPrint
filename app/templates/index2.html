@@ -329,12 +329,12 @@
 					</div>
 				</div>
 				<div class="col-sm-3">
-					<div class="col-sm-6 right">
-						<p onclick="Apps.Printer.ConnectPrinter()" id="connect"><code>подключить</code></p>
-					</div>
-					<div class="col-sm-6 left">
-						<p onclick="Apps.Printer.DisconnectPrinter()" id="disconnect"><code>отключить</code></p>
-					</div>
+					<!--<div class="col-sm-6 right">-->
+						<!--<p onclick="Apps.Printer.ConnectPrinter()" id="connect"><code>подключить</code></p>-->
+					<!--</div>-->
+					<!--<div class="col-sm-6 left">-->
+						<!--<p onclick="Apps.Printer.DisconnectPrinter()" id="disconnect"><code>отключить</code></p>-->
+					<!--</div>-->
 				</div>
 			</div>
 		</footer>
@@ -1419,6 +1419,15 @@
 										</button>
 									</td>
 								</tr>
+								<tr>
+									<td style="padding: 30px;text-align: center;" >
+										<button class="button_style button--secondary" onclick="Apps.Printer.ConnectPrinter()" id="connect"
+												style="width: 345px; height: 35px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Подключить</span>
+										</button>
+									</td>
+								</tr>
 
 								</tbody>
 							</table>
@@ -1455,6 +1464,15 @@
 												style="width: 345px; height: 35px" onclick="Apps.PlayCommand('M104 S0,M140 S0')">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Выключить нагрев</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 30px;text-align: center;" >
+										<button class="button_style button--secondary" onclick="Apps.Printer.DisconnectPrinter()" id="disconnect"
+												style="width: 345px; height: 35px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;font-size: 21px;">Отключить</span>
 										</button>
 									</td>
 								</tr>
