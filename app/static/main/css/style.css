@@ -76,7 +76,7 @@ Project:	Jetson
 /****************************/
 /** Imports **/
 /****************************/
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Poppins:400|500);
+/*@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Poppins:400|500);*/
 @import url(../../dist/bootstrap/dist/css/bootstrap.min.css);
 @import url(../../dist/other_css/font-awesome.min.css);
 @import url(../../dist/other_css/themify-icons.css);
@@ -88,14 +88,14 @@ Project:	Jetson
 @import url(../../dist/other_css/material-design-iconic-font.min.css);
 @import url(../../dist/other_css/filter.css);
 @import url(../../dist/switchery/dist/switchery.min.css);
-@import url(../../dist/owl.carousel/dist/assets/owl.carousel.min.css);
-@import url(../../dist/owl.carousel/dist/assets/owl.theme.default.min.css);
+/*@import url(../../dist/owl.carousel/dist/assets/owl.carousel.min.css);*/
+/*@import url(../../dist/owl.carousel/dist/assets/owl.theme.default.min.css);*/
 @import url(../../dist/other_css/lightgallery.css);
 @import url(../../dist/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css);
 /****************************/
 /** Reset **/
 /****************************/
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+/*@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');*/
 .menu-main {
   list-style: none;
   margin: 0px 0 5px;
