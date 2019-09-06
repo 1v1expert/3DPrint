@@ -4,11 +4,29 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	.progress.progress-lg {
+		height: 30px !important;
+	}
+
+	.irs--big .irs-handle {
+		width: 45px;
+		height: 40px;
+	}
+	.irs--big .irs-bar {
+		height: 25px;
+	}
+	.irs--big .irs-line {
+		height: 25px;
+	}
 	.irs-from, .irs-to, .irs-single {
 		top: -10px;
 	}
 	.irs-from, .irs-to, .irs-single {
 		font-size: 20px;
+	}
+	.irs--big .irs-min, .irs--big .irs-max {
+		padding: 4px 10px;
+		font-size: 15px;
 	}
 	.file-box {
     margin-bottom: 5px!important;
@@ -124,12 +142,12 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" style="min-height: auto; padding: 0 0 0 0;">
 		<ul class="menu-main">
 			<li class="active" id="maintab">
-				<i class="fa fa-home" aria-hidden="true"></i></li>
+				<i class="fa fa-home" aria-hidden="true" style="font-weight: bold;font-size: x-large;"></i></li>
 			<li id="manage_print">
-				<i class="fa fa-print" aria-hidden="true" style="font-weight: bold;">&nbsp; Печать</i></li>
-			<li><i class="fa fa-cogs" aria-hidden="true" style="font-weight: bold;">&nbsp; Настройки</i></li>
+				<i class="fa fa-print" aria-hidden="true" style="font-weight: bold;font-size: x-large;">&nbsp; Печать</i></li>
+			<li><i class="fa fa-cogs" aria-hidden="true" style="font-weight: bold;font-size: x-large;">&nbsp; Настройки</i></li>
 			<!--<li><i class="fa fa-gear" aria-hidden="true" style="font-weight: bold;">&nbsp; Обслуживание</i></li>-->
-			<li><i class="fa fa-arrows" aria-hidden="true" style="font-weight: bold;">&nbsp; Движение по осям</i></li>
+			<li><i class="fa fa-arrows" aria-hidden="true" style="font-weight: bold;font-size: x-large;">&nbsp; Движение по осям</i></li>
 			<!--<li><i class="fa fa-arrows" aria-hidden="true" style="font-weight: bold;">&nbsp; Cервисное меню</i></li>-->
 		</ul>
 	</nav>
@@ -150,7 +168,7 @@
 					<div class="col-lg-12 h-20" style="padding-left: unset;">
 						<div class="well well-lg card-view">
 							<!--<h6 class="mb-15" id="print_status"></h6>-->
-							<h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 2px; font-size: 29px">
+							<h6 style="text-align: center; padding-bottom: 10px;letter-spacing: 2px; font-size: 35px">
 							<code><b id="status_print"> ожидание </b></code></h6>
 									<!--style="font-weight: bold" -->
 
@@ -181,10 +199,10 @@
 								<div class="btn-group mt-15 mr-10" style="margin-top: 4px!important;">
 									<!--<button class="btn btn-success btn-outline btn-rounded" id="restartprint"><i style="    font-size: x-large;" class="fa fa-play-circle-o" aria-hidden="true"> restart</i></button>-->
 									<button class="btn btn-success btn-outline btn-rounded" id="dpauseprint_1"><i
-											style="    font-size: x-large;" class="fa fa-pause" aria-hidden="true"
+											style="font-size: xx-large;" class="fa fa-pause" aria-hidden="true"
 											id="iconpause2"> пауза</i></button>
 									<button class="btn btn-success btn-outline btn-rounded" id="stopprint"><i
-											style="    font-size: x-large;" class="fa fa-stop" aria-hidden="true">
+											style="font-size: xx-large;" class="fa fa-stop" aria-hidden="true">
 										прервать</i></button>
 									<!-- warning pause -->
 									<!--<button class="btn btn-success btn-outline btn-rounded" id="pauseprint"><i-->
@@ -736,38 +754,38 @@
 								<div class="tab-struct vertical-tab custom-tab-1 mt-40"
 									 style="margin-top: 17px!important;margin-bottom: 12px">
 									<ul role="tablist" class="nav nav-tabs ver-nav-tab" id="myTabs_8"
-										style="min-height: 170px; width: 110px">
-										<li class="active" role="presentation" style="font-size: large;">
+										style="min-height: 170px; width: 155px">
+										<li class="active" role="presentation" style="font-size: xx-large;">
 											<a aria-expanded="true" data-toggle="tab"
 																				  role="tab" id="home_tab_8"
 																				  href="#home_8">0.1</a></li>
-										<li role="presentation" class="" style="font-size: large;">
+										<li role="presentation" class="" style="font-size: xx-large;">
 											<a data-toggle="tab" id="profile_tab_8"
 																			role="tab" href="#profile_8"
 																			aria-expanded="false">1</a></li>
-										<li role="presentation" class="" style="font-size: large;">
+										<li role="presentation" class="" style="font-size: xx-large;">
 											<a data-toggle="tab" id="profile_tab_8"
 																			role="tab" href="#profile_8"
 																			aria-expanded="false">10</a></li>
-										<li class="dropdown" role="presentation" style="font-size: large;">
+										<li class="dropdown" role="presentation" style="font-size: xx-large;">
 											<a data-toggle="tab" id="profile_tab_9" role="tab" href="#profile_8"
 											   aria-expanded="false">100</a></li>
 									</ul>
 									<div class="datepicker">
 										<div class="timepicker">
-											<div class="table-responsive" style="margin-left: 25%;">
+											<div class="table-responsive" style="margin-left: 30%;">
 												<table class="table-condensed ">
 													<tbody>
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Z"
 															   class="btn" data-action="incrementHours"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
 														</td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Дальше" id="UP_Y"
 															   class="btn" data-action="incrementMinutes"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
 														</td>
 														<td class="separator"></td>
@@ -777,38 +795,38 @@
 																						  title="Дом" id="Home_Z"
 																						  class="btn"
 																						  data-action="decrementHours"
-																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-home" style="font-size: 35px"></span></a>
 														</td>
 														<td class="separator"><a href="#" tabindex="-1" title="Влево"
 																				 id="Left_X" class="btn"
 																				 data-action="decrementHours"
-																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-left"
 																style="font-size: 35px;"></span></a></td>
 														<td style="text-align: center"><a href="#" tabindex="-1"
 																						  title="Дом" id="Home_XY"
 																						  class="btn"
 																						  data-action="decrementHours"
-																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+																						  style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-home" style="font-size: 35px;"></span></a>
 														</td>
 														<td><a href="#" tabindex="-1" title="Вправо" id="Right_X"
 															   class="btn" data-action="decrementHours"
-															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-right"
 																style="font-size: 35px;"></span></a></td>
 													</tr>
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вниз" id="DOWN_Z"
 															   class="btn" data-action="decrementHours"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
 																style="font-size: 35px;"></span></a></td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Ближе" id="Down_Y"
 															   class="btn" data-action="decrementMinutes"
-															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 25px 35px; border-radius: 10px"><span
+															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
 																style="font-size: 35px;"></span></a></td>
 														<td class="separator"></td>
@@ -1375,27 +1393,27 @@
 								</thead>
 								<tbody>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 30px;text-align: center;">
 										<button id="restart_software" class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 345px; height: 35px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт приложения</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 30px;text-align: center;">
 										<button class="button_style button--secondary" id="platform_restart"
-												style="width: 330px; height: 26px">
+												style="width: 345px; height: 35px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт платформы</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;" >
+									<td style="padding: 30px;text-align: center;" >
 										<button class="button_style button--secondary" id="reset_pl"
-												style="width: 330px; height: 26px">
+												style="width: 345px; height: 35px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт платы</span>
 										</button>
@@ -1414,27 +1432,27 @@
 								</thead>
 								<tbody>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 30px;text-align: center;">
 										<button class="button_style button--secondary" id="restart_touchui"
-												style="width: 330px; height: 26px">
+												style="width: 345px; height: 35px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Рестарт интерфейса</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 30px;text-align: center;">
 										<button class="button_style button--secondary" id="shutdown_pl"
-												style="width: 330px; height: 26px">
+												style="width: 345px; height: 35px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Выключение платы</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
-									<td style="padding: 22px;text-align: center;">
+									<td style="padding: 30px;text-align: center;">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px" onclick="Apps.PlayCommand('M104 S0,M140 S0')">
+												style="width: 345px; height: 35px" onclick="Apps.PlayCommand('M104 S0,M140 S0')">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 21px;">Выключить нагрев</span>
 										</button>
@@ -1669,7 +1687,7 @@
 								</td>
 								<!--<td>установить</td>-->
 							</tr>
-							<tr><td style="padding: 25px 0px 0px 0px;"><a id="set_feed_rate" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none" >Установить</a></td></tr>
+							<tr><td style="padding: 25px 0px 0px 0px;"><a id="set_feed_rate" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 25px 70px; border-radius: 10px; text-transform: none; font-size: x-large" >Установить</a></td></tr>
 							</tbody>
 						</table>
 					</div>
@@ -1741,8 +1759,8 @@
 <!-- Button trigger modal -->
 
 <!-- jQuery -->
-    <script src="{{ static_url('dist/jquery/dist/jquery.min.js')}}" ></script>
-
+    <script src="{{ static_url('dist/jquery/dist/jquery2.min.js')}}" ></script> <!-- alternative -->
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
     <!-- Bootstrap Core JavaScript -->
 
     <script src="{{ static_url('dist/bootstrap/dist/js/bootstrap.min.js')}}" ></script>
@@ -1815,9 +1833,6 @@
 	<script src="{{ static_url('main/js/handlers/start_app.js') }}"></script>
     <script src="{{ static_url('main/js/init_app.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
-
-
-
     <!-- Temporary comment this scripts
     #<script src="{{ static_url('main/js/init.js') }}"></script>
 	#<script src="{{ static_url('main/js/handlers/views_handler.js') }}"></script>
@@ -1827,14 +1842,6 @@
 	<script src="{{ static_url('main/js/octo_js/lib/lodash.min.js') }}"></script>
 	<script src="{{ static_url('main/js/octo_js/lib/sockjs.js') }}"></script>
 	<script src="{{ static_url('main/js/octo_js/app/client/base.js') }}"></script>
-	<!--<script src="{{ static_url('main/js/octo_js/app/client/settings.js') }}"></script>-->
-	<!--<script src="{{ static_url('main/js/octo_js/app/client/socket.js') }}"></script>-->
-
-    <!--<script src="{{ static_url('main/js/octo_js/app/client/job.js') }}"></script>-->
-	<!--<script src="{{ static_url('main/js/octo_js/app/client/browser.js') }}"></script>-->
-	<!--<script src="{{ static_url('main/js/octo_js/app/client/connection.js') }}"></script>-->
-	<!--<script src="{{ static_url('main/js/octo_js/app/client/system.js') }}"></script>-->
-	<!--<script src="{{ static_url('main/js/octo_js/app/client/files.js') }}"></script>-->
 	<script src="{{ static_url('main/js/handlers/packed_client.js') }}"></script>
 </body>
 
