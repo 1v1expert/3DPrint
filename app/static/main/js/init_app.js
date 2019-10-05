@@ -226,7 +226,35 @@ var InitApp = function () {
 
          // pie_chart_chambery
      }
-     $(".js-range-slider").ionRangeSlider({
+
+
+
+// =======================================
+// select temp board
+
+     $("#range_temp_board").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.temp_board = data.from;
+        	// var pie_chart_feed_rate = $('#pie_chart_feed_rate');
+        	// pie_chart_feed_rate.data('easyPieChart').update(data.from_percent);
+         //    pie_chart_feed_rate.find('.percents').text(data.from);
+        	// console.log('Change', data.from, data.from_percent);
+        }
+    });
+     var range_temp_board = $("#range_temp_board").data("ionRangeSlider");
+     range_temp_board.update({
+         min: 0,
+         max: 130,
+		 from: Apps.temp_board,
+         step: 10,
+         skin: "big"
+     });
+
+
+
+// =======================================
+// select range feed rate
+     $("#range_feed_rate").ionRangeSlider({
         onChange: function (data) {
         	Apps.feed_rate = data.from;
         	var pie_chart_feed_rate = $('#pie_chart_feed_rate');
@@ -235,7 +263,7 @@ var InitApp = function () {
         	console.log('Change', data.from, data.from_percent);
         }
     });
-     var range_feed_rate = $(".js-range-slider").data("ionRangeSlider");
+     var range_feed_rate = $("#range_feed_rate").data("ionRangeSlider");
      range_feed_rate.update({
          min: 50,
          max: 150,

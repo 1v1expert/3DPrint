@@ -135,20 +135,20 @@ $('#down_t_tool').on('click', function () {
     $('#t_tool').text(c_t+1);
 });
 
-$('#up_t_board').on('click', function () {
-    var t = $('#t_board').text();
-    var c_t = +t;
-    $('#t_board').text(c_t-1);
-});
+// $('#up_t_board').on('click', function () {
+//     var t = $('#t_board').text();
+//     var c_t = +t;
+//     $('#t_board').text(c_t-1);
+// });
 
-$('#down_t_board').on('click', function () {
-    var t = $('#t_board').text();
-    var c_t = +t;
-    $('#t_board').text(c_t+1);
-});
-$('#zero_temp_board').on('click', function () {
-    $('#t_board').text(0);
-});
+// $('#down_t_board').on('click', function () {
+//     var t = $('#t_board').text();
+//     var c_t = +t;
+//     $('#t_board').text(c_t+1);
+// });
+// $('#zero_temp_board').on('click', function () {
+//     $('#t_board').text(0);
+// });
 $('#zero_temp_tool').on('click', function () {
     $('#t_tool').text(0);
 });
@@ -159,11 +159,18 @@ $('#set_temp_tool').on('click', function () {
     SetTemperature_tool(c_t);
 });
 
+
 $('#set_temp_board').on('click', function () {
-    var t = $('#t_board').text();
-    var c_t = +t;
-    SetTemperature_bed(c_t);
+    // var t = $('#t_board').text();
+    // var c_t = +t;
+
+
+
+    SetTemperature_bed(+Apps.temp_board);
 });
+
+
+
 $('#platform_restart').on('click', function () {
     console.log('Platform_restart');
     RestartPlatform();
@@ -209,6 +216,7 @@ $('#download').on('click', function () {
     Apps.PlayCommand(["M109 S230", "G91", "G1 E30 F150", "G1 E280 F700", "G1 E100 F150"]);
     //Extrude("tool0", -String(Definition.Extrude));
 });
+
 $('#set_feed_rate').on('click', function () {
     OctoPrint.printer.setFeedrate(+Apps.feed_rate)
     .done(function(response) {
