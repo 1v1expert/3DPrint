@@ -101,7 +101,7 @@ function CustomGetFiles() {
             "method": "GET"
     }).done(function (response){
         console.log(response);
-        if (typeof JSON.parse(response).files === 'undefined'){
+        if (typeof JSON.parse(response).files === 'undefined' || typeof JSON.parse(response).files === ''){
             swal('', 'Файлов не обнаружено', 'info');
         };
         _.each(JSON.parse(response).files, function(entry) {
