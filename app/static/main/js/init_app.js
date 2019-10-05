@@ -323,7 +323,7 @@ var setHeightWidth = function () {
 	var height = $(window).height();
 	var width = $(window).width();
 	$('.full-height').css('height', (height));
-	$('.page-wrapper').css('min-height', (height));
+	$('.page-wrapper').css('min-height', (+height-6));
 
 	/*Right Sidebar Scroll Start*/
 	if(width<=1007){
