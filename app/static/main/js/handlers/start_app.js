@@ -225,6 +225,8 @@ function ConnectOctoprint() {
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
             console.log('name ', response.name, 'session', response.session);
             AuthSocket(response.name, response.session);
+            OctoPrint.socket.reconnecting = true;
+            OctoPrint.socket.reconnectTrial = 100;
             OctoPrint.socket.connect();
             //Fix todo: Connect witch Printer offline
             OctoPrint.connection.getSettings().done(function(response){
@@ -237,6 +239,8 @@ function ConnectOctoprint() {
                 Apps.is_connect_server = true;
                 ProcessingData(message);
             });
+
+
 
         })
         .error(function (response) {
