@@ -126,7 +126,7 @@ function GetFiles(url) {
                 if (entry.children) {
                     if (entry.children.length > 0) {
                         for (var children in entry.children) {
-                            data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name' style='font-size: x-large;'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                            data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + children.origin + "\' , \'" + children.name + "\') \" > <div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> <div class='file-name' style='font-size: x-large;'>" + children.display + "<br> <span>Доб: " + moment.unix(children.date).format("DD.MM.YYYY") + "</span> </div> </a> </div> </div>";
                         }
                     }
                 }
@@ -140,7 +140,7 @@ function GetFiles(url) {
                     // }
                     data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmPrintOrDelete(\'" + entry.origin + "\' , \'" + entry.name + "\') \" > " +
                         // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
-                        "<div class='file-name' style='font-size: x-large;'>" + name + "<br> <span>Добавлен: " + moment.unix(entry.date).format("MM:DD:YYYY") + "</span> </div> </a> </div> </div>";
+                        "<div class='file-name' style='font-size: x-large;'>" + name + "<br> <span>Добавлен: " + moment.unix(entry.date).format("DD.MM.YYYY") + "</span> </div> </a> </div> </div>";
                 }
             });
             // if (url === 'local?force=true') {

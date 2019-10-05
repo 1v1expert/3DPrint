@@ -4,13 +4,19 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
-
+	.button_style .button__inner_style {
+		text-transform: none;
+	}
+	.file .file-name span 
+	{
+		font-size: 14px;
+	}
 
 	h5 {
 		text-transform: none;
 	}
 	.progress.progress-lg {
-		height: 30px !important;
+		height: 35px !important;
 	}
 
 	.irs--big .irs-handle {
@@ -187,12 +193,12 @@
 										 style="width: 0%;" id="progress" role="progressbar">0%
 									</div>
 								</div>
-								<div class="col-md-6 col-xs-6">
+								<div class="col-md-6 col-xs-6" style="font-size: 25px;">
 									<label id="file_name" style="color: #fff"></label>
 									<p></p>
 									<label id="test" style="color: #fff"></label>
 								</div>
-								<div class="col-md-6 col-xs-6" style="text-align: right">
+								<div class="col-md-6 col-xs-6" style="text-align: right; font-size: 25px;">
 									<label id="estimatedPrintTime" style="color: #fff"></label>
 									<p></p>
 									<label id="printTime" style="color: #fff"></label>
@@ -373,7 +379,7 @@
 										<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 file-directory pa-0">
 											<div class="ibox float-e-margins">
 												<div class="ibox-content">
-													<div class="file-manager">
+													<div class="file-manager" style="position: fixed;">
 														<!--<div class="mt-20 mb-20 ml-15 mr-15">
                                                             <div class="fileupload btn btn-success btn-anim btn-block"><i class="fa fa-upload"></i><span class="btn-text">Upload files</span>
                                                                 <input type="file" class="upload">
@@ -391,7 +397,7 @@
 															<li id="usbfiles" style="font-size: large;"><a><i class="zmdi zmdi-folder"></i>
 																USB</a></li>
 															<li id="usb2files" style="font-size: large;"><a><i class="zmdi zmdi-folder"></i>
-																USB2</a></li>
+																Сеть</a></li>
 														</ul>
 														<div class="clearfix"></div>
 													</div>
@@ -604,7 +610,7 @@
 									<td style="padding: 22px;text-align: center;">
 										<button class="button_style button--secondary" data-target="#system_modal"
 												data-toggle="modal"
-												style="width: 330px; height: 40px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 25px;">Системные</span>
 										</button>
@@ -613,18 +619,18 @@
 								<tr>
 									<td style="padding: 18px;text-align: center;">
 										<button id="extrude" class="button_style button--secondary"
-												style="width: 330px; height: 40px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">экструдить</span>
+												  style="color: white;font-weight: 900;font-size: 25px;">Экструдить</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;">
 										<button id="retruct" class="button_style button--secondary"
-												style="width: 330px; height: 40px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">ретрактить</span>
+												  style="color: white;font-weight: 900;font-size: 25px;">Ретрактить</span>
 										</button>
 									</td>
 								</tr>
@@ -633,9 +639,18 @@
 									<button class="button_style button--secondary"
 												data-toggle="modal"
 										 data-target="#toolbox" id="change_tools"
-												style="width: 330px; height: 40px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">изменить сопло</span>
+												  style="color: white;font-weight: 900;font-size: 25px;">Изменить сопло</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand('M206 Z0,M666 X0 Y0 Z0,G32,G31,G28,G1 Z22.1 F2000,G30 Y0,M374,M500,G28')">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 60px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;">Калибровка</span>
 										</button>
 									</td>
 								</tr>
@@ -653,81 +668,72 @@
 								<tr>
 									<td style="padding: 22px;text-align: center;">
 										<button id="PLA" class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Пренагрев PLA</span>
+												  style="color: white;font-weight: 900;">Преднагрев PLA</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;">
 										<button id="ABS" class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Пренагрев ABS</span>
+												  style="color: white;font-weight: 900;">Преднагрев ABS</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Охладить экструдер</span>
+												  style="color: white;font-weight: 900;">Охладить экструдер</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;" id="download">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Загрузить пластик</span>
+												  style="color: white;font-weight: 900;">Загрузить пластик</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;" id="extract">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Выгрузить пластик</span>
+												  style="color: white;font-weight: 900;">Выгрузить пластик</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;" data-toggle="modal" data-target="#modaloffsetZ" id="offsetZ">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Настройки 1-го слоя</span>
+												  style="color: white;font-weight: 900;">Настройки 1-го слоя</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand('M306 Z0, G28, M500')" id="m306">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">M306</span>
+												  style="color: white;font-weight: 900;">M306</span>
 										</button>
 									</td>
 								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;" id="M999">
 										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
+												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">M999</span>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand('M206 Z0,M666 X0 Y0 Z0,G32,G31,G28,G1 Z22.1 F2000,G30 Y0,M374,M500,G28')">
-										<button class="button_style button--secondary"
-												style="width: 330px; height: 26px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 21px;">Калибровка</span>
+												  style="color: white;font-weight: 900;">M999</span>
 										</button>
 									</td>
 								</tr>
