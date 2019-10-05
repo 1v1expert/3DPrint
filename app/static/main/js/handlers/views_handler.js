@@ -149,14 +149,15 @@ $('#down_t_tool').on('click', function () {
 // $('#zero_temp_board').on('click', function () {
 //     $('#t_board').text(0);
 // });
-$('#zero_temp_tool').on('click', function () {
-    $('#t_tool').text(0);
-});
+// $('#zero_temp_tool').on('click', function () {
+//     $('#t_tool').text(0);
+// });
 
-$('#set_temp_tool').on('click', function () {
-    var t = $('#t_tool').text();
-    var c_t = +t;
-    SetTemperature_tool(c_t);
+$('#set_temp_tool0').on('click', function () {
+    // var t = $('#t_tool').text();
+    // var c_t = +t;
+
+    SetTemperature_tool(+Apps.temp_tool0);
 });
 
 

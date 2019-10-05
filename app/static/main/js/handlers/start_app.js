@@ -135,7 +135,7 @@ var Apps = {
             _is_connect_printer_octo: null
         },
     feed_rate: 100,
-    temp_board: 70,
+    temp_board:  70,
     temp_tool0: 200,
     temp_tool1: 200,
     _position:

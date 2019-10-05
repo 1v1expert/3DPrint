@@ -228,6 +228,26 @@ var InitApp = function () {
      }
 
 
+// =======================================
+// select temp tool0
+
+     $("#range_temp_tool0").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.temp_tool0 = data.from;
+        }
+    });
+     var range_temp_tool0 = $("#range_temp_tool0").data("ionRangeSlider");
+     range_temp_tool0.update({
+         min: 0,
+         max: 300,
+		 from: Apps.temp_tool0,
+         step: 10,
+         skin: "big"
+     });
+
+
+
+
 
 // =======================================
 // select temp board
@@ -235,10 +255,6 @@ var InitApp = function () {
      $("#range_temp_board").ionRangeSlider({
         onChange: function (data) {
         	Apps.temp_board = data.from;
-        	// var pie_chart_feed_rate = $('#pie_chart_feed_rate');
-        	// pie_chart_feed_rate.data('easyPieChart').update(data.from_percent);
-         //    pie_chart_feed_rate.find('.percents').text(data.from);
-        	// console.log('Change', data.from, data.from_percent);
         }
     });
      var range_temp_board = $("#range_temp_board").data("ionRangeSlider");

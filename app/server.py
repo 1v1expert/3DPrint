@@ -75,6 +75,7 @@ class RootHandler(tornado.web.RequestHandler):
 	def get(self):
 		print(self.get_template_path())
 		full_data = dict(
+			Temp = config.Temp,
 			config=config.CONFIG,
 			Definition=config.Definition,
 			buttons=config.buttons, translate_state=config.translate_state, chambery=config.Chamber, )
