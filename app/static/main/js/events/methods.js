@@ -101,7 +101,9 @@ function CustomGetFiles() {
             "method": "GET"
     }).done(function (response){
         console.log(response);
-        swal(JSON.parse(response).files, JSON.parse(response).files.length, 'error')
+        if !(JSON.parse(response).files){
+            swal('', 'Файлов не обнаружено', 'info')
+        }
         _.each(JSON.parse(response).files, function(entry) {
             data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmCopy(\'" + entry.path + "\' , \'" + entry.name + "\') \" > " +
                 // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
