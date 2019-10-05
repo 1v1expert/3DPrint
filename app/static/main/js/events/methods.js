@@ -8,8 +8,8 @@
 "use strict";
 function GetPosition() {
     Apps.PlayCommand("M114")
-        .done('Success execute command: M114')
-        .error('Error execute command: M114');
+        .done()
+        .error();
 }
 function Stopprint() {
     OctoPrint.job.cancel()

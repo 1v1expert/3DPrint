@@ -145,10 +145,10 @@ var Apps = {
             Z: null,
             E: null,
             update: function (value) {
-                this.X = value.payload.x;
-                this.Y = value.payload.y;
-                this.Z = value.payload.z;
-                this.E = value.payload.e;
+                this.X = +value.payload.x.toFixed(2);
+                this.Y = +value.payload.y.toFixed(2);
+                this.Z = +value.payload.z.toFixed(2);
+                this.E = +value.payload.e.toFixed(2);
                 this.view();
             },
             view: function () {

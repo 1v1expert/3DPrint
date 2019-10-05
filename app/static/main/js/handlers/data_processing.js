@@ -143,13 +143,13 @@ function ProcessingData(data) {
                     Apps.Printer.MonitorState(data.data.payload.state_string);
                     break;
                 case 'Disconnecting':
-                    console.log('Disconnecting');
+                    // console.log('Disconnecting');
                     break;
                 case 'Disconnected':
                     console.log('Disconnected');
                     break;
                 default:
-                    console.log("Untracked event - ", data);
+                    // console.log("Untracked event - ", data);
             }
             break;
         case 'current':
