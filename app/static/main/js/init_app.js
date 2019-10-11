@@ -243,7 +243,7 @@ var InitApp = function () {
          min: 0,
          max: 300,
 		 from: Apps.temp_tool0,
-         step: 10,
+         step: 5,
          skin: "big"
      });
 
@@ -262,9 +262,9 @@ var InitApp = function () {
      var range_temp_chamber = $("#range_temp_chamber").data("ionRangeSlider");
      range_temp_chamber.update({
          min: 0,
-         max: 300,
+         max: 60,
 		 from: Apps.temp_chamber,
-         step: 10,
+         step: 5,
          skin: "big"
      });
  // };
@@ -284,7 +284,7 @@ var InitApp = function () {
          min: 0,
          max: 130,
 		 from: Apps.temp_board,
-         step: 10,
+         step: 5,
          skin: "big"
      });
 
