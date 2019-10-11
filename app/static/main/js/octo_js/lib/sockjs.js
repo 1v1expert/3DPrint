@@ -1675,11 +1675,11 @@ module.exports = global.EventSource;
 
 var Driver = global.WebSocket || global.MozWebSocket;
 if (Driver) {
-	module.exports = function WebSocketBrowserDriver(url) {
-		return new Driver(url);
-	};
+  module.exports = function WebSocketBrowserDriver(url) {
+    return new Driver(url);
+  };
 } else {
-	module.exports = undefined;
+  module.exports = undefined;
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -5079,8 +5079,8 @@ module.exports = function (val, options) {
     return parse(val)
   } else if (type === 'number' && isNaN(val) === false) {
     return options.long ?
-			fmtLong(val) :
-			fmtShort(val)
+      fmtLong(val) :
+      fmtShort(val)
   }
   throw new Error('val is not a non-empty string or a valid number. val=' + JSON.stringify(val))
 }
