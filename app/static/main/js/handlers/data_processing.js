@@ -61,9 +61,17 @@ function ShowTime(totalSeconds) {
     this.seconds = this.totalSeconds % 60;
     //return this.hours + ':' + this.minutes + ':' + this.seconds
 }
+function check_position_chars(tt) {
+    "use strict";
+    if (tt < 10) {
+        return '0' + String(t)
+    } 
+}
+
 ShowTime.prototype.toString = function() {
     "use strict";
-    return this.hours + ':' + this.minutes + ':' + this.seconds;
+    out_data = check_position_chars(this.hours) + ':' + check_position_chars(this.minutes) + ':' + check_position_chars(this.seconds)
+    return out_data;
 };
 var ShowPrintInfo = function (info) {
     "use strict";
@@ -76,7 +84,7 @@ var ShowPrintInfo = function (info) {
         .css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
     // name buttons
-    $('#iconpause2').text(' Пауза#2');
+    $('#iconpause2').text(' Пауза');
     $('#iconpause').text(' Пауза#1');
 };
 
@@ -93,8 +101,8 @@ function HandlerState(value) {
         ShowPrintInfo(value);
     }
     if (state === 'Pausing' || state === 'Paused') {
-        $('#iconpause2').text(' Продолжить#2');
-        $('#iconpause').text(' Продолжить#1');
+        $('#iconpause2').text(' Продолжить');
+        $('#iconpause').text(' Продолжить');
     }
     // Is bed construction ->
     if (state !== Apps.Printer._state) {

@@ -43,6 +43,11 @@ function M999() {
         .done('Success execute command: M999')
         .error('Error execute command: M999');
 }
+function M500() {
+    Apps.PlayCommand("M500")
+        .done('Success execute command: M500')
+        .error('Error execute command: M500');
+}
 function RestartPlatform() {
     OctoPrint.system.executeCommand('core', 'reboot')
         .done('Success execute command: reset plate')

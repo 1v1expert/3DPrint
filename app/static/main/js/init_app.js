@@ -27,13 +27,13 @@ Swal.fire({
     // '<button id="increase" class="btn btn-warning">' +
     //   'I need 5 more seconds!' +
     // '</button><br/>' +
-    '<button id="delete" class="btn btn-danger">' +
+    '<button id="delete" class="btn btn-danger btn-lg" style="margin: 10px;">' +
       'Удалить файл' +
     '</button>' + //<br/>' +
-    '<button id="sent_file" class="btn btn-success">' +
+    '<button id="sent_file" class="btn btn-success btn-lg" style="margin: 10px;">' +
       'Отправить на печать' +
     '</button>' + //<br/>' +
-    '<button id="close" class="btn btn-primary">' +
+    '<button id="close" class="btn btn-primary btn-lg" style="margin: 10px;">' +
       'Закрыть' +
     '</button>',
   //timer: 10000,
@@ -54,8 +54,10 @@ Swal.fire({
     });
 
     sent_file.addEventListener('click', () => {
-    	StartPrint(location, name_file);
+    	Swal.close()
     	$('#maintab').click();
+    	StartPrint(location, name_file);
+
       //swal("Отменено", "А ты послушный :)", "error");
 
     });
@@ -246,6 +248,26 @@ var InitApp = function () {
      });
 
 
+// =======================================
+// select temperature chamber
+     $("#range_temp_chamber").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.temp_chamber = data.from;
+        	// var pie_chart_feed_rate = $('#pie_chart_feed_rate');
+        	// pie_chart_feed_rate.data('easyPieChart').update(data.from_percent);
+         //    pie_chart_feed_rate.find('.percents').text(data.from);
+        	// console.log('Change', data.from, data.from_percent);
+        }
+    });
+     var range_temp_chamber = $("#range_temp_chamber").data("ionRangeSlider");
+     range_temp_chamber.update({
+         min: 0,
+         max: 300,
+		 from: Apps.temp_chamber,
+         step: 10,
+         skin: "big"
+     });
+ // };
 
 
 
@@ -282,9 +304,9 @@ var InitApp = function () {
      var range_feed_rate = $("#range_feed_rate").data("ionRangeSlider");
      range_feed_rate.update({
          min: 50,
-         max: 150,
+         max: 300,
 		 from: Apps.feed_rate,
-         step: 5,
+         step: 10,
          skin: "big"
      });
 

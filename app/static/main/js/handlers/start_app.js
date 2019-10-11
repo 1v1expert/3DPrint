@@ -138,6 +138,7 @@ var Apps = {
     temp_board:  70,
     temp_tool0: 200,
     temp_tool1: 200,
+    temp_chamber: 50,
     _position:
         {
             X: null,

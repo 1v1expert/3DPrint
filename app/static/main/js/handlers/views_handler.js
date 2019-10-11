@@ -168,6 +168,13 @@ $('#set_temp_tool0').on('click', function () {
     SetTemperature_tool(+Apps.temp_tool0);
 });
 
+$('#set_temp_chamber').on('click', function () {
+    // var t = $('#t_tool').text();
+    // var c_t = +t;
+
+    SetTemperature_chamber(+Apps.temp_chamber);
+});
+
 
 $('#set_temp_board').on('click', function () {
     // var t = $('#t_board').text();
@@ -191,6 +198,10 @@ $('#restart_software').on('click', function () {
 
 $('#M999').on('click', function () {
     M999();
+});
+
+$('#M500').on('click', function () {
+    M500();
 });
 
 $('#calibr').on('click', function () {

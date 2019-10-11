@@ -84,6 +84,16 @@ function SetTemperature_tool(temper) {
     });
 }
 
+function SetTemperature_chamber(temper) {
+    var setting = CopyObjects(settings);
+    var command = '{"command": "target", "target":' + temper + '}';
+    setting.url = URL + '/api/printer/chamber';
+    setting.data = command;
+    $.ajax(setting).done(function (response) {
+        console.log(response);
+    });
+}
+
 var SystemTrigeredPrint = function () {
     var setting = settings;
     setting.url = URL + "/api/job";

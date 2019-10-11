@@ -4,6 +4,12 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	.btn {
+		text-transform: none!important;
+	}
+	.swal2-popup {
+		width: 42em!important;
+	}
 	.button_style .button__inner_style {
 		text-transform: none;
 	}
@@ -277,7 +283,7 @@
 									<div class="row">
 										<div class="col-sm-2 mb-15 " style="margin-left: 75px;" data-target="#modalTemperature1" data-toggle="modal">
 											<span class="skill-head mb-20"
-												  style="text-transform: unset">t° 1-го СОПЛА</span>
+												  style="text-transform: unset;font-size: 14px;">T° 1-го СОПЛА</span>
 											<span id="pie_chart_1" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_1"></label>
@@ -291,8 +297,8 @@
 											<!--<canvas height="20" width="20"></canvas></span>-->
 										<!--</div>-->
 										{% if chambery %}
-										<div class="col-sm-2 mb-15">
-											<span class="skill-head mb-20">t° камеры</span>
+										<div class="col-sm-2 mb-15" data-target="#modalTemperatureChamber" data-toggle="modal">
+											<span class="skill-head mb-20" style="font-size: 14px;">T° камеры</span>
 											<span id="pie_chart_chambery" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_chambery"></label>
@@ -300,21 +306,21 @@
 										</div>
 										{% end %}
 										<div class="col-sm-2 mb-15" data-target="#modalTemperature2" data-toggle="modal">
-											<span class="skill-head mb-20" style="text-transform: unset">t° СТОЛА</span>
+											<span class="skill-head mb-20" style="text-transform: unset;font-size: 14px;">T° СТОЛА</span>
 											<span id="pie_chart_3" class="easypiechart skill-circle" data-percent="100">
 												<span class="degrees percents head-font">0</span>
 												<label id="degres_3"></label>
 											<canvas height="20" width="20"></canvas></span>
 										</div>
 										<div class="col-sm-2 mb-15" data-target="#fanbox" data-toggle="modal">
-											<span class="skill-head mb-20">Обдув</span>
+											<span class="skill-head mb-20" style="font-size: 14px;">Обдув</span>
 											<span id="pie_chart_34" class="easypiechart skill-circle" data-percent="100">
 												<span class="degreess  percents degrees head-font">0</span>
 												<label id="degres_34"></label>
 											<canvas height="20" width="20"></canvas></span>
 										</div>
 										<div class="col-sm-2 mb-15" data-target="#print_speed" data-toggle="modal">
-											<span class="skill-head mb-20">Скорость</span>
+											<span class="skill-head mb-20" style="font-size: 14px;">Скорость</span>
 											<span id="pie_chart_feed_rate" class="easypiechart skill-circle" data-percent="100">
 												<span class="degreess  percents degrees head-font">100</span>
 												<label id="degres_feed_rate"></label>
@@ -442,12 +448,12 @@
 			<!-- footer -->
 			<footer class="footer container-fluid pl-30 pr-30">
 				<div class="row">
-					<div class="col-sm-6">
+					<!-- <div class="col-sm-6">
 						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
 					</div>
 					<div class="col-sm-6">
 						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
-					</div>
+					</div> -->
 				</div>
 			</footer>
 
@@ -734,6 +740,15 @@
 												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;">M999</span>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding: 18px;text-align: center;" id="M500">
+										<button class="button_style button--secondary"
+												style="width: 330px; height: 60px">
+											<span class="button__inner_style"
+												  style="color: white;font-weight: 900;">M500</span>
 										</button>
 									</td>
 								</tr>
@@ -1560,11 +1575,11 @@
 								</td>
 								<td><a id="up_to_Z" class="btn"
 									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-										class="fa fa-arrow-up" style="font-size: 85px;"></span></a>
+										class="fa fa-arrow-down" style="font-size: 85px;"></span></a>
 								</td>
 								<td><a id="down_to_Z" class="btn"
 									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-										class="fa fa-arrow-down" style="font-size: 85px;"></span></a>
+										class="fa fa-arrow-up" style="font-size: 85px;"></span></a>
 								</td>
 								<td><a id="set_offset_z" class="btn"
 									   style="border-color:#0b97c4; font-size: 30px; background-color: #00a5d1;padding: 30px 50px; border-radius: 10px; text-transform: none">Установить</a>
@@ -1656,6 +1671,46 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+
+<!-- Temperature chamber modal content -->
+<div id="modalTemperatureChamber" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabelChamber"
+	 aria-hidden="true" style="display: none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h5 class="modal-title" id="myLargeModalLabelChamber" style="text-transform: initial;">Установить температуру камеры</h5>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="table-responsive">
+						<table class="table-condensed" style="text-align: center;    width: 500px;">
+							<thead>
+							<tr>
+
+							</tr>
+							</thead>
+							<tbody>
+							<tr><td>
+								<input type="text" class="js-range-slider" name="range_temp_chamber" id="range_temp_chamber" value=""/>
+								</td>
+								<!--<td>установить</td>-->
+							</tr>
+							<tr><td style="padding: 25px 0px 0px 0px;"><a id="set_temp_chamber" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 25px 70px; border-radius: 10px; text-transform: none; font-size: x-large" >Установить</a></td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 
 <!-- Temperature tool modal content -->
 <div id="modalTemperature2" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel4"
