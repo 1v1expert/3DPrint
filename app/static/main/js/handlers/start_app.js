@@ -225,7 +225,15 @@ function ConnectOctoprint() {
             OctoPrint.connection.connect();
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
             console.log('name ', response.name, 'session', response.session);
+            try {
             AuthSocket(response.name, response.session);
+        }
+        catch (e) {
+            AuthSocket(response.name, response.session);
+        // инструкции для работы с ошибками
+        console.log('Errrrror', e); // передает объект ошибки для управления им
+    }
+            // AuthSocket(response.name, response.session);
             OctoPrint.socket.reconnecting = true;
             OctoPrint.socket.reconnectTrial = 100;
             OctoPrint.socket.connect();
