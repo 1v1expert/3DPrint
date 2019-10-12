@@ -202,8 +202,14 @@ var Show_connection_status = function (msg, resp, status) {
 
 function AuthSocket(name, session) {
     setTimeout(function () {
+        try {
         OctoPrint.socket.sendAuth(name, session);
-    }, 1000);
+    }
+    catch (e) {
+        console.log('Errrrrror', e)
+        AuthSocket(name, session)
+    }
+    }, 1500);
 }
 
 // function ConnectOctoprint2() {
@@ -228,14 +234,14 @@ function ConnectOctoprint() {
             OctoPrint.socket.reconnecting = true;
             OctoPrint.socket.reconnectTrial = 100;
             OctoPrint.socket.connect();
-            try {
+            // try {
                 AuthSocket(response.name, response.session);
-             }
-            catch (e) {
+             // }
+            // catch (e) {
             // AuthSocket(response.name, response.session);
             // инструкции для работы с ошибками
-            console.log('Errrrror', e); // передает объект ошибки для управления им
-            }
+            // console.log('Errrrror', e); // передает объект ошибки для управления им
+            // }
             // AuthSocket(response.name, response.session);
 
             //Fix todo: Connect witch Printer offline
