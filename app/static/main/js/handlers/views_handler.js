@@ -261,12 +261,13 @@ $('#retruct').on('click', function () {
 });
 /*********/
 $('#PLA').on('click', function () {
-    SetTemperature_bed(String(Temp.PLA.Bed));
-    SetTemperature_tool(String(Temp.PLA.Tool));
+
+    SetTemperature_bed(String(Apps._settings.Temp.PLA.Bed));
+    SetTemperature_tool(String(Apps._settings.Temp.PLA.Tool));
 });
 $('#ABS').on('click', function () {
-    SetTemperature_bed(String(Temp.ABS.Bed));
-    SetTemperature_tool(String(Temp.ABS.Tool));
+    SetTemperature_bed(String(Apps._settings.Temp.ABS.Bed));
+    SetTemperature_tool(String(Apps._settings.Temp.ABS.Tool));
 });
 $('#dpauseprint_1').on('click', function () {
     TrigeredPrint();
