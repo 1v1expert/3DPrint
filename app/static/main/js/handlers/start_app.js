@@ -53,8 +53,21 @@ var Apps = {
         // Including buttons from configuration
         for (var i in DATA.buttons.General) {
             var command = DATA.buttons.General[i].command;
-            $("#system_commands").append('<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' +
-                DATA.buttons.General[i].name + '</a></li>');
+            var insert_tr = `<tr>
+                                    <td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand(\'` + command + `\')">
+                                        <button class="button_style button--secondary"
+                                                style="width: 330px; height: 60px">
+                                            <span class="button__inner_style"
+                                                  style="color: white;font-weight: 900;">` + DATA.buttons.General[i].name + `</span>
+                                        </button>
+                                    </td>
+                                </tr>`
+
+            $('#system_commands_right > tbody:last-child').append(insert_tr);
+            // $("#system_commands").append(
+                // var insert_tr = ''
+                // '<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' + DATA.buttons.General[i].name + '</a></li>'
+                // );
         }
         Apps.Printer.Tool._active_tool = Apps._settings.Definition.MainTool;
         // End filling
