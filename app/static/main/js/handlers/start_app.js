@@ -63,7 +63,12 @@ var Apps = {
                                     </td>
                                 </tr>`
 
-            $('#system_commands_right > tbody:last-child').append(insert_tr);
+            if ( i & 1 ) {
+                $('#system_commands_right > tbody:last-child').append(insert_tr)
+            }
+            else {
+                $('#system_commands_left > tbody:last-child').append(insert_tr)
+            }
             // $("#system_commands").append(
                 // var insert_tr = ''
                 // '<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' + DATA.buttons.General[i].name + '</a></li>'
