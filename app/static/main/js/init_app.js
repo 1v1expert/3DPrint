@@ -55,7 +55,7 @@ Swal.fire({
 
     sent_file.addEventListener('click', () => {
     	
-    	$('#maintab').click();
+    	// $('#maintab').click();
     	StartPrint(location, name_file);
     	Swal.close();
 
