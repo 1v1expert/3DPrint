@@ -54,9 +54,10 @@ Swal.fire({
     });
 
     sent_file.addEventListener('click', () => {
-    	Swal.close()
+    	
     	$('#maintab').click();
     	StartPrint(location, name_file);
+    	Swal.close();
 
       //swal("Отменено", "А ты послушный :)", "error");
 
