@@ -66,6 +66,9 @@ function check_position_chars(tt) {
     if (tt < 10) {
         return '0' + String(tt)
     } 
+    else {
+        return String(tt)
+    }
 }
 
 ShowTime.prototype.toString = function() {
