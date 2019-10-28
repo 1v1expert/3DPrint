@@ -64,13 +64,13 @@ function ShowTime(totalSeconds) {
 function check_position_chars(tt) {
     "use strict";
     if (tt < 10) {
-        return '0' + String(t)
+        return '0' + String(tt)
     } 
 }
 
 ShowTime.prototype.toString = function() {
     "use strict";
-    out_data = check_position_chars(this.hours) + ':' + check_position_chars(this.minutes) + ':' + check_position_chars(this.seconds)
+    var out_data = check_position_chars(this.hours) + ':' + check_position_chars(this.minutes) + ':' + check_position_chars(this.seconds)
     return out_data;
 };
 var ShowPrintInfo = function (info) {
