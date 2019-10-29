@@ -58,7 +58,7 @@ Swal.fire({
     	// $('#maintab').click();
     	StartPrint(location, name_file);
     	Swal.close();
-
+    	$('#maintab').click();
       //swal("Отменено", "А ты послушный :)", "error");
 
     });
