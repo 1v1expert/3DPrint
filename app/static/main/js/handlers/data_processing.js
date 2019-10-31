@@ -170,8 +170,23 @@ function ProcessingData(data) {
             Apps.logs.update(data.data);
             break;
         case 'plugin':
+            if (data.data.plugin === "M117PopUp"){
+                $.toast({
+                    heading: 'Сообщение:',
+                    text: data.data.data.msg,
+                    position: 'bottom-left',
+                    loaderBg: '#50c4e3',//'#f8b32d',
+                    icon: 'info',
+                    hideAfter: 3500,
+                    stack: 7,
+                    showHideTransition: 'plain',
+                    bgColor: '#50c4e3'
+                });
+            }
+            else if (data.data.plugin === "ServerStats") {
             var system_info = "cpu.%: " + data.data.data["cpu.%"] + "; mem.%: " + data.data.data["mem.%"] + "; temp: " + data.data.data["temp"];
             $('#system_info').text(system_info);
+        }
             break;
         //case ''
 

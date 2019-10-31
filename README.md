@@ -98,3 +98,9 @@ at `~/Library/Application Support/OctoPrint` on MacOS.
 
 [SEE DOCS](http://docs.octoprint.org/en/master/)\
 [source octoprint](https://github.com/foosel/OctoPrint)
+
+
+PLUGINS REQ:
+OctoPrint-ServerStats
+OctoPrint-NavbarTemp
+
