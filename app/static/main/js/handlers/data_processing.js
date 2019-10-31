@@ -172,8 +172,7 @@ function ProcessingData(data) {
         case 'plugin':
             if (data.data.plugin === "M117PopUp"){
                 $.toast({
-                    heading: 'Сообщение:',
-                    text: data.data.data.msg,
+                    heading: data.data.data.msg,
                     position: 'bottom-left',
                     loaderBg: '#50c4e3',//'#f8b32d',
                     icon: 'info',
