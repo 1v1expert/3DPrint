@@ -86,6 +86,7 @@ var ShowPrintInfo = function (info) {
         .css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
     $('#iconpause2').text(' Пауза');
+    Apps.Printer._is_pause = false;
     // $('#iconpause').text(' Пауза#1');
 };
 
@@ -103,8 +104,10 @@ function HandlerState(value) {
     }
     if (state === 'Pausing' || state === 'Paused') {
         $('#iconpause2').text(' Продолжить');
-        $('#iconpause').text(' Продолжить');
+        // $('#iconpause').text(' Продолжить');
+        Apps.Printer._is_pause = true;
     }
+
     // Is bed construction ->
     if (state !== Apps.Printer._state) {
         //Apps.Printer._state = state;
@@ -136,7 +139,7 @@ function CurrentEvent(value) {
 }
 
 function ProcessingData(data) {
-    
+
     console.log(data);
     switch(data.event) {
         case 'event':
