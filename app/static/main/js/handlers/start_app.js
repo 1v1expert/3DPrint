@@ -121,7 +121,8 @@ var Apps = {
             _is_pause: false,
             Switch_pause: function () {
                 this._is_pause = !this._is_pause;
-                var command = Apps._settings.buttons.OnPause;
+                // var command = Apps._settings.buttons.OnPause;
+                var command = Apps._settings.buttons.CancPause;
                 if ((Apps.Printer._state === 'Pausing') || (Apps.Printer._state ===  'Paused')) {
                     this._is_pause = true;
                     //command = Apps._settings.buttons.CancPause;

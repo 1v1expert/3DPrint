@@ -6,12 +6,13 @@
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
 
+"use strict";
+
 var global = window || this;
 global.global_state = null;
 
 
 function UpdateTemps(temps) {
-    "use strict";
     if (temps.chamber && DATA.chambery) {
         var pie_chart_chambery = $('#pie_chart_chambery');
         pie_chart_chambery.find('.percents').text(temps.chamber.actual);
@@ -72,12 +73,10 @@ function check_position_chars(tt) {
 }
 
 ShowTime.prototype.toString = function() {
-    "use strict";
     var out_data = check_position_chars(this.hours) + ':' + check_position_chars(this.minutes) + ':' + check_position_chars(this.seconds)
     return out_data;
 };
 var ShowPrintInfo = function (info) {
-    "use strict";
     $('#estimatedPrintTime').text("Печатается: " + new ShowTime(info.progress.printTime).toString());
         //moment.unix(Number(info.progress.printTime)).utc().format('HH:mm:ss'));
     $('#printTime').text("Осталось: " + new ShowTime(info.progress.printTimeLeft).toString());
@@ -86,13 +85,12 @@ var ShowPrintInfo = function (info) {
         .html(Math.round(info.progress.completion) + '%')
         .css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
-    // name buttons
     $('#iconpause2').text(' Пауза');
-    $('#iconpause').text(' Пауза#1');
+    // $('#iconpause').text(' Пауза#1');
 };
 
 function HandlerState(value) {
-    "use strict";
+    
     console.log('Handler state:', value, Apps.Printer._state);
     var state = value.state.text || undefined; //|| value.state;
     var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state] : state;
@@ -125,7 +123,6 @@ function HandlerState(value) {
 }
 
 function CurrentEvent(value) {
-    "use strict";
 
     if (value.temps.length) {
         UpdateTemps(value.temps[0]);
@@ -139,7 +136,7 @@ function CurrentEvent(value) {
 }
 
 function ProcessingData(data) {
-    "use strict";
+    
     console.log(data);
     switch(data.event) {
         case 'event':
