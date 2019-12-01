@@ -2,7 +2,7 @@
 ### 3DQ FullHeat | Special project [![GitHub release](https://img.shields.io/badge/release-v0.1.1-blue.svg)](https://github.com/1v1expert/3DPrint/releases) [![GitHub license](https://img.shields.io/github/license/1v1expert/3DPrint.svg?style=plastic)](https://github.com/1v1expert/3DPrint/blob/master/LICENSE)
 This plugin will transform the OctoPrint layout into a Mobile / TFT friendly layout. With larger buttons and a responsive layout down to the smallest resolution possible. It will mimic pointer events as touch, so you can hook up those touchscreens. Design proposed by 3DQuality.
 
-![3DQ Interface](https://github.com/1v1expert/3DPrint/app/static/3DQ Interface.png)
+![3DQ Interface](https://github.com/1v1expert/3DPrint/blob/rc/v1.0.3.1/app/static/images/3DQ%20Interface.png)
 ````
 Dependencies:
  - Octoprint - core
