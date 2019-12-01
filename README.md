@@ -2,15 +2,8 @@
 ### 3DPrint porject [![GitHub release](https://img.shields.io/badge/release-v0.1.1-blue.svg)](https://github.com/1v1expert/3DPrint/releases) [![GitHub license](https://img.shields.io/github/license/1v1expert/3DPrint.svg?style=plastic)](https://github.com/1v1expert/3DPrint/blob/master/LICENSE)
 ````
 Dependencies:
- - Ngrok (https://ngrok.com/) - remote access
- - Python2.7 - basic project
- - Python3.5 - django framework for design view
- - screenfetch - for only fun
- - zsh
- - Octoprint - main project
+ - Octoprint - core
  - Touchui - plugin
- - themeplate jetson
- - OctoPrint-TFT
 ````
 
 ## Install 3DPrint
