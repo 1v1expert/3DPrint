@@ -8,8 +8,10 @@
 "use strict";
 var is_connect_server = false, is_connect_printer = false;
 var socket = null;
+
 let hostname = document.location.hostname;
-let URL = 'http://' + hostname; 
+let URL = 'http://' + hostname;
+
 var def_settings = DATA || {
     "CONFIG": {
         "BaseUrl": "http://localhost:5000",
