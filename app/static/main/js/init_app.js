@@ -18,10 +18,171 @@ $('.js-click-modal').click(function(){
 $('.js-close-modal').click(function(){
   $('.container').removeClass('modal-open');
 });
-function ConfirmPrint(location, name_file) {
-    swal({
+function ConfirmPrintOrDelete(location, name_file) {
+	//let timerInterval
+Swal.fire({
+  title: 'Файл ' + name_file,
+  html:
+    // 'I will close in <strong></strong> seconds.<br/><br/>' +
+    // '<button id="increase" class="btn btn-warning">' +
+    //   'I need 5 more seconds!' +
+    // '</button><br/>' +
+    '<button id="delete" class="btn btn-danger btn-lg" style="margin: 10px;">' +
+      'Удалить файл' +
+    '</button>' + //<br/>' +
+    '<button id="sent_file" class="btn btn-success btn-lg" style="margin: 10px;">' +
+      'Отправить на печать' +
+    '</button>' + //<br/>' +
+    '<button id="close" class="btn btn-primary btn-lg" style="margin: 10px;">' +
+      'Закрыть' +
+    '</button>',
+  //timer: 10000,
+  onBeforeOpen: () => {
+    var content = Swal.getContent();
+    var $ = content.querySelector.bind(content);
+
+    var delete_file = $('#delete');
+    var sent_file = $('#sent_file');
+    var close = $('#close');
+    //const increase = $('#increase')
+
+    Swal.showLoading();
+
+    delete_file.addEventListener('click', () => {
+    	DeleteFile(location, name_file);
+      swal("Успешно", "Файл " + name_file + "успешно удалён" , "success");
+    });
+
+    sent_file.addEventListener('click', () => {
+    	
+    	// $('#maintab').click();
+    	StartPrint(location, name_file);
+    	Swal.close();
+    	$('#maintab').click();
+      //swal("Отменено", "А ты послушный :)", "error");
+
+    });
+
+    close.addEventListener('click', () => {
+      Swal.close()
+
+    });
+
+    // increase.addEventListener('click', () => {
+    //   Swal.increaseTimer(5000)
+    // })
+
+    // timerInterval = setInterval(() => {
+    //   Swal.getContent().querySelector('strong')
+    //     .textContent = (Swal.getTimerLeft() / 1000)
+    //       .toFixed(0)
+    // }, 100)
+  },
+  // onClose: () => {
+  //   clearInterval(timerInterval)
+  // }
+});
+	// Swal.fire({
+	// 	text: "text",
+	// 	content: "content",
+	// 	title: "Test",
+	// 	buttons: {
+  //   		cancel: {
+  //   			text: "Cancel",
+  //   			value: null,
+  //  		 		visible: false,
+  //   			className: "",
+  //   			closeModal: true,
+	// 		},
+	// 		catch: {
+  //   			text: "Throw Pokéball!",
+	// 			value: "catch",
+	// 		},
+	// 		confirm: {
+  //   text: "OK",
+  //   value: true,
+  //   visible: true,
+  //   className: "",
+  //   closeModal: true
+  // }
+	// 		//defeat: true,
+	// 	}
+	// }, function () {
+  //
+  //   });
+    // swal("A wild Pikachu appeared! What do you want to do?", {
+    	// buttons: {
+    	// 	cancel: "Run away!",
+	// 		catch: {
+    	// 		text: "Throw Pokéball!",
+	// 			value: "catch",
+	// 		},
+	// 		defeat: true,
+	// 	},
+	// })
+		// .then((value) => {
+		// 	switch (value) {
+		// 		case "defeat":
+		// 			swal("Pikachu fainted! You gained 500 XP!");
+		// 			break;
+		// 		case "catch":
+		// 			swal("Gotcha!", "Pikachu was caught!", "success");
+		// 			break;
+		// 		default:
+		// 			swal("Got away safely!");
+		// 	}
+		// });
+    // swal({
+    //     title: "Вы уверены ?",
+    //     text: "Файл " + name_file + " будет скопирован на внутреннюю память",
+    //     type: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#f8b32d",
+    //     confirmButtonText: "Да, я сделаю это",
+    //     cancelButtonText: "Нет, не хооочу",
+    //     closeOnConfirm: true,
+    //     closeOnCancel: true
+    // }, function (isConfirm) {
+    //     if (isConfirm) {
+    //     	CommandFile(location, name_file, "copy");
+    //         StartPrint(location, name_file);
+    //         $('#maintab').click();
+    //     } else {
+    //         swal("Отменено", "А ты послушный :)", "error");
+    //     }
+    // });
+}
+
+function CommandFile(filepath, name, command) {
+	//alert('Копируется файл' + filepath);
+	$.ajax(
+        {
+            "async": true,
+            "url": "http://localhost:5001/manage_file",
+            "method": "POST",
+			"data": JSON.stringify({"path": filepath,
+			"command": command, "name": name})
+    }).done(function (response){
+    	Swal.fire(
+            'Скопировано!',
+            'Ваш файл успешно скопирован.',
+            'success'
+        );
+    	//alert('Файл скопирован');
+    })
+		.error(function (response) {
+			Swal.fire(
+            'Не скопировано!',
+            'Произошла проблема',
+            'error'
+        );
+			//alert('Файл не скопирован');
+        });
+}
+function ConfirmCopy(location, name_file) {
+    Swal.fire({
         title: "Вы уверены ?",
-        text: "Данный файл будет скопирован на внутреннюю память и отправлен на печать",
+        text: "Файл " + name_file + " будет скопирован на внутреннюю память",
         type: "warning",
         showCancelButton: true,
         confirmButtonColor: "#f8b32d",
@@ -29,14 +190,23 @@ function ConfirmPrint(location, name_file) {
         cancelButtonText: "Нет, не хооочу",
         closeOnConfirm: true,
         closeOnCancel: true
-    }, function (isConfirm) {
-        if (isConfirm) {
-            StartPrint(location, name_file);
-            $('#maintab').click();
-        } else {
-            swal("Отменено", "А ты послушный :)", "error");
-        }
-    });
+    }).then((result) => {
+  if (result.value)
+	{
+		CommandFile(location, name_file, "copy");
+
+    }})
+  // }
+  //   , function (isConfirm) {
+  //       if (isConfirm) {
+  //       	//alert('confirm')
+  //       	CommandFile(location, name_file, "copy");
+  //           //StartPrint(location, name_file);
+  //           $('#maintab').click();
+  //       } else {
+  //           swal("Отменено", "А ты послушный :)", "error");
+  //       }
+  //   });
 }
  /** ***************************************/
 
@@ -46,12 +216,105 @@ var InitApp = function () {
 	$('#degres_1').text('/' + DATA.Definition.Target + '°');
 	$('#pie_chart_3').data('easyPieChart').update(0);
 	$('#pie_chart_34').data('easyPieChart').update(0);
+	$('#pie_chart_feed_rate').data('easyPieChart').update(0);
 	$('#degres_3').text('/' + DATA.Definition.Target + '°');
 	$('#progress').html('');
+	$('#pie_chart_feed_rate').data('easyPieChart').update(50);
 	$('#t_board').text(String(Temp.Default.Bed));
   	$('#t_tool').text(String(Temp.Default.Tool));
-  	$('#nozzle').text(Apps._settings.Definition.MainTool);
-};
+     $('#nozzle').text(Apps._settings.Definition.MainTool);
+     if (DATA.chambery) {
+         $('#pie_chart_chambery').data('easyPieChart').update(0);
+         // $('#degres_chambery').text('/' + DATA.Definition.Target + '°');
+
+         // pie_chart_chambery
+     }
+
+
+// =======================================
+// select temp tool0
+
+     $("#range_temp_tool0").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.temp_tool0 = data.from;
+        }
+    });
+     var range_temp_tool0 = $("#range_temp_tool0").data("ionRangeSlider");
+     range_temp_tool0.update({
+         min: 0,
+         max: 300,
+		 from: Apps.temp_tool0,
+         step: 5,
+         skin: "big"
+     });
+
+
+// =======================================
+// select temperature chamber
+     $("#range_temp_chamber").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.temp_chamber = data.from;
+        	// var pie_chart_feed_rate = $('#pie_chart_feed_rate');
+        	// pie_chart_feed_rate.data('easyPieChart').update(data.from_percent);
+         //    pie_chart_feed_rate.find('.percents').text(data.from);
+        	// console.log('Change', data.from, data.from_percent);
+        }
+    });
+     var range_temp_chamber = $("#range_temp_chamber").data("ionRangeSlider");
+     range_temp_chamber.update({
+         min: 0,
+         max: 60,
+		 from: Apps.temp_chamber,
+         step: 5,
+         skin: "big"
+     });
+ // };
+
+
+
+// =======================================
+// select temp board
+
+     $("#range_temp_board").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.temp_board = data.from;
+        }
+    });
+     var range_temp_board = $("#range_temp_board").data("ionRangeSlider");
+     range_temp_board.update({
+         min: 0,
+         max: 130,
+		 from: Apps.temp_board,
+         step: 5,
+         skin: "big"
+     });
+
+
+
+// =======================================
+// select range feed rate
+     $("#range_feed_rate").ionRangeSlider({
+        onChange: function (data) {
+        	Apps.feed_rate = data.from;
+        	var pie_chart_feed_rate = $('#pie_chart_feed_rate');
+        	pie_chart_feed_rate.data('easyPieChart').update(data.from_percent);
+            pie_chart_feed_rate.find('.percents').text(data.from);
+        	console.log('Change', data.from, data.from_percent);
+        }
+    });
+     var range_feed_rate = $("#range_feed_rate").data("ionRangeSlider");
+     range_feed_rate.update({
+         min: 50,
+         max: 300,
+		 from: Apps.feed_rate,
+         step: 10,
+         skin: "big"
+     });
+
+     // $("#range_feed_rate").ionRangeSlider({
+     //
+     // });
+ };
 $(window).load(function() {
   $('a.toolbtn').click(function() {
       $('a.toolbtn.active').removeClass("active");
@@ -61,16 +324,17 @@ $(window).load(function() {
   });
 });
 //Managment fan buttons
-$(window).load(function() {
-  $('a.fanbtn').click(function() {
-  	$('a.fanbtn.active').removeClass("active");
-  	$(this).toggleClass("active");
-  	var percents = $(this).text().substr(0, $(this).text().length-1);
-  	Apps.PlayCommand($(this).attr('data'));
-  	$('#pie_chart_34').find('.percents').text(percents);
-  	$('#pie_chart_34').data('easyPieChart').update(+percents);
-  	//console.log($(this).attr('data'));
-  });
+$(window).load(function () {
+    $('a.fanbtn').click(function () {
+        $('a.fanbtn.active').removeClass("active");
+        $(this).toggleClass("active");
+        var percents = $(this).text().substr(0, $(this).text().length - 1);
+        Apps.PlayCommand($(this).attr('data'));
+        $('#pie_chart_34').find('.percents').text(percents);
+        $('#pie_chart_34').data('easyPieChart').update(+percents);
+
+        //console.log($(this).attr('data'));
+    });
 });
 /*****Ready function start*****/
 $(document).ready(function(){
@@ -78,7 +342,6 @@ $(document).ready(function(){
 	InitApp();
 	ConnectOctoprint();
 	Apps.init();
-
 });
 /*****Ready function end*****/
 
@@ -101,7 +364,7 @@ $(window).on("load", function() {
 			  offset: 'bottom-in-view'
 			});
 		}
-	};
+	}
     $('ul.menu-main').on('click', 'li:not(.active)', function() {
 		$(this)
 			.addClass('active').siblings().removeClass('active')
@@ -116,6 +379,9 @@ $(window).on("load", function() {
 		$('ul.menu-main li').eq(tabIndex).click();
 	});
 
+    // another style
+    // document.styleSheets[0].insertRule('a:active { color: #333 !important; }', 0);
+    // document.styleSheets[0].insertRule('a:visited { color: white !important; }', 0);
 });
 /*****Load function* end*****/
 
@@ -124,7 +390,7 @@ var setHeightWidth = function () {
 	var height = $(window).height();
 	var width = $(window).width();
 	$('.full-height').css('height', (height));
-	$('.page-wrapper').css('min-height', (height));
+	$('.page-wrapper').css('min-height', (+height-6));
 
 	/*Right Sidebar Scroll Start*/
 	if(width<=1007){

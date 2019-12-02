@@ -84,6 +84,16 @@ function SetTemperature_tool(temper) {
     });
 }
 
+function SetTemperature_chamber(temper) {
+    var setting = CopyObjects(settings);
+    var command = '{"command": "target", "target":' + temper + '}';
+    setting.url = URL + '/api/printer/chamber';
+    setting.data = command;
+    $.ajax(setting).done(function (response) {
+        console.log(response);
+    });
+}
+
 var SystemTrigeredPrint = function () {
     var setting = settings;
     setting.url = URL + "/api/job";
@@ -108,10 +118,9 @@ var SystemTrigeredPrint = function () {
 };
 
 function TrigeredPrint() {
-    var command = Apps._settings.buttons.OnPause;
-    if (Apps.Printer._state === 'Pausing' || Apps.Printer._state === 'Paused') {
-        command = Apps._settings.buttons.CancPause;
-    }
-    console.log(command);
-    Apps.PlayCommand(command);
+    Apps.Printer.Switch_pause();
+
+    //console.log(command, Apps.Printer._state);
+    //alert('State: ' + Apps.Printer._state +  command);
+    //Apps.PlayCommand(command);
 }

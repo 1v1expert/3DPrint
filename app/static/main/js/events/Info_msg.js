@@ -23,19 +23,20 @@ var SuccessConect = function () {
 
 var PrinterState = function (state) {
     "use strict";
+    console.log(state);
     //$('#status_printt').text(state);
-    window.setTimeout(function () {
-        $.toast().reset('all');
-        $.toast({
-            heading: 'Состояние:',
-            text: state,
-            position: 'bottom-left',
-            loaderBg: '#f8b32d',
-            icon: 'success',
-            hideAfter: 3500,
-            stack: 7
-        });
-    }, 30);
+    // window.setTimeout(function () {
+    //     $.toast().reset('all');
+    //     $.toast({
+    //         heading: 'Состояние:',
+    //         text: state,
+    //         position: 'bottom-left',
+    //         loaderBg: '#f8b32d',
+    //         icon: 'success',
+    //         hideAfter: 3500,
+    //         stack: 7
+    //     });
+    // }, 30);
 };
 var MessageOutput = function (headings, msgs, icons, hideAfters) {
     "use strict";

@@ -2,6 +2,14 @@
 
 PORT = 5001
 cookie_secret = "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo="
+Chamber = True
+Two_nozzle = False
+FileManager = {
+	"Destination": "/home/pi/.octoprint/watched",
+	"Source": "/home/pi/.octoprint/flashdrive",
+	"Suffix": ".gcode"
+
+}
 CONFIG = {
 	"BaseUrl": "http://localhost:5000",
 	"Login": "vladdos",
@@ -41,6 +49,14 @@ buttons = {
 	"OffsetZ": "M206",
 	"General":
 		[
+			{
+				"name": "Выгрузить",
+				"command": ["M109 S200", "G91", "G1 E15 F200",  "G1 E-80 F200", "G1 E-390 F4000"]
+			},
+			{
+				"name": "Загрузить",
+				"command": ["M109 S230", "G91", "G1 E30 F150", "G1 E280 F700", "G1 E100 F150"]
+			},
 			{
 				"name": "Калибровка",
 				"command": ["M206 Z0", "M666 X0 Y0 Z0", "G32", "G31", "G28", "G1 Z22.1 F2000", "G30 Y0", "M374", "M500", "G28"]

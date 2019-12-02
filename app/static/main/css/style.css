@@ -6,96 +6,19 @@ Project:	Jetson
 ++++ Reset ++++
 ++++ Basic ++++
 
-	++Effect 1: YouTube loading++
-	++typography++
-	++Buttons++
-	++Admin Basic++
-	++Form++
-	++Form-Wizard++
-	++Product Deatails*++
-	++Product Cart++
-	++Popover++
-	++Typerhead++
-	++Editors++
-	++Accordion++
-	++Tabs++
-	++Table++
-	++Morris Chart++
-	++Flot Chart++
-	++Chartist++
-	++Easy pie chart++
-	++Skills Counter++
-	++Nestable++
-	++Treeview++
-	++Modals++
-	++sweet-alert++
-	++Notification++
-	++Tooltop++
-	++Icons++
-	++File Upload++
-	++File Manager++
-	++Carousel++
-	++Testimonial slider++
-	++Twitter slider++
-	++Range Slider++
-	++Gallery++
-	++Typography++
-	++Panel++
-	++Pricing Table++
-	++Dropdown++
-	++Weather++
-	++Sparkline++
-	++Pagination++
-	++Pager++
-	++Labels++
-	++Badge++
-	++Task Panel++
-	++Vecotor Map++
-	++Progressbar++
-	++Search Bar++
-	++Chat UI++
-	++Widgets++
-	++Profile++
-	++Followers++
-	++Small Graph++
-	++Timeline++
-	++Caledar++
-	++Todo List++
-	++Activity++
-	++Message Box++
-	++Inbox++
-	++Contact Cards++
-	++Contact List++
-	++Login Form++
-	++Error Page++
-	++Products++
-	++Cropperjs++
-
-++++ Mediaqueries ++++
 -------------------------------------------------------------------*/
 /****************************/
 /** Imports **/
 /****************************/
-@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Poppins:400|500);
+/*@import url(https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700|Poppins:400|500);*/
 @import url(../../dist/bootstrap/dist/css/bootstrap.min.css);
 @import url(../../dist/other_css/font-awesome.min.css);
 @import url(../../dist/other_css/themify-icons.css);
 @import url(../../dist/other_css/animate.css);
-@import url(../../dist/other_css/simple-line-icons.css);
-@import url(../../dist/other_css/linea-icon.css);
-@import url(../../dist/other_css/pe-icon-7-stroke.css);
-@import url(../../dist/other_css/pe-icon-7-styles.css);
 @import url(../../dist/other_css/material-design-iconic-font.min.css);
-@import url(../../dist/other_css/filter.css);
+/*@import url(../../dist/other_css/filter.css);*/
 @import url(../../dist/switchery/dist/switchery.min.css);
-@import url(../../dist/owl.carousel/dist/assets/owl.carousel.min.css);
-@import url(../../dist/owl.carousel/dist/assets/owl.theme.default.min.css);
-@import url(../../dist/other_css/lightgallery.css);
-@import url(../../dist/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css);
-/****************************/
-/** Reset **/
-/****************************/
-@import url('https://fonts.googleapis.com/css?family=Ubuntu+Condensed');
+
 .menu-main {
   list-style: none;
   margin: 0px 0 5px;

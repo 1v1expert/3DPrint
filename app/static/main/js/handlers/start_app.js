@@ -53,8 +53,26 @@ var Apps = {
         // Including buttons from configuration
         for (var i in DATA.buttons.General) {
             var command = DATA.buttons.General[i].command;
-            $("#system_commands").append('<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' +
-                DATA.buttons.General[i].name + '</a></li>');
+            var insert_tr = `<tr>
+                                    <td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand(\'` + command + `\')">
+                                        <button class="button_style button--secondary"
+                                                style="width: 330px; height: 60px">
+                                            <span class="button__inner_style"
+                                                  style="color: white;font-weight: 900;">` + DATA.buttons.General[i].name + `</span>
+                                        </button>
+                                    </td>
+                                </tr>`
+
+            if ( i & 1 ) {
+                $('#system_commands_right > tbody:last-child').append(insert_tr)
+            }
+            else {
+                $('#system_commands_left > tbody:last-child').append(insert_tr)
+            }
+            // $("#system_commands").append(
+                // var insert_tr = ''
+                // '<li><a onclick="Apps.PlayCommand(\'' + command + '\')">' + DATA.buttons.General[i].name + '</a></li>'
+                // );
         }
         Apps.Printer.Tool._active_tool = Apps._settings.Definition.MainTool;
         // End filling
@@ -100,17 +118,46 @@ var Apps = {
 
             _state: "",
             _rus_state: "",
+            _is_pause: false,
+            Switch_pause: function () {
+                // this._is_pause = !this._is_pause;
+                // var command = Apps._settings.buttons.OnPause;
+                var command = Apps._settings.buttons.CancPause;
+                // if ((Apps.Printer._state === 'Pausing') || (Apps.Printer._state ===  'Paused')) {
+                //     this._is_pause = true;
+                //     //command = Apps._settings.buttons.CancPause;
+                // }
+
+
+                if (this._is_pause){
+                    $('#iconpause2').text(' Продолжить');
+                    //$('#iconpause').text(' Продолжить#1');
+                }
+                else {
+                    $('#iconpause2').text(' Пауза');
+                    //$('#iconpause').text(' Пауза#1');
+                    command = Apps._settings.buttons.OnPause;
+                }
+                Apps.PlayCommand(command);
+            },
             ConnectPrinter: function () {
                 //this._state_printer = "connected";
-                OctoPrint.connection.connect();
+                ConnectOctoprint();
+                //OctoPrint.connection.connect();
             },
             DisconnectPrinter: function () {
                 //this._state_printer = "disconnected";
                 OctoPrint.connection.disconnect();
             },
+
             _is_connect_printer: false,
             _is_connect_printer_octo: null
         },
+    feed_rate: 100,
+    temp_board:  70,
+    temp_tool0: 200,
+    temp_tool1: 200,
+    temp_chamber: 50,
     _position:
         {
             X: null,
@@ -118,10 +165,10 @@ var Apps = {
             Z: null,
             E: null,
             update: function (value) {
-                this.X = value.payload.x;
-                this.Y = value.payload.y;
-                this.Z = value.payload.z;
-                this.E = value.payload.e;
+                this.X = +value.payload.x.toFixed(2);
+                this.Y = +value.payload.y.toFixed(2);
+                this.Z = +value.payload.z.toFixed(2);
+                this.E = +value.payload.e.toFixed(2);
                 this.view();
             },
             view: function () {
@@ -174,17 +221,48 @@ var Show_connection_status = function (msg, resp, status) {
 
 function AuthSocket(name, session) {
     setTimeout(function () {
+        try {
         OctoPrint.socket.sendAuth(name, session);
-    }, 1000);
+    }
+    catch (e) {
+        console.log('Errrrrror', e)
+        AuthSocket(name, session)
+    }
+    }, 1500);
 }
+
+// function ConnectOctoprint2() {
+//     var client1 = new OctoPrintClient({baseurl: "http://localhost:5000", apikey: "100AC91FCAF844DC84CA0734C1EEDCBE"});
+//         //DATA.config.Apikey});
+//     client1.connection.connect();
+//     client1.socket.connect();
+//     client1.socket.onMessage("*", function(message) {
+//                 Apps.is_connect_server = true;
+//                 ProcessingData(message);
+//             });
+//     return client1;
+// }
 function ConnectOctoprint() {
     OctoPrint.options.baseurl = DATA.config.BaseUrl;
     OctoPrint.options.apikey = DATA.config.Apikey;
     OctoPrint.browser.login(DATA.config.Login, DATA.config.Password, true)
         .done(function(response) {
+            OctoPrint.connection.connect();
             Show_connection_status('Успешно пройдена инициализация', response, 'success');
-            AuthSocket(response.name, response.session);
+            console.log('name ', response.name, 'session', response.session);
+            OctoPrint.socket.reconnecting = true;
+            OctoPrint.socket.reconnectTrial = 100;
             OctoPrint.socket.connect();
+            // try {
+                AuthSocket(response.name, response.session);
+             // }
+            // catch (e) {
+            // AuthSocket(response.name, response.session);
+            // инструкции для работы с ошибками
+            // console.log('Errrrror', e); // передает объект ошибки для управления им
+            // }
+            // AuthSocket(response.name, response.session);
+
             //Fix todo: Connect witch Printer offline
             OctoPrint.connection.getSettings().done(function(response){
                 HandlerState(response.current);
@@ -197,13 +275,15 @@ function ConnectOctoprint() {
                 ProcessingData(message);
             });
 
+
+
         })
         .error(function (response) {
             Apps.is_connect_server = false;
             Show_connection_status('Не запущено ядро приложения ', response, 'error');
             setTimeout(function() {
                 ConnectOctoprint();
-                }, 2000);
+                }, 7000);
         });
 }
 

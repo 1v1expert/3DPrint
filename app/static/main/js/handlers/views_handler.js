@@ -49,10 +49,30 @@ $('#connect').on('click', function () {
 $('#disconnect').on('click', function () {
    Apps.Printer.DisconnectPrinter();
 });
-$('#localfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').addClass('active');$('#usbfiles').removeClass('active');GetFiles('sdcard?force=true');});
-//GetFiles("sdcard?recursive=true");});
-$('#usbfiles').on('click', function () {$('#rowfiles').html('');$('#localfiles').removeClass('active');$('#usbfiles').addClass('active');
+$('#localfiles').on('click', function () {
+    $('#rowfiles').html('');
+    $('#localfiles').addClass('active');
+    $('#usbfiles').removeClass('active');
+    $('#usb2files').removeClass('active');
+//GetFiles('sdcard?force=true');
 GetFiles('local?force=true');});
+//GetFiles("sdcard?recursive=true");});
+$('#usbfiles').on('click', function () {
+    $('#rowfiles').html('');
+    $('#localfiles').removeClass('active');
+    $('#usb2files').removeClass('active');
+    $('#usbfiles').addClass('active');
+
+//GetFiles('local?force=true');
+CustomGetFiles();});
+
+$('#usb2files').on('click', function () {
+    $('#rowfiles').html('');
+    $('#localfiles').removeClass('active');
+    $('#usbfiles').removeClass('active');
+    $('#usb2files').addClass('active');
+    CustomGetFiles();
+});
 //GetFiles("local?force=true&filter=gcode&recursive=true");});
 $('#UP_Z').on('click', function () {
     //alert('UP_Z' + $('#myTabs_8').find('.active').find('a').text());
@@ -114,44 +134,59 @@ $('#Right_X').on('click', function () {
 $('#up_t_tool').on('click', function () {
     var t = $('#t_tool').text();
     var c_t = +t;
-    $('#t_tool').text(c_t+1);
+    $('#t_tool').text(c_t-1);
 });
 
 $('#down_t_tool').on('click', function () {
     var t = $('#t_tool').text();
     var c_t = +t;
-    $('#t_tool').text(c_t-1);
+    $('#t_tool').text(c_t+1);
 });
 
-$('#up_t_board').on('click', function () {
-    var t = $('#t_board').text();
-    var c_t = +t;
-    $('#t_board').text(c_t+1);
+// $('#up_t_board').on('click', function () {
+//     var t = $('#t_board').text();
+//     var c_t = +t;
+//     $('#t_board').text(c_t-1);
+// });
+
+// $('#down_t_board').on('click', function () {
+//     var t = $('#t_board').text();
+//     var c_t = +t;
+//     $('#t_board').text(c_t+1);
+// });
+// $('#zero_temp_board').on('click', function () {
+//     $('#t_board').text(0);
+// });
+// $('#zero_temp_tool').on('click', function () {
+//     $('#t_tool').text(0);
+// });
+
+$('#set_temp_tool0').on('click', function () {
+    // var t = $('#t_tool').text();
+    // var c_t = +t;
+
+    SetTemperature_tool(+Apps.temp_tool0);
 });
 
-$('#down_t_board').on('click', function () {
-    var t = $('#t_board').text();
-    var c_t = +t;
-    $('#t_board').text(c_t-1);
-});
-$('#zero_temp_board').on('click', function () {
-    $('#t_board').text(0);
-});
-$('#zero_temp_tool').on('click', function () {
-    $('#t_tool').text(0);
+$('#set_temp_chamber').on('click', function () {
+    // var t = $('#t_tool').text();
+    // var c_t = +t;
+
+    SetTemperature_chamber(+Apps.temp_chamber);
 });
 
-$('#set_temp_tool').on('click', function () {
-    var t = $('#t_tool').text();
-    var c_t = +t;
-    SetTemperature_tool(c_t);
-});
 
 $('#set_temp_board').on('click', function () {
-    var t = $('#t_board').text();
-    var c_t = +t;
-    SetTemperature_bed(c_t);
+    // var t = $('#t_board').text();
+    // var c_t = +t;
+
+
+
+    SetTemperature_bed(+Apps.temp_board);
 });
+
+
+
 $('#platform_restart').on('click', function () {
     console.log('Platform_restart');
     RestartPlatform();
@@ -165,6 +200,10 @@ $('#M999').on('click', function () {
     M999();
 });
 
+$('#M500').on('click', function () {
+    M500();
+});
+
 $('#calibr').on('click', function () {
     console.log('restart_software');
     Calibrate();
@@ -173,6 +212,11 @@ $('#reset_pl').on('click', function () {
     console.log('restart_pl');
     Reset_plate();
 });
+$('#shutdown_pl').on('click', function () {
+    console.log('restart_pl');
+    ShutdownPlatform();
+});
+
 
 $('#m306').on('click', function () {
     console.log('m306');
@@ -192,6 +236,15 @@ $('#download').on('click', function () {
     Apps.PlayCommand(["M109 S230", "G91", "G1 E30 F150", "G1 E280 F700", "G1 E100 F150"]);
     //Extrude("tool0", -String(Definition.Extrude));
 });
+
+$('#set_feed_rate').on('click', function () {
+    OctoPrint.printer.setFeedrate(+Apps.feed_rate)
+    .done(function(response) {
+        console.log(response);
+    });
+    //Extrude("tool1", String(Definition.Extrude));
+});
+
 $('#extrude').on('click', function () {
     OctoPrint.printer.extrude(5.0)
     .done(function(response) {
@@ -208,12 +261,13 @@ $('#retruct').on('click', function () {
 });
 /*********/
 $('#PLA').on('click', function () {
-    SetTemperature_bed(String(Temp.PLA.Bed));
-    SetTemperature_tool(String(Temp.PLA.Tool));
+
+    SetTemperature_bed(String(Apps._settings.Temp.PLA.Bed));
+    SetTemperature_tool(String(Apps._settings.Temp.PLA.Tool));
 });
 $('#ABS').on('click', function () {
-    SetTemperature_bed(String(Temp.ABS.Bed));
-    SetTemperature_tool(String(Temp.ABS.Tool));
+    SetTemperature_bed(String(Apps._settings.Temp.ABS.Bed));
+    SetTemperature_tool(String(Apps._settings.Temp.ABS.Tool));
 });
 $('#dpauseprint_1').on('click', function () {
     TrigeredPrint();

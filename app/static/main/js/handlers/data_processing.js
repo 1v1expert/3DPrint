@@ -6,18 +6,30 @@
    __license__ = 'GNU General Public License v2 http://www.gnu.org/licenses/gpl2.html'
 */
 
+"use strict";
+
 var global = window || this;
 global.global_state = null;
 
+
 function UpdateTemps(temps) {
-    "use strict";
-    if (temps.bed){
-        $('#pie_chart_3').find('.percents').text(temps.bed.actual);
+    if (temps.chamber && DATA.chambery) {
+        var pie_chart_chambery = $('#pie_chart_chambery');
+        pie_chart_chambery.find('.percents').text(temps.chamber.actual);
+        var temp_chamber = temps.chamber.actual * 100 / temps.chamber.target;
+        if (temps.chamber.target === 0) {
+            temp_chamber = temps.chamber.actual * 100 / Definition.Target;
+        }
+        pie_chart_chambery.data('easyPieChart').update(temp_chamber);
+    }
+    if (temps.bed) {
+        var pie_chart_3 = $('#pie_chart_3');
+        pie_chart_3.find('.percents').text(temps.bed.actual);
         var tempbed = temps.bed.actual * 100 / temps.bed.target;
   		if (temps.bed.target === 0) {
             tempbed = temps.bed.actual * 100 / Definition.Target;
         }
-  		$('#pie_chart_3').data('easyPieChart').update(tempbed);
+  		pie_chart_3.data('easyPieChart').update(tempbed);
   		$('#degres_3').text('/' + temps.bed.target + '°');
 	}
 
@@ -50,12 +62,21 @@ function ShowTime(totalSeconds) {
     this.seconds = this.totalSeconds % 60;
     //return this.hours + ':' + this.minutes + ':' + this.seconds
 }
-ShowTime.prototype.toString = function() {
+function check_position_chars(tt) {
     "use strict";
-    return this.hours + ':' + this.minutes + ':' + this.seconds;
+    if (tt < 10) {
+        return '0' + String(tt)
+    } 
+    else {
+        return String(tt)
+    }
+}
+
+ShowTime.prototype.toString = function() {
+    var out_data = check_position_chars(this.hours) + ':' + check_position_chars(this.minutes) + ':' + check_position_chars(this.seconds)
+    return out_data;
 };
 var ShowPrintInfo = function (info) {
-    "use strict";
     $('#estimatedPrintTime').text("Печатается: " + new ShowTime(info.progress.printTime).toString());
         //moment.unix(Number(info.progress.printTime)).utc().format('HH:mm:ss'));
     $('#printTime').text("Осталось: " + new ShowTime(info.progress.printTimeLeft).toString());
@@ -64,14 +85,15 @@ var ShowPrintInfo = function (info) {
         .html(Math.round(info.progress.completion) + '%')
         .css('width', Math.round(info.progress.completion) + '%');
     $('#file_name').text("Файл: " + info.job.file.name);
-    // name buttons
-    $('#iconpause2').text(' Пауза#2');
-    $('#iconpause').text(' Пауза#1');
+    $('#iconpause2').text(' Пауза');
+    Apps.Printer._is_pause = false;
+    // $('#iconpause').text(' Пауза#1');
 };
 
 function HandlerState(value) {
-    "use strict";
-    var state = value.state.text || value.state;
+    
+    console.log('Handler state:', value, Apps.Printer._state);
+    var state = value.state.text || undefined; //|| value.state;
     var rus_state = (Apps._settings.translate_state[state]) ? Apps._settings.translate_state[state] : state;
     if (state === 'Closed') {
         $('#status_print').text("Отключено, подключение...");
@@ -81,16 +103,18 @@ function HandlerState(value) {
         ShowPrintInfo(value);
     }
     if (state === 'Pausing' || state === 'Paused') {
-        $('#iconpause2').text(' Продолжить#2');
-        $('#iconpause').text(' Продолжить#1');
+        $('#iconpause2').text(' Продолжить');
+        // $('#iconpause').text(' Продолжить');
+        Apps.Printer._is_pause = true;
     }
+
     // Is bed construction ->
     if (state !== Apps.Printer._state) {
         //Apps.Printer._state = state;
         $('#status_print').text(rus_state);
         PrinterState(rus_state);
         //global.global_state = state;
-        if (Apps.Printer._state === 'Printing' && state === 'Operational') {
+        if ((Apps.Printer._state === 'Printing' || Apps.Printer._state === 'Printing from SD') && state === 'Operational') {
             CancelPrint();
         }
         Apps.Printer._state = state;
@@ -100,22 +124,22 @@ function HandlerState(value) {
         $('#status_print').text(rus_state);
     }
 }
-function CurrentEvent(value) {
-    "use strict";
 
-    if (value.temps.length){
+function CurrentEvent(value) {
+
+    if (value.temps.length) {
         UpdateTemps(value.temps[0]);
     }
-    if (value.state){
+    if (value.state) {
         HandlerState(value);
     }
-    if (value.logs){
+    if (value.logs) {
         Apps.logs.update(value);
     }
 }
 
 function ProcessingData(data) {
-    "use strict";
+
     console.log(data);
     switch(data.event) {
         case 'event':
@@ -130,13 +154,13 @@ function ProcessingData(data) {
                     Apps.Printer.MonitorState(data.data.payload.state_string);
                     break;
                 case 'Disconnecting':
-                    console.log('Disconnecting');
+                    // console.log('Disconnecting');
                     break;
                 case 'Disconnected':
                     console.log('Disconnected');
                     break;
                 default:
-                    console.log("Untracked event - ", data);
+                    // console.log("Untracked event - ", data);
             }
             break;
         case 'current':
@@ -144,6 +168,25 @@ function ProcessingData(data) {
             break;
         case 'history':
             Apps.logs.update(data.data);
+            break;
+        case 'plugin':
+            if (data.data.plugin === "M117PopUp"){
+                $.toast({
+                    heading: data.data.data.msg,
+                    position: 'bottom-left',
+                    loaderBg: '#50c4e3',//'#f8b32d',
+                    icon: 'info',
+                    hideAfter: 3500,
+                    stack: 7,
+                    showHideTransition: 'plain',
+                    bgColor: '#50c4e3'
+                });
+            }
+            else if (data.data.plugin === "ServerStats") {
+            var system_info = "cpu.%: " + data.data.data["cpu.%"] + "; mem.%: " + data.data.data["mem.%"] + "; temp: " + data.data.data["temp"];
+            $('#system_info').text(system_info);
+        }
+            break;
         //case ''
 
     }
