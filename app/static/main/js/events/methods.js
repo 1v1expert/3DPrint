@@ -110,9 +110,9 @@ function CustomGetFiles() {
             swal('', 'Файлов не обнаружено', 'info');
         };
         _.each(JSON.parse(response).files, function(entry) {
-            data_html = data_html + "<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmCopy(\'" + entry.path + "\' , \'" + entry.name + "\') \" > " +
+            data_html = data_html + "<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12  file-box'><div class='file'><a onclick=\"ConfirmCopy(\'" + entry.path + "\' , \'" + entry.name + "\') \" > " +
                 // "<div class='icon'> <i class='zmdi zmdi-file-text'></i> </div> " +
-                "<div class='file-name' style='font-size: large;'>" + entry.name + "<br> </div> </a> </div> </div>";
+                "<div class='file-name' style='font-size: x-large;'>" + entry.name + "<br> </div> </a> </div> </div>";
         });
         $('#rowfiles').html(data_html);
         //alert(response);

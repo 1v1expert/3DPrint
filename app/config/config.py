@@ -6,7 +6,8 @@ Chamber = True
 Two_nozzle = False
 FileManager = {
 	"Destination": "/home/pi/.octoprint/watched",
-	"Source": "/home/pi/.octoprint/flashdrive",
+	# "Source": "/home/pi/.octoprint/flashdrive",
+	"Source": "/Users/vladislavsazonov/PycharmProjects/3DQuality/3DPrint",
 	"Suffix": ".gcode"
 
 }
