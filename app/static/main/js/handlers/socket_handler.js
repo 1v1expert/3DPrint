@@ -14,7 +14,7 @@ var ConnectServer = function () {
     console.log('Start func IsConnectServer');
     var setting = {
         "async": true,
-        "url": "http://127.0.0.1:5000/api/connection",
+        "url": URL + ":5000/api/connection",
         "crossDomain": true,
         "method": "GET",
         "headers": {
@@ -24,14 +24,7 @@ var ConnectServer = function () {
         },
         "processData": false,
         "success": function (response) {
-            //"ws://127.0.0.1:5000/sockjs/627/mvy2qfdj/websocket"
-            //var socket = new WebSocket("ws://0.0.0.0:5000/sockjs/627/mvy2qfdj/websocket");
-            //Set socket connection
-            socket = new WebSocket("ws://0.0.0.0:5000/sockjs/049/lvva5lo4/websocket");
-            //alert(socket);
-            //alert(socket2);
-            //console.log(socket, "EEQQQ");
-            //socket.onopen = function() { alert("Connection opened...") };
+            socket = new WebSocket("ws://" + document.location.hostname + ":5000/sockjs/049/lvva5lo4/websocket");
             socket.onmessage = function(event) {
                 is_connect_server = true;
                 ProcessingData(event.data);

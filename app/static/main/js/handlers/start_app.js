@@ -8,6 +8,10 @@
 "use strict";
 var is_connect_server = false, is_connect_printer = false;
 var socket = null;
+
+let hostname = document.location.hostname;
+let URL = 'http://' + hostname;
+
 var def_settings = DATA || {
     "CONFIG": {
         "BaseUrl": "http://localhost:5000",
@@ -243,7 +247,7 @@ function AuthSocket(name, session) {
 //     return client1;
 // }
 function ConnectOctoprint() {
-    OctoPrint.options.baseurl = DATA.config.BaseUrl;
+    OctoPrint.options.baseurl = URL + ":5000";
     OctoPrint.options.apikey = DATA.config.Apikey;
     OctoPrint.browser.login(DATA.config.Login, DATA.config.Password, true)
         .done(function(response) {
