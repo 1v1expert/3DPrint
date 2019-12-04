@@ -259,15 +259,7 @@ function ConnectOctoprint() {
             OctoPrint.socket.connect();
             // try {
                 AuthSocket(response.name, response.session);
-             // }
-            // catch (e) {
-            // AuthSocket(response.name, response.session);
-            // инструкции для работы с ошибками
-            // console.log('Errrrror', e); // передает объект ошибки для управления им
-            // }
-            // AuthSocket(response.name, response.session);
 
-            //Fix todo: Connect witch Printer offline
             OctoPrint.connection.getSettings().done(function(response){
                 HandlerState(response.current);
                 console.log(response.current.state);
