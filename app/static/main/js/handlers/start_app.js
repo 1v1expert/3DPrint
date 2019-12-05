@@ -8,6 +8,10 @@
 "use strict";
 var is_connect_server = false, is_connect_printer = false;
 var socket = null;
+
+let hostname = document.location.hostname;
+let URL = 'http://' + hostname;
+
 var def_settings = DATA || {
     "CONFIG": {
         "BaseUrl": "http://localhost:5000",
@@ -120,14 +124,7 @@ var Apps = {
             _rus_state: "",
             _is_pause: false,
             Switch_pause: function () {
-                // this._is_pause = !this._is_pause;
-                // var command = Apps._settings.buttons.OnPause;
                 var command = Apps._settings.buttons.CancPause;
-                // if ((Apps.Printer._state === 'Pausing') || (Apps.Printer._state ===  'Paused')) {
-                //     this._is_pause = true;
-                //     //command = Apps._settings.buttons.CancPause;
-                // }
-
 
                 if (this._is_pause){
                     $('#iconpause2').text(' Продолжить');
@@ -243,7 +240,7 @@ function AuthSocket(name, session) {
 //     return client1;
 // }
 function ConnectOctoprint() {
-    OctoPrint.options.baseurl = DATA.config.BaseUrl;
+    OctoPrint.options.baseurl = URL + ":5000";
     OctoPrint.options.apikey = DATA.config.Apikey;
     OctoPrint.browser.login(DATA.config.Login, DATA.config.Password, true)
         .done(function(response) {

@@ -227,15 +227,6 @@ $('#restart_touchui').on('click', function () {
     Restart_touchui();
 });
 /********/
-$('#extract').on('click', function () {
-    Apps.PlayCommand(["M109 S200", "G91", "G1 E15 F200", "G1 E-80 F200", "G1 E-390 F4000"]);
-    //Extrude("tool0", String(Definition.Extrude));
-
-});
-$('#download').on('click', function () {
-    Apps.PlayCommand(["M109 S230", "G91", "G1 E30 F150", "G1 E280 F700", "G1 E100 F150"]);
-    //Extrude("tool0", -String(Definition.Extrude));
-});
 
 $('#set_feed_rate').on('click', function () {
     OctoPrint.printer.setFeedrate(+Apps.feed_rate)

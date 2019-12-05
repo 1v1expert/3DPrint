@@ -4,6 +4,10 @@
 	<div class="la-anim-1"></div>
 </div>
 <style>
+	button.close {
+		color: white;
+		opacity: 1;
+	}
 	.btn {
 		text-transform: none!important;
 	}
@@ -487,7 +491,7 @@
 										<button id="extrude" class="button_style button--secondary"
 												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">Экструдить</span>
+												  style="color: white;font-weight: 900;font-size: 25px;">Загрузить 5мм</span>
 										</button>
 									</td>
 								</tr>
@@ -496,7 +500,7 @@
 										<button id="retruct" class="button_style button--secondary"
 												style="width: 330px; height: 60px">
 											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">Ретрактить</span>
+												  style="color: white;font-weight: 900;font-size: 25px;">Выгрузить 5мм</span>
 										</button>
 									</td>
 								</tr>
@@ -549,33 +553,6 @@
 										</button>
 									</td>
 								</tr>
-								<!-- <tr>
-									<td style="padding: 18px;text-align: center;">
-										<button class="button_style button--secondary"
-												style="width: 330px; height: 60px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;">Охладить экструдер</span>
-										</button>
-									</td>
-								</tr> -->
-								<tr>
-									<td style="padding: 18px;text-align: center;" id="download">
-										<button class="button_style button--secondary"
-												style="width: 330px; height: 60px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;">Загрузить пластик</span>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding: 18px;text-align: center;" id="extract">
-										<button class="button_style button--secondary"
-												style="width: 330px; height: 60px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;">Выгрузить пластик</span>
-										</button>
-									</td>
-								</tr>
 								<tr>
 									<td style="padding: 18px;text-align: center;" data-toggle="modal" data-target="#modaloffsetZ" id="offsetZ">
 										<button class="button_style button--secondary"
@@ -597,10 +574,10 @@
 	<!-- Move to axes window -->
 	<div class="tabs__content">
 		<!-- Main Content -->
-		<div class="page-wrapper" style="padding: 55px 20px;">
+		<div class="page-wrapper" style="padding: 50px 0px 0px 0px;">
 			<div class="container-fluid pt-25" style="padding-top: 1px !important;">
 				<div class="col-lg-12 col-sm-12">
-					<div class="panel panel-default card-view" style="margin-top: 50px;">
+					<div class="panel panel-default card-view" style="margin-top: 30px;">
 						<div class="panel-heading" style="display:none;">
 							<div class="pull-left">
 								<h6 class="panel-title txt-dark">Движение по осям</h6>
@@ -639,13 +616,13 @@
 														<td><a href="#" tabindex="-1" title="Вверх" id="UP_Z"
 															   class="btn" data-action="incrementHours"
 															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
-																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
+																class="fa fa-arrow-up" style="font-size: 35px;"></span>Z</a>
 														</td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Дальше" id="UP_Y"
 															   class="btn" data-action="incrementMinutes"
 															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
-																class="fa fa-arrow-up" style="font-size: 35px;"></span></a>
+																class="fa fa-arrow-up" style="font-size: 35px;"></span>Y</a>
 														</td>
 														<td class="separator"></td>
 													</tr>
@@ -662,7 +639,7 @@
 																				 data-action="decrementHours"
 																				 style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-left"
-																style="font-size: 35px;"></span></a></td>
+																style="font-size: 35px;"></span>X</a></td>
 														<td style="text-align: center"><a href="#" tabindex="-1"
 																						  title="Дом" id="Home_XY"
 																						  class="btn"
@@ -674,20 +651,20 @@
 															   class="btn" data-action="decrementHours"
 															   style="border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-right"
-																style="font-size: 35px;"></span></a></td>
+																style="font-size: 35px;"></span>X</a></td>
 													</tr>
 													<tr>
 														<td><a href="#" tabindex="-1" title="Вниз" id="DOWN_Z"
 															   class="btn" data-action="decrementHours"
 															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
-																style="font-size: 35px;"></span></a></td>
+																style="font-size: 35px;"></span>Z</a></td>
 														<td class="separator"></td>
 														<td><a href="#" tabindex="-1" title="Ближе" id="Down_Y"
 															   class="btn" data-action="decrementMinutes"
 															   style=" border-color: #0b97c4; background-color: #00a5d1; padding: 30px 40px; border-radius: 10px"><span
 																class="fa fa-arrow-down"
-																style="font-size: 35px;"></span></a></td>
+																style="font-size: 35px;"></span>Y</a></td>
 														<td class="separator"></td>
 													</tr>
 													</tbody>
@@ -718,33 +695,24 @@
 								</div>
 							</div>
 						</div>
-						<!--<div class="row">
-							<div class="panel-body">
-
-							</div>
-						</div>-->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6 col-sm-6" style="padding: 20px 25px 0px 25px;">
+						<button class="button_style button--secondary" id=""style="width: 500px; height: 35px"> 
+							<span class="button__inner_style" style="color: white;font-weight: 900;font-size: 25px;">Высота 10мм в движение по осям 
+							</span> 
+						</button> 
+					</div> 
+					<div class="col-lg-6 col-sm-6" style="padding: 20px 25px 0px 25px;">
+						<button class="button_style button--secondary" id=""style="width: 460px; height: 35px"> 
+							<span class="button__inner_style" style="color: white;font-weight: 900;font-size: 25px;">Голову в середину 
+							</span> 
+						</button> 
 					</div>
 				</div>
 			</div>
-
-
-			<!-- Row -->
-
-
-			<!-- footer -->
-			<footer class="footer container-fluid pl-30 pr-30">
-				<div class="row">
-					<div class="col-sm-6">
-						<p>2018 &copy; 3DQuality. Pamper VLADDOS</p>
-					</div>
-					<div class="col-sm-6">
-						<p>Состояние: <code><label class="label_status"> ~ </label></code></p>
-					</div>
-				</div>
-			</footer>
 		</div>
-
-
 	</div>
 </div>
 <div class="tabs__content"></div>
@@ -768,15 +736,6 @@
 								<thead>
 								</thead>
 								<tbody>
-<!-- 								<tr>
-									<td style="padding: 30px;text-align: center;">
-										<button id="restart_software" class="button_style button--secondary"
-												style="width: 345px; height: 35px">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">Рестарт приложения</span>
-										</button>
-									</td>
-								</tr> -->
 								<tr>
 									<td style="padding: 30px;text-align: center;">
 										<button class="button_style button--secondary" id="platform_restart"
@@ -831,15 +790,6 @@
 												style="width: 345px; height: 35px">
 											<span class="button__inner_style"
 												  style="color: white;font-weight: 900;font-size: 25px;">Выключение принтера</span>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding: 30px;text-align: center;">
-										<button class="button_style button--secondary"
-												style="width: 345px; height: 35px" onclick="Apps.PlayCommand('M104 S0,M140 S0')">
-											<span class="button__inner_style"
-												  style="color: white;font-weight: 900;font-size: 25px;">Выключить нагрев</span>
 										</button>
 									</td>
 								</tr>
@@ -962,34 +912,6 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<div class="table-responsive">
-<!-- 						<table class="table-condensed" style="text-align: center;">
-							<thead>
-							<tr>
-								<td><a id="up_t_tool" class="btn"
-									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-										class="fa fa-arrow-left" style="font-size: x-large;"></span></a>
-								</td>
-								<td><a id="t_tool" class="btn"
-									   style="padding: 10px 22px 10px;color: white;font-weight: 900;font-size: 30px;text-transform: none">201</a>
-								</td>
-								<td><a id="down_t_tool" class="btn"
-									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 8px 15px; border-radius: 10px; text-transform: none"><span
-										class="fa fa-arrow-right" style="font-size: x-large;"></span></a>
-								</td>
-								<td style="padding: 0px 30px;"></td>
-							<td><a id="set_temp_tool" class="btn"
-									   style="border-color:#0b97c4; background-color: #00a5d1;padding: 10px 50px; border-radius: 10px; text-transform: none">Установить</a>
-								</td>
-							</thead>
-							<tbody>
-
-							</tbody>
-						</table> -->
-
-
-
-
-
 						<table class="table-condensed" style="text-align: center;    width: 500px;">
 							<thead>
 							<tr>
@@ -1005,13 +927,7 @@
 							<tr><td style="padding: 25px 0px 0px 0px;"><a id="set_temp_tool0" class="btn" style="border-color:#0b97c4; background-color: #00a5d1;padding: 25px 70px; border-radius: 10px; text-transform: none; font-size: x-large" >Установить</a></td></tr>
 							</tbody>
 						</table>
-
-
-
-
 					</div>
-					<!--<label for="message-text" class="control-label mb-10">Message:</label>
-					<textarea class="form-control" id="message-text" style="min-height: 250px"></textarea>-->
 				</div>
 			</div>
 
