@@ -35,6 +35,20 @@ $('#set_offset_z').on('click', function () {
         Apps.PlayCommand(command);
     }
 });
+
+/* additional buttons on last tab */
+$('#height_10_mm_axial_movement').on('click', function () {
+    if (Apps._settings.buttons.Height10mmAxialMovement) {
+        Apps.PlayCommand(Apps._settings.buttons.Height10mmAxialMovement);
+    }
+})
+
+$('#head_to_the_middle').on('click', function () {
+    if (Apps._settings.buttons.HeadToTheMiddle) {
+        Apps.PlayCommand(Apps._settings.buttons.HeadToTheMiddle);
+    }
+})
+
 /* End module offset on Z coordinate module */
 /* Manage main windows */
 $('#manage_print').on('click', function () {
