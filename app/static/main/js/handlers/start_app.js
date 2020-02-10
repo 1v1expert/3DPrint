@@ -57,8 +57,9 @@ var Apps = {
         // Including buttons from configuration
         for (var i in DATA.buttons.General) {
             var command = DATA.buttons.General[i].command;
+            var cmd = Array.prototype.join.call(command, "\", \"");
             var insert_tr = `<tr>
-                                    <td style="padding: 18px;text-align: center;" onclick="Apps.PlayCommand(\'` + command + `\')">
+                                    <td style='padding: 18px;text-align: center;' onclick='Apps.PlayCommand(["` + cmd + `"])'>
                                         <button class="button_style button--secondary"
                                                 style="width: 330px; height: 60px">
                                             <span class="button__inner_style"
